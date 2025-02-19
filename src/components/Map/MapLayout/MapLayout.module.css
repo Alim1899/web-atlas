@@ -1,0 +1,6 @@
+.mapList{
+    position: absolute;
+    top: 10%;
+    left: 1%;
+    z-index: 1000;
+}

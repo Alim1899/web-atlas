@@ -1,0 +1,45 @@
+.mapHeaders {
+  font-size: clamp(0.6rem, 2vw, 1.5rem);
+  width: 350px;
+  z-index: 50;
+  background-color: #d5ddd5;
+}
+.searchBar {
+  display: flex;
+  align-items: center;
+  background-color: var(--navbar-light);
+}
+.searchMap {
+  border-radius: 15px;
+  outline: none;
+  border: none;
+  height: 50px;
+
+  width: 100%;
+}
+.menuIcon {
+  height: 50px;
+  cursor: pointer;
+  margin-left: -50px;
+}
+.searchMap:focus {
+  border: 1px solid goldenrod;
+}
+.menu {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--navbar-light);
+  height: 74dvh;
+}
+.radio {
+  width: 20px;
+  height: 20px;
+  accent-color: #739774; /* Changes the color */
+  cursor: pointer;
+}
+.menu > label {
+  margin-left: 10px;
+}
+.header {
+  text-align: center;
+}

@@ -1,0 +1,5 @@
+.main{
+    display: grid;
+    grid-template-rows: 8% 84% 8% ;
+    height: 100vh;
+}

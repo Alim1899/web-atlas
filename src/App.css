@@ -1,0 +1,17 @@
+:root {
+  --background-color: #2f3c49;
+  --dark-background: #2f3d48;
+  --light-background: #495e71;
+  --foreground-color: #035a4e;
+  --navbar-light: #e6e7e6;
+  --navbar-dark: #236570;
+  --navbar: #b0dfe5;
+  --dark-text: #062906;
+  --light-text: #f1feff;
+  --header-font-size: clamp(1rem, 4vw, 2rem);
+}
+
+body {
+  padding: 0;
+  margin: 0;
+}

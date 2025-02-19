@@ -1,0 +1,16 @@
+.box > div {
+  display: grid;
+  grid-template-columns: 85% 13%;
+  padding: 2px 0;
+}
+.accordion {
+  background-color: none;
+}
+.details {
+  position: fixed;
+  z-index: 2;
+  margin-left: 50px;
+  width: 250px;
+  margin-top: -50px;
+  background-color: var(--light-text);
+}

@@ -1,0 +1,36 @@
+.spinnerContainer {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  backdrop-filter: blur(4px);
+  top: 0;
+  left: 0;
+  z-index: 99999999999999999999999999999999999;
+}
+
+.spinner {
+  width: 6rem;
+  height: 6rem;
+  border-radius: 50%;
+  background: conic-gradient(
+    #ddddd8 1%,
+    #a5d8a5 10%,
+    #53b153 30%,
+    #309c30 70%,
+    #086408 90%,
+
+    #025728
+  );
+  -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 8px), #000 0);
+  animation: rotate 1.5s infinite linear;
+}
+
+@keyframes rotate {
+  to {
+    transform: rotate(1turn);
+  }
+}

@@ -1,0 +1,7 @@
+.main {
+  width: 100vw;
+  display: grid;
+  height: 100%;
+  min-height: 500px;
+  z-index: -1;
+}
