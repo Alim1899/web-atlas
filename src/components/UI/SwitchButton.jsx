@@ -3,36 +3,20 @@ import classes from "./ui.module.css";
 import { Stack, FormControlLabel, Switch } from "@mui/material";
 import Accordion from "./Accordion";
 import { useMaps } from "../Map/MapContext/MapContext";
-import { getDatabase, get, ref } from "firebase/database";
-import app from "../firebaseConfig.js";
+import PropTypes from "prop-types";
 
 const SwitchButton = ({ label, mapChecked, switchId, type }) => {
   const [checked, setChecked] = useState(mapChecked);
-  const { dispatch } = useMaps();
-  const getMaps = async (id) => {
-    dispatch({ type: "loading" });
-    const db = getDatabase(app);
-    try {
-      const projectsRef = ref(db, `geojson/${id}`);
-      const snapshot = await get(projectsRef);
-      if (snapshot.exists()) {
-        dispatch({ type: "loaded" });
-        dispatch({ type: id, payload: snapshot.val() });
-      } else {
-        console.log("No json data available for ");
-      }
-    } catch (error) {
-      console.error("Error fetching json", error);
-    }
-  };
+  const { dispatch, fetchMaps } = useMaps();
 
-  const handleChecked = (e) => {
-    if (checked) {
-      dispatch({ type: `${e.target.id}`, payload: {} });
+  const handleChecked = () => {
+    setChecked((prev) => !prev);
+
+    if (!checked) {
+      fetchMaps(switchId, dispatch); // Fetch map data
     } else {
-      getMaps(e.target.id);
+      dispatch({ type: switchId, payload: {} }); // Remove layer
     }
-    setChecked(!checked);
   };
 
   return (
@@ -41,13 +25,20 @@ const SwitchButton = ({ label, mapChecked, switchId, type }) => {
         <FormControlLabel
           label={label}
           control={<Switch id={switchId} />}
-          onChange={(e) => handleChecked(e)}
+          onChange={handleChecked}
           checked={checked}
-        ></FormControlLabel>
+        />
         {checked && type === "polygon" && <Accordion />}
       </Stack>
     </div>
   );
+};
+
+SwitchButton.propTypes = {
+  label: PropTypes.string.isRequired,
+  mapChecked: PropTypes.bool.isRequired,
+  switchId: PropTypes.string.isRequired,
+  type: PropTypes.oneOf(["polygon", "point", "polyline"]).isRequired,
 };
 
 export default SwitchButton;

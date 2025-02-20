@@ -6,6 +6,7 @@ import { GeoJSON } from "react-leaflet";
 import L from "leaflet";
 import point from "../../../assets/map/point.svg";
 import { useMaps } from "../MapContext/MapContext";
+import { useQuery } from "@tanstack/react-query";
 export default function JsonProvider() {
   const { state } = useMaps();
   const { rockfall, rivers, geology, agroclimate, opacity, weight } = state;
@@ -79,6 +80,9 @@ export default function JsonProvider() {
     }
   };
 
+  useQuery({
+    queryKey: ["geojson"],
+  });
   return (
     <>
       {rockfallJSON.length > 0 && (
