@@ -43,3 +43,7 @@
 .header {
   text-align: center;
 }
+.menu > div {
+  width: 95%;
+  margin: 0 auto;
+}
