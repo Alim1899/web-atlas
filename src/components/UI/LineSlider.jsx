@@ -1,9 +1,13 @@
 import Slider from "@mui/material/Slider";
 import classes from "./ui.module.css";
-import { useMaps } from "../Map/MapContext/MapContext";
-export default function DiscreteSlider() {
-  const { state, dispatch } = useMaps();
-  const { opacity, weight } = state;
+import PropTypes from "prop-types";
+export default function DiscreteSlider({ opacity, weight }) {
+  const onOpacityChange = (e) => {
+    console.log(e.target.value);
+  };
+  const onWeightChange = (e) => {
+    console.log(e.target.value);
+  };
   return (
     <div className={classes.lineSlider}>
       <label htmlFor="opacity">
@@ -12,9 +16,7 @@ export default function DiscreteSlider() {
           id="opacity"
           aria-label="opacity"
           value={opacity}
-          onChange={(e) =>
-            dispatch({ type: "change/opacity", payload: e.target.value })
-          }
+          onChange={onOpacityChange}
           valueLabelDisplay="auto"
           step={10}
           marks
@@ -28,9 +30,7 @@ export default function DiscreteSlider() {
           id="weight"
           aria-label="linewidth"
           value={weight}
-          onChange={(e) =>
-            dispatch({ type: "change/weight", payload: e.target.value })
-          }
+          onChange={onWeightChange}
           valueLabelDisplay="auto"
           step={10}
           marks
@@ -41,3 +41,8 @@ export default function DiscreteSlider() {
     </div>
   );
 }
+
+DiscreteSlider.propTypes = {
+  opacity: PropTypes.number.isRequired,
+  weight: PropTypes.number.isRequired,
+};
