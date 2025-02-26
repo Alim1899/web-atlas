@@ -23,9 +23,12 @@ const fetchGeoJson = async (layer) => {
 
 export default function JsonProvider() {
   const { state } = useMaps();
+
   const { activeLayers } = state;
+
+  const layerIds = activeLayers.map((layer) => layer.id);
   const queries = useQueries({
-    queries: activeLayers.map((layer) => ({
+    queries: layerIds.map((layer) => ({
       queryKey: ["geojson", layer],
       queryFn: () => fetchGeoJson(layer),
       staleTime: 60000,
@@ -33,7 +36,7 @@ export default function JsonProvider() {
     })),
   });
 
-  const geoJsonData = activeLayers.reduce((acc, layer, index) => {
+  const geoJsonData = layerIds.reduce((acc, layer, index) => {
     acc[layer] = queries[index]?.data || {};
     return acc;
   }, {});
@@ -41,28 +44,35 @@ export default function JsonProvider() {
   const isLoading = queries.some((query) => query.isLoading);
 
   if (isLoading) return <Spinner />;
-
   return (
     <>
-      {activeLayers.includes("rockfall") && geoJsonData.rockfall?.features && (
-        <GeoJSON
-          data={geoJsonData.rockfall.features}
-          pointToLayer={pointToLayer}
-        />
-      )}
+      {activeLayers.some((layer) => layer.id === "rockfall") &&
+        geoJsonData.rockfall?.features && (
+          <GeoJSON
+            data={geoJsonData.rockfall.features}
+            pointToLayer={pointToLayer}
+          />
+        )}
 
-      {activeLayers.includes("geology") && geoJsonData.geology?.features && (
-        <GeoJSON data={geoJsonData.geology.features} style={polygonStyle} />
-      )}
+      {activeLayers.some((layer) => layer.id === "geology") &&
+        geoJsonData.geology?.features && (
+          <GeoJSON
+            data={geoJsonData.geology.features}
+            style={(feature) => polygonStyle(feature, activeLayers, "geology")}
+          />
+        )}
 
-      {activeLayers.includes("rivers") && geoJsonData.rivers?.features && (
-        <GeoJSON data={geoJsonData.rivers.features} style={polygonStyle} />
+      {layerIds.includes("rivers") && geoJsonData.rivers?.features && (
+        <GeoJSON data={geoJsonData.rivers.features} />
       )}
-      {activeLayers.includes("agroclimate") &&
+      {layerIds.includes("agroclimate") &&
         geoJsonData.agroclimate?.features && (
           <GeoJSON
             data={geoJsonData.agroclimate.features}
-            style={polygonStyle}
+            style={(feature) =>
+              polygonStyle(feature, activeLayers, "agroclimate")
+            }
+            onEachPolygonFeature={onEachPolygonFeature}
           />
         )}
     </>
@@ -81,7 +91,7 @@ const pointToLayer = (feature, latlng) => {
     }),
   });
 };
-function polygonStyle(feature, weight, opacity) {
+function polygonStyle(feature, layer, id) {
   let color;
   if (feature.name === "geology") {
     let lyr = feature.properties.Index_;
@@ -103,30 +113,30 @@ function polygonStyle(feature, weight, opacity) {
         : "#8c2d04";
   } else if (feature.name === "agro") {
     const zone = feature.properties.zone;
-    if (zone === "Cold") {
-      color = "#ffffcc";
-    } else if (zone === "mid_cold") {
-      color = "#c2e699";
-    } else if (zone === "moderate") {
-      color = "#78c679";
-    } else {
-      color = "#238443";
-    }
+    color =
+      zone === "Cold"
+        ? "#ffffcc"
+        : zone === "mid_cold"
+        ? "#c2e699"
+        : zone === "moderate"
+        ? "#78c679"
+        : "#238443";
   }
 
   return {
     fillColor: color,
-    weight: weight || 1,
-    opacity: opacity || 1,
+    weight: layer.find((lyr) => lyr.id === id).weight,
+    opacity: 1,
     color: "black",
-    fillOpacity: 1,
+    fillOpacity: layer.find((lyr) => lyr.id === id).opacity,
   };
 }
-// const onEachPolygonFeature = (feature, layer) => {
-//   if (feature.properties && feature.properties.Zone_) {
-//     layer.bindPopup(`
-//       <strong>Zone:</strong> ${feature.properties.Zone_}<br>
-//       <strong>Type:</strong> ${feature.properties.Agro_tipe}
-//       `);
-//   }
-// };
+
+const onEachPolygonFeature = (feature, layer) => {
+  if (feature.properties && feature.properties.Zone_) {
+    layer.bindPopup(`
+      <strong>Zone:</strong> ${feature.properties.Zone_}<br>
+      <strong>Type:</strong> ${feature.properties.Agro_tipe}
+      `);
+  }
+};

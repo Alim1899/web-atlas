@@ -6,11 +6,21 @@
 .accordion {
   background-color: none;
 }
+.lineSlider > label > h6 {
+  padding: 0;
+  margin: 0;
+}
+
 .details {
   position: fixed;
   z-index: 2;
   margin-left: 50px;
   width: 250px;
-  margin-top: -50px;
+  margin-top: -100px;
   background-color: var(--light-text);
+}
+
+.expand {
+  width: 50px;
+  height: 40px;
 }

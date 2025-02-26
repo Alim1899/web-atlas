@@ -1,10 +1,10 @@
 import { useReducer } from "react";
 import PropTypes from "prop-types";
-import mapReducer from "./mapReducer"; // Ensure this is correct
+import mapReducer, { initialState } from "./mapReducer"; // Ensure this is correct
 import MapsContext from "./MapsContext"; // Import from the new file
 
 const MapsProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(mapReducer, { activeLayers: [] });
+  const [state, dispatch] = useReducer(mapReducer, initialState);
 
   return (
     <MapsContext.Provider value={{ state, dispatch }}>

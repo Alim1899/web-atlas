@@ -2,6 +2,7 @@ import classes from "./MapList.module.css";
 import { HiMenu } from "react-icons/hi";
 import { useState } from "react";
 import SwitchButton from "../../UI/SwitchButton";
+import AccordionExpandIcon from "../../UI/Accordion";
 const MapList = () => {
   const [showMenu, setSHowMenu] = useState(false);
   const [query, setQuery] = useState("");
@@ -31,13 +32,17 @@ const MapList = () => {
             switchId="agroclimate"
             mapChecked={false}
             type="polygon"
-          />
+          >
+            <AccordionExpandIcon layerId={"agroclimate"} />
+          </SwitchButton>
           <SwitchButton
             label="გეოლოგია"
             switchId="geology"
             mapChecked={false}
             type="polygon"
-          />
+          >
+            <AccordionExpandIcon layerId={"geology"} />
+          </SwitchButton>
           <SwitchButton
             label="ქვათაცვენები"
             switchId="rockfall"

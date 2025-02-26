@@ -1,12 +1,18 @@
-import Slider from "@mui/material/Slider";
+import { Slider } from "@mui/material";
+import useMaps from "../Map/MapContext/useMaps"; // Import your map context
 import classes from "./ui.module.css";
-import PropTypes from "prop-types";
-export default function DiscreteSlider({ opacity, weight }) {
-  const onOpacityChange = (e) => {
-    console.log(e.target.value);
+const DiscreteSlider = ({ layerId }) => {
+  const { state, dispatch } = useMaps();
+
+  const layerState = state.activeLayers.find(
+    (layer) => layer.id === layerId
+  ) || { opacity: 1, weight: 0.5 };
+  const onOpacityChange = (e, newValue) => {
+    dispatch({ type: "SET_OPACITY", layerId, payload: newValue / 100 });
   };
-  const onWeightChange = (e) => {
-    console.log(e.target.value);
+
+  const onWeightChange = (e, newValue) => {
+    dispatch({ type: "SET_WEIGHT", layerId, payload: newValue });
   };
   return (
     <div className={classes.lineSlider}>
@@ -15,7 +21,7 @@ export default function DiscreteSlider({ opacity, weight }) {
         <Slider
           id="opacity"
           aria-label="opacity"
-          value={opacity}
+          value={layerState.opacity * 100} // Convert to percentage
           onChange={onOpacityChange}
           valueLabelDisplay="auto"
           step={10}
@@ -29,20 +35,16 @@ export default function DiscreteSlider({ opacity, weight }) {
         <Slider
           id="weight"
           aria-label="linewidth"
-          value={weight}
+          value={layerState.weight}
           onChange={onWeightChange}
           valueLabelDisplay="auto"
-          step={10}
+          step={0.1}
           marks
-          min={10}
-          max={100}
+          min={0.1}
+          max={1}
         />
       </label>
     </div>
   );
-}
-
-DiscreteSlider.propTypes = {
-  opacity: PropTypes.number.isRequired,
-  weight: PropTypes.number.isRequired,
 };
+export default DiscreteSlider;
