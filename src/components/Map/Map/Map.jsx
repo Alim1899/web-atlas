@@ -15,7 +15,7 @@ function Map() {
           zoomControl={false}
           style={{ height: "100%", width: "100%" }}
         >
-          <ZoomControl position="topright" />
+          <ZoomControl position="bottomright" />
           <TileLayer
             attribution={maps.maptiler.attribution}
             url={maps.maptiler.url}

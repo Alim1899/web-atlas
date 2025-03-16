@@ -1,15 +1,14 @@
 .main {
   z-index: 999999;
-  background-color: #e6e7e6;
+  background-color: var(--navbar-dark);
 }
 
 .list {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  height: 100%;
-  border-bottom: 1px solid black;
-  background-color: #abccba;
+  height: 99%;
+  background-color: var(--navbar);
   margin-top: 0;
 }
 .listItem {

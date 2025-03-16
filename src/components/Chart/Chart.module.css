@@ -1,0 +1,26 @@
+.main {
+  position: fixed;
+  z-index: 1000;
+  top: 10%;
+  right: 1%;
+
+  border-radius: 15px;
+}
+.icon {
+  width: 5vw;
+  max-width: 80px;
+  cursor: pointer;
+}
+.chart {
+  z-index: 1000;
+  background-color: var(--navbar-light);
+  border: 1px solid var(--light-background);
+  border-radius: 15px;
+  position: absolute;
+  height: 40vw;
+  width: 70vw;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
