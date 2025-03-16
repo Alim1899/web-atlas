@@ -13,14 +13,24 @@
 }
 .chart {
   z-index: 1000;
-  background-color: var(--navbar-light);
+  background-color: var(--dark-background);
   border: 1px solid var(--light-background);
   border-radius: 15px;
   position: absolute;
-  height: 40vw;
-  width: 70vw;
+  height: clamp(300px, 40vw, 500px);
+  width: clamp(280px, 70vw, 900px);
+
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  display: grid;
+  grid-template-rows: 10% 90%;
+}
+.chart > div,
+.chart > h2 {
+  position: relative;
+  overflow: visible;
+  margin: auto;
+  color: var(--navbar-light);
 }

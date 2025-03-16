@@ -2,21 +2,21 @@ import classes from "./Chart.module.css";
 import chart from "../../assets/chart.svg";
 import { useState } from "react";
 import {
-  Area,
-  AreaChart,
-  CartesianGrid,
+  Cell,
+  Legend,
+  Pie,
+  PieChart,
   ResponsiveContainer,
-  XAxis,
-  YAxis,
+  Tooltip,
 } from "recharts";
-import { Tooltip } from "react-leaflet";
+
 const fakeData = [
-  { label: "მთის", area: 22900 },
-  { label: "ზღვის", area: 143 },
-  { label: "ხმელთაშუაზღვის", area: 2500 },
-  { label: "სუბტროპიკული", area: 8700 },
-  { label: "ტროპიკული", area: 6231 },
-  { label: "არიდული", area: 1500 },
+  { label: "მთის", area: 10900, color: "#beebcc" },
+  { label: "ზღვის", area: 1143, color: "#c2e699" },
+  { label: "ხმელთაშუაზღვის", area: 2500, color: "#78c679" },
+  { label: "სუბტროპიკული", area: 8700, color: "#bbb443" },
+  { label: "ტროპიკული", area: 6231, color: "#44cb66" },
+  { label: "არიდული", area: 1500, color: "#44cbaa" },
 ];
 const Chart = () => {
   const [showChart, setShowChart] = useState(false);
@@ -36,22 +36,25 @@ const Chart = () => {
       </div>
       {showChart && (
         <div className={classes.chart}>
-          <ResponsiveContainer width="100%" height="100%">
-            <AreaChart
-              data={fakeData}
-              margin={{ top: 20, right: 20, left: 0, bottom: 0 }}
-            >
-              <XAxis dataKey="label" tick={{ fontSize: 10, fill: "black" }} />
-              <YAxis unit="კმ²" tick={{ fontSize: 14, fill: "black" }} />
-              <CartesianGrid />
-              <Tooltip />
-              <Area
+          <h2>დიაგრამა</h2>
+
+          <ResponsiveContainer width="90%" height="90%">
+            <PieChart>
+              <Pie
+                data={fakeData}
                 dataKey="area"
-                type="monotone"
-                stroke="red"
-                fill="orange"
-              ></Area>
-            </AreaChart>
+                nameKey="label"
+                innerRadius={80}
+                outerRadius={105}
+                paddingAngle={5}
+              >
+                {fakeData.map((entry) => (
+                  <Cell key={entry.label} fill={entry.color} />
+                ))}
+              </Pie>
+              <Tooltip formatter={(value) => `${value} მ²`} />
+              <Legend />
+            </PieChart>
           </ResponsiveContainer>
         </div>
       )}
@@ -60,3 +63,25 @@ const Chart = () => {
 };
 
 export default Chart;
+
+{
+  /* <ResponsiveContainer width="90%" height="95%">
+<AreaChart
+  data={fakeData}
+  margin={{ top: 20, right: 20, left: 0, bottom: 0 }}
+>
+  <XAxis dataKey="label" tick={{ fontSize: 10, fill: "black" }} />
+  <YAxis unit="კმ²" tick={{ fontSize: 14, fill: "black" }} />
+  <CartesianGrid strokeDasharray="5" />
+  <Tooltip content={CustomTooltip} />
+  <Area
+    dataKey="area"
+    type="monotone"
+    stroke="black"
+    fill="orange"
+    strokeWidth={0.5}
+    name="კლიმატური განაწილება"
+  ></Area>
+</AreaChart>
+</ResponsiveContainer> */
+}
