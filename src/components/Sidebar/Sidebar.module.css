@@ -1,0 +1,31 @@
+.main {
+  position: fixed;
+  z-index: 1000;
+  top: 10%;
+  right: 1%;
+  border-radius: 15px;
+}
+.icon {
+  width: 5vw;
+  max-width: 80px;
+  cursor: pointer;
+}
+
+.layers {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  background-color: var(--navbar-light);
+  position: absolute;
+  border-radius: 15px;
+  right: 0;
+}
+.layers > li {
+  text-transform: capitalize;
+  padding: 10px;
+  border-bottom: 1px solid var(--navbar-dark);
+}
+.layers > li:hover {
+  cursor: pointer;
+  opacity: 0.5;
+}

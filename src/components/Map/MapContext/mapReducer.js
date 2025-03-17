@@ -1,5 +1,10 @@
 const initialState = {
   activeLayers: [],
+  baselayer: {
+    url: "https://api.maptiler.com/maps/basic/256/{z}/{x}/{y}.png?key=4gNWcAfO6xj7SYyWp2KI",
+    attribution:
+      '&copy; <a href="https://www.maptiler.com/">MapTiler</a> &copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+  },
 };
 
 const mapReducer = (state = initialState, action) => {
@@ -35,6 +40,11 @@ const mapReducer = (state = initialState, action) => {
             ? { ...layer, weight: action.payload }
             : layer
         ),
+      };
+    case "SET_MAP":
+      return {
+        ...state,
+        baselayer: { url: action.url, attribution: action.attribution },
       };
 
     default:

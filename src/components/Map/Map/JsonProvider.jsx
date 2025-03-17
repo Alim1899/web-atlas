@@ -6,7 +6,6 @@ import fetchGeoJson from "./Fetch";
 import { onEachPolygonFeature, pointToLayer, polygonStyle } from "./Styling";
 export default function JsonProvider() {
   const { state } = useMaps();
-  console.log(state);
   const { activeLayers } = state;
 
   const layerIds = activeLayers.map((layer) => layer.id);

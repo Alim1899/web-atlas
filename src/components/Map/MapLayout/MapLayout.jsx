@@ -1,7 +1,7 @@
 import classes from "./MapLayout.module.css";
 import Map from "../Map/Map";
 import MapList from "../MapList/MapList";
-import Chart from "../../Chart/Chart";
+import Sidebar from "../../Sidebar/Sidebar";
 const MapLayout = () => {
   return (
     <div className={classes.map}>
@@ -9,7 +9,7 @@ const MapLayout = () => {
         <MapList />
       </div>
       <Map />
-      <Chart />
+      <Sidebar />
     </div>
   );
 };

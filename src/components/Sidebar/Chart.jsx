@@ -1,6 +1,4 @@
 import classes from "./Chart.module.css";
-import chart from "../../assets/chart.svg";
-import { useState } from "react";
 import {
   Cell,
   Legend,
@@ -19,44 +17,31 @@ const fakeData = [
   { label: "არიდული", area: 1500, color: "#44cbaa" },
 ];
 const Chart = () => {
-  const [showChart, setShowChart] = useState(false);
-  const handleChange = (e) => {
-    e.preventDefault();
-    setShowChart(!showChart);
-  };
   return (
     <>
-      <div className={classes.main}>
-        <img
-          onClick={(e) => handleChange(e)}
-          className={classes.icon}
-          src={chart}
-          alt="pie-chart"
-        />
+      <div className={classes.main}></div>
+
+      <div className={classes.chart}>
+        <h3 className={classes.header}>დიაგრამა</h3>
+        <ResponsiveContainer width="90%" height="90%">
+          <PieChart>
+            <Pie
+              data={fakeData}
+              dataKey="area"
+              nameKey="label"
+              innerRadius={80}
+              outerRadius={105}
+              paddingAngle={5}
+            >
+              {fakeData.map((entry) => (
+                <Cell key={entry.label} fill={entry.color} />
+              ))}
+            </Pie>
+            <Tooltip formatter={(value) => `${value} მ²`} />
+            <Legend />
+          </PieChart>
+        </ResponsiveContainer>
       </div>
-      {showChart && (
-        <div className={classes.chart}>
-          <h3 className={classes.header}>დიაგრამა</h3>
-          <ResponsiveContainer width="90%" height="90%">
-            <PieChart>
-              <Pie
-                data={fakeData}
-                dataKey="area"
-                nameKey="label"
-                innerRadius={80}
-                outerRadius={105}
-                paddingAngle={5}
-              >
-                {fakeData.map((entry) => (
-                  <Cell key={entry.label} fill={entry.color} />
-                ))}
-              </Pie>
-              <Tooltip formatter={(value) => `${value} მ²`} />
-              <Legend />
-            </PieChart>
-          </ResponsiveContainer>
-        </div>
-      )}
     </>
   );
 };

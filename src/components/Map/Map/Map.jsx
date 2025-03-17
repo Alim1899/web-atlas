@@ -1,11 +1,14 @@
 import { MapContainer, TileLayer, ZoomControl } from "react-leaflet";
-import maps from "../data/layers";
 import "leaflet/dist/leaflet.css";
 import classes from "./Map.module.css";
 import JsonProvider from "./JsonProvider";
+import useMaps from "../MapContext/useMaps";
+
 function Map() {
   const center = [41.52, 44.48];
-
+  const { state } = useMaps();
+  const { baselayer } = state;
+  const { url, attribution } = baselayer;
   return (
     <div className={classes.main}>
       <div className={classes.shape}>
@@ -16,11 +19,7 @@ function Map() {
           style={{ height: "100%", width: "100%" }}
         >
           <ZoomControl position="bottomright" />
-          <TileLayer
-            attribution={maps.maptiler.attribution}
-            url={maps.maptiler.url}
-            maxZoom={20}
-          />
+          <TileLayer attribution={attribution} url={url} maxZoom={20} />
 
           <JsonProvider />
         </MapContainer>
