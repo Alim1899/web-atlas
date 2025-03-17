@@ -28,7 +28,7 @@
   grid-template-rows: 10% 90%;
 }
 .chart > div,
-.chart > h2 {
+.header {
   position: relative;
   overflow: visible;
   margin: auto;

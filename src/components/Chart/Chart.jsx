@@ -36,8 +36,7 @@ const Chart = () => {
       </div>
       {showChart && (
         <div className={classes.chart}>
-          <h2>დიაგრამა</h2>
-
+          <h3 className={classes.header}>დიაგრამა</h3>
           <ResponsiveContainer width="90%" height="90%">
             <PieChart>
               <Pie
@@ -73,14 +72,14 @@ export default Chart;
   <XAxis dataKey="label" tick={{ fontSize: 10, fill: "black" }} />
   <YAxis unit="კმ²" tick={{ fontSize: 14, fill: "black" }} />
   <CartesianGrid strokeDasharray="5" />
-  <Tooltip content={CustomTooltip} />
+  <Tooltip />
   <Area
     dataKey="area"
     type="monotone"
     stroke="black"
     fill="orange"
     strokeWidth={0.5}
-    name="კლიმატური განაწილება"
+    name="ფართობი"
   ></Area>
 </AreaChart>
 </ResponsiveContainer> */
