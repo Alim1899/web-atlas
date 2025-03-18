@@ -1,5 +1,8 @@
+import { useState, useRef, useEffect } from "react";
 import classes from "./Chart.module.css";
 import useMaps from "../Map/MapContext/useMaps";
+import drag from "../../assets/drag.svg";
+import remove from "../../assets/delete.svg";
 import {
   Cell,
   Legend,
@@ -9,7 +12,55 @@ import {
   Tooltip,
 } from "recharts";
 
-const Chart = () => {
+const Chart = ({ handleChart }) => {
+  const chartRef = useRef(null); // Ref for chart
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [isDragging, setIsDragging] = useState(false);
+  const offset = useRef({ x: 0, y: 0 });
+
+  // Function to calculate the new position
+  const centerChart = () => {
+    if (chartRef.current) {
+      const { offsetWidth, offsetHeight } = chartRef.current;
+      setPosition({
+        x: window.innerWidth / 2 - offsetWidth / 2,
+        y: window.innerHeight / 2 - offsetHeight / 2,
+      });
+    }
+  };
+
+  // Centering Chart on Mount
+  useEffect(() => {
+    centerChart(); // Set initial position
+    // Add resize event listener to update position on window resize
+    window.addEventListener("resize", centerChart);
+
+    // Cleanup the resize event listener when component unmounts
+    return () => {
+      window.removeEventListener("resize", centerChart);
+    };
+  }, []);
+
+  const handleMouseDown = (e) => {
+    setIsDragging(true);
+    offset.current = {
+      x: e.clientX - position.x,
+      y: e.clientY - position.y,
+    };
+  };
+
+  const handleMouseMove = (e) => {
+    if (!isDragging) return;
+    setPosition({
+      x: e.clientX - offset.current.x,
+      y: e.clientY - offset.current.y,
+    });
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
+
   const { state } = useMaps();
   const { chartdata } = state;
   const data =
@@ -22,13 +73,32 @@ const Chart = () => {
         return acc;
       }, {})
     ) || [];
-  console.log(data);
-  return (
-    <>
-      <div className={classes.main}></div>
 
-      <div className={classes.chart}>
-        <h3 className={classes.header}>დიაგრამა</h3>
+  return (
+    <div className={classes.main}>
+      <div
+        ref={chartRef} // Attach ref here
+        className={classes.chart}
+        style={{ top: `${position.y}px`, left: `${position.x}px` }} // Use px instead of %
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+      >
+        <div className={classes.head}>
+          <img
+            src={drag}
+            alt="drag-and-drop"
+            className={classes.dragHandle}
+            onMouseDown={handleMouseDown}
+          />
+          <h3 className={classes.header}>დიაგრამა</h3>
+          <img
+            className={classes.dragHandle}
+            src={remove}
+            onClick={handleChart}
+            alt="remove"
+          />
+        </div>
+
         {data.length > 0 ? (
           <ResponsiveContainer width="90%" height="90%">
             <PieChart>
@@ -53,7 +123,7 @@ const Chart = () => {
                     })
                     .replace(/,/g, " ")} მ²`
                 }
-              />{" "}
+              />
               <Legend />
             </PieChart>
           </ResponsiveContainer>
@@ -61,38 +131,8 @@ const Chart = () => {
           <p className={classes.param}>გთხოვთ აირჩიოთ რუკა</p>
         )}
       </div>
-    </>
+    </div>
   );
 };
 
 export default Chart;
-
-{
-  /* <ResponsiveContainer width="90%" height="95%">
-<AreaChart
-  data={fakeData}
-  margin={{ top: 20, right: 20, left: 0, bottom: 0 }}
->
-  <XAxis dataKey="label" tick={{ fontSize: 10, fill: "black" }} />
-  <YAxis unit="კმ²" tick={{ fontSize: 14, fill: "black" }} />
-  <CartesianGrid strokeDasharray="5" />
-  <Tooltip />
-  <Area
-    dataKey="area"
-    type="monotone"
-    stroke="black"
-    fill="orange"
-    strokeWidth={0.5}
-    name="ფართობი"
-  ></Area>
-</AreaChart>
-</ResponsiveContainer> */
-  // const fakeData = [
-  //   { label: "მთის", area: 10900, color: "#beebcc" },
-  //   { label: "ზღვის", area: 1143, color: "#c2e699" },
-  //   { label: "ხმელთაშუაზღვის", area: 2500, color: "#78c679" },
-  //   { label: "სუბტროპიკული", area: 8700, color: "#bbb443" },
-  //   { label: "ტროპიკული", area: 6231, color: "#44cb66" },
-  //   { label: "არიდული", area: 1500, color: "#44cbaa" },
-  // ];
-}

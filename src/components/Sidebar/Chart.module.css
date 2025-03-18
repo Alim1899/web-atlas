@@ -1,27 +1,53 @@
-.chart {
+.main {
   position: fixed;
-  z-index: 1000;
+  z-index: -1;
+  top: 0;
+  left: 0;
+}
+
+.chart {
+  position: absolute; /* Make sure it moves freely */
   background-color: var(--dark-background);
   border: 1px solid var(--light-background);
   border-radius: 15px;
-  height: clamp(300px, 40vw, 500px);
+  height: clamp(380px, 50vw, 500px);
   width: clamp(280px, 70vw, 900px);
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   display: grid;
-  grid-template-rows: 10% 90%;
+  grid-template-rows: auto 90%;
 }
-.chart > div,
-.header {
-  position: relative;
-  overflow: visible;
+.chart.show {
+  opacity: 1; /* Fully visible */
+  transform: scale(1); /* Regular size */
+}
+
+.head {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
   margin: auto;
-  color: var(--navbar-light);
 }
+
+/* Drag Handle */
+.dragHandle {
+  cursor: grab;
+  background-color: var(--navbar-light);
+  padding: 5px;
+  text-align: center;
+  user-select: none;
+  width: 40px;
+}
+
+.dragHandle:active {
+  cursor: grabbing;
+}
+
 .header {
   font-size: var(--header-font-size);
+  text-align: center;
+  margin: 0;
+  color: var(--navbar-light);
 }
+
 .param {
   display: grid;
   color: var(--navbar-light);

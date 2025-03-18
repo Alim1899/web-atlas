@@ -1,9 +1,11 @@
 .main {
   position: fixed;
-  z-index: 1000;
+  z-index: 1000000;
   top: 10%;
-  right: 1%;
+  right: 2%;
+  background-color: var(--navbar-light);
   border-radius: 15px;
+  padding: 5px;
 }
 .icon {
   width: 5vw;
