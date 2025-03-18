@@ -1,5 +1,6 @@
 const initialState = {
   activeLayers: [],
+  chartdata: [],
   baselayer: {
     url: "https://api.maptiler.com/maps/basic/256/{z}/{x}/{y}.png?key=4gNWcAfO6xj7SYyWp2KI",
     attribution:
@@ -45,6 +46,11 @@ const mapReducer = (state = initialState, action) => {
       return {
         ...state,
         baselayer: { url: action.url, attribution: action.attribution },
+      };
+    case "SET_CHART":
+      return {
+        ...state,
+        chartdata: { data: action.payload },
       };
 
     default:

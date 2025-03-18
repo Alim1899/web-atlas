@@ -19,3 +19,12 @@
   margin: auto;
   color: var(--navbar-light);
 }
+.header {
+  font-size: var(--header-font-size);
+}
+.param {
+  display: grid;
+  color: var(--navbar-light);
+  place-content: center;
+  font-size: clamp(0.6rem, 2vw, 1.5rem);
+}

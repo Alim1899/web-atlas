@@ -4,7 +4,7 @@ import { useState } from "react";
 import classes from "./Sidebar.module.css";
 import Layers from "./Layers";
 import Chart from "./Chart";
-const Sidebar = () => {
+const Sidebar = ({ data }) => {
   const [showChart, setShowChart] = useState(false);
   const [showLayer, setShowLayer] = useState(false);
   const handleChart = (e) => {
@@ -29,7 +29,7 @@ const Sidebar = () => {
         src={layers}
         alt="pie-chart"
       />
-      {showChart && <Chart />}
+      {showChart && <Chart data={data} />}
       {showLayer && <Layers />}
     </div>
   );

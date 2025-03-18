@@ -4,8 +4,9 @@ import { useQueries } from "@tanstack/react-query";
 import Spinner from "../../UI/Loader/Spinner";
 import fetchGeoJson from "./Fetch";
 import { onEachPolygonFeature, pointToLayer, polygonStyle } from "./Styling";
+import { useEffect } from "react";
 export default function JsonProvider() {
-  const { state } = useMaps();
+  const { state, dispatch } = useMaps();
   const { activeLayers } = state;
 
   const layerIds = activeLayers.map((layer) => layer.id);
@@ -21,10 +22,11 @@ export default function JsonProvider() {
   const geoJsonData = Object.fromEntries(
     layerIds.map((layer, index) => [layer, queries[index]?.data || {}])
   );
-
+  // Object.entries(geoJsonData?.agroclimate?.features).map((el) =>
+  //   console.log(el[1].properties.zone)
+  // );
   const isLoading = queries.some((query) => query?.isLoading);
 
-  if (isLoading) return <Spinner />;
   const { rockfall, geology, rivers, agroclimate } = geoJsonData;
 
   const rockfallLayer =
@@ -34,6 +36,21 @@ export default function JsonProvider() {
   const riversLayer = layerIds.includes("rivers") && rivers?.features;
   const agroclimateLayer =
     layerIds.includes("agroclimate") && agroclimate?.features;
+
+  useEffect(() => {
+    const dataToSend = [];
+    if (agroclimateLayer) {
+      agroclimateLayer.forEach((feature) => {
+        dataToSend.push({
+          label: feature.properties.zone,
+          area: feature.properties.Shape_Area.toFixed(2),
+          color: polygonStyle(feature, activeLayers, "agroclimate").fillColor,
+        });
+      });
+    }
+    dispatch({ type: "SET_CHART", payload: dataToSend });
+  }, [agroclimateLayer, activeLayers, dispatch]);
+  if (isLoading) return <Spinner />;
   return (
     <>
       {rockfallLayer && (
