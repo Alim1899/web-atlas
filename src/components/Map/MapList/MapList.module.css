@@ -1,6 +1,7 @@
 .mapHeaders {
   font-size: clamp(0.6rem, 2vw, 1.5rem);
-  width: 350px;
+  width: clamp(70px, 25vw, 450px);
+
   z-index: 50;
   background-color: whitesmoke;
   border-radius: 15px;
@@ -13,9 +14,9 @@
   border-radius: 15px;
   outline: none;
   border: none;
-  height: 50px;
-
+  height: clamp(50px, 5vh, 80px);
   width: 99%;
+  border: 1px solid red;
 }
 .menuIcon {
   height: 50px;

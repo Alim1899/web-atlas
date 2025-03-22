@@ -10,14 +10,10 @@
   background-color: var(--dark-background);
   border: 1px solid var(--light-background);
   border-radius: 15px;
-  height: clamp(380px, 50vw, 500px);
-  width: clamp(280px, 70vw, 900px);
+  height: clamp(380px, 30vw, 400px);
+  width: clamp(280px, 50vw, 700px);
   display: grid;
   grid-template-rows: auto 90%;
-}
-.chart.show {
-  opacity: 1; /* Fully visible */
-  transform: scale(1); /* Regular size */
 }
 
 .head {
