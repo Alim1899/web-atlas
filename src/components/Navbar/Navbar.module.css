@@ -30,12 +30,12 @@
 .close:nth-child(1) {
   transform: translateY(10px) rotate(45deg);
   transition: 0.2s ease-in-out;
-  background-color: #465a5e;
+  background-color: #182c30;
 }
 .close:nth-child(2) {
   transform: translateY(0px) rotate(135deg);
   transition: 0.2s ease-in-out;
-  background-color: #465a5e;
+  background-color: #182c30;
 }
 .close:nth-child(3) {
   visibility: hidden;
@@ -54,11 +54,10 @@
   height: 100vh;
   display: grid;
   grid-template-rows: 7% 90%;
-  border: 1px solid red;
 }
 .lines {
   z-index: 999;
-  border: 1px solid red;
+  margin-top: 10px;
   padding-left: 30px;
 }
 .line,
