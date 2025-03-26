@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import classes from "./Chart.module.css";
 import useMaps from "../Map/MapContext/useMaps";
 import drag from "../../assets/drag.svg";
@@ -41,25 +41,55 @@ const Chart = ({ handleChart }) => {
     };
   }, []);
 
-  const handleMouseDown = (e) => {
+  const handleStart = (e) => {
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
     setIsDragging(true);
     offset.current = {
-      x: e.clientX - position.x,
-      y: e.clientY - position.y,
+      x: clientX - position.x,
+      y: clientY - position.y,
     };
   };
 
-  const handleMouseMove = (e) => {
-    if (!isDragging) return;
-    setPosition({
-      x: e.clientX - offset.current.x,
-      y: e.clientY - offset.current.y,
-    });
-  };
+  const handleMove = useCallback(
+    (e) => {
+      if (!isDragging) return;
 
-  const handleMouseUp = () => {
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+      setPosition({
+        x: clientX - offset.current.x,
+        y: clientY - offset.current.y,
+      });
+    },
+    [isDragging]
+  );
+
+  const handleEnd = useCallback(() => {
     setIsDragging(false);
-  };
+  }, []);
+
+  // Memoize handlers to avoid unnecessary re-renders
+  useEffect(() => {
+    if (!isDragging) return;
+
+    const moveHandler = (e) => handleMove(e);
+    const endHandler = () => handleEnd();
+
+    window.addEventListener("mousemove", moveHandler);
+    window.addEventListener("mouseup", endHandler);
+    window.addEventListener("touchmove", moveHandler);
+    window.addEventListener("touchend", endHandler);
+
+    return () => {
+      window.removeEventListener("mousemove", moveHandler);
+      window.removeEventListener("mouseup", endHandler);
+      window.removeEventListener("touchmove", moveHandler);
+      window.removeEventListener("touchend", endHandler);
+    };
+  }, [isDragging, position, handleMove, handleEnd]);
 
   const { state } = useMaps();
   const { chartdata } = state;
@@ -77,18 +107,19 @@ const Chart = ({ handleChart }) => {
   return (
     <div className={classes.main}>
       <div
-        ref={chartRef} // Attach ref here
+        ref={chartRef}
         className={classes.chart}
-        style={{ top: `${position.y}px`, left: `${position.x}px` }} // Use px instead of %
-        onMouseMove={handleMouseMove}
-        onMouseUp={handleMouseUp}
+        style={{ top: `${position.y}px`, left: `${position.x}px` }}
+        onMouseDown={handleStart}
+        onTouchStart={handleStart} // Added touch support
       >
         <div className={classes.head}>
           <img
             src={drag}
             alt="drag-and-drop"
             className={classes.dragHandle}
-            onMouseDown={handleMouseDown}
+            onMouseDown={handleStart}
+            onTouchStart={handleStart} // Added touch support
           />
           <h3 className={classes.header}>დიაგრამა</h3>
           <img
