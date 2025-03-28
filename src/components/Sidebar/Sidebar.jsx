@@ -27,7 +27,7 @@ const Sidebar = () => {
         onClick={(e) => handleLayers(e)}
         className={classes.icon}
         src={layers}
-        alt="pie-chart"
+        alt="layers"
       />
       {showChart && <Chart handleChart={handleChart} />}
       {showLayer && <Layers />}
