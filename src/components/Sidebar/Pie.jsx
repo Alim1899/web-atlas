@@ -15,15 +15,16 @@ const ChartPie = ({ data, dataKey, nameKey }) => {
           data={data}
           dataKey={dataKey}
           nameKey={nameKey}
-          innerRadius={80}
+          innerRadius={2}
           outerRadius={105}
-          paddingAngle={5}
+          paddingAngle={10}
         >
           {data.map((entry) => (
             <Cell key={entry.label} fill={entry.color} />
           ))}
         </Pie>
         <Tooltip
+          wrapperStyle={{ fontSize: "16px" }}
           formatter={(value) =>
             `${Number(value)
               .toLocaleString("en-US", {
@@ -33,7 +34,49 @@ const ChartPie = ({ data, dataKey, nameKey }) => {
               .replace(/,/g, " ")} მ²`
           }
         />
-        <Legend />
+        <Legend
+          content={({ payload }) => (
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "flex-start",
+                overflow: "auto",
+                height: "10vh",
+                marginBottom: "-3vh",
+              }}
+            >
+              {payload.map((entry, index) => (
+                <span
+                  key={`item-${index}`}
+                  style={{
+                    margin: "0 8px",
+                    fontSize: "12px",
+                    transition: "font-size 0.3s ease-in-out",
+                    cursor: "pointer",
+                    color: entry.color || "white",
+                  }}
+                  onMouseEnter={(e) => {
+                    (e.target.style.fontSize = "16px"),
+                      (e.target.style.backgroundColor = "#aaaaaa");
+                    e.target.style.color = "#111";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.target.style.fontSize = "12px";
+                    e.target.style.backgroundColor = "unset";
+                    e.target.style.color = entry.color;
+                  }}
+                >
+                  <span style={{ color: entry.color, marginRight: "5px" }}>
+                    ⬤
+                  </span>{" "}
+                  {entry.value}
+                </span>
+              ))}
+            </div>
+          )}
+          align="right"
+        />
       </PieChart>
     </ResponsiveContainer>
   );

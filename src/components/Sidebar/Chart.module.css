@@ -10,7 +10,7 @@
   background-color: var(--dark-background);
   border: 1px solid var(--light-background);
   border-radius: 15px;
-  height: clamp(380px, 50vh, 600px);
+  height: clamp(380px, 100%, 600px);
   width: clamp(250px, 98vw, 1000px);
   display: grid;
   grid-template-rows: auto 90%;
@@ -21,11 +21,11 @@
   justify-content: space-between;
   width: 90%;
   margin: auto;
+  border-bottom: 1px solid var(--light-background);
 }
 .chart {
   display: grid;
-  grid-template-columns: 15% 70%;
-  align-items: center;
+  grid-template-columns: 15% 85%;
 }
 
 .chart > select {
@@ -44,8 +44,7 @@
   width: 100%;
   height: 100%;
   padding: 0;
-  display: flex;
-  justify-content: center;
+  display: grid;
 }
 
 /* Drag Handle */
@@ -88,4 +87,9 @@
     padding: 0;
     margin: 0;
   }
+}
+
+::-webkit-scrollbar {
+  width: 2px;
+  background-color: var(--light-background);
 }

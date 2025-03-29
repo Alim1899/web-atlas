@@ -14,11 +14,11 @@ const Chart = ({ handleChart }) => {
   const { state } = useMaps();
   const { chartdata, activeLayers } = state;
   const { data } = chartdata;
-  const agro = Object.values(data[0]);
+  const agro = Object.values(data[1]);
   const handleSelected = (e) => {
     setSelectedLayer(e.target.value);
   };
-
+  console.log(selectedLayer);
   const filtered = Object.values(
     agro[0].reduce((acc, item) => {
       const { label, area, color } = item;
