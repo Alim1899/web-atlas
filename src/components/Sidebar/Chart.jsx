@@ -10,26 +10,45 @@ const Chart = ({ handleChart }) => {
   const chartRef = useRef(null);
   const [selectedLayer, setSelectedLayer] = useState("");
   const { position, handleStart } = useDraggable(chartRef);
-
-  const { state } = useMaps();
-  const { chartdata, activeLayers } = state;
-  const { data } = chartdata;
-  const agro = Object.values(data[1]);
   const handleSelected = (e) => {
     setSelectedLayer(e.target.value);
   };
-  console.log(selectedLayer);
-  const filtered = Object.values(
-    agro[0].reduce((acc, item) => {
-      const { label, area, color } = item;
+  const { state } = useMaps();
+  const { chartdata, activeLayers } = state;
+  const { data } = chartdata;
+  let agro = [];
+  let geology = [];
+  let filtered = [];
+  let filterGeo = [];
 
-      if (!acc[label]) {
-        acc[label] = { label, area: 0, color };
-      }
-      acc[label].area += parseFloat(area);
-      return acc;
-    }, {})
-  );
+  if (data.length > 0) agro = Object.values(data[0]);
+  if (data.length > 0) geology = Object.values(data[1]);
+  if (agro.length > 0) {
+    filtered = Object.values(
+      agro[0].reduce((acc, item) => {
+        const { label, area, color } = item;
+
+        if (!acc[label]) {
+          acc[label] = { label, area: 0, color };
+        }
+        acc[label].area += parseFloat(area);
+        return acc;
+      }, {})
+    );
+  }
+  if (geology.length > 0) {
+    filterGeo = Object.values(
+      geology[0].reduce((acc, item) => {
+        const { label, area, color } = item;
+
+        if (!acc[label]) {
+          acc[label] = { label, area: 0, color };
+        }
+        acc[label].area += parseFloat(area);
+        return acc;
+      }, {})
+    );
+  }
 
   return (
     <div className={classes.main}>
@@ -46,7 +65,7 @@ const Chart = ({ handleChart }) => {
             alt="drag-and-drop"
             className={classes.dragHandle}
             onMouseDown={handleStart}
-            onTouchStart={handleStart} // Added touch support
+            onTouchStart={handleStart}
           />
           <h3 className={classes.header}>დიაგრამა</h3>
           <img
@@ -61,7 +80,11 @@ const Chart = ({ handleChart }) => {
           <div className={classes.chart}>
             <select onChange={(e) => handleSelected(e)}>
               {activeLayers.map((el) => {
-                return <option key={el.id}>{el.id}</option>;
+                return (
+                  <option key={el.id} id={selectedLayer}>
+                    {el.id}
+                  </option>
+                );
               })}
             </select>
 

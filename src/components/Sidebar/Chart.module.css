@@ -11,7 +11,7 @@
   border: 1px solid var(--light-background);
   border-radius: 15px;
   height: clamp(380px, 100%, 600px);
-  width: clamp(250px, 98vw, 1000px);
+  width: clamp(250px, 90vw, 1000px);
   display: grid;
   grid-template-rows: auto 90%;
 }

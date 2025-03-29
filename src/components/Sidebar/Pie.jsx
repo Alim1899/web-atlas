@@ -40,10 +40,10 @@ const ChartPie = ({ data, dataKey, nameKey }) => {
               style={{
                 display: "flex",
                 flexDirection: "column",
-                justifyContent: "flex-start",
+                justifyContent: "flex-end",
                 overflow: "auto",
                 height: "10vh",
-                marginBottom: "-3vh",
+                marginBottom: "-20px",
               }}
             >
               {payload.map((entry, index) => (
