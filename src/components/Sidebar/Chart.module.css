@@ -10,7 +10,7 @@
   background-color: var(--dark-background);
   border: 1px solid var(--light-background);
   border-radius: 15px;
-  height: clamp(380px, 100%, 600px);
+  height: clamp(380px, 80vh, 600px);
   width: clamp(250px, 90vw, 1000px);
   display: grid;
   grid-template-rows: auto 90%;

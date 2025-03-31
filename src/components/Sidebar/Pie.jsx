@@ -9,15 +9,15 @@ import {
 
 const ChartPie = ({ data, dataKey, nameKey }) => {
   return (
-    <ResponsiveContainer width="90%" height="90%">
+    <ResponsiveContainer width="98%" height="70%">
       <PieChart>
         <Pie
           data={data}
           dataKey={dataKey}
           nameKey={nameKey}
-          innerRadius={2}
-          outerRadius={105}
-          paddingAngle={10}
+          innerRadius={90}
+          outerRadius={140}
+          paddingAngle={3}
         >
           {data.map((entry) => (
             <Cell key={entry.label} fill={entry.color} />
@@ -38,12 +38,10 @@ const ChartPie = ({ data, dataKey, nameKey }) => {
           content={({ payload }) => (
             <div
               style={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "flex-end",
-                overflow: "auto",
-                height: "10vh",
-                marginBottom: "-20px",
+                overflowX: "auto",
+                marginBottom: "-90px",
+                height: "15vh",
+                display: "grid",
               }}
             >
               {payload.map((entry, index) => (

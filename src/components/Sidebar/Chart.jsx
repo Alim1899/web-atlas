@@ -4,28 +4,43 @@ import drag from "../../assets/drag.svg";
 import remove from "../../assets/delete.svg";
 
 import useDraggable from "../Hooks/useDraggable";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ChartPie from "./Pie";
 const Chart = ({ handleChart }) => {
   const chartRef = useRef(null);
-  const [selectedLayer, setSelectedLayer] = useState("");
+  const [activeData, setActiveData] = useState([]);
   const { position, handleStart } = useDraggable(chartRef);
   const handleSelected = (e) => {
     setSelectedLayer(e.target.value);
+    sessionStorage.setItem("selectedLayer", e.target.value);
   };
   const { state } = useMaps();
   const { chartdata, activeLayers } = state;
   const { data } = chartdata;
-  let agro = [];
-  let geology = [];
+  const [selectedLayer, setSelectedLayer] = useState(() => {
+    if (data.length > 0) {
+      const storedLayer = sessionStorage.getItem("selectedLayer");
+      return storedLayer || Object.keys(data[0]).join();
+    }
+    return "";
+  });
+  useEffect(() => {
+    console.log("Checking");
+    console.log(selectedLayer, data);
+    if (data.length > 0 && !selectedLayer)
+      setSelectedLayer(Object.keys(data[0]).join());
+    if (!selectedLayer || data.length === 0) return;
+    const foundData = data.find((el) => Object.keys(el)[0] === selectedLayer);
+    if (foundData) {
+      setActiveData(Object.values(foundData)[0]); // Get the value instead of Object.entries
+    }
+  }, [selectedLayer, data]);
+
   let filtered = [];
-  let filterGeo = [];
 
-  if (data.length > 0) agro = Object.values(data[0]);
-  if (data.length > 0) geology = Object.values(data[1]);
-  if (agro.length > 0) {
+  if (activeData.length > 0) {
     filtered = Object.values(
-      agro[0].reduce((acc, item) => {
+      activeData.reduce((acc, item) => {
         const { label, area, color } = item;
 
         if (!acc[label]) {
@@ -36,20 +51,6 @@ const Chart = ({ handleChart }) => {
       }, {})
     );
   }
-  if (geology.length > 0) {
-    filterGeo = Object.values(
-      geology[0].reduce((acc, item) => {
-        const { label, area, color } = item;
-
-        if (!acc[label]) {
-          acc[label] = { label, area: 0, color };
-        }
-        acc[label].area += parseFloat(area);
-        return acc;
-      }, {})
-    );
-  }
-
   return (
     <div className={classes.main}>
       <div
@@ -79,13 +80,13 @@ const Chart = ({ handleChart }) => {
         {activeLayers.length > 0 ? (
           <div className={classes.chart}>
             <select onChange={(e) => handleSelected(e)}>
-              {activeLayers.map((el) => {
-                return (
+              {[...activeLayers]
+                .sort((a, b) => a.id.localeCompare(b.id))
+                .map((el) => (
                   <option key={el.id} id={selectedLayer}>
                     {el.id}
                   </option>
-                );
-              })}
+                ))}
             </select>
 
             <div className={classes.diagram}>

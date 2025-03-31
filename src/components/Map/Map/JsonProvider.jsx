@@ -8,7 +8,6 @@ import { useEffect } from "react";
 export default function JsonProvider() {
   const { state, dispatch } = useMaps();
   const { activeLayers } = state;
-
   const layerIds = activeLayers.map((layer) => layer.id);
   const queries = useQueries({
     queries: layerIds.map((layer) => ({
@@ -24,7 +23,6 @@ export default function JsonProvider() {
   );
 
   const isLoading = queries.some((query) => query?.isLoading);
-
   const { rockfall, geology, rivers, agroclimate } = geoJsonData;
 
   const rockfallLayer =
