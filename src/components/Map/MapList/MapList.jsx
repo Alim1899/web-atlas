@@ -53,6 +53,11 @@ const MapList = () => {
             switchId="rivers"
             mapChecked={false}
           />
+          <SwitchButton
+            label="ვეგეტაცია"
+            switchId="vegetation"
+            mapChecked={false}
+          />
         </div>
       )}
     </div>

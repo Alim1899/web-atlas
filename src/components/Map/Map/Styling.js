@@ -1,6 +1,11 @@
 import L from "leaflet";
 import point from "../../../assets/map/point.svg";
-
+const zones = [];
+function getRandomColor() {
+  return `#${Math.floor(Math.random() * 16777215)
+    .toString(16)
+    .padStart(6, "0")}`;
+}
 export const pointToLayer = (feature, latlng) => {
   if (!latlng) console.log("error:", feature);
   return L.marker(latlng, {
@@ -41,6 +46,26 @@ export function polygonStyle(feature, layer, id) {
         ? "#c2e699"
         : zone === "moderate"
         ? "#78c679"
+        : "#238443";
+  } else {
+    const zone = feature.properties.vegetation;
+    zones.push(zone);
+    const uniqueZones = zones.filter(
+      (item, index) => zones.indexOf(item) === index
+    );
+
+    console.log(uniqueZones);
+    color =
+      zone === "East Georgian lowland, downhill and superior plateau vegetation"
+        ? "#abc"
+        : zone === "Mountainous forest plants Broadleaf forests"
+        ? "#c2e699"
+        : zone === "High Mountain vegetation"
+        ? "#78c679"
+        : zone === "Steppe vegetation of south Georgian mountains"
+        ? "#c2e699"
+        : zone === "Bright Coniferous forests"
+        ? "#abcccc"
         : "#238443";
   }
 

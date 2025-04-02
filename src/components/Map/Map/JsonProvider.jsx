@@ -23,7 +23,7 @@ export default function JsonProvider() {
   );
 
   const isLoading = queries.some((query) => query?.isLoading);
-  const { rockfall, geology, rivers, agroclimate } = geoJsonData;
+  const { rockfall, geology, rivers, agroclimate, vegetation } = geoJsonData;
 
   const rockfallLayer =
     activeLayers.some((layer) => layer.id === "rockfall") && rockfall?.features;
@@ -32,7 +32,8 @@ export default function JsonProvider() {
   const riversLayer = layerIds.includes("rivers") && rivers?.features;
   const agroclimateLayer =
     layerIds.includes("agroclimate") && agroclimate?.features;
-
+  const vegetationLayer =
+    layerIds.includes("vegetation") && vegetation?.features;
   useEffect(() => {
     const dataToSend = [];
     if (agroclimateLayer) {
@@ -60,8 +61,21 @@ export default function JsonProvider() {
       });
       dataToSend.push({ geology: geologyData });
     }
+    if (vegetationLayer) {
+      const vegetationData = [];
+      vegetationLayer.forEach((feature) => {
+        vegetationData.push({
+          key: feature.properties.OBJECTID,
+          index: feature.properties.Species,
+          label: feature.properties.vegetation,
+          area: feature.properties.Shape_Area.toFixed(2),
+          color: polygonStyle(feature, activeLayers, "vegetation").fillColor,
+        });
+      });
+      dataToSend.push({ vegetation: vegetationData });
+    }
     dispatch({ type: "SET_CHART", payload: dataToSend });
-  }, [agroclimateLayer, geologyLayer, activeLayers, dispatch]);
+  }, [agroclimateLayer, geologyLayer, activeLayers, dispatch, vegetationLayer]);
   if (isLoading) return <Spinner />;
   return (
     <>
@@ -84,6 +98,15 @@ export default function JsonProvider() {
           onEachFeature={onEachPolygonFeature}
         />
       )}
+      {/* {vegetationLayer && (
+        <GeoJSON
+          data={vegetationLayer}
+          style={(feature) =>
+            polygonStyle(feature, activeLayers, "vegetationLayer")
+          }
+          onEachFeature={onEachPolygonFeature}
+        />
+      )} */}
     </>
   );
 }
