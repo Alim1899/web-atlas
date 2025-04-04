@@ -11,7 +11,7 @@ export default function AccordionExpandIcon({ layerId }) {
           id="panel1-header"
           aria-controls="panel1"
           expandIcon={<MdOutlineExpandMore className={classes.expand} />}
-          sx={{ minHeight: 48 }}
+          sx={{ minHeight: 30 }}
         ></AccordionSummary>
         <AccordionDetails className={classes.details}>
           <LineSlider layerId={layerId} />

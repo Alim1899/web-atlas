@@ -21,7 +21,7 @@ export default function JsonProvider() {
   const geoJsonData = Object.fromEntries(
     layerIds.map((layer, index) => [layer, queries[index]?.data || {}])
   );
-
+  console.log(activeLayers);
   const isLoading = queries.some((query) => query?.isLoading);
   const { rockfall, geology, rivers, agroclimate, vegetation } = geoJsonData;
 
@@ -98,15 +98,13 @@ export default function JsonProvider() {
           onEachFeature={onEachPolygonFeature}
         />
       )}
-      {/* {vegetationLayer && (
+      {vegetationLayer && (
         <GeoJSON
           data={vegetationLayer}
-          style={(feature) =>
-            polygonStyle(feature, activeLayers, "vegetationLayer")
-          }
+          style={(feature) => polygonStyle(feature, activeLayers, "vegetation")}
           onEachFeature={onEachPolygonFeature}
         />
-      )} */}
+      )}
     </>
   );
 }

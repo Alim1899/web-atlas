@@ -57,7 +57,10 @@ const MapList = () => {
             label="ვეგეტაცია"
             switchId="vegetation"
             mapChecked={false}
-          />
+            type="polygon"
+          >
+            <AccordionExpandIcon layerId={"vegetation"} />
+          </SwitchButton>
         </div>
       )}
     </div>

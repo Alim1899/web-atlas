@@ -47,14 +47,9 @@ export function polygonStyle(feature, layer, id) {
         : zone === "moderate"
         ? "#78c679"
         : "#238443";
-  } else {
+  } else if (feature.name === "vegetation") {
     const zone = feature.properties.vegetation;
-    zones.push(zone);
-    const uniqueZones = zones.filter(
-      (item, index) => zones.indexOf(item) === index
-    );
 
-    console.log(uniqueZones);
     color =
       zone === "East Georgian lowland, downhill and superior plateau vegetation"
         ? "#abc"
@@ -69,12 +64,13 @@ export function polygonStyle(feature, layer, id) {
         : "#238443";
   }
 
+  const foundLayer = layer.find((lyr) => lyr.id === id) || {};
   return {
     fillColor: color,
-    weight: layer.find((lyr) => lyr.id === id).weight,
+    weight: foundLayer.weight,
     opacity: 1,
     color: "black",
-    fillOpacity: layer.find((lyr) => lyr.id === id).opacity,
+    fillOpacity: foundLayer.opacity || 0.5, // Default opacity
   };
 }
 
