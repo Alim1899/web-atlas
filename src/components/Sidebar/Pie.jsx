@@ -8,6 +8,7 @@ import {
 } from "recharts";
 
 const ChartPie = ({ data, dataKey, nameKey }) => {
+  console.log(data);
   return (
     <ResponsiveContainer width="98%" height="70%">
       <PieChart>
@@ -25,14 +26,36 @@ const ChartPie = ({ data, dataKey, nameKey }) => {
         </Pie>
         <Tooltip
           wrapperStyle={{ fontSize: "16px" }}
-          formatter={(value) =>
-            `${Number(value)
-              .toLocaleString("en-US", {
-                minimumFractionDigits: 1,
-                maximumFractionDigits: 1,
-              })
-              .replace(/,/g, " ")} მ²`
-          }
+          content={({ active, payload }) => {
+            if (active && payload && payload.length > 0) {
+              const { payload: data } = payload[0]; // destructure from the payload array
+              return (
+                <div
+                  style={{
+                    backgroundColor: "#fff",
+
+                    border: "1px solid #ccc",
+                    borderRadius: "8px",
+                    boxShadow: "0 0 10px rgba(0,0,0,0.1)",
+                  }}
+                >
+                  <p>
+                    {data.index ? data.index : data.label}{" "}
+                    <strong>
+                      {Number(data.area)
+                        .toLocaleString("en-US", {
+                          minimumFractionDigits: 1,
+                          maximumFractionDigits: 1,
+                        })
+                        .replace(/,/g, " ")}{" "}
+                      m²
+                    </strong>
+                  </p>
+                </div>
+              );
+            }
+            return null;
+          }}
         />
         <Legend
           content={({ payload }) => (

@@ -37,14 +37,13 @@ const Chart = ({ handleChart }) => {
   }, [selectedLayer, data]);
 
   let filtered = [];
-
   if (activeData.length > 0) {
     filtered = Object.values(
       activeData.reduce((acc, item) => {
-        const { label, area, color } = item;
+        const { label, area, color, index } = item;
 
         if (!acc[label]) {
-          acc[label] = { label, area: 0, color };
+          acc[label] = { label, area: 0, color, index };
         }
         acc[label].area += parseFloat(area);
         return acc;

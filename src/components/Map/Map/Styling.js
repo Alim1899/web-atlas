@@ -33,7 +33,7 @@ export function polygonStyle(feature, layer, id) {
       "Steppe vegetation of south Georgian mountains",
       "Bright Coniferous forests",
     ])
-    .range(d3.schemeYlGnBu[5].slice(1));
+    .range(d3.schemeBrBG[9].slice(1));
   let color;
   if (feature.name === "geology") {
     const lyr = feature.properties.Index_;
