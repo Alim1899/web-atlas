@@ -8,7 +8,6 @@ import {
 } from "recharts";
 
 const ChartPie = ({ data, dataKey, nameKey }) => {
-  console.log(data);
   return (
     <ResponsiveContainer width="98%" height="70%">
       <PieChart>
@@ -21,14 +20,15 @@ const ChartPie = ({ data, dataKey, nameKey }) => {
           paddingAngle={3}
         >
           {data.map((entry) => (
-            <Cell key={entry.label} fill={entry.color} />
+            <Cell key={entry.name} fill={entry.color} />
           ))}
         </Pie>
         <Tooltip
           wrapperStyle={{ fontSize: "16px" }}
           content={({ active, payload }) => {
             if (active && payload && payload.length > 0) {
-              const { payload: data } = payload[0]; // destructure from the payload array
+              const { payload: data } = payload[0];
+              console.log(payload); // destructure from the payload array
               return (
                 <div
                   style={{
@@ -40,7 +40,7 @@ const ChartPie = ({ data, dataKey, nameKey }) => {
                   }}
                 >
                   <p>
-                    {data.index ? data.index : data.label}{" "}
+                    {data.desc ? data.desc : data.name}{" "}
                     <strong>
                       {Number(data.area)
                         .toLocaleString("en-US", {
@@ -91,7 +91,7 @@ const ChartPie = ({ data, dataKey, nameKey }) => {
                   <span style={{ color: entry.color, marginRight: "5px" }}>
                     ⬤
                   </span>{" "}
-                  {entry.value}
+                  {entry.payload.name}
                 </span>
               ))}
             </div>

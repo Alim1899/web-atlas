@@ -36,11 +36,9 @@ export function polygonStyle(feature, layer, id) {
     .range(d3.schemeBrBG[9].slice(1));
   let color;
   if (feature.name === "geology") {
-    console.log(feature);
     const lyr = feature.properties.layerName;
     color = geologyScale(lyr) || "#abccba";
   } else if (feature.name === "agro") {
-    console.log(feature.properties.layerName);
     const zone = feature.properties.layerName;
     color = agroScale(zone) || "#443";
   } else if (feature.name === "vegetation") {

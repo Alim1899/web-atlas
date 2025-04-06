@@ -15,6 +15,7 @@ const Chart = ({ handleChart }) => {
     sessionStorage.setItem("selectedLayer", e.target.value);
   };
   const { state } = useMaps();
+
   const { chartdata, activeLayers } = state;
   const { data } = chartdata;
   const [selectedLayer, setSelectedLayer] = useState(() => {
@@ -24,9 +25,8 @@ const Chart = ({ handleChart }) => {
     }
     return "";
   });
+
   useEffect(() => {
-    console.log("Checking");
-    console.log(selectedLayer, data);
     if (data.length > 0 && !selectedLayer)
       setSelectedLayer(Object.keys(data[0]).join());
     if (!selectedLayer || data.length === 0) return;
@@ -35,17 +35,15 @@ const Chart = ({ handleChart }) => {
       setActiveData(Object.values(foundData)[0]); // Get the value instead of Object.entries
     }
   }, [selectedLayer, data]);
-
   let filtered = [];
   if (activeData.length > 0) {
     filtered = Object.values(
       activeData.reduce((acc, item) => {
-        const { label, area, color, index } = item;
-
-        if (!acc[label]) {
-          acc[label] = { label, area: 0, color, index };
+        const { name, area, color, desc } = item;
+        if (!acc[name]) {
+          acc[name] = { name, area: 0, color, desc };
         }
-        acc[label].area += parseFloat(area);
+        acc[name].area += parseFloat(area);
         return acc;
       }, {})
     );
@@ -92,7 +90,7 @@ const Chart = ({ handleChart }) => {
               <ChartPie
                 data={Object.values(filtered)}
                 dataKey="area"
-                nameKey="label"
+                nameKey="desc"
               />
             </div>
           </div>

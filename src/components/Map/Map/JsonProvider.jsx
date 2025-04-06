@@ -40,7 +40,8 @@ export default function JsonProvider() {
       agroclimateLayer.forEach((feature) => {
         agroData.push({
           key: feature.properties.OBJECTID,
-          label: feature.properties.zone,
+          name: feature.properties.layerName,
+          desc: feature.properties.layerDesc,
           area: feature.properties.Shape_Area.toFixed(2),
           color: polygonStyle(feature, activeLayers, "agroclimate").fillColor,
         });
@@ -52,8 +53,8 @@ export default function JsonProvider() {
       geologyLayer.forEach((feature) => {
         geologyData.push({
           key: feature.properties.OBJECTID,
-          index: feature.properties.Index_,
-          label: feature.properties.Geology,
+          desc: feature.properties.layerDesc,
+          name: feature.properties.layerName,
           area: feature.properties.area.toFixed(2),
           color: polygonStyle(feature, activeLayers, "geology").fillColor,
         });
@@ -65,14 +66,15 @@ export default function JsonProvider() {
       vegetationLayer.forEach((feature) => {
         vegetationData.push({
           key: feature.properties.OBJECTID,
-          index: feature.properties.Species,
-          label: feature.properties.vegetation,
+          desc: feature.properties.layerDesc,
+          name: feature.properties.layerName,
           area: feature.properties.area.toFixed(2),
           color: polygonStyle(feature, activeLayers, "vegetation").fillColor,
         });
       });
       dataToSend.push({ vegetation: vegetationData });
     }
+
     dispatch({ type: "SET_CHART", payload: dataToSend });
   }, [agroclimateLayer, geologyLayer, activeLayers, dispatch, vegetationLayer]);
   if (isLoading) return <Spinner />;
