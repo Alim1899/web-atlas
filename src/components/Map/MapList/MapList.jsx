@@ -14,6 +14,7 @@ const MapList = () => {
           type="text"
           placeholder="მოძებნე რუკა"
           value={query}
+          onClick={() => setSHowMenu(true)}
           onChange={(e) => {
             setQuery(e.target.value);
           }}

@@ -54,7 +54,7 @@ export default function JsonProvider() {
           key: feature.properties.OBJECTID,
           index: feature.properties.Index_,
           label: feature.properties.Geology,
-          area: feature.properties.Shape_Area.toFixed(2),
+          area: feature.properties.area.toFixed(2),
           color: polygonStyle(feature, activeLayers, "geology").fillColor,
         });
       });
@@ -67,7 +67,7 @@ export default function JsonProvider() {
           key: feature.properties.OBJECTID,
           index: feature.properties.Species,
           label: feature.properties.vegetation,
-          area: feature.properties.Shape_Area.toFixed(2),
+          area: feature.properties.area.toFixed(2),
           color: polygonStyle(feature, activeLayers, "vegetation").fillColor,
         });
       });

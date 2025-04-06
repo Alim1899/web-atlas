@@ -36,13 +36,15 @@ export function polygonStyle(feature, layer, id) {
     .range(d3.schemeBrBG[9].slice(1));
   let color;
   if (feature.name === "geology") {
-    const lyr = feature.properties.Index_;
+    console.log(feature);
+    const lyr = feature.properties.layerName;
     color = geologyScale(lyr) || "#abccba";
   } else if (feature.name === "agro") {
-    const zone = feature.properties.zone;
+    console.log(feature.properties.layerName);
+    const zone = feature.properties.layerName;
     color = agroScale(zone) || "#443";
   } else if (feature.name === "vegetation") {
-    const zone = feature.properties.vegetation;
+    const zone = feature.properties.layerName;
     color = vegetationScale(zone) || "#238443";
   }
 
@@ -51,7 +53,7 @@ export function polygonStyle(feature, layer, id) {
     fillColor: color,
     weight: foundLayer.weight,
     opacity: 1,
-    color: "brown",
+    color: "gray",
     fillOpacity: foundLayer.opacity || 1,
   };
 }
