@@ -3,10 +3,9 @@ import useMaps from "../MapContext/useMaps";
 import { useQueries } from "@tanstack/react-query";
 import Spinner from "../../UI/Loader/Spinner";
 import fetchGeoJson from "./Fetch";
-import { onEachPolygonFeature, pointToLayer, polygonStyle } from "./Styling";
-import { useEffect } from "react";
+import { pointToLayer, polygonStyle } from "./Styling";
 export default function JsonProvider() {
-  const { state, dispatch } = useMaps();
+  const { state } = useMaps();
   const { activeLayers } = state;
   const layerIds = activeLayers.map((layer) => layer.id);
   const queries = useQueries({
@@ -22,90 +21,30 @@ export default function JsonProvider() {
     layerIds.map((layer, index) => [layer, queries[index]?.data || {}])
   );
   const isLoading = queries.some((query) => query?.isLoading);
-  const { rockfall, geology, rivers, agroclimate, vegetation } = geoJsonData;
 
-  const rockfallLayer =
-    activeLayers.some((layer) => layer.id === "rockfall") && rockfall?.features;
-  const geologyLayer =
-    activeLayers.some((layer) => layer.id === "geology") && geology?.features;
-  const riversLayer = layerIds.includes("rivers") && rivers?.features;
-  const agroclimateLayer =
-    layerIds.includes("agroclimate") && agroclimate?.features;
-  const vegetationLayer =
-    layerIds.includes("vegetation") && vegetation?.features;
-  useEffect(() => {
-    const dataToSend = [];
-    if (agroclimateLayer) {
-      const agroData = [];
-      agroclimateLayer.forEach((feature) => {
-        agroData.push({
-          key: feature.properties.OBJECTID,
-          name: feature.properties.layerName,
-          desc: feature.properties.layerDesc,
-          area: feature.properties.Shape_Area.toFixed(2),
-          color: polygonStyle(feature, activeLayers, "agroclimate").fillColor,
-        });
-      });
-      dataToSend.push({ agroclimate: agroData });
-    }
-    if (geologyLayer) {
-      const geologyData = [];
-      geologyLayer.forEach((feature) => {
-        geologyData.push({
-          key: feature.properties.OBJECTID,
-          desc: feature.properties.layerDesc,
-          name: feature.properties.layerName,
-          area: feature.properties.area.toFixed(2),
-          color: polygonStyle(feature, activeLayers, "geology").fillColor,
-        });
-      });
-      dataToSend.push({ geology: geologyData });
-    }
-    if (vegetationLayer) {
-      const vegetationData = [];
-      vegetationLayer.forEach((feature) => {
-        vegetationData.push({
-          key: feature.properties.OBJECTID,
-          desc: feature.properties.layerDesc,
-          name: feature.properties.layerName,
-          area: feature.properties.area.toFixed(2),
-          color: polygonStyle(feature, activeLayers, "vegetation").fillColor,
-        });
-      });
-      dataToSend.push({ vegetation: vegetationData });
-    }
-
-    dispatch({ type: "SET_CHART", payload: dataToSend });
-  }, [agroclimateLayer, geologyLayer, activeLayers, dispatch, vegetationLayer]);
   if (isLoading) return <Spinner />;
+
+  const layersToDisplay = Object.entries(geoJsonData);
+
   return (
     <>
-      {rockfallLayer && (
-        <GeoJSON data={rockfallLayer} pointToLayer={pointToLayer} />
-      )}
-      {geologyLayer && (
-        <GeoJSON
-          data={geologyLayer}
-          style={(feature) => polygonStyle(feature, activeLayers, "geology")}
-        />
-      )}
-      {riversLayer && <GeoJSON data={riversLayer} />}
-      {agroclimateLayer && (
-        <GeoJSON
-          data={agroclimateLayer}
-          style={(feature) =>
-            polygonStyle(feature, activeLayers, "agroclimate")
-          }
-          onEachFeature={onEachPolygonFeature}
-        />
-      )}
-      {vegetationLayer && (
-        <GeoJSON
-          data={vegetationLayer}
-          style={(feature) => polygonStyle(feature, activeLayers, "vegetation")}
-          onEachFeature={onEachPolygonFeature}
-        />
-      )}
+      {layersToDisplay.map((el) => {
+        return el[1].type === "polygon" ? (
+          <GeoJSON
+            key={el[0]}
+            data={el[1].features}
+            style={(feature) => polygonStyle(feature, activeLayers, el[0])}
+          />
+        ) : el[1].type === "points" ? (
+          <GeoJSON
+            key={el[0]}
+            data={el[1].features}
+            pointToLayer={pointToLayer}
+          />
+        ) : (
+          <GeoJSON key={el[0]} data={el[1].features} />
+        );
+      })}
     </>
   );
 }

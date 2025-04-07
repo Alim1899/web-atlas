@@ -18,6 +18,7 @@ const Chart = ({ handleChart }) => {
 
   const { chartdata, activeLayers } = state;
   const { data } = chartdata;
+  console.log(data);
   const [selectedLayer, setSelectedLayer] = useState(() => {
     if (data.length > 0) {
       const storedLayer = sessionStorage.getItem("selectedLayer");
@@ -48,6 +49,7 @@ const Chart = ({ handleChart }) => {
       }, {})
     );
   }
+  console.log(filtered);
   return (
     <div className={classes.main}>
       <div
@@ -85,14 +87,17 @@ const Chart = ({ handleChart }) => {
                   </option>
                 ))}
             </select>
-
-            <div className={classes.diagram}>
-              <ChartPie
-                data={Object.values(filtered)}
-                dataKey="area"
-                nameKey="desc"
-              />
-            </div>
+            {filtered.length > 0 ? (
+              <div className={classes.diagram}>
+                <ChartPie
+                  data={Object.values(filtered)}
+                  dataKey="area"
+                  nameKey="name"
+                />
+              </div>
+            ) : (
+              <p className={classes.param}>⛔ამ ფენას არ აქვს დიაგრამა</p>
+            )}
           </div>
         ) : (
           <p className={classes.param}>გთხოვთ აირჩიოთ რუკა</p>

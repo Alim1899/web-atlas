@@ -28,12 +28,10 @@ const ChartPie = ({ data, dataKey, nameKey }) => {
           content={({ active, payload }) => {
             if (active && payload && payload.length > 0) {
               const { payload: data } = payload[0];
-              console.log(payload); // destructure from the payload array
               return (
                 <div
                   style={{
                     backgroundColor: "#fff",
-
                     border: "1px solid #ccc",
                     borderRadius: "8px",
                     boxShadow: "0 0 10px rgba(0,0,0,0.1)",
