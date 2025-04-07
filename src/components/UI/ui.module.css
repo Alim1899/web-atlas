@@ -6,6 +6,14 @@
 .accordion {
   background-color: none;
 }
+.accordion > div {
+  height: 40px;
+  width: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
 .lineSlider > label > h6 {
   padding: 0;
   margin: 0;
@@ -14,9 +22,8 @@
 .details {
   position: fixed;
   z-index: 2;
-  margin-left: 50px;
+
   width: 250px;
-  margin-top: -100px;
   background-color: var(--light-text);
 }
 
