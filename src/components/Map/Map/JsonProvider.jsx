@@ -48,3 +48,45 @@ export default function JsonProvider() {
     </>
   );
 }
+// const dataToSend = useMemo(() => {
+//   const keys = activeLayers.map((el) => el.id);
+//   const result = [];
+
+//   keys.forEach((el) => {
+//     const match = Object.entries(geoJsonData).find(([key]) => key === el);
+//     if (match) {
+//       const name = el;
+//       const { features, type } = match[1];
+//       if (type === "polygon") {
+//         const layerData = features.map((feature) => {
+//           const {
+//             OBJECTID: id,
+//             area,
+//             layerDesc,
+//             layerName,
+//             length,
+//             Hazard: hazard,
+//           } = feature.properties;
+//           return {
+//             key: id,
+//             name: layerName || false,
+//             desc: layerDesc || false,
+//             hazard: hazard || false,
+//             area: area ? area.toFixed(2) : false,
+//             length: length ? length.toFixed(2) : false,
+//             color: polygonStyle(feature, activeLayers, name).fillColor,
+//           };
+//         });
+//         result.push({ [name]: layerData });
+//       }
+//     }
+//   });
+
+//   return result;
+// }, [geoJsonData, activeLayers]);
+// console.log(dataToSend);
+// // useEffect(() => {
+// //   dispatch({ type: "SET_CHART", payload: dataToSend });
+// // }, [dataToSend, dispatch]);
+
+// //////////////////////////////////////

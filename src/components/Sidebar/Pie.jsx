@@ -20,7 +20,7 @@ const ChartPie = ({ data, dataKey, nameKey }) => {
           paddingAngle={3}
         >
           {data.map((entry) => (
-            <Cell key={entry.name} fill={entry.color} />
+            <Cell key={entry.layerName} fill={entry.color} />
           ))}
         </Pie>
         <Tooltip

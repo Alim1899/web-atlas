@@ -1,9 +1,8 @@
 import L from "leaflet";
 import point from "../../../assets/map/point.svg";
-import * as d3 from "d3";
-
+import { getColor } from "../../Utils/ColorScales";
 export const pointToLayer = (feature, latlng) => {
-  if (!latlng) console.log("error:", feature);
+  if (!latlng) console.error("error:", feature);
   return L.marker(latlng, {
     icon: L.icon({
       iconUrl: point,
@@ -14,37 +13,7 @@ export const pointToLayer = (feature, latlng) => {
   });
 };
 export function polygonStyle(feature, layer, id) {
-  const geologyScale = d3
-    .scaleOrdinal()
-    .domain(["K", "Q", "yPz", "J", "P", "PR+Pz1", "N"])
-    .range(d3.schemeOranges[7]);
-
-  const agroScale = d3
-    .scaleOrdinal()
-    .domain(["Cold", "mid_cold", "moderate", "warm"])
-    .range(d3.schemeGreens[8].slice(2));
-
-  const vegetationScale = d3
-    .scaleOrdinal()
-    .domain([
-      "East Georgian lowland, downhill and superior plateau vegetation",
-      "Mountainous forest plants Broadleaf forests",
-      "High Mountain vegetation",
-      "Steppe vegetation of south Georgian mountains",
-      "Bright Coniferous forests",
-    ])
-    .range(d3.schemeBrBG[9].slice(1));
-  let color;
-  if (feature.name === "geology") {
-    const lyr = feature.properties.layerName;
-    color = geologyScale(lyr) || "#abccba";
-  } else if (feature.name === "agro") {
-    const zone = feature.properties.layerName;
-    color = agroScale(zone) || "#443";
-  } else if (feature.name === "vegetation") {
-    const zone = feature.properties.layerName;
-    color = vegetationScale(zone) || "#238443";
-  }
+  const color = getColor(feature.name, feature.properties.layerName);
 
   const foundLayer = layer.find((lyr) => lyr.id === id) || {};
   return {

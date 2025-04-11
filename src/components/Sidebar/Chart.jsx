@@ -2,54 +2,81 @@ import classes from "./Chart.module.css";
 import useMaps from "../Map/MapContext/useMaps";
 import drag from "../../assets/drag.svg";
 import remove from "../../assets/delete.svg";
-
 import useDraggable from "../Hooks/useDraggable";
 import { useEffect, useRef, useState } from "react";
 import ChartPie from "./Pie";
+import { getColor } from "../Utils/ColorScales";
+import { useQueryClient } from "@tanstack/react-query";
 const Chart = ({ handleChart }) => {
+  // DATA FOR CHARTS
+  const queryClient = useQueryClient();
+  const geojsonQueries = queryClient
+    .getQueryCache()
+    .findAll({ queryKey: ["geojson"] }); // partial match
+  const allGeojsonData = geojsonQueries.map((q) => ({
+    key: q.queryKey,
+    data: q.state.data,
+  }));
+  // GETTING ACTIVE LAYER IDS
+  const { state } = useMaps();
+  const { activeLayers } = state;
+  //const layerIds = activeLayers.map((layer) => layer.id);
   const chartRef = useRef(null);
   const [activeData, setActiveData] = useState([]);
+  const [chartData, setChartData] = useState([]);
   const { position, handleStart } = useDraggable(chartRef);
-  const handleSelected = (e) => {
-    setSelectedLayer(e.target.value);
-    sessionStorage.setItem("selectedLayer", e.target.value);
-  };
-  const { state } = useMaps();
 
-  const { chartdata, activeLayers } = state;
-  const { data } = chartdata;
-  console.log(data);
   const [selectedLayer, setSelectedLayer] = useState(() => {
-    if (data.length > 0) {
+    if (allGeojsonData.length > 0) {
       const storedLayer = sessionStorage.getItem("selectedLayer");
-      return storedLayer || Object.keys(data[0]).join();
+      return storedLayer || activeLayers[0];
     }
     return "";
   });
-
-  useEffect(() => {
-    if (data.length > 0 && !selectedLayer)
-      setSelectedLayer(Object.keys(data[0]).join());
-    if (!selectedLayer || data.length === 0) return;
-    const foundData = data.find((el) => Object.keys(el)[0] === selectedLayer);
-    if (foundData) {
-      setActiveData(Object.values(foundData)[0]); // Get the value instead of Object.entries
-    }
-  }, [selectedLayer, data]);
-  let filtered = [];
-  if (activeData.length > 0) {
-    filtered = Object.values(
-      activeData.reduce((acc, item) => {
-        const { name, area, color, desc } = item;
-        if (!acc[name]) {
-          acc[name] = { name, area: 0, color, desc };
-        }
-        acc[name].area += parseFloat(area);
-        return acc;
-      }, {})
+  const handleSelected = (e) => {
+    const layer = e.target.value;
+    setSelectedLayer(layer);
+    sessionStorage.setItem("selectedLayer", layer);
+    allGeojsonData.map(
+      (el) =>
+        el.key[1] === layer && setActiveData(Object.values(el.data.features))
     );
-  }
-  console.log(filtered);
+  };
+
+  console.log(allGeojsonData);
+  console.log(selectedLayer);
+  useEffect(() => {
+    if (activeData.length > 0) {
+      const type = activeData[0].geometry.type;
+
+      if (type === "MultiPolygon") {
+        const summary = activeData.reduce((acc, el) => {
+          const key = `${el.properties.layerName}`;
+          const type = selectedLayer; // e.g., "geology", "agro", etc.
+
+          if (!acc[key]) {
+            acc[key] = {
+              layerName: el.properties.layerName,
+              layerDesc: el.properties.layerDesc,
+              area: 0,
+              length: 0,
+              color: getColor(type, el.properties.layerName),
+            };
+          }
+          acc[key].area += el.properties.area;
+          acc[key].length += el.properties.length;
+
+          return acc;
+        }, {});
+
+        const result = Object.values(summary);
+        setChartData(result);
+      } else {
+        setChartData([]);
+      }
+    }
+  }, [activeData, selectedLayer]);
+
   return (
     <div className={classes.main}>
       <div
@@ -87,12 +114,12 @@ const Chart = ({ handleChart }) => {
                   </option>
                 ))}
             </select>
-            {filtered.length > 0 ? (
+            {chartData.length > 0 ? (
               <div className={classes.diagram}>
                 <ChartPie
-                  data={Object.values(filtered)}
+                  data={Object.values(chartData)}
                   dataKey="area"
-                  nameKey="name"
+                  nameKey="layerName"
                 />
               </div>
             ) : (
