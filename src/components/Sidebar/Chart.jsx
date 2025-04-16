@@ -43,8 +43,7 @@ const Chart = ({ handleChart }) => {
     );
   };
 
-  console.log(allGeojsonData);
-  console.log(selectedLayer);
+ 
   useEffect(() => {
     if (activeData.length > 0) {
       const type = activeData[0].geometry.type;
