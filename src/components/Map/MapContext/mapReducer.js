@@ -5,6 +5,7 @@ const initialState = {
     attribution:
       '&copy; <a href="https://www.maptiler.com/">MapTiler</a> &copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
   },
+  dataChart: [],
 };
 
 const mapReducer = (state = initialState, action) => {
@@ -46,6 +47,8 @@ const mapReducer = (state = initialState, action) => {
         ...state,
         baselayer: { url: action.url, attribution: action.attribution },
       };
+    case "SET_DATA_CHART":
+      return { ...state, dataChart: action.payload };
 
     default:
       return state;

@@ -1,19 +1,16 @@
 .main {
   position: fixed;
   z-index: -1;
-  top: 0;
-  left: 0;
-}
-
-.charts {
-  position: absolute; /* Make sure it moves freely */
+  top: 15vh;
+  right: 10vw;
+  height: 70vh;
+  width: 80vw;
   background-color: var(--dark-background);
   border: 1px solid var(--light-background);
-  border-radius: 15px;
-  height: clamp(380px, 80vh, 600px);
-  width: clamp(250px, 90vw, 1000px);
   display: grid;
   grid-template-rows: auto 90%;
+  border-radius: 15px;
+  cursor: all-scroll;
 }
 
 .head {
@@ -24,14 +21,17 @@
   border-bottom: 1px solid var(--light-background);
 }
 .chart {
-  display: grid;
-  grid-template-columns: 15% 85%;
+  border-radius: inherit;
+  height: 98%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
 }
 
 .chart > select {
   height: 40px;
-  width: 90%;
-  margin: auto;
+  width: clamp(70px, 15vw, 200px);
+
   border-radius: 15px;
   border: none;
   outline: none;
@@ -39,12 +39,17 @@
   font-family: "Times New Roman", Times, serif;
   font-weight: 700;
   font-size: clamp(0.5rem, 1.5vw, 1.2rem);
+  cursor: pointer;
 }
 .diagram {
   width: 100%;
   height: 100%;
   padding: 0;
-  display: grid;
+}
+.diagram > div {
+  width: 100%;
+  height: 100%;
+  margin: 5px;
 }
 
 /* Drag Handle */
@@ -73,6 +78,7 @@
   color: var(--navbar-light);
   place-content: center;
   font-size: clamp(0.6rem, 2vw, 1.5rem);
+  margin: auto;
 }
 
 @media screen and (max-width: 450px) {

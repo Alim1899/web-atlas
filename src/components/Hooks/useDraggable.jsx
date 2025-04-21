@@ -1,72 +1,45 @@
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useRef } from "react";
 
-const useDraggable = (chartRef) => {
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [isDragging, setIsDragging] = useState(false);
-  const offset = useRef({ x: 0, y: 0 });
+const useDraggable = (ref) => {
+  const positionRef = useRef({ x: 0, y: 0 });
+  const offsetRef = useRef({ x: 0, y: 0 });
 
-  const centerChart = useCallback(() => {
-    if (chartRef.current) {
-      const { offsetWidth, offsetHeight } = chartRef.current;
-      setPosition({
-        x: window.innerWidth / 2 - offsetWidth / 2,
-        y: window.innerHeight / 2 - offsetHeight / 2,
-      });
-    }
-  }, [chartRef]);
+  const handleMouseMove = (e) => {
+    if (!ref.current) return;
 
-  useEffect(() => {
-    centerChart();
-    window.addEventListener("resize", centerChart);
-    return () => {
-      window.removeEventListener("resize", centerChart);
-    };
-  }, [centerChart]);
+    const x = e.clientX - offsetRef.current.x;
+    const y = e.clientY - offsetRef.current.y;
 
-  const handleStart = (e) => {
-    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-    setIsDragging(true);
-    offset.current = { x: clientX - position.x, y: clientY - position.y };
+    positionRef.current = { x, y };
+    ref.current.style.left = `${x}px`;
+    ref.current.style.top = `${y}px`;
   };
 
-  const handleMove = useCallback(
-    (e) => {
-      if (!isDragging) return;
-      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-      setPosition({
-        x: clientX - offset.current.x,
-        y: clientY - offset.current.y,
-      });
-    },
-    [isDragging]
-  );
+  const handleMouseUp = () => {
+    window.removeEventListener("mousemove", handleMouseMove);
+    window.removeEventListener("mouseup", handleMouseUp);
+  };
 
-  const handleEnd = useCallback(() => {
-    setIsDragging(false);
-  }, []);
+  const handleStart = (e) => {
+    if (!ref.current) return;
 
-  useEffect(() => {
-    if (!isDragging) return;
+    const rect = ref.current.getBoundingClientRect();
+    const clientX = e.clientX || (e.touches && e.touches[0]?.clientX);
+    const clientY = e.clientY || (e.touches && e.touches[0]?.clientY);
 
-    const moveHandler = (e) => handleMove(e);
-    const endHandler = () => handleEnd();
-
-    window.addEventListener("mousemove", moveHandler);
-    window.addEventListener("mouseup", endHandler);
-    window.addEventListener("touchmove", moveHandler);
-    window.addEventListener("touchend", endHandler);
-
-    return () => {
-      window.removeEventListener("mousemove", moveHandler);
-      window.removeEventListener("mouseup", endHandler);
-      window.removeEventListener("touchmove", moveHandler);
-      window.removeEventListener("touchend", endHandler);
+    offsetRef.current = {
+      x: clientX - rect.left,
+      y: clientY - rect.top,
     };
-  }, [isDragging, handleMove, handleEnd]);
 
-  return { position, handleStart };
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mouseup", handleMouseUp);
+  };
+
+  return {
+    position: positionRef,
+    handleStart,
+  };
 };
 
 export default useDraggable;

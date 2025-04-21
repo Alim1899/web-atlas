@@ -27,20 +27,22 @@ const ChartPie = ({ data, dataKey, nameKey }) => {
           wrapperStyle={{ fontSize: "16px" }}
           content={({ active, payload }) => {
             if (active && payload && payload.length > 0) {
-              const { payload: data } = payload[0];
+              const data = payload[0].payload;
+
               return (
                 <div
                   style={{
                     backgroundColor: "#fff",
                     border: "1px solid #ccc",
                     borderRadius: "8px",
-                    boxShadow: "0 0 10px rgba(0,0,0,0.1)",
+                    padding: "0 5px ",
                   }}
                 >
+                  <p style={{ fontWeight: 600 }}>{data.layerName}</p>
+                  <p>{data.layerDesc}</p>
                   <p>
-                    {data.desc ? data.desc : data.name}{" "}
                     <strong>
-                      {Number(data.area)
+                      {Number(data.totalArea)
                         .toLocaleString("en-US", {
                           minimumFractionDigits: 1,
                           maximumFractionDigits: 1,
