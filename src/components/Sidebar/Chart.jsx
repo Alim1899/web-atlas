@@ -2,7 +2,7 @@ import classes from "./Chart.module.css";
 import useMaps from "../Map/MapContext/useMaps";
 import remove from "../../assets/delete.svg";
 import useDraggable from "../Hooks/useDraggable";
-import { useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import ChartPie from "./Pie";
 import { getColor } from "../Utils/ColorScales";
 const Chart = ({ handleChart }) => {
@@ -15,39 +15,78 @@ const Chart = ({ handleChart }) => {
   );
   const handleSelected = (e) => {
     const layer = e.target.value;
+
     setSelectedLayer(layer);
     sessionStorage.setItem("selectedLayer", layer);
   };
-  const chartData = [];
+  const chartData = useMemo(() => {
+    const result = [];
 
-  dataChart.map((el) => {
-    const type = el[1].type;
-    if (type !== "polygon") return;
-    const key = el[0];
+    dataChart.forEach((el) => {
+      const type = el[1].type;
+      if (type !== "polygon") return;
+      const key = el[0];
 
-    const summarized = {};
-    const charts = el[1].features;
-    charts.map((prop) => {
-      const props = prop.properties;
-      const name = props.layerName;
-      const layerType = el[0];
-      if (!summarized[name]) {
-        summarized[name] = {
-          layerName: name,
-          layerDesc: props.layerDesc,
-          totalArea: 0,
-          totalLength: 0,
-          color: getColor(layerType, name),
-        };
-      }
+      const summarized = {};
+      const charts = el[1].features;
+      charts.forEach((prop) => {
+        const props = prop.properties;
+        const name = props.layerName;
+        const layerType = el[0];
 
-      summarized[name].totalArea += props.area;
-      summarized[name].totalLength += props.length;
+        if (!summarized[name]) {
+          summarized[name] = {
+            layerName: name,
+            layerDesc: props.layerDesc,
+            totalArea: 0,
+            totalLength: 0,
+            color: getColor(layerType, name),
+          };
+        }
+
+        summarized[name].totalArea += props.area;
+        summarized[name].totalLength += props.length;
+      });
+
+      result.push({ id: key, data: summarized });
     });
 
-    chartData.push({ id: key, data: summarized });
-  });
+    return result;
+  }, [dataChart]);
 
+  useEffect(() => {
+    if (activeLayers.length === 0) {
+      setSelectedLayer("");
+      sessionStorage.removeItem("selectedLayer");
+      return;
+    }
+
+    const stillExists = activeLayers.some(
+      (layer) => layer.id === selectedLayer
+    );
+    if (!stillExists) {
+      const fallback = activeLayers[0].id;
+      setSelectedLayer(fallback);
+      sessionStorage.setItem("selectedLayer", fallback);
+    }
+  }, [activeLayers, selectedLayer]);
+
+  useEffect(() => {
+    if (activeLayers.length === 0) {
+      setSelectedLayer("");
+      sessionStorage.removeItem("selectedLayer");
+      return;
+    }
+
+    const stillExists = activeLayers.some(
+      (layer) => layer.id === selectedLayer
+    );
+    if (!stillExists) {
+      const fallback = activeLayers[0].id;
+      setSelectedLayer(fallback);
+      sessionStorage.setItem("selectedLayer", fallback);
+    }
+  }, [activeLayers, selectedLayer]);
   return (
     <div
       className={classes.main}
@@ -66,38 +105,43 @@ const Chart = ({ handleChart }) => {
           />
         </div>
       </div>
-      {activeLayers.length > 0 ? (
+      {activeLayers.length === 0 ? (
+        <p className={classes.param}>გთხოვთ აირჩიოთ რუკა</p>
+      ) : (
         <div className={classes.chart}>
-          <select value={selectedLayer} onChange={(e) => handleSelected(e)}>
+          <select value={selectedLayer} onChange={handleSelected}>
             {[...activeLayers]
               .sort((a, b) => a.id.localeCompare(b.id))
-              .map((el) => (
-                <option key={el.id} id={selectedLayer}>
-                  {el.id}
-                </option>
-              ))}
-          </select>
-          {chartData.length > 0 ? (
-            <div className={classes.diagram}>
-              {chartData.map((el) => {
-                if (el.id === selectedLayer) {
-                  return (
-                    <ChartPie
-                      key={el.id}
-                      data={Object.values(el.data)}
-                      dataKey="totalArea"
-                      nameKey="layerName"
-                    />
-                  );
-                }
+              .map((el) => {
+                const hasChart = chartData.some((chart) => chart.id === el.id);
+                return (
+                  <option key={el.id} value={el.id}>
+                    {el.id} {hasChart ? "" : "(⚠️ No Data)"}
+                  </option>
+                );
               })}
-            </div>
-          ) : (
-            <p className={classes.param}>⛔ამ ფენას არ აქვს დიაგრამა</p>
-          )}
+          </select>
+
+          {(() => {
+            const selectedChart = chartData.find(
+              (el) => el.id === selectedLayer
+            );
+            if (selectedChart) {
+              return (
+                <div className={classes.diagram}>
+                  <ChartPie
+                    key={selectedChart.id}
+                    data={Object.values(selectedChart.data)}
+                    dataKey="totalArea"
+                    nameKey="layerName"
+                  />
+                </div>
+              );
+            } else {
+              return <p className={classes.param}>ამ ფენას არ აქვს დიაგრამა</p>;
+            }
+          })()}
         </div>
-      ) : (
-        <p className={classes.param}>გთხოვთ აირჩიოთ რუკა</p>
       )}
     </div>
   );
