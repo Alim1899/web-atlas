@@ -1,5 +1,5 @@
 .list {
-  background-color: #485e70;
+  background-color: var(--background-color);
   list-style-type: none;
   display: grid;
   height: 100%;

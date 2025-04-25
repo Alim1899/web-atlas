@@ -1,10 +1,11 @@
 .mapHeaders {
   font-size: clamp(0.6rem, 2vw, 1.5rem);
-  width: clamp(70px, 25vw, 450px);
-
+  width: clamp(70px, 25vw, 350px);
   z-index: 50;
+  margin-left: 1vw;
   background-color: whitesmoke;
   border-radius: 15px;
+  min-width: 240px;
 }
 .searchBar {
   display: flex;
@@ -18,9 +19,8 @@
   width: 99%;
 }
 .menuIcon {
-  height: 50px;
+  width: 50px;
   cursor: pointer;
-  margin-left: -50px;
 }
 .searchMap:focus {
   border: 1px solid goldenrod;
@@ -31,16 +31,15 @@
   background-color: var(--navbar-light);
 
   height: 74dvh;
+  min-width: 240px;
 }
 .radio {
   width: 20px;
   height: 20px;
-  accent-color: #739774; /* Changes the color */
+  accent-color: #dd6413;
   cursor: pointer;
 }
-.menu > label {
-  margin-left: 10px;
-}
+
 .header {
   text-align: center;
 }

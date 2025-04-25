@@ -23,7 +23,6 @@ const DiscreteSlider = ({ layerId }) => {
           aria-label="opacity"
           value={layerState.opacity * 100} // Convert to percentage
           onChange={onOpacityChange}
-          valueLabelDisplay="auto"
           step={10}
           marks
           min={10}

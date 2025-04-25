@@ -1,6 +1,6 @@
 .mapList {
   position: absolute;
   top: 10%;
-  left: 1%;
+  left: clamp(5px, 2%, 10px);
   z-index: 1000;
 }
