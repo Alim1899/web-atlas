@@ -1,18 +1,30 @@
 import classes from "./Footer.module.css";
-import { FaGithub } from "react-icons/fa";
+import { FaFacebook } from "react-icons/fa";
+import { IoIosCall } from "react-icons/io";
+
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   return (
-    <ul className={classes.list}>
-      <li className={classes.listItem}>
-        {" "}
-        <a href="https://github.com/Alim1899" rel="noreferrer" target="_blank">
-          <FaGithub className={classes.icon} />
-        </a>
-      </li>
-      <li className={classes.listItem}>All Rights Reserved</li>
-      <li className={classes.listItem}>{currentYear}</li>
-    </ul>
+    <div className={classes.list}>
+      <div className={classes.social}>
+        <FaFacebook className={classes.icon} />
+        <IoIosCall className={classes.icon} />
+      </div>
+      <div className={classes.year}>
+        <span>ყველა უფლება დაცულია - {currentYear}©</span>
+      </div>
+      <div className={classes.organisation}>
+        <h6 className={classes.name}>
+          ვახუშტი ბაგრატიონის გეოგრაფიის ინსტიტუტი
+        </h6>
+        <h6 className={classes.name}>
+          შოთა რუსთაველის ეროვნული სამეცნიერო ფონდი
+        </h6>
+        <h6 className={classes.name}>
+          ივანე ჯავახიშვილის თბილისის სახელმწიფო უნივერსიტეტი
+        </h6>
+      </div>
+    </div>
   );
 };
 

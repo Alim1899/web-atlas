@@ -22,8 +22,9 @@
 .details {
   position: fixed;
   z-index: 2;
-  width: 250px;
+  width: 200px;
   background-color: var(--light-text);
+  margin-left: -20px;
 }
 
 .expand {

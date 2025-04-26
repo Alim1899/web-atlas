@@ -3,15 +3,33 @@
   list-style-type: none;
   display: grid;
   height: 100%;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 30% 40% 30%;
   margin-top: 0;
+  color: antiquewhite;
 }
 .listItem {
-  color: antiquewhite;
   margin: auto;
 }
 .icon {
-  width: 40px;
-  height: 40px;
-  color: antiquewhite;
+  width: clamp(40px, 3vw, 60px);
+  height: clamp(40px, 3vw, 60px);
+  margin: 15px;
+}
+.name {
+  margin: 0;
+  font-size: clamp(0.5rem, 1vw, 1rem);
+}
+.social,
+.year,
+.organisation {
+  display: flex;
+  align-items: center;
+
+  justify-content: center;
+}
+.organisation {
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  text-align: right;
 }

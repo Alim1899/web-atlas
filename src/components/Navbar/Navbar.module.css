@@ -1,9 +1,28 @@
 .main {
-  background-color: var(--background-color);
+  background-color: var(--navbar);
+  display: grid;
+  grid-template-columns: 40% 60%;
+}
+.logo {
+  height: clamp(40px, 3vw, 60px);
+}
+.headText {
+  margin: 0;
+  font-weight: 500;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-size: clamp(0.6rem, 1.5vw, 1.3rem);
+}
+.head,
+.links {
+  padding: 0;
+  margin: 0;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
 }
-.main > img {
-  height: clamp(40px, 5vw, 80px);
+.head {
+  border-right: 1px solid darkgray;
+}
+.links > h3 {
+  cursor: pointer;
 }
