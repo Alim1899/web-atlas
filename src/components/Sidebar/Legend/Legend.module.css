@@ -1,0 +1,29 @@
+.main {
+  position: absolute;
+  right: calc(var(--sidebar-width) + 15px);
+  background-color: var(--dark-background);
+  height: 60vh;
+  width: 40vw;
+  bottom: 0;
+  display: grid;
+  grid-template-rows: 20% 80%;
+  border-radius: 15px;
+  z-index: -1;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  margin: auto;
+
+  border-bottom: 1px solid gray;
+}
+.head {
+  color: var(--light-text);
+  margin: 0;
+}
+.header > svg {
+  fill: var(--light-text);
+  cursor: pointer;
+}

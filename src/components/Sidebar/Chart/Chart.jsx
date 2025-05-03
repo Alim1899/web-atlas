@@ -1,10 +1,10 @@
 import classes from "./Chart.module.css";
-import useMaps from "../Map/MapContext/useMaps";
-import remove from "../../assets/delete.svg";
-import useDraggable from "../Hooks/useDraggable";
+import useMaps from "../../Map/MapContext/useMaps";
+import remove from "../../../assets/delete.svg";
+import useDraggable from "../../Hooks/useDraggable";
 import { useEffect, useMemo, useRef, useState } from "react";
 import ChartPie from "./Pie";
-import { getColor } from "../Utils/ColorScales";
+import { getColor } from "../../Utils/ColorScales";
 const Chart = ({ handleChart }) => {
   const { state } = useMaps();
   const { dataChart, activeLayers } = state;

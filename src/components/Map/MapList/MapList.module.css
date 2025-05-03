@@ -2,12 +2,15 @@
   font-size: clamp(0.6rem, 2vw, 1.5rem);
   width: clamp(70px, 25vw, 350px);
   z-index: 50;
-  margin-left: 1vw;
-  background-color: whitesmoke;
   border-radius: 15px;
   min-width: 240px;
+  margin: 0.5vw 0 0 0.5vw;
 }
 .searchBar {
+  background-color: whitesmoke;
+  border-top-right-radius: 15px;
+  border-top-left-radius: 15px;
+
   display: flex;
   align-items: center;
 }
@@ -29,9 +32,10 @@
   display: flex;
   flex-direction: column;
   background-color: var(--navbar-light);
-
-  height: 74dvh;
+  border-bottom-right-radius: 15px;
   min-width: 240px;
+  height: var(--bar-height);
+  overflow: auto;
 }
 .radio {
   width: 20px;

@@ -2,10 +2,13 @@
   background-color: var(--background-color);
   list-style-type: none;
   display: grid;
-  height: 100%;
+  height: var(--footer-height);
   grid-template-columns: 30% 40% 30%;
   margin-top: 0;
   color: antiquewhite;
+  position: absolute;
+  width: 100vw;
+  bottom: 0;
 }
 .listItem {
   margin: auto;
@@ -24,12 +27,11 @@
 .organisation {
   display: flex;
   align-items: center;
-
   justify-content: center;
 }
 .organisation {
   flex-direction: column;
   justify-content: center;
-  align-items: flex-end;
+  align-items: flex-start;
   text-align: right;
 }
