@@ -10,20 +10,24 @@
   background-color: whitesmoke;
   border-top-right-radius: 15px;
   border-top-left-radius: 15px;
-
+  border-top: 1px solid var(--navbar-light);
   display: flex;
-  align-items: center;
+  align-items: flex-start;
 }
 .searchMap {
   border-radius: 15px;
   outline: none;
   border: none;
-  height: clamp(50px, 5vh, 80px);
   width: 99%;
+  height: clamp(50px, 5vh, 80px);
 }
 .menuIcon {
+  height: clamp(50px, 5vh, 80px);
   width: 50px;
+  border-radius: 15px;
+  background-color: var(--navbar-light);
   cursor: pointer;
+  margin-top: 1px;
 }
 .searchMap:focus {
   border: 1px solid goldenrod;
@@ -33,7 +37,7 @@
   flex-direction: column;
   background-color: var(--navbar-light);
   border-bottom-right-radius: 15px;
-  min-width: 240px;
+  min-width: 150px;
   height: var(--bar-height);
   overflow: auto;
 }

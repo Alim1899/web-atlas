@@ -3,7 +3,7 @@
   --dark-background: #2f3d48;
   --light-background: #495e71;
   --foreground-color: #035a4e;
-  --navbar-light: #e6e7e6;
+  --navbar-light: #8e9292cb;
   --navbar-dark: #236570;
   --navbar: #cedee0;
   --dark-text: #062906;
@@ -11,7 +11,7 @@
   --header-font-size: clamp(1rem, 4vw, 2rem);
   --navbar-height: clamp(50px, 5vw, 72px);
   --footer-height: clamp(80px, 10vh, 120px);
-  --sidebar-width: clamp(40px, 5vw, 90px);
+  --sidebar-width: clamp(70px, 10vw, 120px);
   --bar-height: clamp(200px, 60vh, 1200px);
 }
 
