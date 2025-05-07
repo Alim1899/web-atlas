@@ -5,11 +5,16 @@ import Sidebar from "../../Sidebar/Sidebar";
 const MapLayout = () => {
   return (
     <div className={classes.map}>
-      <div className={classes.mapList}>
+      <div className={classes.leftBar}>
         <MapList />
       </div>
-      <Map />
-      <Sidebar />
+      <div className={classes.mapContainer}>
+        <Map />
+      </div>
+
+      <div className={classes.rightBar}>
+        <Sidebar />
+      </div>
     </div>
   );
 };

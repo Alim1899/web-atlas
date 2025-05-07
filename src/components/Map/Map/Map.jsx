@@ -5,7 +5,7 @@ import JsonProvider from "./JsonProvider";
 import useMaps from "../MapContext/useMaps";
 
 function Map() {
-  const center = [41.52, 44.48];
+  const center = [41.32, 44.28];
   const { state } = useMaps();
   const { baselayer } = state;
   const { url, attribution } = baselayer;

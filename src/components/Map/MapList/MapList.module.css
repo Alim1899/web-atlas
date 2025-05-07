@@ -1,16 +1,16 @@
 .mapHeaders {
   font-size: clamp(0.6rem, 2vw, 1.5rem);
   width: clamp(70px, 25vw, 350px);
-  z-index: 50;
   border-radius: 15px;
   min-width: 240px;
   margin: 0.5vw 0 0 0.5vw;
 }
 .searchBar {
   background-color: whitesmoke;
+
   border-top-right-radius: 15px;
   border-top-left-radius: 15px;
-  border-top: 1px solid var(--navbar-light);
+  border-top: 1px solid var(--dark-background);
   display: flex;
   align-items: flex-start;
 }
@@ -25,7 +25,6 @@
   height: clamp(50px, 5vh, 80px);
   width: 50px;
   border-radius: 15px;
-  background-color: var(--navbar-light);
   cursor: pointer;
   margin-top: 1px;
 }
@@ -39,7 +38,9 @@
   border-bottom-right-radius: 15px;
   min-width: 150px;
   height: var(--bar-height);
-  overflow: auto;
+
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 .radio {
   width: 20px;

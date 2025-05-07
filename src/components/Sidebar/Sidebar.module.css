@@ -1,6 +1,6 @@
 .main {
   position: fixed;
-  z-index: 1000000;
+
   top: calc(var(--navbar-height) + 0.5vw);
   right: 0.5vw;
   background-color: var(--navbar-light);
