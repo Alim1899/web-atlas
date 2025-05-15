@@ -9,15 +9,29 @@
   grid-template-rows: 20% 80%;
   border-radius: 15px;
   z-index: -1;
+  overflow: auto;
 }
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 90%;
-  margin: auto;
-
+  margin: 0 auto;
+  height: 45px;
+  font-size: clamp(0.7rem, 2vw, 1rem);
+  padding: 0;
   border-bottom: 1px solid gray;
+}
+.legend {
+  display: grid;
+  grid-template-columns: 10% 85%;
+  gap: 5%;
+  align-items: center;
+  margin-top: 5px;
+  color: var(--light-text);
+}
+.legend > div {
+  height: 30px;
 }
 .head {
   color: var(--light-text);

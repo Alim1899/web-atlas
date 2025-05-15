@@ -1,7 +1,7 @@
 import chart from "../../assets/chart.svg";
 import layers from "../../assets/sidebar/layers.svg";
 import info from "../../assets/sidebar/info.svg";
-
+import useChartData from "../Hooks/useChartData";
 import legend from "../../assets/sidebar/legend.svg";
 import right from "../../assets/sidebar/up.png";
 import left from "../../assets/sidebar/down.png";
@@ -38,6 +38,13 @@ const Sidebar = () => {
     e.preventDefault();
     setShowLegend(!showLegend);
   };
+  const {
+    chartData,
+    selectedLayer,
+    selectedChart,
+    activeLayers,
+    handleSelected,
+  } = useChartData();
   return (
     <aside className={classes.main}>
       {showSidebar ? (
@@ -76,9 +83,19 @@ const Sidebar = () => {
             />
           </div>
 
-          {showChart && <Chart handleChart={handleChart} />}
+          {showChart && (
+            <Chart
+              handleChart={handleChart}
+              chartData={chartData}
+              activeLayers={activeLayers}
+              selectedLayer={selectedLayer}
+              handleSelected={handleSelected}
+            />
+          )}
           {showLayer && <Layers />}
-          {showLegend && <Legend onCloseModal={handleLegend} />}
+          {showLegend && (
+            <Legend onCloseModal={handleLegend} selectedChart={selectedChart} />
+          )}
         </article>
       ) : (
         <div className={classes.toggleWrapper} onClick={openSidebar}>

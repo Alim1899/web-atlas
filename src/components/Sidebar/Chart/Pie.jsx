@@ -6,6 +6,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
+import translit from "translit-geo";
 
 const ChartPie = ({ data, dataKey, nameKey }) => {
   return (
@@ -39,7 +40,7 @@ const ChartPie = ({ data, dataKey, nameKey }) => {
                   }}
                 >
                   <p style={{ fontWeight: 600 }}>{data.layerName}</p>
-                  <p>{data.layerDesc}</p>
+                  <p>{translit(data.layerDesc)}</p>
                   <p>
                     <strong>
                       {Number(data.totalArea)
