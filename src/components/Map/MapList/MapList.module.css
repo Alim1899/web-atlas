@@ -3,11 +3,11 @@
   width: clamp(70px, 25vw, 350px);
   border-radius: 15px;
   min-width: 240px;
+  color: var(--dark-background);
   margin: 0.5vw 0 0 0.5vw;
 }
 .searchBar {
   background-color: whitesmoke;
-
   border-top-right-radius: 15px;
   border-top-left-radius: 15px;
   border-top: 1px solid var(--dark-background);
@@ -19,6 +19,7 @@
   outline: none;
   border: none;
   width: 99%;
+
   height: clamp(50px, 5vh, 80px);
 }
 .menuIcon {
@@ -34,18 +35,16 @@
 .menu {
   display: flex;
   flex-direction: column;
-  background-color: var(--navbar-light);
+  background-color: var(--light-text);
   border-bottom-right-radius: 15px;
   min-width: 150px;
   height: var(--bar-height);
-
   overflow-x: hidden;
   overflow-y: auto;
 }
 .radio {
   width: 20px;
   height: 20px;
-  accent-color: #dd6413;
   cursor: pointer;
 }
 
@@ -53,6 +52,9 @@
   text-align: center;
 }
 .menu > div {
+  position: relative;
   width: 95%;
   margin: 0 auto;
+
+  border-bottom: 1px solid var(--dark-background);
 }

@@ -1,5 +1,5 @@
 .spinnerContainer {
-  position: absolute;
+  position: fixed;
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -9,7 +9,7 @@
   backdrop-filter: blur(4px);
   top: 0;
   left: 0;
-  z-index: 99999999999999999999999999999999999;
+  z-index: 2147483647;
 }
 
 .spinner {

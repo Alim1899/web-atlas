@@ -7,9 +7,11 @@ import Spinner from "../UI/Loader/Spinner";
 const Home = () => {
   const { state } = useMaps();
   const { isLoading } = state;
-  return (
+
+  return isLoading ? (
+    <Spinner />
+  ) : (
     <div className={classes.main}>
-      {isLoading && <Spinner />}
       <Navbar />
       <MapLayout />
       <Footer />

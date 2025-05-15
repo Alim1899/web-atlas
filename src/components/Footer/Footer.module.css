@@ -16,6 +16,7 @@
   width: clamp(20px, 2vw, 40px);
   height: clamp(20px, 2vw, 40px);
   margin: 0 10px;
+  cursor: pointer;
 }
 
 a {

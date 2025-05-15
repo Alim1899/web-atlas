@@ -18,6 +18,9 @@
   padding: 0;
   margin: 0;
 }
+.lineSlider {
+  border-left: 1px solid var(--dark-background);
+}
 
 .details {
   position: fixed;
