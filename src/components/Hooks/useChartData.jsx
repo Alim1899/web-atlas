@@ -33,7 +33,6 @@ const useChartData = () => {
         return { id: key, data: summarized };
       });
   }, [dataChart]);
-
   // Keep selected layer in sync with active layers
   useEffect(() => {
     if (activeLayers.length === 0) {

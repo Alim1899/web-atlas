@@ -42,6 +42,9 @@
   overflow-x: hidden;
   overflow-y: auto;
 }
+.menu > div > div > label > span {
+  font-weight: 900;
+}
 .radio {
   width: 20px;
   height: 20px;

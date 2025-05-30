@@ -32,6 +32,7 @@
 }
 .legend > div {
   height: 30px;
+  margin-left: 2px;
 }
 .head {
   color: var(--light-text);
@@ -40,4 +41,16 @@
 .header > svg {
   fill: var(--light-text);
   cursor: pointer;
+}
+.nolayer {
+  display: grid;
+  color: var(--navbar-light);
+  place-content: center;
+  font-size: clamp(0.6rem, 2vw, 1.5rem);
+}
+
+.nolayer > span {
+  text-align: center;
+  font-size: clamp(0.9rem, 3vw, 2rem);
+  margin: auto;
 }

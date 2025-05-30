@@ -21,7 +21,9 @@ const Legend = ({ onCloseModal, selectedChart }) => {
             </div>
           ))
         ) : (
-          <p>ფენა არჩეული არ არის</p>
+          <p className={classes.nolayer}>
+            <span>🚫</span>ფენა არჩეული არ არის
+          </p>
         )}
       </div>
     </div>
