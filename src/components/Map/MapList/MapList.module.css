@@ -1,44 +1,22 @@
 .mapHeaders {
   font-size: clamp(0.6rem, 2vw, 1.5rem);
-  width: clamp(70px, 25vw, 350px);
   border-radius: 15px;
-  min-width: 240px;
-  color: var(--dark-background);
+  background-color: var(--navbar-dark);
+  color: antiquewhite;
   margin: 0.5vw 0 0 0.5vw;
-}
-.searchBar {
-  background-color: whitesmoke;
-  border-top-right-radius: 15px;
-  border-top-left-radius: 15px;
-  border-top: 1px solid var(--dark-background);
   display: flex;
-  align-items: flex-start;
+  justify-content: space-between;
+  width: auto;
+  height: var(--bar-height);
 }
-.searchMap {
-  border-radius: 15px;
-  outline: none;
-  border: none;
-  width: 99%;
 
-  height: clamp(50px, 5vh, 80px);
-}
-.menuIcon {
-  height: clamp(50px, 5vh, 80px);
-  width: 50px;
-  border-radius: 15px;
-  cursor: pointer;
-  margin-top: 1px;
-}
-.searchMap:focus {
-  border: 1px solid goldenrod;
-}
 .menu {
   display: flex;
   flex-direction: column;
-  background-color: var(--light-text);
   border-bottom-right-radius: 15px;
-  min-width: 150px;
-  height: var(--bar-height);
+
+  min-width: 260px;
+
   overflow-x: hidden;
   overflow-y: auto;
 }
@@ -54,10 +32,76 @@
 .header {
   text-align: center;
 }
-.menu > div {
-  position: relative;
-  width: 95%;
-  margin: 0 auto;
+.mapTypes {
+  display: grid;
+  grid-template-columns: 45% 45%;
+  column-gap: 10%;
+  margin-top: 10%;
+  overflow: auto;
+}
+.mapTypes > :nth-last-child(1):nth-child(odd) {
+  grid-column: 1 / -1;
+  justify-self: center;
+}
+.type {
+  border-bottom: 1px solid var(--light-text);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  cursor: pointer;
+  margin-top: 1vh;
+}
+.typeIcon {
+  height: clamp(30px, 5vw, 80px);
+  width: clamp(30px, 5vw, 80px);
+}
+.typeName {
+  margin: 0;
+  padding: 2px;
+}
+.type:hover {
+  transform: scale(0.9);
+}
 
-  border-bottom: 1px solid var(--dark-background);
+.catHeader {
+  text-align: center;
+  margin: clamp(5px, 1vw, 15px);
+}
+.arrows {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  border-radius: 15px;
+  cursor: pointer;
+  background-color: var(--navbar-dark);
+}
+.arrows:hover {
+  background-color: var(--navbar-dark-transparent);
+}
+
+.searchMap {
+  border-radius: 5px;
+  outline: none;
+  border: none;
+  margin-left: 5px;
+  margin-top: 10%;
+
+  height: clamp(20px, 2vh, 40px);
+}
+
+.searchMap:focus {
+  border: 1px solid goldenrod;
+}
+
+.backButton {
+  width: 140px;
+  border-radius: 15px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+.backButton:hover {
+  opacity: 0.7;
 }

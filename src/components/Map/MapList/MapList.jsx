@@ -1,94 +1,82 @@
-// MapList.jsx
 import classes from "./MapList.module.css";
-import { HiMenu } from "react-icons/hi";
 import { useState } from "react";
+
 import SwitchButton from "../../UI/SwitchButton";
 import AccordionExpandIcon from "../../UI/Accordion";
-
+import { BiSolidLeftArrow, BiSolidRightArrow } from "react-icons/bi";
+import { mapCategories } from "./Categories";
 const MapList = () => {
   const [showMenu, setSHowMenu] = useState(false);
   const [query, setQuery] = useState("");
-  const [expandedPanel, setExpandedPanel] = useState(null); // add this line
+  const [selectedCategory, setSelectedCategory] = useState(null); // NEW
+  const [expandedPanel, setExpandedPanel] = useState(null);
 
   const handleAccordionChange = (panel) => (event, isExpanded) => {
     setExpandedPanel(isExpanded ? panel : null);
   };
 
+  // Define categories and associated map layer ids
+
   return (
     <div className={classes.mapHeaders}>
-      <div className={classes.searchBar}>
-        <input
-          className={classes.searchMap}
-          type="text"
-          placeholder="მოძებნე რუკა"
-          value={query}
-          onClick={() => setSHowMenu(true)}
-          onChange={(e) => {
-            setQuery(e.target.value);
-          }}
-        />
-        <HiMenu
-          onClick={() => setSHowMenu(!showMenu)}
-          className={classes.menuIcon}
-        />
-      </div>
-
       {showMenu && (
         <div className={classes.menu}>
-          <h4 className={classes.header}>რუკის ტიპები</h4>
-
-          <SwitchButton
-            label="აგროკლიმატი"
-            switchId="agroclimate"
-            mapChecked={false}
-            type="polygon"
-          >
-            <AccordionExpandIcon
-              layerId="agroclimate"
-              expanded={expandedPanel === "agroclimate"}
-              onChange={handleAccordionChange("agroclimate")}
-            />
-          </SwitchButton>
-
-          <SwitchButton
-            label="გეოლოგია"
-            switchId="geology"
-            mapChecked={false}
-            type="polygon"
-          >
-            <AccordionExpandIcon
-              layerId="geology"
-              expanded={expandedPanel === "geology"}
-              onChange={handleAccordionChange("geology")}
-            />
-          </SwitchButton>
-
-          <SwitchButton
-            label="ქვათაცვენები"
-            switchId="rockfall"
-            mapChecked={false}
+          <input
+            className={classes.searchMap}
+            type="text"
+            placeholder="მოძებნე რუკა"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
           />
 
-          <SwitchButton
-            label="მდინარეები"
-            switchId="rivers"
-            mapChecked={false}
-          />
-
-          <SwitchButton
-            label="ვეგეტაცია"
-            switchId="vegetation"
-            mapChecked={false}
-            type="polygon"
-          >
-            <AccordionExpandIcon
-              layerId="vegetation"
-              expanded={expandedPanel === "vegetation"}
-              onChange={handleAccordionChange("vegetation")}
-            />
-          </SwitchButton>
+          <div className={classes.mapTypes}>
+            {mapCategories.map((cat) => {
+              const Icon = cat.icon;
+              return selectedCategory === cat.key ? (
+                <div key={cat.key}>
+                  <h4 className={classes.catHeader}>{cat.name}</h4>
+                  {cat.layers.map((layer) => (
+                    <SwitchButton
+                      key={layer.id}
+                      label={layer.label}
+                      switchId={layer.id}
+                      mapChecked={false}
+                      type={layer.type}
+                    >
+                      <AccordionExpandIcon
+                        layerId={layer.id}
+                        expanded={expandedPanel === layer.id}
+                        onChange={handleAccordionChange(layer.id)}
+                      />
+                    </SwitchButton>
+                  ))}
+                  <button
+                    className={classes.backButton}
+                    onClick={() => setSelectedCategory(null)}
+                  >
+                    უკან
+                  </button>
+                </div>
+              ) : (
+                selectedCategory === null && (
+                  <div
+                    key={cat.key}
+                    className={classes.type}
+                    onClick={() => setSelectedCategory(cat.key)}
+                  >
+                    <Icon className={classes.typeIcon} />
+                    <h6 className={classes.typeName}>{cat.name}</h6>
+                  </div>
+                )
+              );
+            })}
+          </div>
         </div>
       )}
+
+      <div className={classes.arrows} onClick={() => setSHowMenu(!showMenu)}>
+        {showMenu ? <BiSolidLeftArrow /> : <BiSolidRightArrow />}
+      </div>
     </div>
   );
 };
