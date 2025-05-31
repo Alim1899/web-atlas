@@ -3,7 +3,7 @@
   display: grid;
   grid-template-columns: 40% 60%;
   height: var(--navbar-height);
-  color: var(--light-text);
+  color: antiquewhite;
 }
 .logo {
   height: clamp(40px, 3vw, 60px);
@@ -13,7 +13,7 @@
   font-weight: 500;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
-  font-size: clamp(0.6rem, 1vw, 1.3rem);
+  font-size: var(--bar-font-size);
 }
 .head,
 .links {

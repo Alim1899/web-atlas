@@ -1,10 +1,12 @@
-import chart from "../../assets/chart.svg";
-import layers from "../../assets/sidebar/layers.svg";
-import info from "../../assets/sidebar/info.svg";
 import useChartData from "../Hooks/useChartData";
-import legend from "../../assets/sidebar/legend.svg";
-import right from "../../assets/sidebar/up.png";
-import left from "../../assets/sidebar/down.png";
+import {
+  FaChevronUp,
+  FaChevronDown,
+  FaLayerGroup,
+  FaMap,
+  FaInfoCircle,
+  FaChartPie,
+} from "react-icons/fa";
 
 import { useState } from "react";
 import classes from "./Sidebar.module.css";
@@ -50,34 +52,33 @@ const Sidebar = () => {
       {showSidebar ? (
         <article className={classes.content}>
           <div className={classes.closeIcon} onClick={closeSidebar}>
-            <img src={right} className={classes.close} />
+            <FaChevronUp className={classes.close} />
           </div>
           <div className={classes.icons}>
-            <img
+            <FaChartPie
               onClick={handleChart}
               className={classes.icon}
-              src={chart}
               alt="დიაგრამა"
               title="დიაგრამა"
             />
-            <img
+
+            <FaLayerGroup
               onClick={handleLayers}
               className={classes.icon}
-              src={layers}
               alt="layers"
               title="ფენები"
             />
-            <img
+
+            <FaMap
               onClick={handleLegend}
               className={classes.icon}
-              src={legend}
               alt="legend"
               title="ლეგენდა"
             />
-            <img
+
+            <FaInfoCircle
               onClick={handleLegend}
               className={classes.icon}
-              src={info}
               alt="info"
               title="ინფორმაცია"
             />
@@ -99,7 +100,7 @@ const Sidebar = () => {
         </article>
       ) : (
         <div className={classes.toggleWrapper} onClick={openSidebar}>
-          <img src={left} alt="open" title="გახსნა" className={classes.open} />
+          <FaChevronDown alt="open" title="ჩამოშალე" className={classes.open} />
         </div>
       )}
     </aside>

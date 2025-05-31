@@ -10,6 +10,7 @@
   --dark-text: #062906;
   --light-text: #cde7e1;
   --header-font-size: clamp(1rem, 4vw, 2rem);
+  --bar-font-size: clamp(0.5rem, 1.2vw, 0.9rem);
   --navbar-height: clamp(50px, 5vw, 72px);
   --footer-height: clamp(80px, 10vh, 120px);
   --sidebar-width: clamp(70px, 10vw, 120px);

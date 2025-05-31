@@ -4,9 +4,9 @@ import {
   GiGreekTemple,
   GiSwordTie,
 } from "react-icons/gi";
-import { FaPeopleRoof, FaBaby } from "react-icons/fa6";
+import { FaPeopleRoof } from "react-icons/fa6";
 import { PiPersonSimpleHikeBold } from "react-icons/pi";
-
+import { FaBookOpenReader } from "react-icons/fa6";
 export const mapCategories = [
   {
     key: "nature",
@@ -24,7 +24,7 @@ export const mapCategories = [
         type: "polygon",
       },
       {
-        id: "rockfalls",
+        id: "rockfall",
         label: "ქვათაცვენები",
         type: "point",
       },
@@ -54,7 +54,7 @@ export const mapCategories = [
   },
   {
     key: "education",
-    icon: FaBaby,
+    icon: FaBookOpenReader,
     name: "განათლება",
     layers: [],
   },

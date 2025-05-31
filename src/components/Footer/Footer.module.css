@@ -5,10 +5,11 @@
   height: var(--footer-height);
   grid-template-columns: 30% 40% 30%;
   margin-top: 0;
-  color: var(--light-text);
+  color: antiquewhite;
   position: absolute;
   width: 100vw;
   bottom: 0;
+  font-size: var(--bar-font-size);
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
 
@@ -25,7 +26,6 @@ a {
 }
 .name {
   margin: 0;
-  font-size: clamp(0.5rem, 1vw, 0.9rem);
 }
 .year,
 .organisation {
@@ -36,7 +36,6 @@ a {
   flex-direction: column;
 }
 .year > span {
-  font-size: clamp(0.5rem, 1vw, 0.9rem);
   font-weight: 100;
   font-family: sans-serif;
 }
@@ -51,7 +50,6 @@ a {
   padding: 0;
   margin: 0;
   text-align: center;
-  font-size: clamp(0.5rem, 1vw, 0.9rem);
 }
 
 @media screen and (max-width: 600px) {

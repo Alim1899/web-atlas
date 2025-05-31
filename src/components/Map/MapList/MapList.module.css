@@ -37,7 +37,8 @@
   grid-template-columns: 45% 45%;
   column-gap: 10%;
   margin-top: 10%;
-  overflow: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 .mapTypes > :nth-last-child(1):nth-child(odd) {
   grid-column: 1 / -1;

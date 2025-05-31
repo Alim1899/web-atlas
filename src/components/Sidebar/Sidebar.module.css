@@ -3,7 +3,7 @@
 
   top: calc(var(--navbar-height) + 0.5vw);
   right: 0.5vw;
-  background-color: var(--light-text);
+  background-color: var(--navbar-dark);
   border-radius: 15px;
   z-index: 12;
 }
@@ -11,9 +11,10 @@
 .toggleWrapper {
   display: flex;
   height: 50px;
+
   width: var(--sidebar-width);
   border-radius: 15px;
-  background-color: var(--light-text);
+  background-color: var(--navbar-dark);
   align-items: center;
   justify-content: center;
   cursor: pointer;
@@ -26,15 +27,17 @@
 .open,
 .close {
   width: 40px;
-  height: 20px;
+  height: 40px;
   padding: 0;
   margin: 0;
+  color: antiquewhite;
 }
 
 .icon {
   width: clamp(20px, 5vw, 50px);
   height: clamp(20px, 5vw, 50px);
   cursor: pointer;
+  color: antiquewhite;
 }
 .closeIcon {
   box-shadow: 1px 2px;
