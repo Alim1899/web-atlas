@@ -1,22 +1,27 @@
-.main {
+.wrapper {
   position: absolute;
-  right: calc(var(--sidebar-width) + 15px);
-  background-color: var(--dark-background);
-  height: 60vh;
-  width: 40vw;
+  right: calc(var(--sidebar-width));
+
   bottom: 0;
+  z-index: 10; /* or higher to stay above other UI elements */
+}
+
+.main {
+  width: 100%; /* fills ResizableBox */
+  height: 100%; /* fills ResizableBox */
+  background-color: var(--dark-background);
   display: grid;
   grid-template-rows: 20% 80%;
   border-radius: 15px;
-  z-index: -1;
   overflow: auto;
 }
 .header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 95% 5%;
   width: 90%;
   margin: 0 auto;
+  margin-left: 10%;
+  align-items: center;
   height: 45px;
   font-size: clamp(0.7rem, 2vw, 1rem);
   padding: 0;
@@ -27,6 +32,7 @@
   grid-template-columns: 10% 85%;
   gap: 5%;
   align-items: center;
+
   margin-top: 5px;
   color: var(--light-text);
 }
@@ -36,11 +42,14 @@
 }
 .head {
   color: var(--light-text);
-  margin: 0;
+  margin: 0 auto;
 }
 .header > svg {
   fill: var(--light-text);
   cursor: pointer;
+  font-size: 1.5rem;
+
+  text-align: right;
 }
 .nolayer {
   display: grid;

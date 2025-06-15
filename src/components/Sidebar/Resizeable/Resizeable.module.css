@@ -1,0 +1,10 @@
+.icon {
+  position: absolute;
+  top: 2%;
+  left: 1%;
+
+  color: var(--light-text);
+  font-size: 2rem;
+  cursor: col-resize;
+  margin: auto;
+}

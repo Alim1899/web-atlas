@@ -17,7 +17,7 @@ const DiscreteSlider = ({ layerId }) => {
   return (
     <div className={classes.lineSlider}>
       <label htmlFor="opacity">
-        <h6 style={{ fontSize: "10px", textAlign: "center" }}>გამჭვირვალობა</h6>
+        <h6>გამჭვირვალობა</h6>
         <Slider
           id="opacity"
           aria-label="opacity"
@@ -30,7 +30,7 @@ const DiscreteSlider = ({ layerId }) => {
         />
       </label>
       <label htmlFor="weight">
-        <h6 style={{ fontSize: "10px", textAlign: "center" }}>ხაზის სისქე</h6>
+        <h6>ხაზის სისქე</h6>
         <Slider
           id="weight"
           aria-label="linewidth"

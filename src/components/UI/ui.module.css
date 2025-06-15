@@ -7,34 +7,30 @@
   background-color: none;
 }
 .accordion > div {
-  height: 40px;
-  width: 40px;
+  height: 30px;
+  width: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
+  background-color: antiquewhite;
 }
 .lineSlider > label > h6 {
   padding: 0;
   margin: 0;
 }
-.lineSlider {
-  border-left: 1px solid var(--dark-background);
-}
-
 .details {
   position: fixed;
-  z-index: 2;
+  z-index: -1;
   width: 200px;
   background-color: var(--light-text);
-  margin-left: -20px;
+  border-radius: 15px;
+  margin-left: 20px;
 }
-
 .expand {
   width: 50px;
   height: 40px;
 }
-
 @media screen and (max-width: 600px) {
   .details {
     margin-left: -200px;
