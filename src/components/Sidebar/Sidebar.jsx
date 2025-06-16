@@ -13,11 +13,13 @@ import classes from "./Sidebar.module.css";
 import Layers from "./Layers";
 import Chart from "./Chart/Chart";
 import Legend from "./Legend/Legend";
+import Info from "./Legend/Info";
 const Sidebar = () => {
   const [showSidebar, setShowSidebar] = useState(false);
   const [showChart, setShowChart] = useState(false);
   const [showLayer, setShowLayer] = useState(false);
   const [showLegend, setShowLegend] = useState(false);
+  const [showInfo, setShowInfo] = useState(false);
   const openSidebar = (e) => {
     e.preventDefault();
     if (showSidebar) return;
@@ -39,6 +41,10 @@ const Sidebar = () => {
   const handleLegend = (e) => {
     e.preventDefault();
     setShowLegend(!showLegend);
+  };
+  const handleInfo = (e) => {
+    e.preventDefault();
+    setShowInfo(!showInfo);
   };
   const {
     chartData,
@@ -77,7 +83,7 @@ const Sidebar = () => {
             />
 
             <FaInfoCircle
-              onClick={handleLegend}
+              onClick={handleInfo}
               className={classes.icon}
               alt="info"
               title="ინფორმაცია"
@@ -96,6 +102,9 @@ const Sidebar = () => {
           {showLayer && <Layers />}
           {showLegend && (
             <Legend onCloseModal={handleLegend} selectedChart={selectedChart} />
+          )}
+          {showInfo && (
+            <Info onCloseModal={handleInfo} selectedChart={selectedChart} />
           )}
         </article>
       ) : (

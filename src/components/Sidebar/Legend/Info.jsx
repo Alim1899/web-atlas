@@ -9,7 +9,7 @@ const Legend = ({ onCloseModal, selectedChart }) => {
       <Resizeable>
         <div className={classes.main}>
           <div className={classes.header}>
-            <h2 className={classes.head}>ლეგენდა</h2>
+            <h2 className={classes.head}>ინფორმაცია</h2>
             <IoMdClose onClick={onCloseModal} />
           </div>
           <div className={classes.content}>

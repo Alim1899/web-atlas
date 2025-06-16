@@ -1,7 +1,6 @@
 .wrapper {
   position: absolute;
   right: calc(var(--sidebar-width));
-
   bottom: 0;
   z-index: 10; /* or higher to stay above other UI elements */
 }
@@ -15,12 +14,14 @@
   border-radius: 15px;
   overflow: auto;
 }
+.content {
+  max-width: 100%;
+}
 .header {
   display: grid;
-  grid-template-columns: 95% 5%;
-  width: 90%;
+  grid-template-columns: 90% 5%;
+  width: 100%;
   margin: 0 auto;
-  margin-left: 10%;
   align-items: center;
   height: 45px;
   font-size: clamp(0.7rem, 2vw, 1rem);
@@ -32,7 +33,6 @@
   grid-template-columns: 10% 85%;
   gap: 5%;
   align-items: center;
-
   margin-top: 5px;
   color: var(--light-text);
 }
@@ -48,18 +48,5 @@
   fill: var(--light-text);
   cursor: pointer;
   font-size: 1.5rem;
-
   text-align: right;
-}
-.nolayer {
-  display: grid;
-  color: var(--navbar-light);
-  place-content: center;
-  font-size: clamp(0.6rem, 2vw, 1.5rem);
-}
-
-.nolayer > span {
-  text-align: center;
-  font-size: clamp(0.9rem, 3vw, 2rem);
-  margin: auto;
 }

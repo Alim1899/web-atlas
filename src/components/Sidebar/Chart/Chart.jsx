@@ -4,6 +4,7 @@ import ChartPie from "./Pie";
 import useDraggable from "../../Hooks/useDraggable";
 import remove from "../../../assets/delete.svg";
 import { useRef } from "react";
+import Nolayer from "../Nolayer";
 
 const Chart = ({
   handleChart,
@@ -37,7 +38,7 @@ const Chart = ({
       </div>
 
       {activeLayers.length === 0 ? (
-        <p className={classes.param}>გთხოვთ აირჩიოთ რუკა</p>
+        <Nolayer layer="none" />
       ) : (
         <div className={classes.chart}>
           <select
@@ -66,7 +67,7 @@ const Chart = ({
               />
             </div>
           ) : (
-            <p className={classes.param}>ამ ფენას არ აქვს დიაგრამა</p>
+            <Nolayer layer="have" />
           )}
         </div>
       )}
