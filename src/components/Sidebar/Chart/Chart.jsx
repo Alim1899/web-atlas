@@ -17,7 +17,6 @@ const Chart = ({
   const { handleStart } = useDraggable(chartRef);
 
   const selectedChart = chartData.find((el) => el.id === selectedLayer);
-
   return (
     <div
       className={classes.main}
@@ -63,7 +62,7 @@ const Chart = ({
                 key={selectedChart.id}
                 data={Object.values(selectedChart.data)}
                 dataKey="totalArea"
-                nameKey="layerName"
+                nameKey="nameGe"
               />
             </div>
           ) : (

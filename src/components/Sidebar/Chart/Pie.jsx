@@ -21,7 +21,7 @@ const ChartPie = ({ data, dataKey, nameKey }) => {
           paddingAngle={3}
         >
           {data.map((entry) => (
-            <Cell key={entry.layerName} fill={entry.color} />
+            <Cell key={entry.nameGe} fill={entry.color} />
           ))}
         </Pie>
         <Tooltip
@@ -39,8 +39,8 @@ const ChartPie = ({ data, dataKey, nameKey }) => {
                     padding: "0 5px ",
                   }}
                 >
-                  <p style={{ fontWeight: 600 }}>{data.layerName}</p>
-                  <p>{translit(data.layerDesc)}</p>
+                  <p style={{ fontWeight: 600 }}>{translit(data.nameGe)}</p>
+                  <p>{translit(data.descriptionGe) || data.description}</p>
                   <p>
                     <strong>
                       {Number(data.totalArea)
@@ -63,7 +63,7 @@ const ChartPie = ({ data, dataKey, nameKey }) => {
             <div
               style={{
                 overflowX: "auto",
-                marginBottom: "-90px",
+                marginBottom: "-120px",
                 height: "15vh",
                 display: "grid",
               }}
@@ -92,7 +92,7 @@ const ChartPie = ({ data, dataKey, nameKey }) => {
                   <span style={{ color: entry.color, marginRight: "5px" }}>
                     ⬤
                   </span>{" "}
-                  {entry.payload.name}
+                  {translit(entry.payload.name)}
                 </span>
               ))}
             </div>

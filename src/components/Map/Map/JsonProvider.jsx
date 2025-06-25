@@ -26,7 +26,6 @@ export default function JsonProvider() {
   const isLoading = queries.some((query) => query?.isLoading);
 
   const layersToDisplay = Object.entries(geoJsonData);
-  console.log(layersToDisplay);
   useEffect(() => {
     if (layersToDisplay.length === 0) return;
     const result = isEqual(dataChart, layersToDisplay);

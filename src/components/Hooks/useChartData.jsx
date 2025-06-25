@@ -17,16 +17,23 @@ const useChartData = () => {
       .map(([key, layer]) => {
         const summarized = {};
         layer.features.forEach(({ properties }) => {
-          const name = properties.layerName;
+          const { nameGe, nameEn, description, descriptionGe, area, length } =
+            properties;
+          const name = nameGe || nameEn;
           if (!summarized[name]) {
             summarized[name] = {
-              layerName: name,
-              layerDesc: properties.layerDesc,
+              nameGe: nameGe || "",
+              nameEn: nameEn || "",
+              description: description || "",
+              descriptionGe: descriptionGe || "",
+              area: area.toFixed(2) || "",
+              length: length.toFixed(2) || "",
               totalArea: 0,
               totalLength: 0,
               color: getColor(key, name),
             };
           }
+
           summarized[name].totalArea += properties.area;
           summarized[name].totalLength += properties.length;
         });
