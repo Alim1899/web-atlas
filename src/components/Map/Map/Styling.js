@@ -13,8 +13,8 @@ export const pointToLayer = (feature, latlng) => {
   });
 };
 export function polygonStyle(feature, layer, id) {
-  const color = getColor(feature.name, feature.properties.layerName);
-
+  const color = getColor(id, feature.properties.nameGe);
+  console.log(id);
   const foundLayer = layer.find((lyr) => lyr.id === id) || {};
   return {
     fillColor: color,

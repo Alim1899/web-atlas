@@ -28,7 +28,11 @@ export function getColor(layerType, layerName) {
     case "agroclimate":
       return agroScale(layerName) || "#443";
     case "vegetation":
-      return vegetationScale(layerName) || "#238443";
+      return vegetationScale(layerName) || "#123321";
+    case "hydrogeology":
+      return vegetationScale(layerName) || "#fffaaa";
+    case "landscape":
+      return vegetationScale(layerName) || "#ccbbff";
     default:
       return "#ccc";
   }

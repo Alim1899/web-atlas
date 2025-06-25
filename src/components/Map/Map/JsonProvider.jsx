@@ -10,10 +10,11 @@ export default function JsonProvider() {
   const { state, dispatch } = useMaps();
   const { activeLayers, dataChart } = state;
   const layerIds = activeLayers.map((layer) => layer.id);
+
   const queries = useQueries({
     queries: layerIds.map((layer) => ({
       queryKey: ["geojson", layer],
-      queryFn: () => fetchGeoJson(layer),
+      queryFn: () => fetchGeoJson("nature", layer),
       staleTime: 60000,
       retry: 2,
     })),
@@ -25,7 +26,7 @@ export default function JsonProvider() {
   const isLoading = queries.some((query) => query?.isLoading);
 
   const layersToDisplay = Object.entries(geoJsonData);
-
+  console.log(layersToDisplay);
   useEffect(() => {
     if (layersToDisplay.length === 0) return;
     const result = isEqual(dataChart, layersToDisplay);

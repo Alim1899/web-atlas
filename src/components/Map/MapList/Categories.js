@@ -19,20 +19,41 @@ export const mapCategories = [
         type: "polygon",
       },
       {
+        id: "erosion",
+        label: "ეროზია",
+        type: "point",
+      },
+      {
+        id: "foults",
+        label: "ნაპრალები",
+        type: "polyline",
+      },
+      {
         id: "geology",
         label: "გეოლოგია",
         type: "polygon",
+      },
+      {
+        id: "hydrogeology",
+        label: "ჰიდროგეოლოგია",
+        type: "polygon",
+      },
+      {
+        id: "landscape",
+        label: "ლანდშაფტი",
+        type: "polygon",
+      },
+      {
+        id: "landslide",
+        label: "მეწყრები",
+        type: "point",
       },
       {
         id: "rockfall",
         label: "ქვათაცვენები",
         type: "point",
       },
-      {
-        id: "rivers",
-        label: "მდინარეები",
-        type: "polyline",
-      },
+
       {
         id: "vegetation",
         label: "ვეგეტაცია",
