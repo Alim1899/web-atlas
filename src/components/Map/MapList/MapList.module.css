@@ -9,7 +9,12 @@
   width: auto;
   height: var(--bar-height);
 }
-
+.head {
+  text-align: center;
+  margin: 0;
+  margin-top: 15px;
+  padding: 0;
+}
 .menu {
   display: flex;
   flex-direction: column;
@@ -66,10 +71,6 @@
   transform: scale(0.9);
 }
 
-.catHeader {
-  text-align: center;
-  margin: clamp(5px, 1vw, 15px);
-}
 .arrows {
   height: 100%;
   display: flex;

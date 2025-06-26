@@ -18,7 +18,12 @@ const mapReducer = (state = initialState, action) => {
           ? state.activeLayers.filter((layer) => layer.id !== action.layerId)
           : [
               ...state.activeLayers,
-              { id: action.layerId, opacity: 1, weight: 1 },
+              {
+                id: action.layerId,
+                opacity: 1,
+                weight: 1,
+                label: action.label,
+              },
             ], // Default values
       };
 

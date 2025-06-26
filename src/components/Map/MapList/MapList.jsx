@@ -21,20 +21,23 @@ const MapList = () => {
     <div className={classes.mapHeaders}>
       {showMenu && (
         <div className={classes.menu}>
-          <input
-            className={classes.searchMap}
-            type="text"
-            placeholder="მოძებნე რუკა"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-          />
-
+          <h5 className={classes.head}>
+            აირჩიე {selectedCategory ? "ფენა" : "კატეგორია"}
+          </h5>
+          {selectedCategory && (
+            <input
+              className={classes.searchMap}
+              type="text"
+              placeholder="მოძებნე რუკა"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+            />
+          )}
           <div className={classes.mapTypes}>
             {mapCategories.map((cat) => {
               const Icon = cat.icon;
               return selectedCategory === cat.key ? (
                 <div key={cat.key}>
-                  <h4 className={classes.catHeader}>{cat.name}</h4>
                   {cat.layers.map((layer) => (
                     <SwitchButton
                       key={layer.id}

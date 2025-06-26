@@ -6,9 +6,8 @@ const SwitchButton = ({ label, switchId, type, children }) => {
   const { state, dispatch } = useMaps();
 
   const checked = state.activeLayers.some((layer) => layer.id === switchId);
-
   const handleChecked = () => {
-    dispatch({ type: "TOGGLE_LAYER", layerId: switchId });
+    dispatch({ type: "TOGGLE_LAYER", layerId: switchId, label: label });
   };
 
   return (

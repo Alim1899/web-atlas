@@ -5,6 +5,7 @@ import useDraggable from "../../Hooks/useDraggable";
 import remove from "../../../assets/delete.svg";
 import { useRef } from "react";
 import Nolayer from "../Nolayer";
+import Select from "react-select";
 
 const Chart = ({
   handleChart,
@@ -15,7 +16,15 @@ const Chart = ({
 }) => {
   const chartRef = useRef(null);
   const { handleStart } = useDraggable(chartRef);
-
+  const options = [...activeLayers]
+    .sort((a, b) => a.id.localeCompare(b.id))
+    .map((el) => {
+      const hasChart = chartData.some((chart) => chart.id === el.id);
+      return {
+        value: el.id,
+        label: `${el.label} ${hasChart ? "" : "⚠️ No Data"}`,
+      };
+    });
   const selectedChart = chartData.find((el) => el.id === selectedLayer);
   return (
     <div
@@ -40,21 +49,25 @@ const Chart = ({
         <Nolayer layer="none" />
       ) : (
         <div className={classes.chart}>
-          <select
-            value={selectedLayer}
-            onChange={(e) => handleSelected(e.target.value)}
-          >
-            {[...activeLayers]
-              .sort((a, b) => a.id.localeCompare(b.id))
-              .map((el) => {
-                const hasChart = chartData.some((chart) => chart.id === el.id);
-                return (
-                  <option key={el.id} value={el.id}>
-                    {el.id} {hasChart ? "" : "(⚠️ No Data)"}
-                  </option>
-                );
-              })}
-          </select>
+          <Select
+            value={options.find((option) => option.value === selectedLayer)}
+            onChange={(selectedOption) => handleSelected(selectedOption.value)}
+            options={options}
+            formatOptionLabel={(option) => {
+              const [id, warning] = option.label.split(" ⚠️ ");
+              return (
+                <div style={{ fontWeight: "900" }}>
+                  {id}
+                  {warning && (
+                    <span style={{ color: "red", fontSize: "0.7em" }}>
+                      {" "}
+                      ⚠️ {warning}
+                    </span>
+                  )}
+                </div>
+              );
+            }}
+          />
 
           {selectedChart ? (
             <div className={classes.diagram}>

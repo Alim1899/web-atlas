@@ -1,10 +1,9 @@
 .main {
   position: fixed;
-  z-index: -1;
   top: 15vh;
-  right: 10vw;
+  left: 20vw;
   height: 70vh;
-  width: 80vw;
+  width: 60vw;
   background-color: var(--dark-background);
   border: 1px solid var(--light-background);
   display: grid;
@@ -23,33 +22,20 @@
 .chart {
   border-radius: inherit;
   height: 98%;
-  display: flex;
+  display: grid;
+  grid-template-columns: 20% 80%;
   align-items: center;
-  justify-content: flex-start;
 }
 
-.chart > select {
-  height: 40px;
-  width: clamp(70px, 15vw, 200px);
-
-  border-radius: 15px;
-  border: none;
-  outline: none;
-  text-transform: capitalize;
-  font-family: "Times New Roman", Times, serif;
-  font-weight: 700;
-  font-size: clamp(0.5rem, 1.5vw, 1.2rem);
+.chart > div {
+  font-weight: 900;
+  font-size: clamp(0.7rem, 1vw, 1rem);
   cursor: pointer;
 }
 .diagram {
   width: 100%;
   height: 100%;
   padding: 0;
-}
-.diagram > div {
-  width: 100%;
-  height: 100%;
-  margin: 5px;
 }
 
 /* Drag Handle */
