@@ -1,10 +1,14 @@
-.wrapper {
-  position: absolute;
+.wrapper,
+.infoWrapper {
+  position: fixed;
   right: calc(var(--sidebar-width));
-  bottom: 0;
+  bottom: 250px;
+  cursor: all-scroll;
   z-index: 10; /* or higher to stay above other UI elements */
 }
-
+.infoWrapper {
+  bottom: 100px;
+}
 .main {
   width: 100%; /* fills ResizableBox */
   height: 100%; /* fills ResizableBox */

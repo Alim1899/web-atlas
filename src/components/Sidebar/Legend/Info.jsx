@@ -3,9 +3,20 @@ import { IoMdClose } from "react-icons/io";
 import translit from "translit-geo";
 import Resizeable from "../Resizeable/Resizeable";
 import Nolayer from "../Nolayer";
-const Legend = ({ onCloseModal, selectedChart }) => {
+import { useRef } from "react";
+import useDraggable from "../../Hooks/useDraggable";
+
+const Info = ({ onCloseModal, selectedChart }) => {
+  const infoRef = useRef(null);
+  const { handleStart } = useDraggable(infoRef);
+
   return (
-    <div className={classes.wrapper}>
+    <div
+      className={classes.infoWrapper}
+      ref={infoRef}
+      onMouseDown={handleStart}
+      onTouchStart={handleStart}
+    >
       <Resizeable>
         <div className={classes.main}>
           <div className={classes.header}>
@@ -34,4 +45,4 @@ const Legend = ({ onCloseModal, selectedChart }) => {
   );
 };
 
-export default Legend;
+export default Info;
