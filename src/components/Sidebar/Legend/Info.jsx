@@ -1,7 +1,7 @@
 import classes from "./Legend.module.css";
 import { IoMdClose } from "react-icons/io";
 import translit from "translit-geo";
-import Resizeable from "../Resizeable/Resizeable";
+import Resizeable from "../../Hooks/Resizeable/Resizeable";
 import Nolayer from "../Nolayer";
 import { useRef } from "react";
 import useDraggable from "../../Hooks/useDraggable";
@@ -11,15 +11,14 @@ const Info = ({ onCloseModal, selectedChart }) => {
   const { handleStart } = useDraggable(infoRef);
 
   return (
-    <div
-      className={classes.infoWrapper}
-      ref={infoRef}
-      onMouseDown={handleStart}
-      onTouchStart={handleStart}
-    >
+    <div className={classes.infoWrapper} ref={infoRef}>
       <Resizeable>
         <div className={classes.main}>
-          <div className={classes.header}>
+          <div
+            className={classes.header}
+            onMouseDown={handleStart}
+            onTouchStart={handleStart}
+          >
             <h2 className={classes.head}>ინფორმაცია</h2>
             <IoMdClose onClick={onCloseModal} />
           </div>

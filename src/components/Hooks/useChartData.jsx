@@ -16,6 +16,8 @@ const useChartData = () => {
       .filter((el) => el[1].type === "polygon")
       .map(([key, layer]) => {
         const summarized = {};
+
+        const layerName = layer.layerName;
         layer.features.forEach(({ properties }) => {
           const { nameGe, nameEn, description, descriptionGe, area, length } =
             properties;
@@ -37,7 +39,7 @@ const useChartData = () => {
           summarized[name].totalArea += properties.area;
           summarized[name].totalLength += properties.length;
         });
-        return { id: key, data: summarized };
+        return { layerName: layerName || "", id: key, data: summarized };
       });
   }, [dataChart]);
   // Keep selected layer in sync with active layers
