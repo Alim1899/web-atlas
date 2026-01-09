@@ -7,52 +7,55 @@
   display: flex;
   justify-content: space-between;
   width: auto;
+
   height: var(--bar-height);
 }
 .head {
   margin: 0;
   padding: 0;
 }
-.menu {
-  display: flex;
-  flex-direction: column;
-  border-bottom-right-radius: 15px;
-
-  min-width: 260px;
-
-  overflow-x: hidden;
-  overflow-y: auto;
-}
-.menu > div > div > label > span {
-  font-weight: 900;
-}
-.radio {
-  width: 20px;
-  height: 20px;
-  cursor: pointer;
-}
-
 .header {
   text-align: center;
   display: grid;
   grid-template-columns: 20% 60% 20%;
   width: 100%;
-
   justify-content: center;
   align-items: center;
+  height: 30px;
 }
-.mapTypes {
+.menu {
+  display: flex;
+  flex-direction: column;
+  border-bottom-right-radius: 15px;
+  min-width: 260px;
+  overflow: hidden;
+}
+
+.category {
   display: grid;
   grid-template-columns: 45% 45%;
   column-gap: 10%;
   margin-top: 10%;
   overflow-x: hidden;
   overflow-y: auto;
-  border: 1px solid red;
+  scrollbar-width: 4px; /* Firefox */
+  -ms-overflow-style: none;
 }
-.mapTypes > :nth-last-child(1):nth-child(odd) {
+.category > :nth-last-child(1):nth-child(odd) {
   grid-column: 1 / -1;
   justify-self: center;
+}
+.list {
+  height: 80%;
+  margin-top: 10%;
+  margin-left: 10px;
+  overflow: auto;
+  margin-bottom: 15px;
+  border-radius: 15px;
+  background-color: var(--navbar-dark-transparent);
+}
+.list > div {
+  margin-left: 10px;
 }
 .type {
   border-bottom: 1px solid var(--light-text);
@@ -64,6 +67,7 @@
   cursor: pointer;
   margin-top: 1vh;
 }
+
 .typeIcon {
   height: clamp(30px, 5vw, 80px);
   width: clamp(30px, 5vw, 80px);
@@ -76,16 +80,28 @@
   transform: scale(1.1);
 }
 
-.arrows {
-  height: 100%;
+.leftArrow,
+.rightArrow {
+  height: 20%;
+  margin: auto;
   display: flex;
   align-items: center;
   border-radius: 15px;
   cursor: pointer;
+  border-left: 1px solid rgb(182, 165, 165);
   background-color: var(--navbar-dark);
 }
-.arrows:hover {
+.rightArrow {
+  height: 100%;
+}
+.leftArrow:hover,
+.rightArrow:hover {
   background-color: var(--navbar-dark-transparent);
+}
+.leftArrow > svg,
+.rightArrow > svg {
+  height: 40px;
+  width: 40px;
 }
 
 .backButton {

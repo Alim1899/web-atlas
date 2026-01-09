@@ -10,6 +10,7 @@ const MapList = () => {
   const { state, dispatch } = useLeftBar();
   const { mapDispatch } = useMaps();
   const { isOpen, selectedCategory, expandedLayer } = state;
+  console.log(isOpen, selectedCategory, expandedLayer);
   return (
     <div className={classes.mapHeaders}>
       {isOpen && (
@@ -30,8 +31,7 @@ const MapList = () => {
             </h5>
           </div>
 
-          {/* CONTENT */}
-          <div className={classes.mapTypes}>
+          <div className={selectedCategory ? classes.list : classes.category}>
             {selectedCategory
               ? renderLayers(
                   selectedCategory,
@@ -45,9 +45,8 @@ const MapList = () => {
         </div>
       )}
 
-      {/* TOGGLE ARROW */}
       <div
-        className={classes.arrows}
+        className={isOpen ? classes.leftArrow : classes.rightArrow}
         onClick={() => dispatch({ type: "TOGGLE_MENU" })}
       >
         {isOpen ? <BiSolidLeftArrow /> : <BiSolidRightArrow />}

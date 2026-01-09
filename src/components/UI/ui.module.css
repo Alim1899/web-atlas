@@ -2,6 +2,8 @@
   display: grid;
   grid-template-columns: 85% 13%;
   padding: 2px 0;
+  align-items: center;
+  border-bottom: 1px solid var(--light-text);
 }
 .accordion {
   background-color: none;
@@ -13,7 +15,7 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  background-color: antiquewhite;
+  color: var(--dark-text);
 }
 .lineSlider > label > h6 {
   padding: 0;
@@ -28,8 +30,9 @@
   margin-left: 20px;
 }
 .expand {
-  width: 50px;
+  width: 40px;
   height: 40px;
+  color: var(--dark-text);
 }
 @media screen and (max-width: 600px) {
   .details {

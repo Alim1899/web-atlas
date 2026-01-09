@@ -6,7 +6,7 @@ export const renderCategories = (dispatch, classes) =>
   mapCategories.map(({ key, name, icon: Icon }) => (
     <div
       key={key}
-      className={classes.mapTypes}
+      className={classes.type}
       onClick={() => dispatch({ type: "SELECT_CATEGORY", payload: key })}
     >
       <Icon className={classes.typeIcon} />
@@ -18,8 +18,7 @@ export const renderLayers = (
   categoryKey,
   expandedLayer,
   uiDispatch,
-  dispatch,
-  classes
+  dispatch
 ) => {
   const category = mapCategories.find((c) => c.key === categoryKey);
 
@@ -30,7 +29,6 @@ export const renderLayers = (
       switchId={layer.id}
       mapChecked={false}
       type={layer.type}
-      className={classes.type}
       onChange={() =>
         dispatch({
           type: "TOGGLE_LAYER",
