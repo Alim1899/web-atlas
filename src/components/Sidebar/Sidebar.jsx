@@ -8,44 +8,17 @@ import {
   FaChartPie,
 } from "react-icons/fa";
 
-import { useState } from "react";
 import classes from "./Sidebar.module.css";
 import Layers from "./Layers";
 import Chart from "./Chart/Chart";
 import Legend from "./Legend/Legend";
 import Info from "./Legend/Info";
+import useRightBar from "../Context/RightBarContext/useRightBar";
+
 const Sidebar = () => {
-  const [showSidebar, setShowSidebar] = useState(false);
-  const [showChart, setShowChart] = useState(false);
-  const [showLayer, setShowLayer] = useState(false);
-  const [showLegend, setShowLegend] = useState(false);
-  const [showInfo, setShowInfo] = useState(false);
-  const openSidebar = (e) => {
-    e.preventDefault();
-    if (showSidebar) return;
-    setShowSidebar(true);
-  };
-  const closeSidebar = (e) => {
-    e.preventDefault();
-    if (!showSidebar) return;
-    setShowSidebar(false);
-  };
-  const handleChart = (e) => {
-    e.preventDefault();
-    setShowChart(!showChart);
-  };
-  const handleLayers = (e) => {
-    e.preventDefault();
-    setShowLayer(!showLayer);
-  };
-  const handleLegend = (e) => {
-    e.preventDefault();
-    setShowLegend(!showLegend);
-  };
-  const handleInfo = (e) => {
-    e.preventDefault();
-    setShowInfo(!showInfo);
-  };
+  const { state: rightBarState, dispatch: rightBarDispatch } = useRightBar();
+  const { isExpanded, activePanel } = rightBarState;
+
   const {
     chartData,
     selectedLayer,
@@ -53,63 +26,67 @@ const Sidebar = () => {
     activeLayers,
     handleSelected,
   } = useChartData();
+
+  const toggleExpand = () => {
+    rightBarDispatch({ type: "TOGGLE_EXPAND" });
+  };
+
+  const togglePanel = (panel) => {
+    rightBarDispatch({ type: "TOGGLE_PANEL", payload: panel });
+  };
+
   return (
     <aside className={classes.main}>
-      {showSidebar ? (
+      {isExpanded ? (
         <article className={classes.content}>
-          <div className={classes.closeIcon} onClick={closeSidebar}>
+          <div className={classes.closeIcon} onClick={toggleExpand}>
             <FaChevronUp className={classes.close} />
           </div>
+
           <div className={classes.icons}>
             <FaChartPie
-              onClick={handleChart}
+              onClick={() => togglePanel("chart")}
               className={classes.icon}
-              alt="დიაგრამა"
               title="დიაგრამა"
             />
 
             <FaLayerGroup
-              onClick={handleLayers}
+              onClick={() => togglePanel("layers")}
               className={classes.icon}
-              alt="layers"
               title="ფენები"
             />
 
             <FaMap
-              onClick={handleLegend}
+              onClick={() => togglePanel("legend")}
               className={classes.icon}
-              alt="legend"
               title="ლეგენდა"
             />
 
             <FaInfoCircle
-              onClick={handleInfo}
+              onClick={() => togglePanel("info")}
               className={classes.icon}
-              alt="info"
               title="ინფორმაცია"
             />
           </div>
 
-          {showChart && (
+          {activePanel === "chart" && (
             <Chart
-              handleChart={handleChart}
               chartData={chartData}
               activeLayers={activeLayers}
               selectedLayer={selectedLayer}
               handleSelected={handleSelected}
             />
           )}
-          {showLayer && <Layers />}
-          {showLegend && (
-            <Legend onCloseModal={handleLegend} selectedChart={selectedChart} />
-          )}
-          {showInfo && (
-            <Info onCloseModal={handleInfo} selectedChart={selectedChart} />
-          )}
+
+          {activePanel === "layers" && <Layers />}
+
+          {activePanel === "legend" && <Legend selectedChart={selectedChart} />}
+
+          {activePanel === "info" && <Info selectedChart={selectedChart} />}
         </article>
       ) : (
-        <div className={classes.toggleWrapper} onClick={openSidebar}>
-          <FaChevronDown alt="open" title="ჩამოშალე" className={classes.open} />
+        <div className={classes.toggleWrapper} onClick={toggleExpand}>
+          <FaChevronDown title="ჩამოშალე" className={classes.open} />
         </div>
       )}
     </aside>

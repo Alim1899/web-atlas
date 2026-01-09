@@ -4,7 +4,7 @@ const LeftBarState = {
   expandedLayer: null,
 };
 
-const mapUIReducer = (state = LeftBarState, action) => {
+const LeftBarReducer = (state = LeftBarState, action) => {
   switch (action.type) {
     case "TOGGLE_MENU":
       return { ...state, isOpen: !state.isOpen };
@@ -28,4 +28,4 @@ const mapUIReducer = (state = LeftBarState, action) => {
 };
 
 export { LeftBarState };
-export default mapUIReducer;
+export default LeftBarReducer;

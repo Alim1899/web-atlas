@@ -3,6 +3,7 @@ import "./App.css";
 import Layout from "./components/Layout/Layout";
 import MapsProvider from "./components/Context/MapContext/MapsProvider";
 import LeftBarProvider from "./components/Context/LeftBarContext/LeftBarProvider";
+import RightBarProvider from "./components/Context/RightBarContext/RightBarProvider";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -14,12 +15,14 @@ const queryClient = new QueryClient({
 function App() {
   return (
     <MapsProvider>
-      <LeftBarProvider>
-        <QueryClientProvider client={queryClient}>
-          <ReactQueryDevtools initialIsOpen={false} />
-          <Layout />
-        </QueryClientProvider>{" "}
-      </LeftBarProvider>
+      <RightBarProvider>
+        <LeftBarProvider>
+          <QueryClientProvider client={queryClient}>
+            <ReactQueryDevtools initialIsOpen={false} />
+            <Layout />
+          </QueryClientProvider>{" "}
+        </LeftBarProvider>
+      </RightBarProvider>
     </MapsProvider>
   );
 }
