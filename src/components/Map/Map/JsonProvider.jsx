@@ -1,5 +1,5 @@
 import { GeoJSON } from "react-leaflet";
-import useMaps from "../MapContext/useMaps";
+import useMaps from "../../Context/MapContext/useMaps";
 import { useQueries } from "@tanstack/react-query";
 import Spinner from "../../UI/Loader/Spinner";
 import { isEqual } from "lodash";

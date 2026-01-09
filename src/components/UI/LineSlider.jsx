@@ -1,5 +1,5 @@
 import { Slider } from "@mui/material";
-import useMaps from "../Map/MapContext/useMaps"; // Import your map context
+import useMaps from "../Context/MapContext/useMaps"; // Import your map context
 import classes from "./ui.module.css";
 const DiscreteSlider = ({ layerId }) => {
   const { state, dispatch } = useMaps();

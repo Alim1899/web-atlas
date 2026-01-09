@@ -2,7 +2,7 @@ import { MapContainer, TileLayer, ZoomControl } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import classes from "./Map.module.css";
 import JsonProvider from "./JsonProvider";
-import useMaps from "../MapContext/useMaps";
+import useMaps from "../../Context/MapContext/useMaps";
 
 function Map() {
   const center = [41.32, 44.28];

@@ -1,5 +1,5 @@
 import { Stack, FormControlLabel, Switch } from "@mui/material";
-import useMaps from "../Map/MapContext/useMaps";
+import useMaps from "../Context/MapContext/useMaps";
 import PropTypes from "prop-types";
 import classes from "./ui.module.css";
 const SwitchButton = ({ label, switchId, type, children }) => {

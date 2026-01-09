@@ -14,7 +14,7 @@
   --navbar-height: clamp(50px, 5vw, 72px);
   --footer-height: clamp(80px, 10vh, 120px);
   --sidebar-width: clamp(70px, 10vw, 120px);
-  --bar-height: clamp(200px, 60vh, 1200px);
+  --bar-height: clamp(200px, 65vh, 1200px);
 }
 
 body {

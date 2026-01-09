@@ -1,84 +1,56 @@
 import classes from "./MapList.module.css";
-import { useState } from "react";
-
-import SwitchButton from "../../UI/SwitchButton";
-import AccordionExpandIcon from "../../UI/Accordion";
+import { IoIosArrowBack } from "react-icons/io";
 import { BiSolidLeftArrow, BiSolidRightArrow } from "react-icons/bi";
-import { mapCategories } from "./Categories";
+import { renderCategories, renderLayers } from "./Helpers";
+
+import useMaps from "../../Context/MapContext/useMaps";
+import useLeftBar from "../../Context/LeftBarContext/useLeftBar";
+
 const MapList = () => {
-  const [showMenu, setSHowMenu] = useState(false);
-  const [query, setQuery] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState(null); // NEW
-  const [expandedPanel, setExpandedPanel] = useState(null);
-
-  const handleAccordionChange = (panel) => (event, isExpanded) => {
-    setExpandedPanel(isExpanded ? panel : null);
-  };
-
-  // Define categories and associated map layer ids
-
+  const { state, dispatch } = useLeftBar();
+  const { mapDispatch } = useMaps();
+  const { isOpen, selectedCategory, expandedLayer } = state;
   return (
     <div className={classes.mapHeaders}>
-      {showMenu && (
+      {isOpen && (
         <div className={classes.menu}>
-          <h5 className={classes.head}>
-            აირჩიე {selectedCategory ? "ფენა" : "კატეგორია"}
-          </h5>
-          {selectedCategory && (
-            <input
-              className={classes.searchMap}
-              type="text"
-              placeholder="მოძებნე რუკა"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-            />
-          )}
+          <div className={classes.header}>
+            {selectedCategory && (
+              <button
+                className={classes.backButton}
+                onClick={() => dispatch({ type: "BACK_TO_CATEGORIES" })}
+              >
+                <IoIosArrowBack />
+              </button>
+            )}
+            {!selectedCategory && <div></div>}
+
+            <h5 className={classes.head}>
+              აირჩიე {selectedCategory ? "ფენა" : "კატეგორია"}
+            </h5>
+          </div>
+
+          {/* CONTENT */}
           <div className={classes.mapTypes}>
-            {mapCategories.map((cat) => {
-              const Icon = cat.icon;
-              return selectedCategory === cat.key ? (
-                <div key={cat.key}>
-                  {cat.layers.map((layer) => (
-                    <SwitchButton
-                      key={layer.id}
-                      label={layer.label}
-                      switchId={layer.id}
-                      mapChecked={false}
-                      type={layer.type}
-                    >
-                      <AccordionExpandIcon
-                        layerId={layer.id}
-                        expanded={expandedPanel === layer.id}
-                        onChange={handleAccordionChange(layer.id)}
-                      />
-                    </SwitchButton>
-                  ))}
-                  <button
-                    className={classes.backButton}
-                    onClick={() => setSelectedCategory(null)}
-                  >
-                    უკან
-                  </button>
-                </div>
-              ) : (
-                selectedCategory === null && (
-                  <div
-                    key={cat.key}
-                    className={classes.type}
-                    onClick={() => setSelectedCategory(cat.key)}
-                  >
-                    <Icon className={classes.typeIcon} />
-                    <h6 className={classes.typeName}>{cat.name}</h6>
-                  </div>
+            {selectedCategory
+              ? renderLayers(
+                  selectedCategory,
+                  expandedLayer,
+                  dispatch,
+                  mapDispatch,
+                  classes
                 )
-              );
-            })}
+              : renderCategories(dispatch, classes)}
           </div>
         </div>
       )}
 
-      <div className={classes.arrows} onClick={() => setSHowMenu(!showMenu)}>
-        {showMenu ? <BiSolidLeftArrow /> : <BiSolidRightArrow />}
+      {/* TOGGLE ARROW */}
+      <div
+        className={classes.arrows}
+        onClick={() => dispatch({ type: "TOGGLE_MENU" })}
+      >
+        {isOpen ? <BiSolidLeftArrow /> : <BiSolidRightArrow />}
       </div>
     </div>
   );

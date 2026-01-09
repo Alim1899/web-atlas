@@ -1,6 +1,6 @@
 import { basemaps } from "../Map/data/layers";
 import classes from "./Sidebar.module.css";
-import useMaps from "../Map/MapContext/useMaps";
+import useMaps from "../Context/MapContext/useMaps";
 const Layers = () => {
   const { dispatch } = useMaps();
 

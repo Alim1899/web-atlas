@@ -1,8 +1,7 @@
 // hooks/useChartData.js
 import { useEffect, useMemo, useState } from "react";
 import { getColor } from "../Utils/ColorScales";
-import useMaps from "../Map/MapContext/useMaps";
-
+import useMaps from "../Context/MapContext/useMaps";
 const useChartData = () => {
   const { state } = useMaps();
   const { dataChart, activeLayers } = state;

@@ -9,7 +9,6 @@ import useDraggable from "../../Hooks/useDraggable";
 const Legend = ({ onCloseModal, selectedChart }) => {
   const legendRef = useRef(null);
   const { handleStart } = useDraggable(legendRef);
-  console.log(selectedChart);
   return (
     <div className={classes.wrapper} ref={legendRef}>
       <Resizeable>
