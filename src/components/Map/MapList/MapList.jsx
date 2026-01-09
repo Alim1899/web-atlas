@@ -1,53 +1,57 @@
 import classes from "./MapList.module.css";
 import { IoIosArrowBack } from "react-icons/io";
 import { BiSolidLeftArrow, BiSolidRightArrow } from "react-icons/bi";
-import { renderCategories, renderLayers } from "./Helpers";
 
 import useMaps from "../../Context/MapContext/useMaps";
 import useLeftBar from "../../Context/LeftBarContext/useLeftBar";
 
+import CategoriesList from "./CategoriesList";
+import LayersList from "./LayerList";
+
 const MapList = () => {
-  const { state, dispatch } = useLeftBar();
-  const { mapDispatch } = useMaps();
-  const { isOpen, selectedCategory, expandedLayer } = state;
-  console.log(isOpen, selectedCategory, expandedLayer);
+  const { state: barState, dispatch: barDispatch } = useLeftBar();
+  const { dispatch: mapDispatch } = useMaps();
+  const { isOpen, selectedCategory, expandedLayer } = barState;
+
   return (
     <div className={classes.mapHeaders}>
       {isOpen && (
         <div className={classes.menu}>
           <div className={classes.header}>
-            {selectedCategory && (
+            {selectedCategory ? (
               <button
                 className={classes.backButton}
-                onClick={() => dispatch({ type: "BACK_TO_CATEGORIES" })}
+                onClick={() => barDispatch({ type: "BACK_TO_CATEGORIES" })}
               >
                 <IoIosArrowBack />
               </button>
+            ) : (
+              <div />
             )}
-            {!selectedCategory && <div></div>}
 
             <h5 className={classes.head}>
               აირჩიე {selectedCategory ? "ფენა" : "კატეგორია"}
             </h5>
+            <div />
           </div>
-
           <div className={selectedCategory ? classes.list : classes.category}>
-            {selectedCategory
-              ? renderLayers(
-                  selectedCategory,
-                  expandedLayer,
-                  dispatch,
-                  mapDispatch,
-                  classes
-                )
-              : renderCategories(dispatch, classes)}
+            {selectedCategory ? (
+              <LayersList
+                categoryKey={selectedCategory}
+                expandedLayer={expandedLayer}
+                uiDispatch={barDispatch}
+                mapDispatch={mapDispatch}
+              />
+            ) : (
+              <CategoriesList />
+            )}
           </div>
         </div>
       )}
 
       <div
         className={isOpen ? classes.leftArrow : classes.rightArrow}
-        onClick={() => dispatch({ type: "TOGGLE_MENU" })}
+        onClick={() => barDispatch({ type: "TOGGLE_MENU" })}
       >
         {isOpen ? <BiSolidLeftArrow /> : <BiSolidRightArrow />}
       </div>

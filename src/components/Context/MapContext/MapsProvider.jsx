@@ -1,5 +1,4 @@
 import { useReducer } from "react";
-import PropTypes from "prop-types";
 import mapReducer, { initialState } from "./mapReducer";
 import MapsContext from "./MapsContext";
 
@@ -11,10 +10,6 @@ const MapsProvider = ({ children }) => {
       {children}
     </MapsContext.Provider>
   );
-};
-
-MapsProvider.propTypes = {
-  children: PropTypes.node.isRequired,
 };
 
 export default MapsProvider;

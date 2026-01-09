@@ -5,6 +5,7 @@
   align-items: center;
   border-bottom: 1px solid var(--light-text);
 }
+
 .accordion {
   background-color: none;
 }

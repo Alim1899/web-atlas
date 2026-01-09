@@ -1,10 +1,10 @@
-const uiInitialState = {
+const LeftBarState = {
   isOpen: false,
   selectedCategory: null,
   expandedLayer: null,
 };
 
-const mapUIReducer = (state = uiInitialState, action) => {
+const mapUIReducer = (state = LeftBarState, action) => {
   switch (action.type) {
     case "TOGGLE_MENU":
       return { ...state, isOpen: !state.isOpen };
@@ -27,5 +27,5 @@ const mapUIReducer = (state = uiInitialState, action) => {
   }
 };
 
-export { uiInitialState };
+export { LeftBarState };
 export default mapUIReducer;

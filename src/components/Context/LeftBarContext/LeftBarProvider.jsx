@@ -1,10 +1,10 @@
 import { useReducer } from "react";
 import PropTypes from "prop-types";
-import leftBarReducer, { uiInitialState } from "./LeftBarReducer";
+import leftBarReducer, { LeftBarState } from "./LeftBarReducer";
 import LeftBarContext from "./LeftBarContext";
 
 const LeftBarProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(leftBarReducer, uiInitialState);
+  const [state, dispatch] = useReducer(leftBarReducer, LeftBarState);
 
   return (
     <LeftBarContext.Provider value={{ state, dispatch }}>
