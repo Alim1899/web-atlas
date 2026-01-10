@@ -49,3 +49,9 @@
   text-align: center;
   height: 20px;
 }
+
+.layers {
+  padding-top: 10px;
+  width: 50%;
+  margin: auto;
+}

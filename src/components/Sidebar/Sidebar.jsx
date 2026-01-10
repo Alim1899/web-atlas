@@ -71,6 +71,7 @@ const Sidebar = () => {
 
           {activePanel === "chart" && (
             <Chart
+              selectedChart={selectedChart}
               chartData={chartData}
               activeLayers={activeLayers}
               selectedLayer={selectedLayer}
@@ -80,9 +81,25 @@ const Sidebar = () => {
 
           {activePanel === "layers" && <Layers />}
 
-          {activePanel === "legend" && <Legend selectedChart={selectedChart} />}
+          {activePanel === "legend" && (
+            <Legend
+              selectedChart={selectedChart}
+              chartData={chartData}
+              activeLayers={activeLayers}
+              selectedLayer={selectedLayer}
+              handleSelected={handleSelected}
+            />
+          )}
 
-          {activePanel === "info" && <Info selectedChart={selectedChart} />}
+          {activePanel === "info" && (
+            <Info
+              selectedChart={selectedChart}
+              chartData={chartData}
+              activeLayers={activeLayers}
+              selectedLayer={selectedLayer}
+              handleSelected={handleSelected}
+            />
+          )}
         </article>
       ) : (
         <div className={classes.toggleWrapper} onClick={toggleExpand}>

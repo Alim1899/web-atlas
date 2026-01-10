@@ -1,18 +1,25 @@
 import classes from "./Legend.module.css";
-import Nolayer from "../Nolayer";
 import DraggableContainer from "../Helpers/DraggableContainer";
+import MapHeaders from "../Helpers/MapHeaders";
 
-const Info = ({ selectedChart }) => {
+const Info = ({
+  selectedChart,
+  activeLayers,
+  chartData,
+  selectedLayer,
+  handleSelected,
+}) => {
   return (
     <DraggableContainer header="დამატებითი ინფორმაცია" className={classes.main}>
       <div className={classes.content}>
-        {selectedChart ? (
-          <h2 className={classes.info}>
-            დამატებითი ინფორმაცია ამ ფენისთვის არ არის ხელმისაწვდომი
-          </h2>
-        ) : (
-          <Nolayer layer="none" />
-        )}
+        <MapHeaders
+          activeLayers={activeLayers}
+          chartData={chartData}
+          selectedLayer={selectedLayer}
+          handleSelected={handleSelected}
+          selectedChart={selectedChart}
+          layer="info"
+        />
       </div>
     </DraggableContainer>
   );

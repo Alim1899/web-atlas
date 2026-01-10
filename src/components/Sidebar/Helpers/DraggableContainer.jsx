@@ -2,10 +2,11 @@ import useDraggable from "../../Hooks/useDraggable";
 import { useRef } from "react";
 import classes from "./DraggableContainer.module.css";
 import remove from "../../../assets/delete.svg";
-
-const DraggableContainer = ({ handleChart, header, children }) => {
+import useRightBar from "../../Context/RightBarContext/useRightBar";
+const DraggableContainer = ({ header, children }) => {
   const chartRef = useRef(null);
   const { handleStart } = useDraggable(chartRef);
+  const { dispatch: rightBarDispatch } = useRightBar();
 
   return (
     <div
@@ -19,7 +20,7 @@ const DraggableContainer = ({ handleChart, header, children }) => {
         <img
           className={classes.dragHandle}
           src={remove}
-          onClick={handleChart}
+          onClick={() => rightBarDispatch({ type: "TOGGLE_PANEL" })}
           alt="remove"
         />
       </div>

@@ -1,16 +1,30 @@
 import classes from "./Legend.module.css";
 import translit from "translit-geo";
-import Nolayer from "../Nolayer";
 import DraggableContainer from "../Helpers/DraggableContainer";
+import MapHeaders from "../Helpers/MapHeaders";
 
-const Legend = ({ selectedChart }) => {
+const Legend = ({
+  selectedChart,
+  activeLayers,
+  chartData,
+  selectedLayer,
+  handleSelected,
+}) => {
   return (
     <DraggableContainer className={classes.main} header="ლეგენდა">
       <div className={classes.content}>
-        {selectedChart && (
-          <h6 className={classes.layerName}>{selectedChart.layerName}</h6>
-        )}
-        {selectedChart ? (
+        <div className={classes.layers}>
+          <MapHeaders
+            layer="legend"
+            activeLayers={activeLayers}
+            chartData={chartData}
+            selectedLayer={selectedLayer}
+            handleSelected={handleSelected}
+            selectedChart={selectedChart}
+          />
+        </div>
+
+        {selectedChart &&
           Object.values(selectedChart.data).map((item) => (
             <div key={item.nameGe} className={classes.legend}>
               <div
@@ -20,10 +34,7 @@ const Legend = ({ selectedChart }) => {
               />
               <span>{translit(item.nameGe)}</span>
             </div>
-          ))
-        ) : (
-          <Nolayer layer="none" />
-        )}
+          ))}
       </div>
     </DraggableContainer>
   );
