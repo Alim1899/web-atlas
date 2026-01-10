@@ -1,11 +1,9 @@
 // Chart.jsx
 import classes from "./Chart.module.css";
 import ChartPie from "./Pie";
-import useDraggable from "../../Hooks/useDraggable";
-import remove from "../../../assets/delete.svg";
-import { useRef } from "react";
 import Nolayer from "../Nolayer";
 import Select from "react-select";
+import DraggableContainer from "../Helpers/DraggableContainer";
 
 const Chart = ({
   handleChart,
@@ -14,8 +12,6 @@ const Chart = ({
   selectedLayer,
   handleSelected,
 }) => {
-  const chartRef = useRef(null);
-  const { handleStart } = useDraggable(chartRef);
   const options = [...activeLayers]
     .sort((a, b) => a.id.localeCompare(b.id))
     .map((el) => {
@@ -27,24 +23,7 @@ const Chart = ({
     });
   const selectedChart = chartData.find((el) => el.id === selectedLayer);
   return (
-    <div
-      className={classes.main}
-      ref={chartRef}
-      onMouseDown={handleStart}
-      onTouchStart={handleStart}
-    >
-      <div className={classes.charts}>
-        <div className={classes.head}>
-          <h3 className={classes.header}>დიაგრამა</h3>
-          <img
-            className={classes.dragHandle}
-            src={remove}
-            onClick={handleChart}
-            alt="remove"
-          />
-        </div>
-      </div>
-
+    <DraggableContainer header="დიაგრამა" handleChart={handleChart}>
       {activeLayers.length === 0 ? (
         <Nolayer layer="none" />
       ) : (
@@ -83,7 +62,7 @@ const Chart = ({
           )}
         </div>
       )}
-    </div>
+    </DraggableContainer>
   );
 };
 

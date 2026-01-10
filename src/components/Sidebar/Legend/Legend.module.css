@@ -1,22 +1,3 @@
-.wrapper,
-.infoWrapper {
-  position: fixed;
-  right: calc(var(--sidebar-width));
-  bottom: 250px;
-  z-index: 10; /* or higher to stay above other UI elements */
-}
-.infoWrapper {
-  bottom: 100px;
-}
-.main {
-  width: 100%; /* fills ResizableBox */
-  height: 100%; /* fills ResizableBox */
-  background-color: var(--dark-background);
-  display: grid;
-  grid-template-rows: 20% 80%;
-  border-radius: 15px;
-  overflow: auto;
-}
 .content {
   max-width: 100%;
 }
@@ -60,4 +41,11 @@
   font-size: clamp(0.8rem, 1.5vw, 1.5rem);
   margin: 0;
   padding: 0;
+}
+.info {
+  color: var(--light-text);
+  margin: 10% auto;
+  width: 50%;
+  text-align: center;
+  height: 20px;
 }

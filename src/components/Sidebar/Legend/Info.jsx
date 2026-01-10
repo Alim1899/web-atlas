@@ -1,46 +1,20 @@
 import classes from "./Legend.module.css";
-import { IoMdClose } from "react-icons/io";
-import translit from "translit-geo";
-import Resizeable from "../../Hooks/Resizeable/Resizeable";
 import Nolayer from "../Nolayer";
-import { useRef } from "react";
-import useDraggable from "../../Hooks/useDraggable";
+import DraggableContainer from "../Helpers/DraggableContainer";
 
-const Info = ({ onCloseModal, selectedChart }) => {
-  const infoRef = useRef(null);
-  const { handleStart } = useDraggable(infoRef);
-
+const Info = ({ selectedChart }) => {
   return (
-    <div className={classes.infoWrapper} ref={infoRef}>
-      <Resizeable>
-        <div className={classes.main}>
-          <div
-            className={classes.header}
-            onMouseDown={handleStart}
-            onTouchStart={handleStart}
-          >
-            <h2 className={classes.head}>ინფორმაცია</h2>
-            <IoMdClose onClick={onCloseModal} />
-          </div>
-          <div className={classes.content}>
-            {selectedChart ? (
-              Object.values(selectedChart.data).map((item) => (
-                <div key={item.layerName} className={classes.legend}>
-                  <div
-                    style={{
-                      backgroundColor: item.color,
-                    }}
-                  />
-                  <span>{translit(item.layerDesc)}</span>
-                </div>
-              ))
-            ) : (
-              <Nolayer layer="none" />
-            )}
-          </div>
-        </div>
-      </Resizeable>
-    </div>
+    <DraggableContainer header="დამატებითი ინფორმაცია" className={classes.main}>
+      <div className={classes.content}>
+        {selectedChart ? (
+          <h2 className={classes.info}>
+            დამატებითი ინფორმაცია ამ ფენისთვის არ არის ხელმისაწვდომი
+          </h2>
+        ) : (
+          <Nolayer layer="none" />
+        )}
+      </div>
+    </DraggableContainer>
   );
 };
 

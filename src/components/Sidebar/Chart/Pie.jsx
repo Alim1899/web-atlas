@@ -16,9 +16,9 @@ const ChartPie = ({ data, dataKey, nameKey }) => {
           data={data}
           dataKey={dataKey}
           nameKey={nameKey}
-          innerRadius={90}
-          outerRadius={140}
-          paddingAngle={3}
+          innerRadius={100}
+          outerRadius={160}
+          paddingAngle={2}
         >
           {data.map((entry) => (
             <Cell key={entry.nameGe} fill={entry.color} />

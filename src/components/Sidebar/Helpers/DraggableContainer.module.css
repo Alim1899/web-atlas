@@ -1,0 +1,45 @@
+.container {
+  position: fixed;
+  top: 15vh;
+  left: 20vw;
+  height: 70vh;
+  width: 60vw;
+  background-color: var(--dark-background);
+  border: 1px solid var(--light-background);
+  display: grid;
+  grid-template-rows: auto 90%;
+  border-radius: 15px;
+  cursor: all-scroll;
+  padding-bottom: 15px;
+}
+.content {
+  overflow: auto;
+}
+.head {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  margin: auto;
+  border-bottom: 1px solid var(--light-background);
+}
+
+/* Drag Handle */
+.dragHandle {
+  cursor: grab;
+  background-color: var(--navbar-light);
+  padding: 5px;
+  text-align: center;
+  user-select: none;
+  width: 40px;
+}
+
+.dragHandle:active {
+  cursor: grabbing;
+}
+
+.header {
+  font-size: var(--header-font-size);
+  text-align: center;
+  margin: 0;
+  color: var(--navbar-light);
+}
