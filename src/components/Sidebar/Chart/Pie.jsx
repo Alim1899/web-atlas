@@ -1,106 +1,130 @@
+import classes from "./Chart.module.css";
 import {
   PieChart,
   Pie,
   Cell,
   Tooltip,
-  Legend,
   ResponsiveContainer,
+  Sector,
 } from "recharts";
 import translit from "translit-geo";
+import { useState } from "react";
 
 const ChartPie = ({ data, dataKey, nameKey }) => {
-  return (
-    <ResponsiveContainer width="98%" height="70%">
-      <PieChart>
-        <Pie
-          data={data}
-          dataKey={dataKey}
-          nameKey={nameKey}
-          innerRadius={100}
-          outerRadius={160}
-          paddingAngle={2}
-        >
-          {data.map((entry) => (
-            <Cell key={entry.nameGe} fill={entry.color} />
-          ))}
-        </Pie>
-        <Tooltip
-          wrapperStyle={{ fontSize: "16px" }}
-          content={({ active, payload }) => {
-            if (active && payload && payload.length > 0) {
-              const data = payload[0].payload;
+  const [activeIndex, setActiveIndex] = useState(null);
+  const [tooltipIndex, setTooltipIndex] = useState(null);
 
-              return (
-                <div
-                  style={{
-                    backgroundColor: "#fff",
-                    border: "1px solid #ccc",
-                    borderRadius: "8px",
-                    padding: "0 5px ",
-                  }}
-                >
-                  <p style={{ fontWeight: 600 }}>{translit(data.nameGe)}</p>
-                  <p>{translit(data.descriptionGe) || data.description}</p>
-                  <p>
-                    <strong>
-                      {Number(data.totalArea)
-                        .toLocaleString("en-US", {
-                          minimumFractionDigits: 1,
-                          maximumFractionDigits: 1,
-                        })
-                        .replace(/,/g, " ")}{" "}
-                      m²
-                    </strong>
-                  </p>
-                </div>
-              );
-            }
-            return null;
-          }}
-        />
-        <Legend
-          content={({ payload }) => (
-            <div
-              style={{
-                overflowX: "auto",
-                marginBottom: "-120px",
-                height: "15vh",
-                display: "grid",
+  const activeData = tooltipIndex !== null ? data[tooltipIndex] : null;
+  console.log(data);
+  return (
+    <div className={classes.wrapper}>
+      <div className={classes.chartArea}>
+        <ResponsiveContainer width="100%" height="100%">
+          <PieChart className={classes.piechart}>
+            <Pie
+              data={data}
+              dataKey={dataKey}
+              nameKey={nameKey}
+              innerRadius={100}
+              outerRadius={160}
+              paddingAngle={3}
+              activeIndex={activeIndex}
+              activeShape={(props) => (
+                <Sector {...props} outerRadius={props.outerRadius + 10} />
+              )}
+              onMouseLeave={() => {
+                setActiveIndex(null);
+                setTooltipIndex(null);
               }}
             >
-              {payload.map((entry, index) => (
-                <span
-                  key={`item-${index}`}
-                  style={{
-                    margin: "0 8px",
-                    fontSize: "12px",
-                    transition: "font-size 0.3s ease-in-out",
-                    cursor: "pointer",
-                    color: entry.color || "white",
+              {data.map((entry, index) => (
+                <Cell
+                  key={entry.nameGe}
+                  fill={entry.color}
+                  opacity={
+                    activeIndex === null || activeIndex === index ? 1 : 0.35
+                  }
+                  onMouseEnter={() => {
+                    setActiveIndex(index);
+                    setTooltipIndex(index);
                   }}
-                  onMouseEnter={(e) => {
-                    (e.target.style.fontSize = "16px"),
-                      (e.target.style.backgroundColor = "#aaaaaa");
-                    e.target.style.color = "#111";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.target.style.fontSize = "12px";
-                    e.target.style.backgroundColor = "unset";
-                    e.target.style.color = entry.color;
-                  }}
-                >
-                  <span style={{ color: entry.color, marginRight: "5px" }}>
-                    ⬤
-                  </span>{" "}
-                  {translit(entry.payload.name)}
-                </span>
+                />
               ))}
-            </div>
-          )}
-          align="right"
-        />
-      </PieChart>
-    </ResponsiveContainer>
+            </Pie>
+
+            <Tooltip
+              active={tooltipIndex !== null}
+              payload={
+                activeData
+                  ? [
+                      {
+                        payload: activeData,
+                        name: activeData[nameKey],
+                        value: activeData[dataKey],
+                      },
+                    ]
+                  : []
+              }
+              content={({ active, payload }) => {
+                if (active && payload && payload.length) {
+                  const data = payload[0].payload;
+                  return (
+                    <div
+                      style={{
+                        backgroundColor: data.color,
+                        border: "1px solid #ccc",
+                        borderRadius: "8px",
+                        padding: "5px",
+                      }}
+                    >
+                      <p style={{ fontWeight: 600 }}>{translit(data.nameGe)}</p>
+                      <p>{translit(data.descriptionGe) || data.description}</p>
+                      <p>
+                        <strong>
+                          {Number(data.totalArea)
+                            .toLocaleString("en-US", {
+                              minimumFractionDigits: 1,
+                              maximumFractionDigits: 1,
+                            })
+                            .replace(/,/g, " ")}{" "}
+                          m²
+                        </strong>
+                      </p>
+                    </div>
+                  );
+                }
+                return null;
+              }}
+            />
+          </PieChart>
+        </ResponsiveContainer>
+      </div>
+
+      {/* CUSTOM SCROLLABLE LEGEND */}
+      <div className={classes.legendScroll}>
+        {data.map((item, index) => (
+          <div
+            key={item.nameGe}
+            className={classes.listItem}
+            onMouseEnter={() => {
+              setActiveIndex(index);
+              setTooltipIndex(index);
+            }}
+            onMouseLeave={() => {
+              setActiveIndex(null);
+              setTooltipIndex(null);
+            }}
+            style={{
+              opacity: activeIndex === null || activeIndex === index ? 1 : 0.4,
+              fontWeight: activeIndex === index ? 600 : 400,
+            }}
+          >
+            <span style={{ color: item.color, marginRight: "6px" }}>⬤</span>
+            <span style={{ color: item.color }}>{translit(item[nameKey])}</span>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 };
 

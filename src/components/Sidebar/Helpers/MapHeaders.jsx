@@ -43,7 +43,7 @@ const MapHeaders = ({
               );
             }}
           />
-          {!selectedChart && <Nolayer layer={layer} />}
+          {!selectedChart && layer !== "info" && <Nolayer layer={layer} />}
           {activeLayers.length > 0 && layer === "info" && (
             <Nolayer layer="info" />
           )}

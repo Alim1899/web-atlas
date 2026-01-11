@@ -1,9 +1,8 @@
 .container {
   position: fixed;
-  top: 15vh;
-  left: 20vw;
+  left: 15vw;
   height: 70vh;
-  width: 60vw;
+  width: 70vw;
   background-color: var(--dark-background);
   border: 1px solid var(--light-background);
   display: grid;
@@ -11,6 +10,7 @@
   border-radius: 15px;
   cursor: all-scroll;
   padding-bottom: 15px;
+  top: 8vh;
 }
 .content {
   overflow: auto;
