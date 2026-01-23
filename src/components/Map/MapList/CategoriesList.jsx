@@ -4,6 +4,7 @@ import { mapCategories } from "./Categories";
 
 const CategoriesList = () => {
   const { dispatch } = useLeftBar();
+  
   return (
     <>
       {mapCategories.map(({ key, name, icon: Icon }) => (

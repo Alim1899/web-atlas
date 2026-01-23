@@ -1,6 +1,7 @@
 import L from "leaflet";
 import point from "../../../assets/map/point.svg";
-import { getColor } from "../../Utils/ColorScales";
+
+
 export const pointToLayer = (feature, latlng) => {
   if (!latlng) console.error("error:", feature);
   return L.marker(latlng, {
@@ -12,14 +13,12 @@ export const pointToLayer = (feature, latlng) => {
     }),
   });
 };
-export function polygonStyle(feature, layer, id) {
-  const color = getColor(
-    id,
-    feature.properties.nameGe || feature.properties.nameEn
-  );
+
+export function polygonStyle(feature, layer, id, fillColor) {
+ // console.log(feature,layer,id,fillColor);
   const foundLayer = layer.find((lyr) => lyr.id === id) || {};
   return {
-    fillColor: color,
+    fillColor: fillColor,
     weight: foundLayer.weight,
     opacity: 1,
     color: "gray",

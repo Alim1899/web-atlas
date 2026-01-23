@@ -6,6 +6,7 @@ import { isEqual } from "lodash";
 import fetchGeoJson from "./Fetch";
 import { pointToLayer, polygonStyle } from "./Styling";
 import { useEffect } from "react";
+
 export default function JsonProvider() {
   const { state, dispatch } = useMaps();
   const { activeLayers, dataChart } = state;
@@ -21,7 +22,7 @@ export default function JsonProvider() {
   });
 
   const geoJsonData = Object.fromEntries(
-    layerIds.map((layer, index) => [layer, queries[index]?.data || {}])
+    layerIds.map((layer, index) => [layer, queries[index]?.data || {}]),
   );
   const isLoading = queries.some((query) => query?.isLoading);
 
@@ -34,23 +35,27 @@ export default function JsonProvider() {
   }, [layersToDisplay, dispatch, dataChart]);
 
   if (isLoading) return <Spinner />;
+
   return (
     <>
       {layersToDisplay.map((el) => {
-        return el[1].type === "polygon" ? (
+        return el[1].shape === "polygon" ? (
           <GeoJSON
             key={el[0]}
-            data={el[1].features}
-            style={(feature) => polygonStyle(feature, activeLayers, el[0])}
+            data={el[1]}
+            style={(feature) =>
+              polygonStyle(
+                feature.features,
+                activeLayers,
+                el[0],
+                feature.properties.color,
+              )
+            }
           />
         ) : el[1].type === "points" ? (
-          <GeoJSON
-            key={el[0]}
-            data={el[1].features}
-            pointToLayer={pointToLayer}
-          />
+          <GeoJSON key={el[0]} data={el[1].props} pointToLayer={pointToLayer} />
         ) : (
-          <GeoJSON key={el[0]} data={el[1].features} />
+          <GeoJSON key={el[0]} data={el[1].props} />
         );
       })}
     </>

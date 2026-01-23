@@ -1,42 +1,42 @@
 // hooks/useChartData.js
 import { useEffect, useMemo, useState } from "react";
-import { getColor } from "../Utils/ColorScales";
 import useMaps from "../Context/MapContext/useMaps";
 const useChartData = () => {
   const { state } = useMaps();
   const { dataChart, activeLayers } = state;
   const [selectedLayer, setSelectedLayer] = useState(
-    sessionStorage.getItem("selectedLayer") || ""
+    sessionStorage.getItem("selectedLayer") || "",
   );
-
   // Computed chart data
   const chartData = useMemo(() => {
     return dataChart
-      .filter((el) => el[1].type === "polygon")
+      .filter((el) => el[1].shape === "polygon")
       .map(([key, layer]) => {
         const summarized = {};
-
-        const layerName = layer.layerName;
+        const layerName = layer.layerName_en;
         layer.features.forEach(({ properties }) => {
-          const { nameGe, nameEn, description, descriptionGe, area, length } =
-            properties;
-          const name = nameGe || nameEn;
+          const {
+            name_ge,
+            name_en,
+            description_en,
+            description_ge,
+            area,
+            color,
+          } = properties;
+          const name = name_ge || name_en;
           if (!summarized[name]) {
             summarized[name] = {
-              nameGe: nameGe || "",
-              nameEn: nameEn || "",
-              description: description || "",
-              descriptionGe: descriptionGe || "",
+              name_ge: name_ge || "",
+              name_en: name_en || "",
+              description_en: description_en || "",
+              description_ge: description_ge || "",
               area: area.toFixed(2) || "",
-              length: length.toFixed(2) || "",
               totalArea: 0,
-              totalLength: 0,
-              color: getColor(key, name),
+              color: color,
             };
           }
 
           summarized[name].totalArea += properties.area;
-          summarized[name].totalLength += properties.length;
         });
         return { layerName: layerName || "", id: key, data: summarized };
       });

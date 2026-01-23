@@ -2,6 +2,7 @@
 import SwitchButton from "../../UI/SwitchButton";
 import AccordionExpandIcon from "../../UI/Accordion";
 import { mapCategories } from "./Categories";
+import classes from './Maplist.module.css'
 const LayersList = ({
   categoryKey,
   expandedLayer,
@@ -10,33 +11,49 @@ const LayersList = ({
 }) => {
   const category = mapCategories.find((c) => c.key === categoryKey);
   if (!category) return null;
+ 
 
   return (
     <>
-      {category.layers.map((layer) => (
+     {category.layers.map((layerObj) => {
+  const [groupTitle, layers] = Object.entries(layerObj)[0];
+
+  return (
+    <div key={groupTitle} className={classes.group}>
+
+      <h4 className={classes.groupTitle}>{groupTitle}</h4>
+
+      {layers.map((el) => (
         <SwitchButton
-          key={layer.id}
-          label={layer.label}
-          switchId={layer.id}
+          key={el.id}
+          label={el.label}
+          switchId={el.id}
           mapChecked={false}
-          type={layer.type}
+          type={el.type}
           onChange={() =>
             mapDispatch({
               type: "TOGGLE_LAYER",
-              layerId: layer.id,
-              label: layer.label,
+              layerId: el.id,
+              label: el.label,
             })
           }
         >
           <AccordionExpandIcon
-            layerId={layer.id}
-            expanded={expandedLayer === layer.id}
+            layerId={el.id}
+            expanded={expandedLayer === el.id}
             onChange={() =>
-              uiDispatch({ type: "TOGGLE_ACCORDION", payload: layer.id })
+              uiDispatch({
+                type: "TOGGLE_ACCORDION",
+                payload: el.id,
+              })
             }
           />
         </SwitchButton>
       ))}
+    </div>
+  );
+})}
+
     </>
   );
 };

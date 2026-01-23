@@ -13,51 +13,29 @@ export const mapCategories = [
     icon: GiForest,
     name: "ბუნება",
     layers: [
-      {
-        id: "agroclimate",
-        label: "აგროკლიმატი",
-        type: "polygon",
-      },
-      {
-        id: "erosion",
-        label: "ეროზია",
-        type: "point",
-      },
-      {
-        id: "foults",
-        label: "ნაპრალები",
-        type: "polyline",
-      },
-      {
-        id: "geology",
-        label: "გეოლოგია",
-        type: "polygon",
-      },
-      {
-        id: "hydrogeology",
-        label: "ჰიდროგეოლოგია",
-        type: "polygon",
-      },
-      {
-        id: "landscape",
-        label: "ლანდშაფტი",
-        type: "polygon",
-      },
-      {
-        id: "landslide",
-        label: "მეწყრები",
-        type: "point",
-      },
-      {
-        id: "rockfall",
-        label: "ქვათაცვენები",
-        type: "point",
-      },
+      // {
+      //   "მიწისქვეშა მტკნარი წყლები": [
+      //     {
+      //       id: "hydrogeology",
+      //       label: "ჰიდროგეოლოგია",
+      //       type: "polygon",
+      //     },
+      //     {
+      //       id: "groundwater",
+      //       label: "მტკნარი წყლები",
+      //       type: "points",
+      //     },
+      //   ],
+      // },
 
       {
-        id: "vegetation",
-        label: "ვეგეტაცია",
-        type: "polygon",
+        "აგროკლიმატი": [
+          {
+            id: "agroclimate",
+            label: "აგროკლიმატური ზონები",
+            type: "polygon",
+          },
+        ],
       },
     ],
   },

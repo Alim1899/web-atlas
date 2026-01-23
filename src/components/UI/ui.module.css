@@ -3,7 +3,6 @@
   grid-template-columns: 85% 13%;
   padding: 2px 0;
   align-items: center;
-  border-bottom: 1px solid var(--light-text);
 }
 
 .accordion {
@@ -34,6 +33,7 @@
   width: 40px;
   height: 40px;
   color: var(--dark-text);
+  
 }
 @media screen and (max-width: 600px) {
   .details {

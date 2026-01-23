@@ -4,7 +4,7 @@ import { getDatabase, get, ref } from "firebase/database";
 const fetchGeoJson = async (type, layer) => {
   const db = getDatabase(app);
   try {
-    const projectsRef = ref(db, `geojson/${type}/${layer}`);
+    const projectsRef = ref(db, `${type}/${layer}`);
     const snapshot = await get(projectsRef);
     if (snapshot.exists()) {
       return snapshot.val();

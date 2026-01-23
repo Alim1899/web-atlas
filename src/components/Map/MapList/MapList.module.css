@@ -123,3 +123,18 @@
 .backButton:hover {
   opacity: 0.7;
 }
+
+
+
+
+
+/* MAPLIST */
+.groupTitle{
+  margin: 5px;
+  width: 100;
+  display: block;
+  
+}
+.group{
+  border-bottom: 1px solid var(--light-text);
+}

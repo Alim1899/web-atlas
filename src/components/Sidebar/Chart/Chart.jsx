@@ -23,7 +23,7 @@ const Chart = ({ chartData, activeLayers, selectedLayer, handleSelected }) => {
               key={selectedChart.id}
               data={Object.values(selectedChart.data)}
               dataKey="totalArea"
-              nameKey="nameGe"
+              nameKey="name_ge"
             />
           </div>
         )}

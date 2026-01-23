@@ -15,7 +15,6 @@ const ChartPie = ({ data, dataKey, nameKey }) => {
   const [tooltipIndex, setTooltipIndex] = useState(null);
 
   const activeData = tooltipIndex !== null ? data[tooltipIndex] : null;
-  console.log(data);
   return (
     <div className={classes.wrapper}>
       <div className={classes.chartArea}>
@@ -30,7 +29,7 @@ const ChartPie = ({ data, dataKey, nameKey }) => {
               paddingAngle={3}
               activeIndex={activeIndex}
               activeShape={(props) => (
-                <Sector {...props} outerRadius={props.outerRadius + 10} />
+                <Sector {...props} outerRadius={props.outerRadius + 5} />
               )}
               onMouseLeave={() => {
                 setActiveIndex(null);
@@ -39,7 +38,7 @@ const ChartPie = ({ data, dataKey, nameKey }) => {
             >
               {data.map((entry, index) => (
                 <Cell
-                  key={entry.nameGe}
+                  key={entry.name_ge}
                   fill={entry.color}
                   opacity={
                     activeIndex === null || activeIndex === index ? 1 : 0.35
@@ -77,8 +76,8 @@ const ChartPie = ({ data, dataKey, nameKey }) => {
                         padding: "5px",
                       }}
                     >
-                      <p style={{ fontWeight: 600 }}>{translit(data.nameGe)}</p>
-                      <p>{translit(data.descriptionGe) || data.description}</p>
+                      <p style={{ fontWeight: 600 }}>{translit(data.name_ge)}</p>
+                      <p>{translit(data.descriptionGe) || data.description_ge}</p>
                       <p>
                         <strong>
                           {Number(data.totalArea)
@@ -104,7 +103,7 @@ const ChartPie = ({ data, dataKey, nameKey }) => {
       <div className={classes.legendScroll}>
         {data.map((item, index) => (
           <div
-            key={item.nameGe}
+            key={item.name_ge}
             className={classes.listItem}
             onMouseEnter={() => {
               setActiveIndex(index);
