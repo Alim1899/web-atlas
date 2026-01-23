@@ -1,5 +1,4 @@
 import classes from "./Legend.module.css";
-import translit from "translit-geo";
 import DraggableContainer from "../Helpers/DraggableContainer";
 import MapHeaders from "../Helpers/MapHeaders";
 
@@ -10,6 +9,7 @@ const Legend = ({
   selectedLayer,
   handleSelected,
 }) => {
+  console.log(chartData);
   return (
     <DraggableContainer className={classes.main} header="ლეგენდა">
       <div className={classes.content}>
@@ -27,12 +27,27 @@ const Legend = ({
         {selectedChart &&
           Object.values(selectedChart.data).map((item) => (
             <div key={item.name_ge} className={classes.legend}>
-              <div
-                style={{
-                  backgroundColor: item.color,
-                }}
-              />
-              <span>{translit(item.description_ge)}</span>
+              {item.description_ge.length > 0 &&
+                item.description_ge.map((txt, i) => (
+                  <>
+                    <div
+                      style={{
+                        backgroundColor: item.color,
+                      }}
+                    />
+                    <span className={classes.span} key={i}>
+                      {txt}
+                    </span>
+                  </>
+                ))}
+                {item.description_ge.length===0&& <>
+                   <div
+                      style={{
+                        backgroundColor: item.color,
+                      }}
+                    />
+                    <span>{item.name_ge}</span>
+                </>}
             </div>
           ))}
       </div>

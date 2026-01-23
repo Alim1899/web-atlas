@@ -22,7 +22,9 @@
   color: aliceblue;
   margin-top: 5px;
   border-bottom: 1px solid var(--dark-text);
+ height: 100px;
 }
+
 
 .legend > div {
   height:clamp(30px,5vh,60px)

@@ -2,7 +2,7 @@
 import SwitchButton from "../../UI/SwitchButton";
 import AccordionExpandIcon from "../../UI/Accordion";
 import { mapCategories } from "./Categories";
-import classes from './Maplist.module.css'
+import classes from './MapList.module.css'
 const LayersList = ({
   categoryKey,
   expandedLayer,

@@ -13,20 +13,39 @@ export const mapCategories = [
     icon: GiForest,
     name: "ბუნება",
     layers: [
-      // {
-      //   "მიწისქვეშა მტკნარი წყლები": [
-      //     {
-      //       id: "hydrogeology",
-      //       label: "ჰიდროგეოლოგია",
-      //       type: "polygon",
-      //     },
-      //     {
-      //       id: "groundwater",
-      //       label: "მტკნარი წყლები",
-      //       type: "points",
-      //     },
-      //   ],
-      // },
+       {
+        "გეომორფოლოგია": [
+          {
+            id: "morphology",
+            label: "მორფოლოგია",
+            type: "polygon",
+          },
+          {
+            id: "dynamiclandforms",
+            label: "დინამიკური ფორმები",
+            type: "points",
+          },
+          {
+            id: "linearlandforms",
+            label: "ხაზობრივი რელიეფი",
+            type: "points",
+          },
+        ],
+      },
+      {
+        "მიწისქვეშა მტკნარი წყლები": [
+          {
+            id: "hydrogeology",
+            label: "ჰიდროგეოლოგია",
+            type: "polygon",
+          },
+          {
+            id: "groundwater",
+            label: "მტკნარი წყლები",
+            type: "points",
+          },
+        ],
+      },
 
       {
         "აგროკლიმატი": [

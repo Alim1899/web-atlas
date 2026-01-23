@@ -45,7 +45,7 @@ export default function JsonProvider() {
             data={el[1]}
             style={(feature) =>
               polygonStyle(
-                feature.features,
+                feature,
                 activeLayers,
                 el[0],
                 feature.properties.color,
@@ -53,9 +53,9 @@ export default function JsonProvider() {
             }
           />
         ) : el[1].type === "points" ? (
-          <GeoJSON key={el[0]} data={el[1].props} pointToLayer={pointToLayer} />
+          <GeoJSON key={el[0]} data={el[1].properties} pointToLayer={pointToLayer} />
         ) : (
-          <GeoJSON key={el[0]} data={el[1].props} />
+          <GeoJSON key={el[0]} data={el[1].properties} />
         );
       })}
     </>

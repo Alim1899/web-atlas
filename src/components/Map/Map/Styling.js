@@ -15,7 +15,6 @@ export const pointToLayer = (feature, latlng) => {
 };
 
 export function polygonStyle(feature, layer, id, fillColor) {
- // console.log(feature,layer,id,fillColor);
   const foundLayer = layer.find((lyr) => lyr.id === id) || {};
   return {
     fillColor: fillColor,
