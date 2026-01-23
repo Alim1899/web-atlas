@@ -26,13 +26,13 @@ const Legend = ({
 
         {selectedChart &&
           Object.values(selectedChart.data).map((item) => (
-            <div key={item.nameGe} className={classes.legend}>
+            <div key={item.name_ge} className={classes.legend}>
               <div
                 style={{
                   backgroundColor: item.color,
                 }}
               />
-              <span>{translit(item.nameGe)}</span>
+              <span>{translit(item.description_ge)}</span>
             </div>
           ))}
       </div>

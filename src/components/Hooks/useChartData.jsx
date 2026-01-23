@@ -14,6 +14,7 @@ const useChartData = () => {
       .map(([key, layer]) => {
         const summarized = {};
         const layerName = layer.layerName_en;
+        const info = layer.info;
         layer.features.forEach(({ properties }) => {
           const {
             name_ge,
@@ -38,7 +39,12 @@ const useChartData = () => {
 
           summarized[name].totalArea += properties.area;
         });
-        return { layerName: layerName || "", id: key, data: summarized };
+        return {
+          layerName: layerName || "",
+          id: key,
+          info: info,
+          data: summarized,
+        };
       });
   }, [dataChart]);
   // Keep selected layer in sync with active layers

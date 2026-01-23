@@ -12,6 +12,7 @@ const Info = ({
   return (
     <DraggableContainer header="დამატებითი ინფორმაცია" className={classes.main}>
       <div className={classes.content}>
+      <div className={classes.layers}>
         <MapHeaders
           activeLayers={activeLayers}
           chartData={chartData}
@@ -21,6 +22,9 @@ const Info = ({
           layer="info"
         />
       </div>
+        
+{selectedChart&&<p className={classes.infoText}>{chartData[0].info}</p>
+}      </div>
     </DraggableContainer>
   );
 };

@@ -3,7 +3,6 @@ import {
   PieChart,
   Pie,
   Cell,
-  Tooltip,
   ResponsiveContainer,
   Sector,
 } from "recharts";
@@ -14,7 +13,11 @@ const ChartPie = ({ data, dataKey, nameKey }) => {
   const [activeIndex, setActiveIndex] = useState(null);
   const [tooltipIndex, setTooltipIndex] = useState(null);
 
+  const getOpacity = (index) =>
+    activeIndex === null || activeIndex === index ? 1 : 0.35;
+
   const activeData = tooltipIndex !== null ? data[tooltipIndex] : null;
+
   return (
     <div className={classes.wrapper}>
       <div className={classes.chartArea}>
@@ -24,8 +27,8 @@ const ChartPie = ({ data, dataKey, nameKey }) => {
               data={data}
               dataKey={dataKey}
               nameKey={nameKey}
-              innerRadius={100}
-              outerRadius={160}
+              innerRadius={120}
+              outerRadius={180}
               paddingAngle={3}
               activeIndex={activeIndex}
               activeShape={(props) => (
@@ -40,68 +43,59 @@ const ChartPie = ({ data, dataKey, nameKey }) => {
                 <Cell
                   key={entry.name_ge}
                   fill={entry.color}
-                  opacity={
-                    activeIndex === null || activeIndex === index ? 1 : 0.35
-                  }
+                  opacity={getOpacity(index)} // always a number
                   onMouseEnter={() => {
                     setActiveIndex(index);
                     setTooltipIndex(index);
                   }}
+                  onMouseLeave={() => {
+                    setActiveIndex(null);
+                    setTooltipIndex(null);
+                  }}
+                  cursor="pointer"
                 />
               ))}
             </Pie>
 
-            <Tooltip
-              active={tooltipIndex !== null}
-              payload={
-                activeData
-                  ? [
-                      {
-                        payload: activeData,
-                        name: activeData[nameKey],
-                        value: activeData[dataKey],
-                      },
-                    ]
-                  : []
-              }
-              content={({ active, payload }) => {
-                if (active && payload && payload.length) {
-                  const data = payload[0].payload;
-                  return (
-                    <div
-                      style={{
-                        backgroundColor: data.color,
-                        border: "1px solid #ccc",
-                        borderRadius: "8px",
-                        padding: "5px",
-                      }}
-                    >
-                      <p style={{ fontWeight: 600 }}>{translit(data.name_ge)}</p>
-                      <p>{translit(data.descriptionGe) || data.description_ge}</p>
-                      <p>
-                        <strong>
-                          {Number(data.totalArea)
-                            .toLocaleString("en-US", {
-                              minimumFractionDigits: 1,
-                              maximumFractionDigits: 1,
-                            })
-                            .replace(/,/g, " ")}{" "}
-                          m²
-                        </strong>
-                      </p>
-                    </div>
-                  );
-                }
-                return null;
-              }}
-            />
+    
           </PieChart>
         </ResponsiveContainer>
       </div>
-
-      {/* CUSTOM SCROLLABLE LEGEND */}
+   {activeData && (
+  <div
+    style={{
+      position: "absolute",
+      top: "20px",
+      left: "40%",
+      backgroundColor: activeData.color,
+      border: "1px solid #ccc",
+      borderRadius: "8px",
+      padding: "5px",
+      zIndex:"999999999"
+    }}
+  >
+    <p style={{ fontWeight: 600 }}>
+      {translit(activeData.name_ge)}
+    </p>
+    <p>
+      {translit(activeData.descriptionGe) || activeData.description_ge}
+    </p>
+    <p>
+      <strong>
+        {Number(activeData.totalArea)
+          .toLocaleString("en-US", {
+            minimumFractionDigits: 1,
+            maximumFractionDigits: 1,
+          })
+          .replace(/,/g, " ")}{" "}
+        m²
+      </strong>
+    </p>
+  </div>
+)}
       <div className={classes.legendScroll}>
         {data.map((item, index) => (
+          
           <div
             key={item.name_ge}
             className={classes.listItem}
@@ -114,8 +108,9 @@ const ChartPie = ({ data, dataKey, nameKey }) => {
               setTooltipIndex(null);
             }}
             style={{
-              opacity: activeIndex === null || activeIndex === index ? 1 : 0.4,
-              fontWeight: activeIndex === index ? 600 : 400,
+              opacity: getOpacity(index), 
+              fontWeight: activeIndex === index ? 900 : 400,
+              cursor: "pointer",
             }}
           >
             <span style={{ color: item.color, marginRight: "6px" }}>⬤</span>

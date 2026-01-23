@@ -5,25 +5,27 @@
   display: grid;
   grid-template-columns: 90% 5%;
   width: 100%;
+  
   margin: 0 auto;
   align-items: center;
   height: 45px;
   font-size: clamp(0.7rem, 2vw, 1rem);
   padding: 0;
-  border-bottom: 1px solid gray;
-  cursor: all-scroll;
 }
 .legend {
+  width: 90%;
+  margin: auto;
   display: grid;
   grid-template-columns: 10% 85%;
-  gap: 5%;
+  gap: 2%;
   align-items: center;
+  color: aliceblue;
   margin-top: 5px;
-  color: var(--light-text);
+  border-bottom: 1px solid var(--dark-text);
 }
+
 .legend > div {
-  height: 30px;
-  margin-left: 2px;
+  height:clamp(30px,5vh,60px)
 }
 .head {
   color: var(--light-text);
@@ -54,4 +56,11 @@
   padding-top: 10px;
   width: 50%;
   margin: auto;
+}
+
+.infoText{
+  width: 90%;
+  margin:20px auto;
+  color: var(--light-text);
+  text-indent: 10px;
 }
