@@ -16,7 +16,6 @@ const useChartData = () => {
       .map(([key, layer]) => {
         const summarized = {};
         const layerName = layer.layerName_en;
-        const info = layer.info;
 
         layer.features.forEach(({ properties }) => {
           const {
@@ -56,7 +55,6 @@ const useChartData = () => {
         return {
           layerName: layerName || "",
           id: key,
-          info: info,
           data: summarized,
         };
       });

@@ -52,10 +52,10 @@ export default function JsonProvider() {
               )
             }
           />
-        ) : el[1].type === "points" ? (
-          <GeoJSON key={el[0]} data={el[1].properties} pointToLayer={pointToLayer} />
+        ) : el[1].shape === "points" ? (
+          <GeoJSON key={el[0]} data={el[1]} pointToLayer={pointToLayer} />
         ) : (
-          <GeoJSON key={el[0]} data={el[1].properties} />
+          <GeoJSON key={el[0]} data={el[1]} />
         );
       })}
     </>
