@@ -1,11 +1,10 @@
 .main {
   position: fixed;
-
   top: calc(var(--navbar-height) + 0.5vw);
   right: 0.5vw;
   background-color: var(--navbar-dark);
   border-radius: 15px;
-  z-index: 12;
+  z-index: 1;
 }
 
 .toggleWrapper {

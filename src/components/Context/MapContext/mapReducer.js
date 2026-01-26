@@ -13,7 +13,7 @@ const mapReducer = (state = initialState, action) => {
       return {
         ...state,
         activeLayers: state.activeLayers.some(
-          (layer) => layer.id === action.layerId
+          (layer) => layer.id === action.layerId,
         )
           ? state.activeLayers.filter((layer) => layer.id !== action.layerId)
           : [
@@ -23,6 +23,8 @@ const mapReducer = (state = initialState, action) => {
                 opacity: 1,
                 weight: 1,
                 label: action.label,
+                info: action.info,
+                group: action.group || "",
               },
             ], // Default values
       };
@@ -33,7 +35,7 @@ const mapReducer = (state = initialState, action) => {
         activeLayers: state.activeLayers.map((layer) =>
           layer.id === action.layerId
             ? { ...layer, opacity: action.payload }
-            : layer
+            : layer,
         ),
       };
 
@@ -43,7 +45,7 @@ const mapReducer = (state = initialState, action) => {
         activeLayers: state.activeLayers.map((layer) =>
           layer.id === action.layerId
             ? { ...layer, weight: action.payload }
-            : layer
+            : layer,
         ),
       };
     case "SET_MAP":

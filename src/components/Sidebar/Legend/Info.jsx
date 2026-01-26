@@ -1,7 +1,7 @@
 import classes from "./Legend.module.css";
 import DraggableContainer from "../Helpers/DraggableContainer";
 import MapHeaders from "../Helpers/MapHeaders";
-
+import useMaps from "../../Context/MapContext/useMaps";
 const Info = ({
   selectedChart,
   activeLayers,
@@ -9,22 +9,31 @@ const Info = ({
   selectedLayer,
   handleSelected,
 }) => {
+  const { state } = useMaps();
+  const { dataChart } = state;
+  let info = null;
+
+  if (dataChart && dataChart.length > 0) {
+    info = dataChart.find((el) => el[0] === selectedLayer) || null;
+  }
   return (
     <DraggableContainer header="დამატებითი ინფორმაცია" className={classes.main}>
       <div className={classes.content}>
-      <div className={classes.layers}>
-        <MapHeaders
-          activeLayers={activeLayers}
-          chartData={chartData}
-          selectedLayer={selectedLayer}
-          handleSelected={handleSelected}
-          selectedChart={selectedChart}
-          layer="info"
-        />
+        <div className={classes.layers}>
+          <MapHeaders
+            activeLayers={activeLayers}
+            chartData={chartData}
+            selectedLayer={selectedLayer}
+            handleSelected={handleSelected}
+            selectedChart={selectedChart}
+            layer="info"
+          />
+        </div>
+        {dataChart.length > 0 &&
+          activeLayers.length > 0 &&
+          info &&
+          info[1]?.info && <p className={classes.infoText}>{info[1].info}</p>}
       </div>
-        
-{selectedChart&&<p className={classes.infoText}>{chartData[0].info}</p>
-}      </div>
     </DraggableContainer>
   );
 };

@@ -1,14 +1,30 @@
 import { Stack, FormControlLabel, Switch } from "@mui/material";
 import useMaps from "../Context/MapContext/useMaps";
-import PropTypes from "prop-types";
 import classes from "./ui.module.css";
 const SwitchButton = ({ label, switchId, type, children }) => {
   const { state, dispatch } = useMaps();
+  const { activeLayers } = state;
 
-  const checked = state.activeLayers.some((layer) => layer.id === switchId);
+  const checked = activeLayers.some((layer) => layer.id === switchId);
+
+  
+
+
   const handleChecked = () => {
-    dispatch({ type: "TOGGLE_LAYER", layerId: switchId, label: label });
-  };
+  // Find chart data for this layer
+  const chartEntry = state.dataChart.find(([id, ]) => id === switchId);
+  const info = chartEntry?.[1]?.info || "";
+  const group = chartEntry?.[1]?.group || "";
+
+  dispatch({
+    type: "TOGGLE_LAYER",
+    layerId: switchId,
+    label,
+    info,
+    group,
+  });
+};
+
 
   return (
     <div className={classes.box}>
@@ -16,19 +32,13 @@ const SwitchButton = ({ label, switchId, type, children }) => {
         <FormControlLabel
           label={label}
           control={
-            <Switch id={switchId} onChange={handleChecked} checked={checked} />
+            <Switch id={switchId} checked={checked} onChange={handleChecked} />
           }
         />
         {checked && type === "polygon" && children}
       </Stack>
     </div>
   );
-};
-
-SwitchButton.propTypes = {
-  label: PropTypes.string.isRequired,
-  switchId: PropTypes.string.isRequired,
-  type: PropTypes.oneOf(["polygon", "point", "polyline"]).isRequired,
 };
 
 export default SwitchButton;

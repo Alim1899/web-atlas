@@ -1,23 +1,25 @@
 import Select from "react-select";
 import Nolayer from "../Nolayer";
+import useMaps from "../../Context/MapContext/useMaps";
 const MapHeaders = ({
-  activeLayers,
-  chartData,
   selectedLayer,
   handleSelected,
   selectedChart,
   layer,
 }) => {
+   const {state} = useMaps();
+   const {activeLayers} = state;
+
   const options = [...activeLayers]
     .sort((a, b) => a.id.localeCompare(b.id))
     .map((el) => {
-      const hasChart = chartData.some((chart) => chart.id === el.id);
+   
       return {
         value: el.id,
-        label: `${el.label} ${hasChart ? "" : "⚠️ No Data"}`,
+        label: el.label
       };
     });
-
+console.log(options);
   return (
     <div>
       {activeLayers.length === 0 ? (
@@ -29,16 +31,11 @@ const MapHeaders = ({
             onChange={(selectedOption) => handleSelected(selectedOption.value)}
             options={options}
             formatOptionLabel={(option) => {
-              const [id, warning] = option.label.split(" ⚠️ ");
+      
               return (
                 <div style={{ fontWeight: "900" }}>
-                  {id}
-                  {warning && (
-                    <span style={{ color: "red", fontSize: "0.7em" }}>
-                      {" "}
-                      ⚠️ {warning}
-                    </span>
-                  )}
+               <option style={{fontSize:"1rem",fontWeight:"900"}}>{option.label}</option>
+                 
                 </div>
               );
             }}

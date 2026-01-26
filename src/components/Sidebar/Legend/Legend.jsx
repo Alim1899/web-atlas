@@ -9,7 +9,6 @@ const Legend = ({
   selectedLayer,
   handleSelected,
 }) => {
-  console.log(chartData);
   return (
     <DraggableContainer className={classes.main} header="ლეგენდა">
       <div className={classes.content}>
@@ -40,14 +39,16 @@ const Legend = ({
                     </span>
                   </>
                 ))}
-                {item.description_ge.length===0&& <>
-                   <div
-                      style={{
-                        backgroundColor: item.color,
-                      }}
-                    />
-                    <span>{item.name_ge}</span>
-                </>}
+              {item.description_ge.length === 0 && (
+                <>
+                  <div
+                    style={{
+                      backgroundColor: item.color,
+                    }}
+                  />
+                  <span>{item.name_ge}</span>
+                </>
+              )}
             </div>
           ))}
       </div>

@@ -8,6 +8,7 @@ import { pointToLayer, polygonStyle } from "./Styling";
 import { useEffect } from "react";
 
 export default function JsonProvider() {
+  
   const { state, dispatch } = useMaps();
   const { activeLayers, dataChart } = state;
   const layerIds = activeLayers.map((layer) => layer.id);
@@ -25,7 +26,6 @@ export default function JsonProvider() {
     layerIds.map((layer, index) => [layer, queries[index]?.data || {}]),
   );
   const isLoading = queries.some((query) => query?.isLoading);
-
   const layersToDisplay = Object.entries(geoJsonData);
   useEffect(() => {
     if (layersToDisplay.length === 0) return;

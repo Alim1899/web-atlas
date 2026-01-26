@@ -1,4 +1,3 @@
-// LayersList.jsx
 import SwitchButton from "../../UI/SwitchButton";
 import AccordionExpandIcon from "../../UI/Accordion";
 import { mapCategories } from "./Categories";
@@ -7,11 +6,11 @@ const LayersList = ({
   categoryKey,
   expandedLayer,
   uiDispatch,
-  mapDispatch,
 }) => {
+
   const category = mapCategories.find((c) => c.key === categoryKey);
   if (!category) return null;
- 
+
 
   return (
     <>
@@ -30,13 +29,7 @@ const LayersList = ({
           switchId={el.id}
           mapChecked={false}
           type={el.type}
-          onChange={() =>
-            mapDispatch({
-              type: "TOGGLE_LAYER",
-              layerId: el.id,
-              label: el.label,
-            })
-          }
+          
         >
           <AccordionExpandIcon
             layerId={el.id}
