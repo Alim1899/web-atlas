@@ -1,20 +1,32 @@
 import L from "leaflet";
-import point from "../../../assets/map/point.svg";
-
 
 export const pointToLayer = (feature, latlng) => {
   if (!latlng) console.error("error:", feature);
+
   return L.marker(latlng, {
-    icon: L.icon({
-      iconUrl: point,
-      iconSize: [20, 20], // Set width & height (adjust as needed)
-      iconAnchor: [10, 10], // Center icon
-      popupAnchor: [0, -10], // Adjust popups
+    icon: L.divIcon({
+      html: feature.sign, // inline SVG markup
+      className: "", //Important for avoid white background
+      iconSize: [40, 40],
+      iconAnchor: [10, 10],
+      popupAnchor: [0, -10],
     }),
   });
 };
+export const lineToLayer = (feature, activeLayers, layerId) => {
+  const isActive = activeLayers.some((l) => l.id === layerId);
+  return {
+    color: feature.properties?.color || "#ff7800",
+    weight: isActive ? 4 : 2,
+    opacity: isActive ? 1 : 0.4,
 
-export function polygonStyle(feature, layer, id, fillColor) {
+    lineCap: "dashed",
+    lineJoin: "dashed",
+    dashArray: "5,10",
+  };
+};
+
+export function polygonStyle(featre, layer, id, fillColor) {
   const foundLayer = layer.find((lyr) => lyr.id === id) || {};
   return {
     fillColor: fillColor,

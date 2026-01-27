@@ -4,11 +4,10 @@ import { useQueries } from "@tanstack/react-query";
 import Spinner from "../../UI/Loader/Spinner";
 import { isEqual } from "lodash";
 import fetchGeoJson from "./Fetch";
-import { pointToLayer, polygonStyle } from "./Styling";
+import { pointToLayer, polygonStyle, lineToLayer } from "./Styling";
 import { useEffect } from "react";
 
 export default function JsonProvider() {
-  
   const { state, dispatch } = useMaps();
   const { activeLayers, dataChart } = state;
   const layerIds = activeLayers.map((layer) => layer.id);
@@ -55,7 +54,11 @@ export default function JsonProvider() {
         ) : el[1].shape === "points" ? (
           <GeoJSON key={el[0]} data={el[1]} pointToLayer={pointToLayer} />
         ) : (
-          <GeoJSON key={el[0]} data={el[1]} />
+          <GeoJSON
+            key={el[0]}
+            data={el[1]}
+            style={(feature) => lineToLayer(feature, activeLayers, el[0])}
+          />
         );
       })}
     </>

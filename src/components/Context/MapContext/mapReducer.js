@@ -25,6 +25,7 @@ const mapReducer = (state = initialState, action) => {
                 label: action.label,
                 info: action.info,
                 group: action.group || "",
+                
               },
             ], // Default values
       };
