@@ -13,16 +13,13 @@ export const pointToLayer = (feature, latlng) => {
     }),
   });
 };
-export const lineToLayer = (feature, activeLayers, layerId) => {
-  const isActive = activeLayers.some((l) => l.id === layerId);
+export const lineToLayer = (feature,) => {
   return {
     color: feature.properties?.color || "#ff7800",
-    weight: isActive ? 4 : 2,
-    opacity: isActive ? 1 : 0.4,
+    weight: 1,
+    opacity: 1,
 
-    lineCap: "dashed",
-    lineJoin: "dashed",
-    dashArray: "5,10",
+  
   };
 };
 

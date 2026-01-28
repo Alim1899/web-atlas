@@ -6,9 +6,9 @@ import { isEqual } from "lodash";
 import fetchGeoJson from "./Fetch";
 import { pointToLayer, polygonStyle, lineToLayer } from "./Styling";
 import { useEffect } from "react";
-
 export default function JsonProvider() {
   const { state, dispatch } = useMaps();
+
   const { activeLayers, dataChart } = state;
   const layerIds = activeLayers.map((layer) => layer.id);
 

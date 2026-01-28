@@ -19,7 +19,6 @@ const MapHeaders = ({
         label: el.label
       };
     });
-console.log(options);
   return (
     <div>
       {activeLayers.length === 0 ? (
