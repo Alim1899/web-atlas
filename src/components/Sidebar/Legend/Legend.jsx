@@ -2,6 +2,7 @@ import classes from "./Legend.module.css";
 import DraggableContainer from "../Helpers/DraggableContainer";
 import point from "../../../assets/map/point.svg";
 import useLegend from "../../Hooks/useLegend";
+
 const Legend = () => {
   const { legendData } = useLegend();
   const svgToDataUrl = (svg) =>
@@ -32,7 +33,8 @@ const Legend = () => {
                     />
 
                     <span className={classes.span}>
-                      {item.name}{item.location && `, ${item.location}`}
+                      {item.name}
+                      {item.location && `, ${item.location}`}
                     </span>
                   </div>
                 ));

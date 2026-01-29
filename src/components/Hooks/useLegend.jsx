@@ -31,7 +31,9 @@ const useLegend = () => {
 
         const { name_ge, location_ge } = props;
 
-        data.push({ name: name_ge, sign: sign, location: location_ge || "" });
+         if (!data.some((el) => el.name === name_ge)) {
+            data.push({ name: name_ge, sign, location:location_ge|| ""});
+          }
       });
     }
     return { name: el[0],shape:shape, data: data };

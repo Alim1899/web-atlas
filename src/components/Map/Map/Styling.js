@@ -1,14 +1,18 @@
 import L from "leaflet";
+import point from "../../../assets/map/point.svg";
 
 export const pointToLayer = (feature, latlng) => {
   if (!latlng) console.error("error:", feature);
 
+  const iconHtml = feature.sign
+    ? feature.sign // inline SVG string
+    : `<img src="${point}" width="24" height="24" />`; // fallback file
   return L.marker(latlng, {
     icon: L.divIcon({
-      html: feature.sign, // inline SVG markup
-      className: "", //Important for avoid white background
-      iconSize: [40, 40],
-      iconAnchor: [10, 10],
+      html: iconHtml,
+      className: "", // removes default leaflet styles
+      iconSize: [20, 40],
+      iconAnchor: [12, 12],
       popupAnchor: [0, -10],
     }),
   });
