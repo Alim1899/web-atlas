@@ -1,14 +1,14 @@
-import { GeoJSON } from "react-leaflet";
+import { GeoJSON, useMap } from "react-leaflet";
 import useMaps from "../../Context/MapContext/useMaps";
 import { useQueries } from "@tanstack/react-query";
 import Spinner from "../../UI/Loader/Spinner";
 import { isEqual } from "lodash";
 import fetchGeoJson from "./Fetch";
-import { pointToLayer, polygonStyle, lineToLayer } from "./Styling";
+import { pointToLayer, polygonStyle, lineToLayer, onEachLine } from "./Styling";
 import { useEffect } from "react";
 export default function JsonProvider() {
   const { state, dispatch } = useMaps();
-
+  const map = useMap();
   const { activeLayers, dataChart } = state;
   const layerIds = activeLayers.map((layer) => layer.id);
 
@@ -57,6 +57,7 @@ export default function JsonProvider() {
           <GeoJSON
             key={el[0]}
             data={el[1]}
+            onEachFeature={(feature, layer) => onEachLine(feature, layer, map)}
             style={(feature) => lineToLayer(feature, activeLayers, el[0])}
           />
         );
