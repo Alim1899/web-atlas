@@ -21,7 +21,7 @@ flex-direction: column;
 
 }
 .legendItem{
-  margin-top: 20px;
+  margin-top: 10px;
     border-bottom: 1px solid var(--dark-text);
   display: grid;
   grid-template-columns: 10% 90%;
@@ -32,12 +32,15 @@ flex-direction: column;
   height: 40px;
 }
 .span{
-  margin-left: 1vw
+  margin-left: 1vw;
+  font-size: clamp(0.9rem,2vw,1.5rem)
+  
 }
 .legendIcon{
-  height: 40px;
-  background-color: antiquewhite;
-  width: 40px;
+  height:clamp(40px,5vw,60px);
+  background-color:aliceblue;
+
+  width: clamp(40px,5vw,60px)
   
 }
 

@@ -5,7 +5,6 @@ import useMaps from "../../Context/MapContext/useMaps";
 const Info = ({
   selectedChart,
   activeLayers,
-  chartData,
   selectedLayer,
   handleSelected,
 }) => {
@@ -21,8 +20,6 @@ const Info = ({
       <div className={classes.content}>
         <div className={classes.layers}>
           <MapHeaders
-            activeLayers={activeLayers}
-            chartData={chartData}
             selectedLayer={selectedLayer}
             handleSelected={handleSelected}
             selectedChart={selectedChart}

@@ -9,27 +9,36 @@ const initialState = {
 
 const mapReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "TOGGLE_LAYER":
+    case "TOGGLE_LAYER": {
+      const isActive = state.activeLayers.some(
+        (layer) => layer.id === action.layerId,
+      );
+
+      const nextActiveLayers = isActive
+        ? state.activeLayers.filter((layer) => layer.id !== action.layerId)
+        : [
+            ...state.activeLayers,
+            {
+              id: action.layerId,
+              opacity: 1,
+              weight: 1,
+              label: action.label,
+              info: action.info,
+              group: action.group || "",
+            },
+          ];
+
+      // Clear sessionStorage if no layers are active
+      if (nextActiveLayers.length === 0) {
+        sessionStorage.removeItem("header"); // or sessionStorage.removeItem('yourKey') if you want to remove a specific key
+      }
+
       return {
         ...state,
-        activeLayers: state.activeLayers.some(
-          (layer) => layer.id === action.layerId,
-        )
-          ? state.activeLayers.filter((layer) => layer.id !== action.layerId)
-          : [
-              ...state.activeLayers,
-              {
-                id: action.layerId,
-                opacity: 1,
-                weight: 1,
-                label: action.label,
-                info: action.info,
-                group: action.group || "",
-                
-              },
-            ], // Default values
+        activeLayers: nextActiveLayers,
+        dataChart: nextActiveLayers.length === 0 ? [] : state.dataChart,
       };
-
+    }
     case "SET_OPACITY":
       return {
         ...state,

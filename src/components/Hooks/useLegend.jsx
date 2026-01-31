@@ -1,47 +1,57 @@
 import useMaps from "../Context/MapContext/useMaps";
-const useLegend = () => {
-  const { state } = useMaps();
-  const {dataChart } = state;
 
-  const legendData = dataChart.map((el) => {
+export const useLegend = () => {
+  const { state } = useMaps();
+  const { dataChart } = state;
+
+  const legendData = dataChart.reduce((acc, el) => {
     const shape = el[1].shape;
-    const data = [];
     const features = el[1].features;
+    const group = el[1].group_ge || "default";
+
+    const data = [];
+
     if (shape === "polygon") {
-      features.map((feature) => {
-        const props = feature.properties;
-        const { name_ge, description_ge, color } = props;
-        if (description_ge) {
-          if (
-            !data.some((el) => el.txt === description_ge && el.color === color)
-          ) {
-            data.push({ txt: description_ge, color });
-          }
-        } else if (name_ge) {
-          
-          if (!data.some((el) => el.txt === name_ge && el.color === color)) {
-            data.push({ txt: name_ge, color });
-          }
+      features.forEach((feature) => {
+        const { name_ge, description_ge, color } = feature.properties;
+
+        const txt = description_ge || name_ge;
+        if (txt && !data.some((d) => d.txt === txt && d.color === color)) {
+          data.push({ txt, color });
         }
       });
-    } else if (shape === "points") {
-      features.map((feature) => {
+    }
+
+    if (shape === "points" || shape === "line") {
+      features.forEach((feature) => {
+        const { name_ge, location_ge } = feature.properties;
         const sign = feature.sign;
-        const props = feature.properties;
 
-        const { name_ge, location_ge } = props;
-
-         if (!data.some((el) => el.name === name_ge)) {
-            data.push({ name: name_ge, sign, location:location_ge|| ""});
-          }
+        if (!data.some((d) => d.name === name_ge)) {
+          data.push({
+            name: name_ge,
+            sign,
+            location: location_ge || "",
+          });
+        }
       });
     }
-    return { name: el[0],shape:shape, data: data };
-  });
 
-  return {
-   
-    legendData
-  };
+    const legendItem = {
+      name: el[0],
+      shape,
+      data,
+    };
+
+    // 👇 GROUPING HAPPENS HERE
+    if (!acc[group]) {
+      acc[group] = [];
+    }
+
+    acc[group].push(legendItem);
+
+    return acc;
+  }, {});
+
+  return { legendData };
 };
-export default useLegend;
