@@ -2,44 +2,43 @@ import classes from "./Legend.module.css";
 import DraggableContainer from "../Helpers/DraggableContainer";
 import point from "../../../assets/map/point.svg";
 import { useLegend } from "../../Hooks/useLegend";
+import useRightBar from "../../Context/RightBarContext/useRightBar";
 import Select from "react-select";
 import Nolayer from "../Nolayer";
-import { useState } from "react";
 const Legend = () => {
-  const { legendData } = useLegend();
-  const [selectedHeader, setSelectedHeader] = useState(
-    sessionStorage.getItem("header") || "",
-  );
-  const [activeData, setActiveData] = useState(
-    legendData[selectedHeader] || [],
-  );
-
-  const svgToDataUrl = (svg) =>
-    `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
-  const headers = Object.keys(legendData).map((key) => ({
+  useLegend();
+  const { state: legendState, dispatch: rightBarDispatch } = useRightBar();
+  const { legendLayers, selectedLayer, activeData } = legendState;
+  const headers = Object.keys(legendLayers).map((key) => ({
     value: key,
     label: key,
   }));
 
+  const svgToDataUrl = (svg) =>
+    `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
+
   const handleSelected = (layer) => {
     sessionStorage.setItem("header", String(layer.value));
-    setSelectedHeader(layer);
-    setActiveData(legendData[layer.value]);
+    rightBarDispatch({
+      type: "LAYER_CHANGED",
+      payload: layer.value,
+    });
   };
 
   return (
     <DraggableContainer className={classes.main} header="ლეგენდა">
-      <Select
-        value={headers.find((option) => option.value === selectedHeader)}
-        onChange={handleSelected}
-        layer="legend"
-        options={headers}
-      />
+      {headers.length === 0 && <Nolayer layer="none" />}
+      {headers.length > 0 && (
+        <div className={classes.content}>
+          <Select
+            value={headers.find((option) => option.value === selectedLayer)}
+            onChange={handleSelected}
+            layer="legend"
+            options={headers}
+          />
 
-      <div className={classes.content}>
-        {activeData.length > 0 ? (
           <div className={classes.legend}>
-            {activeData.map((el) => {
+            {activeData?.map((el) => {
               if (el.shape === "polygon") {
                 return el.data.map((item, idx) => (
                   <div key={`${el.name}-${idx}`} className={classes.legendItem}>
@@ -68,10 +67,8 @@ const Legend = () => {
               }
             })}
           </div>
-        ) : (
-          <Nolayer layer="legend" />
-        )}
-      </div>
+        </div>
+      )}
     </DraggableContainer>
   );
 };
