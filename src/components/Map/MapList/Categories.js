@@ -46,6 +46,40 @@ export const mapCategories = [
           },
         ],
       },
+       {
+        "მეწყერი და ქვათაცვენა": [
+          {
+            id: "landslide",
+            label: "მეწყერი",
+            type: "points",
+          },
+          {
+            id: "rockfall",
+            label: "ქვათაცვენა",
+            type: "points",
+          },
+            {
+            id: "landslidezones",
+            label: "მეწყრული ზონები",
+            type: "polygon",
+          },
+        ],
+      },
+      {
+        "ლანდშაფტი": [
+          {
+            id: "antrolandscape",
+            label: "ანთროპოგენური ლანდშაფტი",
+            type: "polygon",
+          },
+          {
+            id: "landscape",
+            label: "ლანდშაფტის ტიპები",
+            type: "polygon",
+          },
+        ],
+      },
+
 
       {
         "აგროკლიმატი": [
