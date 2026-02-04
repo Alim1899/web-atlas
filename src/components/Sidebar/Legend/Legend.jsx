@@ -45,7 +45,7 @@ const Legend = () => {
                     <div
                       className={classes.legendColor}
                       style={{ backgroundColor: item.color }}
-                    />
+                    ><span>{item?.unicode}</span></div>
                     <span className={classes.span}>{item.txt}</span>
                   </div>
                 ));

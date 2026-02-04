@@ -40,26 +40,21 @@ const RightBarReducer = (state = RightBarState, action) => {
       };
     }
     case "DATA_ARRIVED": {
-  const savedLayer = sessionStorage.getItem("header");
-  const layers = action.payload;
+      const savedLayer = sessionStorage.getItem("header");
+      const layers = action.payload;
 
-  const firstLayer = Object.keys(layers)[0] || null;
+      const firstLayer = Object.keys(layers)[0] || null;
 
-  const selectedLayer =
-    savedLayer && layers[savedLayer]
-      ? savedLayer
-      : firstLayer;
+      const selectedLayer =
+        savedLayer && layers[savedLayer] ? savedLayer : firstLayer;
 
-  return {
-    ...state,
-    legendLayers: layers,
-    selectedLayer,
-    activeData: selectedLayer
-      ? layers[selectedLayer]
-      : [],
-  };
-}
-
+      return {
+        ...state,
+        legendLayers: layers,
+        selectedLayer,
+        activeData: selectedLayer ? layers[selectedLayer] : [],
+      };
+    }
 
     case "LAYER_CHANGED": {
       return {

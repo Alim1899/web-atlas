@@ -30,6 +30,11 @@ flex-direction: column;
 .legendColor{
   width: 60px !important;
   height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+color: var(--dark-text);
+font-weight: 900;
 }
 .span{
   margin-left: 1vw;

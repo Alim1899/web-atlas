@@ -3,20 +3,29 @@ import point from "../../../assets/map/point.svg";
 import "leaflet-polylinedecorator";
 
 export const pointToLayer = (feature, latlng) => {
-  if (!latlng) console.error("error:", feature);
-  const iconHtml = feature.sign
-    ? feature.sign // inline SVG string
-    : `<img src="${point}" width="24" height="24" />`; // fallback file
-  return L.marker(latlng, {
+  const svgToDataUrl = (svg) =>
+    `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
+
+  const iconSrc = feature.sign
+    ? svgToDataUrl(feature.sign)   // 👈 convert SVG to image URL
+    : point;
+
+  const marker = L.marker(latlng, {
     icon: L.divIcon({
-      html: iconHtml,
-      className: "",
-      iconSize: [20, 40],
-      iconAnchor: [12, 12],
+      html: `<img src="${iconSrc}" width="20" height="20" />`,
+      iconSize: [20, 20],
+      iconAnchor: [10, 10],
       popupAnchor: [0, -10],
+      className:""
     }),
   });
+
+  return marker;
 };
+
+
+
+
 export const lineToLayer = (feature) => {
   return {
     color: feature.properties?.color || "#ff7800",
@@ -54,7 +63,7 @@ export const onEachLine = (feature, layer, map) => {
       icon: L.divIcon({
         className: "tick-line",
         iconSize: [10, 10],
-        iconAnchor: [1,2],
+        iconAnchor: [1, 2],
         html: `
           <div style="color:#2f6fd6">
             ${tickSvg}
@@ -64,8 +73,9 @@ export const onEachLine = (feature, layer, map) => {
     },
   });
 
-const name = feature.properties.name_en;
-if (name==="Dry Gully") return;
+  const name = feature.properties.name_en;
+  if (name === "Dry Gully") return;
+   if (name === "Foults") return;
   if (!map) return;
   if (
     feature.geometry.type !== "LineString" &&
@@ -96,3 +106,5 @@ export const onEachPolygonFeature = (feature, layer) => {
       `);
   }
 };
+
+

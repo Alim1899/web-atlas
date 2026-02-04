@@ -13,6 +13,30 @@ export const mapCategories = [
     icon: GiForest,
     name: "ბუნება",
     layers: [
+         {
+        "გეოლოგია": [
+          {
+            id: "parentrocks",
+            label: "ამგები ქანები",
+            type: "polygon",
+          },
+          {
+            id: "metalore",
+            label: "მეტალები",
+            type: "points",
+          },
+            {
+            id: "nonmetalore",
+            label: "არამეტალები",
+            type: "points",
+          },
+          {
+            id: "faults",
+            label: "რღვევები",
+            type: "line",
+          },
+        ],
+      },
        {
         "გეომორფოლოგია": [
           {
@@ -28,7 +52,7 @@ export const mapCategories = [
           {
             id: "linearlandforms",
             label: "ხაზობრივი რელიეფი",
-            type: "points",
+            type: "line",
           },
         ],
       },
@@ -65,6 +89,7 @@ export const mapCategories = [
           },
         ],
       },
+    
       {
         "ლანდშაფტი": [
           {

@@ -5,7 +5,6 @@ export const useLegend = () => {
   const { state } = useMaps();
   const { dataChart } = state;
   const { dispatch: rightBarDispatch } = useRightBar();
-  console.log(dataChart);
 
   const legendData = useMemo(() => {
     return dataChart.reduce((acc, el) => {
@@ -15,29 +14,59 @@ export const useLegend = () => {
       const data = [];
 
       if (shape === "polygon") {
-        features.forEach((feature) => {
-          const { name_ge, description_ge, color } = feature.properties;
+        if (el[1].group_en === "Geology") {
+          features.forEach((feature) => {
+            const { name_ge, description_ge, color, unicode } =
+              feature.properties;
+            const txt = description_ge || name_ge;
+            if (!data.some((d) => d.txt === txt)) {
+              data.push({
+                txt,
+                color,
+                unicode,
+              });
+            }
+          });
+        } else {
+          features.forEach((feature) => {
+            const { name_ge, description_ge, color } = feature.properties;
 
-          const txt = description_ge || name_ge;
-          if (txt && !data.some((d) => d.txt === txt && d.color === color)) {
-            data.push({ txt, color });
-          }
-        });
+            const txt = description_ge || name_ge;
+            if (txt && !data.some((d) => d.txt === txt && d.color === color)) {
+              data.push({ txt, color });
+            }
+          });
+        }
       }
 
       if (shape === "points" || shape === "line") {
-        features.forEach((feature) => {
-          const { name_ge, location_ge } = feature.properties;
-          const sign = feature.sign;
+        if (el[1].group_en === "Geology") {
+          features.forEach((feature) => {
+            const { type_ge, name_ge } = feature.properties;
+            const sign = feature.sign;
 
-          if (!data.some((d) => d.name === name_ge)) {
-            data.push({
-              name: name_ge,
-              sign,
-              location: location_ge || "",
-            });
-          }
-        });
+            if (!data.some((d) => d.sign === sign)) {
+              data.push({
+                name: type_ge || name_ge,
+                sign,
+                location: "",
+              });
+            }
+          });
+        } else {
+          features.forEach((feature) => {
+            const { name_ge, location_ge } = feature.properties;
+            const sign = feature.sign;
+
+            if (!data.some((d) => d.name === name_ge)) {
+              data.push({
+                name: name_ge,
+                sign,
+                location: location_ge || "",
+              });
+            }
+          });
+        }
       }
 
       if (!acc[group]) acc[group] = [];
@@ -56,7 +85,6 @@ export const useLegend = () => {
       type: "DATA_ARRIVED",
       payload: legendData,
     });
-    console.log(Object.keys(legendData));
   }, [legendData, rightBarDispatch]);
   return { legendData };
 };
