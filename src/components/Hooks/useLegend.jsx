@@ -40,7 +40,41 @@ export const useLegend = () => {
       }
 
       if (shape === "points" || shape === "line") {
-        if (el[1].group_en === "Geology") {
+        if (el[1].layerName_en === "Instrumental period") {
+          const getIconSize = (size) => {
+            const n = Number(size) || 0;
+            if (!size) return { type: "", size: [20, 20] };
+            if (n < 3) return { type: "<3 ", size: [15, 15] };
+            if (n >= 3 && n < 4) return { type: ">3 - <4 ", size: [20, 20] };
+            if (n >= 4 && n < 5) return { type: ">4 - <5 ", size: [25, 25] };
+            if (n >= 5 && n < 6) return { type: ">5 - <6 ", size: [30, 30] };
+            if (n >= 6) return { type: ">6 ", size: [35, 35] };
+          };
+          const resizeSvg = (sign, size) => {
+
+            const { size: wh } = getIconSize(size);
+            const [w, h] = wh;
+            return sign.replace(
+              /<svg\b([^>]*)>/i,
+              `<svg$1 width="${w}" height="${h}">`,
+            );
+          };
+
+          features.forEach((feature) => {
+            const size = feature.properties?.size ?? feature.size;
+            const sizedSvg = resizeSvg(feature.sign, size);
+                  const label = `${getIconSize(size).type} მაგნიტუდა`;
+
+            if (!data.some((d) => d.name === label)) {
+              data.push({
+                name: `${getIconSize(size).type} მაგნიტუდა`,
+                sign: sizedSvg,
+                location: "",
+                size: getIconSize(size).size,
+              });
+            }
+          });
+        }else if (el[1].group_en === "Geology") {
           features.forEach((feature) => {
             const { type_ge, name_ge } = feature.properties;
             const sign = feature.sign;

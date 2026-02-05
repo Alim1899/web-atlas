@@ -13,6 +13,44 @@ export const mapCategories = [
     icon: GiForest,
     name: "ბუნება",
     layers: [
+        {
+        "ნიადაგები": [
+          {
+            id: "soiltypes",
+            label: "ნიადაგის ტიპები",
+            type: "polygon",
+          },
+          {
+            id: "soilproducer",
+            label: "ნიადაგწარმომქმნელი ქანები",
+            type: "polygon",
+          },
+          {
+            id: "soilph",
+            label: "ნიადაგის მჟავიანობა",
+            type: "polygon",
+          },
+        ],
+      },
+       {
+        "მიწისძვრები": [
+          {
+            id: "earthquakenew",
+            label: "ინსტრუმენტული პერიოდის",
+            type: "points",
+          },
+          {
+            id: "earthquakeold",
+            label: "ისტორიული პერიოდის (1900 წლამდე)",
+            type: "points",
+          },
+          {
+            id: "seismostations",
+            label: "სეისმო სადგურები",
+            type: "points",
+          },
+        ],
+      },
          {
         "გეოლოგია": [
           {

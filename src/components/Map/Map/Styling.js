@@ -3,28 +3,36 @@ import point from "../../../assets/map/point.svg";
 import "leaflet-polylinedecorator";
 
 export const pointToLayer = (feature, latlng) => {
+  const getIconSize = (size) => {
+    if (!size) return [[20, 20]];
+    if (size < 3) return [10, 10];
+    if (size >= 3 && size < 4) return [15, 15];
+    if (size >= 4 && size < 5) return [20, 20];
+    if (size >= 5 && size < 6) return [25, 25];
+    if (size >= 6) return [30, 30];
+
+    return [40, 40]; // fallback
+  };
   const svgToDataUrl = (svg) =>
     `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
+  const size = feature.properties?.size;
 
-  const iconSrc = feature.sign
-    ? svgToDataUrl(feature.sign)   // 👈 convert SVG to image URL
-    : point;
+  const iconSize = getIconSize(size);
 
+  const iconSrc = feature.sign ? svgToDataUrl(feature.sign) : point;
   const marker = L.marker(latlng, {
+    
     icon: L.divIcon({
-      html: `<img src="${iconSrc}" width="20" height="20" />`,
-      iconSize: [20, 20],
+      html: `<img src="${iconSrc}" width="${iconSize[0][0]}" height="${iconSize[0][1]}" />`,
+      iconSize: iconSize,
       iconAnchor: [10, 10],
       popupAnchor: [0, -10],
-      className:""
+      className: "",
     }),
   });
 
   return marker;
 };
-
-
-
 
 export const lineToLayer = (feature) => {
   return {
@@ -75,7 +83,7 @@ export const onEachLine = (feature, layer, map) => {
 
   const name = feature.properties.name_en;
   if (name === "Dry Gully") return;
-   if (name === "Foults") return;
+  if (name === "Foults") return;
   if (!map) return;
   if (
     feature.geometry.type !== "LineString" &&
@@ -99,6 +107,7 @@ export const onEachLine = (feature, layer, map) => {
 };
 
 export const onEachPolygonFeature = (feature, layer) => {
+  console.log(feature,layer);
   if (feature.properties && feature.properties.Zone_) {
     layer.bindPopup(`
       <strong>Zone:</strong> ${feature.properties.Zone_}<br>
@@ -106,5 +115,3 @@ export const onEachPolygonFeature = (feature, layer) => {
       `);
   }
 };
-
-

@@ -41,11 +41,11 @@ font-weight: 900;
   font-size: clamp(0.9rem,2vw,1.5rem)
   
 }
-.legendIcon{
-  height:clamp(40px,5vw,60px);
+.legendIcon>svg{
+
   background-color:aliceblue;
 
-  width: clamp(40px,5vw,60px)
+
   
 }
 

@@ -45,7 +45,9 @@ const Legend = () => {
                     <div
                       className={classes.legendColor}
                       style={{ backgroundColor: item.color }}
-                    ><span>{item?.unicode}</span></div>
+                    >
+                      <span>{item?.unicode}</span>
+                    </div>
                     <span className={classes.span}>{item.txt}</span>
                   </div>
                 ));
@@ -56,6 +58,8 @@ const Legend = () => {
                       className={classes.legendIcon}
                       src={item.sign ? svgToDataUrl(item.sign) : point}
                       alt={item.name}
+                      width={Array.isArray(item.size) ? item.size[0] : 40}
+                      height={Array.isArray(item.size) ? item.size[1] : 40}
                     />
 
                     <span className={classes.span}>
