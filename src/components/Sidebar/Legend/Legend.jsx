@@ -37,40 +37,44 @@ const Legend = () => {
             options={headers}
           />
 
-          <div className={classes.legend}>
-            {activeData?.map((el) => {
-              if (el.shape === "polygon") {
-                return el.data.map((item, idx) => (
-                  <div key={`${el.name}-${idx}`} className={classes.legendItem}>
-                    <div
-                      className={classes.legendColor}
-                      style={{ backgroundColor: item.color }}
-                    >
-                      <span>{item?.unicode}</span>
-                    </div>
-                    <span className={classes.span}>{item.txt}</span>
-                  </div>
-                ));
-              } else if (el.shape === "points" || el.shape === "line") {
-                return el.data.map((item, i) => (
-                  <div key={`${el.name}-${i}`} className={classes.legendItem}>
-                    <img
-                      className={classes.legendIcon}
-                      src={item.sign ? svgToDataUrl(item.sign) : point}
-                      alt={item.name}
-                      width={Array.isArray(item.size) ? item.size[0] : 40}
-                      height={Array.isArray(item.size) ? item.size[1] : 40}
-                    />
+        <div className={classes.legend}>
+  {activeData?.map((el) => (
+    <div key={el.name ?? el.header} className={classes.legendGroup}>
+      {!!el.header && <h2 className={classes.header}>{el.header}</h2>}
 
-                    <span className={classes.span}>
-                      {item.name}
-                      {item.location && `, ${item.location}`}
-                    </span>
-                  </div>
-                ));
-              }
-            })}
+      {el.shape === "polygon" &&
+        el.data.map((item, idx) => (
+          <div key={`${el.name}-${idx}`} className={classes.legendItem}>
+            <div
+              className={classes.legendColor}
+              style={{ backgroundColor: item.color }}
+            >
+              <span>{item?.unicode}</span>
+            </div>
+            <span className={classes.span}>{item.txt}</span>
           </div>
+        ))}
+
+      {(el.shape === "points" || el.shape === "line") &&
+        el.data.map((item, i) => (
+          <div key={`${el.name}-${i}`} className={classes.legendItem}>
+            <img
+              className={classes.legendIcon}
+              src={item.sign ? svgToDataUrl(item.sign) : point}
+              alt={item.name}
+              width={Array.isArray(item.size) ? item.size[0] : 40}
+              height={Array.isArray(item.size) ? item.size[1] : 40}
+            />
+            <span className={classes.span}>
+              {item.name}
+              {item.location && `, ${item.location}`}
+            </span>
+          </div>
+        ))}
+    </div>
+  ))}
+</div>
+
         </div>
       )}
     </DraggableContainer>

@@ -27,6 +27,7 @@ flex-direction: column;
   grid-template-columns: 10% 90%;
   align-items: center;
 }
+
 .legendColor{
   width: 60px !important;
   height: 40px;
@@ -35,6 +36,7 @@ flex-direction: column;
   align-items: center;
 color: var(--dark-text);
 font-weight: 900;
+margin-left: 10px;
 }
 .span{
   margin-left: 1vw;
@@ -42,11 +44,12 @@ font-weight: 900;
   
 }
 .legendIcon>svg{
-
   background-color:aliceblue;
-
-
-  
+}
+.header{
+  width: 70%;
+margin: 20px;
+border-bottom: 1px solid var(--light-text);
 }
 
 

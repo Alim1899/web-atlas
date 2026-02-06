@@ -13,6 +13,44 @@ export const mapCategories = [
     icon: GiForest,
     name: "ბუნება",
     layers: [
+       {
+        "ჰაერის ტემპერატურა": [
+          {
+            id: "airavg",
+            label: "ჰაერის საშუალო მრავალწლიური ტემპერატურა, 1990-2022",
+            type: "polygon",
+          },
+          {
+            id: "airmax",
+            label: "ჰაერის მაქსიმალური მრავალწლიური ტემპერატურა, 1990-2022",
+            type: "polygon",
+          },
+          {
+            id: "precipitation",
+            label: "ატმოსფერული ნალექების მრავალწლიური ჯამი, 1990-2022",
+            type: "polygon",
+          },
+        ],
+      },
+         {
+        "ღვარცოფი და ნაპირგარეცხვა": [
+          {
+            id: "erosion",
+            label: "ნაპირგარეცხვა",
+            type: "polygon",
+          },
+          {
+            id: "madflow",
+            label: "ღვარცოფი",
+            type: "points",
+          },
+          {
+            id: "madflowzoning",
+            label: "ღვარცოფის საფრთხის კატეგორია",
+            type: "polygon",
+          },
+        ],
+      },
         {
         "ნიადაგები": [
           {
