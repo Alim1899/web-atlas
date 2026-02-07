@@ -13,7 +13,40 @@ export const mapCategories = [
     icon: GiForest,
     name: "ბუნება",
     layers: [
-       {
+      {
+        "სითბური ტალღები": [
+          {
+            id: "hotwaves",
+            label: "სითბური ტალღის ინდექსი",
+            type: "polygon",
+          },
+          {
+            id: "draught",
+            label: "გვალვის ინდექსი, 1990-2022",
+            type: "polygon",
+          },
+        ],
+      },
+      {
+        "ცხელი დღეები": [
+          {
+            id: "hotdays",
+            label: "ცხელი დღეების საშუალო რაოდენობა, 1990-2022",
+            type: "polygon",
+          },
+          {
+            id: "tropicalnights",
+            label: "ტროპიკული ღამეების საშუალო რაოდენობა, 1990-2022",
+            type: "polygon",
+          },
+          {
+            id: "frozendays",
+            label: "ყინვიანი დღეების საშუალო რაოდენობა, 1990-2022",
+            type: "polygon",
+          },
+        ],
+      },
+      {
         "ჰაერის ტემპერატურა": [
           {
             id: "airavg",
@@ -32,7 +65,7 @@ export const mapCategories = [
           },
         ],
       },
-         {
+      {
         "ღვარცოფი და ნაპირგარეცხვა": [
           {
             id: "erosion",
@@ -51,8 +84,8 @@ export const mapCategories = [
           },
         ],
       },
-        {
-        "ნიადაგები": [
+      {
+        ნიადაგები: [
           {
             id: "soiltypes",
             label: "ნიადაგის ტიპები",
@@ -70,8 +103,8 @@ export const mapCategories = [
           },
         ],
       },
-       {
-        "მიწისძვრები": [
+      {
+        მიწისძვრები: [
           {
             id: "earthquakenew",
             label: "ინსტრუმენტული პერიოდის",
@@ -89,8 +122,8 @@ export const mapCategories = [
           },
         ],
       },
-         {
-        "გეოლოგია": [
+      {
+        გეოლოგია: [
           {
             id: "parentrocks",
             label: "ამგები ქანები",
@@ -101,7 +134,7 @@ export const mapCategories = [
             label: "მეტალები",
             type: "points",
           },
-            {
+          {
             id: "nonmetalore",
             label: "არამეტალები",
             type: "points",
@@ -113,8 +146,8 @@ export const mapCategories = [
           },
         ],
       },
-       {
-        "გეომორფოლოგია": [
+      {
+        გეომორფოლოგია: [
           {
             id: "morphology",
             label: "მორფოლოგია",
@@ -146,7 +179,7 @@ export const mapCategories = [
           },
         ],
       },
-       {
+      {
         "მეწყერი და ქვათაცვენა": [
           {
             id: "landslide",
@@ -158,16 +191,16 @@ export const mapCategories = [
             label: "ქვათაცვენა",
             type: "points",
           },
-            {
+          {
             id: "landslidezones",
             label: "მეწყრული ზონები",
             type: "polygon",
           },
         ],
       },
-    
+
       {
-        "ლანდშაფტი": [
+        ლანდშაფტი: [
           {
             id: "antrolandscape",
             label: "ანთროპოგენური ლანდშაფტი",
@@ -181,9 +214,8 @@ export const mapCategories = [
         ],
       },
 
-
       {
-        "აგროკლიმატი": [
+        აგროკლიმატი: [
           {
             id: "agroclimate",
             label: "აგროკლიმატური ზონები",

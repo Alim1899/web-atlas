@@ -53,10 +53,11 @@ const Legend = () => {
             </div>
             <span className={classes.span}>{item.txt}</span>
           </div>
-        ))}
-
+        ))};
       {(el.shape === "points" || el.shape === "line") &&
+
         el.data.map((item, i) => (
+     
           <div key={`${el.name}-${i}`} className={classes.legendItem}>
             <img
               className={classes.legendIcon}

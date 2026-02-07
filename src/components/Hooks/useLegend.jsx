@@ -12,8 +12,7 @@ export const useLegend = () => {
       const features = el[1].features;
       const group = el[1].group_ge || "default";
       const data = [];
-      const header = el[1].legend_header || null;
-
+      const header = el[1].legend_header || el[1].layerName_ge;
       if (shape === "polygon") {
         if (el[1].group_en === "Geology") {
           features.forEach((feature) => {
@@ -109,7 +108,6 @@ export const useLegend = () => {
       }
 
       if (!acc[group]) acc[group] = [];
-
       acc[group].push({
         name: el[0],
         shape,
