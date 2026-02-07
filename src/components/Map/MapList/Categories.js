@@ -14,6 +14,21 @@ export const mapCategories = [
     name: "ბუნება",
     layers: [
       {
+        აგროკლიმატი: [
+          {
+            id: "forest",
+            label: "ძირითადი მერქნიანი სახეობები",
+            type: "polygon",
+          },
+           {
+            id: "vegetation",
+            label: "მცენარეული საფარი",
+            type: "polygon",
+          },
+     
+        ],
+      },
+      {
         "სითბური ტალღები": [
           {
             id: "hotwaves",
@@ -218,6 +233,16 @@ export const mapCategories = [
         აგროკლიმატი: [
           {
             id: "agroclimate",
+            label: "აგროკლიმატური ზონები",
+            type: "polygon",
+          },
+           {
+            id: "activetemperature",
+            label: "აგროკლიმატური ზონები",
+            type: "polygon",
+          },
+           {
+            id: "humidity",
             label: "აგროკლიმატური ზონები",
             type: "polygon",
           },
