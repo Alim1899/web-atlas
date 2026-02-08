@@ -17,6 +17,8 @@ const sortLegendData = (arr=[]) => {
 
   return [...arr].sort((a, b) => getMin(a.txt) - getMin(b.txt));
 };
+
+
 export const useLegend = () => {
   const { state } = useMaps();
   const { dataChart } = state;
@@ -48,6 +50,20 @@ export const useLegend = () => {
           features.forEach((feature) => {
             const { name_ge, description_en, color, } = feature.properties;
             data.push({ header: name_ge, txt:description_en, color });
+          });
+        }
+        else if (el[1].group_en === "Landscape") {
+          features.forEach((feature) => {
+            const { name_ge, color,index } = feature.properties;
+            const txt = name_ge
+             if (!data.some((d) => d.txt === txt)) {
+              data.push({
+                txt,
+                color,
+                index
+              });
+              data.sort((a, b) => (a.index ?? 0) - (b.index ?? 0));
+            }
           });
         } else if (el[1].layerName_en === "Agroclimatic Zones") {
   const grouped = {}; // <-- temp object
@@ -165,9 +181,6 @@ export const useLegend = () => {
   
 const name = el[0] || "unnamed";
 
-
-
-console.log(data);
 const finalData = name === "activetemperature" ? sortLegendData(data) : data;
 console.log(finalData);
 if (!acc[group]) acc[group] = [];
@@ -175,7 +188,7 @@ acc[group].push({
   name,
   shape,
   hasSubHeader,
-  data: finalData, 
+  data:finalData,
   header,
 });
 
