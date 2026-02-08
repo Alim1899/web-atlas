@@ -41,21 +41,55 @@ const Legend = () => {
   {activeData?.map((el) => (
     <div key={el.name ?? el.header} className={classes.legendGroup}>
       {!!el.header && <h2 className={classes.header}>{el.header}</h2>}
+     {el.shape === "polygon" && (
+  <>
+    {/* ✅ GROUPED (has subheader) */}
+    {el.hasSubHeader &&
+      el.data.map((group, gIdx) => (
+        <div
+          className={classes.subheader}
+          key={`${el.name}-${group.subheader}-${gIdx}`}
+        >
+          {group.subheader && <h2>{group.subheader}</h2>}
 
-      {el.shape === "polygon" &&
-        el.data.map((item, idx) => (
-          <div key={`${el.name}-${idx}`} className={classes.legendItem}>
+          {group.items?.map((elem, iIdx) => (
             <div
-              className={classes.legendColor}
-              style={{ backgroundColor: item.color }}
+              key={`${el.name}-${group.subheader}-${elem.index ?? iIdx}`}
+              className={classes.legendItem}
             >
-              <span>{item?.unicode}</span>
-            </div>
-            <span className={classes.span}>{item.txt}</span>
-          </div>
-        ))};
-      {(el.shape === "points" || el.shape === "line") &&
+              <div
+                className={classes.legendColor}
+                style={{ backgroundColor: elem.color }}
+              >
+                <span>{elem?.unicode}</span>
+              </div>
 
+              <span className={classes.span}>{elem.txt}</span>
+            </div>
+          ))}
+        </div>
+      ))}
+
+    {/* ✅ FLAT (no subheader) */}
+    {!el.hasSubHeader &&
+      el.data.map((item, idx) => (
+        <div key={`${el.name}-${idx}`} className={classes.legendItem}>
+          <div
+            className={classes.legendColor}
+            style={{ backgroundColor: item.color }}
+          >
+            <span>{item?.unicode}</span>
+          </div>
+          <span className={classes.span}>{item.txt}</span>
+        </div>
+      ))}
+  </>
+)}
+
+
+         
+      {(el.shape === "points" || el.shape === "line") &&
+     
         el.data.map((item, i) => (
      
           <div key={`${el.name}-${i}`} className={classes.legendItem}>

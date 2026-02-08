@@ -16,7 +16,7 @@ export default function JsonProvider() {
     queries: layerIds.map((layer) => ({
       queryKey: ["geojson", layer],
       queryFn: () => fetchGeoJson("nature", layer),
-      staleTime: 60000,
+      staleTime: 1,
       retry: 2,
     })),
   });

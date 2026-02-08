@@ -13,8 +13,27 @@ export const mapCategories = [
     icon: GiForest,
     name: "ბუნება",
     layers: [
-      {
+         {
         აგროკლიმატი: [
+          {
+            id: "agroclimate",
+            label: "აგროკლიმატური ზონები",
+            type: "polygon",
+          },
+           {
+            id: "activetemperature",
+            label: "ჰაერის 10°C-ზე მეტი აქტიურ ტემპერატურათა ჯამი",
+            type: "polygon",
+          },
+           {
+            id: "humidity",
+            label: "ჰაერის დატენიანების ინდექსი",
+            type: "polygon",
+          },
+        ],
+      },
+      {
+        ტყეები: [
           {
             id: "forest",
             label: "ძირითადი მერქნიანი სახეობები",
@@ -229,25 +248,7 @@ export const mapCategories = [
         ],
       },
 
-      {
-        აგროკლიმატი: [
-          {
-            id: "agroclimate",
-            label: "აგროკლიმატური ზონები",
-            type: "polygon",
-          },
-           {
-            id: "activetemperature",
-            label: "აგროკლიმატური ზონები",
-            type: "polygon",
-          },
-           {
-            id: "humidity",
-            label: "აგროკლიმატური ზონები",
-            type: "polygon",
-          },
-        ],
-      },
+   
     ],
   },
   {

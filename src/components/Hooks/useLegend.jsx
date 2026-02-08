@@ -1,6 +1,22 @@
 import { useEffect, useMemo } from "react";
 import useMaps from "../Context/MapContext/useMaps";
 import useRightBar from "../Context/RightBarContext/useRightBar";
+const sortLegendData = (arr=[]) => {
+  const getMin = (txt = "") => {
+    const t = String(txt).trim();
+
+    if (t.startsWith("<")) return -Infinity; 
+    if (t.startsWith(">")) return Infinity;  
+
+    // "1000-1500"
+    const first = t.split("-")[0];
+    const n = Number(first);
+    return Number.isFinite(n) ? n : 0;
+  };
+
+
+  return [...arr].sort((a, b) => getMin(a.txt) - getMin(b.txt));
+};
 export const useLegend = () => {
   const { state } = useMaps();
   const { dataChart } = state;
@@ -8,6 +24,7 @@ export const useLegend = () => {
 
   const legendData = useMemo(() => {
     return dataChart.reduce((acc, el) => {
+      const hasSubHeader = el[1]?.sub_header||false;
       const shape = el[1].shape;
       const features = el[1].features;
       const group = el[1].group_ge || "default";
@@ -29,10 +46,48 @@ export const useLegend = () => {
           });
         } else if (el[1].group_en === "Precipitation") {
           features.forEach((feature) => {
-            const { name_ge, description_en, color } = feature.properties;
+            const { name_ge, description_en, color, } = feature.properties;
             data.push({ header: name_ge, txt:description_en, color });
           });
-        } else {
+        } else if (el[1].layerName_en === "Agroclimatic Zones") {
+  const grouped = {}; // <-- temp object
+
+  features.forEach((feature) => {
+    const { name_ge, description_ge, color, subheader, index } =
+      feature.properties;
+
+    const txt = description_ge || name_ge;
+    if (!txt) return;
+
+    const key = subheader || "";
+
+    if (!grouped[key]) {
+      grouped[key] = [];
+    }
+
+    // avoid duplicates
+    const exists = grouped[key].some(
+      (d) => d.txt === txt && d.color === color
+    );
+
+    if (!exists) {
+      grouped[key].push({ txt, color, subheader, index });
+    }
+  });
+
+  // 👉 convert to final array structure
+  data.push(
+    ...Object.entries(grouped)
+      .map(([subheader, items]) => ({
+        subheader,
+        items: items.sort((a, b) => (a.index ?? 0) - (b.index ?? 0)), // sort inside each group
+      }))
+      .sort(
+        (a, b) =>
+          (a.items[0]?.index ?? 0) - (b.items[0]?.index ?? 0)
+      ) // sort groups by first index
+  );
+}else {
           features.forEach((feature) => {
             const { name_ge, description_ge, color } = feature.properties;
 
@@ -107,14 +162,24 @@ export const useLegend = () => {
         }
       }
 
-      if (!acc[group]) acc[group] = [];
-      acc[group].push({
-        name: el[0],
-        shape,
-        data,
-        header,
-      });
-      return acc;
+  
+const name = el[0] || "unnamed";
+
+
+
+console.log(data);
+const finalData = name === "activetemperature" ? sortLegendData(data) : data;
+console.log(finalData);
+if (!acc[group]) acc[group] = [];
+acc[group].push({
+  name,
+  shape,
+  hasSubHeader,
+  data: finalData, 
+  header,
+});
+
+return acc;
     }, {});
   }, [dataChart]);
   useEffect(() => {
