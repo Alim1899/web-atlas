@@ -13,106 +13,9 @@ export const mapCategories = [
     icon: GiForest,
     name: "ბუნება",
     layers: [
-      {
-        გეომორფოლოგია: [
-          {
-            id: "morphology",
-            label: "მორფოლოგია",
-            type: "polygon",
-          },
-          {
-            id: "dynamiclandforms",
-            label: "დინამიკური ფორმები",
-            type: "points",
-          },
-          {
-            id: "linearlandforms",
-            label: "ხაზობრივი რელიეფი",
-            type: "line",
-          },
-        ],
-      },
-      {
-        "მიწისქვეშა მტკნარი წყლები": [
-          {
-            id: "hydrogeology",
-            label: "ჰიდროგეოლოგია",
-            type: "polygon",
-          },
-          {
-            id: "groundwater",
-            label: "მტკნარი წყლები",
-            type: "points",
-          },
-        ],
-      },
-         {
-        აგროკლიმატი: [
-          {
-            id: "agroclimate",
-            label: "აგროკლიმატური ზონები",
-            type: "polygon",
-          },
-           {
-            id: "activetemperature",
-            label: "ჰაერის 10°C-ზე მეტი აქტიურ ტემპერატურათა ჯამი",
-            type: "polygon",
-          },
-           {
-            id: "humidity",
-            label: "ჰაერის დატენიანების ინდექსი",
-            type: "polygon",
-          },
-        ],
-      },
-      {
-        ტყეები: [
-          {
-            id: "forest",
-            label: "ძირითადი მერქნიანი სახეობები",
-            type: "polygon",
-          },
-           {
-            id: "vegetation",
-            label: "მცენარეული საფარი",
-            type: "polygon",
-          },
+
      
-        ],
-      },
-      {
-        "სითბური ტალღები": [
-          {
-            id: "hotwaves",
-            label: "სითბური ტალღის ინდექსი",
-            type: "polygon",
-          },
-          {
-            id: "draught",
-            label: "გვალვის ინდექსი, 1990-2022",
-            type: "polygon",
-          },
-        ],
-      },
-      {
-        "ცხელი დღეები": [
-          {
-            id: "hotdays",
-            label: "ცხელი დღეების საშუალო რაოდენობა, 1990-2022",
-            type: "polygon",
-          },
-          {
-            id: "tropicalnights",
-            label: "ტროპიკული ღამეების საშუალო რაოდენობა, 1990-2022",
-            type: "polygon",
-          },
-          {
-            id: "frozendays",
-            label: "ყინვიანი დღეების საშუალო რაოდენობა, 1990-2022",
-            type: "polygon",
-          },
-        ],
-      },
+     
       {
         "ჰაერის ტემპერატურა": [
           {
@@ -130,6 +33,22 @@ export const mapCategories = [
             label: "ატმოსფერული ნალექების მრავალწლიური ჯამი, 1990-2022",
             type: "polygon",
           },
+        ],
+      },
+         
+      {
+        ტყეები: [
+          {
+            id: "forest",
+            label: "ძირითადი მერქნიანი სახეობები",
+            type: "polygon",
+          },
+           {
+            id: "vegetation",
+            label: "მცენარეული საფარი",
+            type: "polygon",
+          },
+     
         ],
       },
       {
@@ -213,7 +132,7 @@ export const mapCategories = [
           },
         ],
       },
-           
+          //  ||||||||||||||||     TESTED     ||||||||||||||||||||\\\
       {
         "მეწყერი და ქვათაცვენა": [
           {
@@ -248,7 +167,91 @@ export const mapCategories = [
           },
         ],
       },
-
+   {
+        გეომორფოლოგია: [
+          {
+            id: "morphology",
+            label: "მორფოლოგია",
+            type: "polygon",
+          },
+          {
+            id: "dynamiclandforms",
+            label: "დინამიკური ფორმები",
+            type: "points",
+          },
+          {
+            id: "linearlandforms",
+            label: "ხაზობრივი რელიეფი",
+            type: "line",
+          },
+        ],
+      },
+      {
+        "მიწისქვეშა მტკნარი წყლები": [
+          {
+            id: "hydrogeology",
+            label: "ჰიდროგეოლოგია",
+            type: "polygon",
+          },
+          {
+            id: "groundwater",
+            label: "მტკნარი წყლები",
+            type: "points",
+          },
+        ],
+      },
+         {
+        აგროკლიმატი: [
+          {
+            id: "agroclimate",
+            label: "აგროკლიმატური ზონები",
+            type: "polygon",
+          },
+           {
+            id: "activetemperature",
+            label: "ჰაერის 10°C-ზე მეტი აქტიურ ტემპერატურათა ჯამი",
+            type: "polygon",
+          },
+           {
+            id: "humidity",
+            label: "ჰაერის დატენიანების ინდექსი",
+            type: "polygon",
+          },
+        ],
+      },
+       {
+        "ცხელი დღეები": [
+          {
+            id: "hotdays",
+            label: "ცხელი დღეების საშუალო რაოდენობა, 1990-2022",
+            type: "polygon",
+          },
+          {
+            id: "tropicalnights",
+            label: "ტროპიკული ღამეების საშუალო რაოდენობა, 1990-2022",
+            type: "polygon",
+          },
+          {
+            id: "frozendays",
+            label: "ყინვიანი დღეების საშუალო რაოდენობა, 1990-2022",
+            type: "polygon",
+          },
+        ],
+      },
+       {
+        "სითბური ტალღები": [
+          {
+            id: "hotwaves",
+            label: "სითბური ტალღის ინდექსი",
+            type: "polygon",
+          },
+          {
+            id: "draught",
+            label: "გვალვის ინდექსი, 1990-2022",
+            type: "polygon",
+          },
+        ],
+      },
    
     ],
   },

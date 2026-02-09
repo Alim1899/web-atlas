@@ -40,8 +40,8 @@ const Legend = () => {
       
   {activeData?.map((el) => (
     <div key={el.name ?? el.header} className={classes.legendGroup}>
-      {!!el.header && <h2 className={classes.header}>{el.header}</h2>}
          <div className={classes.items}>
+      {!!el.header && <h2 className={classes.header}>{el.header}</h2>}
      {el.shape === "polygon" && (
   <>
     {/* ✅ GROUPED (has subheader) */}
