@@ -37,10 +37,11 @@ const Legend = () => {
             options={headers}
           />
 
-        <div className={classes.legend}>
+      
   {activeData?.map((el) => (
     <div key={el.name ?? el.header} className={classes.legendGroup}>
       {!!el.header && <h2 className={classes.header}>{el.header}</h2>}
+         <div className={classes.items}>
      {el.shape === "polygon" && (
   <>
     {/* ✅ GROUPED (has subheader) */}
@@ -70,7 +71,7 @@ const Legend = () => {
         </div>
       ))}
 
-    {/* ✅ FLAT (no subheader) */}
+
     {!el.hasSubHeader &&
       el.data.map((item, idx) => (
         <div key={`${el.name}-${idx}`} className={classes.legendItem}>
@@ -85,10 +86,7 @@ const Legend = () => {
       ))}
   </>
 )}
-
-
-         
-      {(el.shape === "points" || el.shape === "line") &&
+  {(el.shape === "points" || el.shape === "line") &&
      
         el.data.map((item, i) => (
      
@@ -106,9 +104,14 @@ const Legend = () => {
             </span>
           </div>
         ))}
+   </div>
+    
+
+
+         
+    
     </div>
   ))}
-</div>
 
         </div>
       )}

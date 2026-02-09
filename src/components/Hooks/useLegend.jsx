@@ -30,6 +30,8 @@ export const useLegend = () => {
       const shape = el[1].shape;
       const features = el[1].features;
       const group = el[1].group_ge || "default";
+      const groupEn = el[1].group_en;
+      console.log(groupEn);
       const data = [];
       const header = el[1].legend_header || el[1].layerName_ge;
       if (shape === "polygon") {
@@ -47,7 +49,7 @@ export const useLegend = () => {
             }
           });
         }
-        else if(el[1].group_en==="Fresh groundwater") {
+        else if(groupEn==="Fresh groundwater"||groupEn==="Geomorphology" ) {
           const grouped=[];
           features.forEach((feature) => {
             const { name_ge,unicode, description_ge,subheader,color,index } = feature.properties;
@@ -61,7 +63,6 @@ export const useLegend = () => {
       grouped[key] = [];
     }
 
-    // avoid duplicates
     const exists = grouped[key].some(
       (d) => d.txt === txt && d.color === color
     );
@@ -70,9 +71,6 @@ export const useLegend = () => {
       grouped[key].push({ txt, color, subheader, index,unicode });
     }
   });
-
-  // 👉 convert to final array structure
-  console.log(grouped);
   data.push(
     ...Object.entries(grouped)
       .map(([subheader, items]) => ({
@@ -82,7 +80,7 @@ export const useLegend = () => {
       .sort(
         (a, b) =>
           (a.items[0]?.index ?? 0) - (b.items[0]?.index ?? 0)
-      ) // sort groups by first index
+      ) 
   );
         } else if (el[1].group_en === "Precipitation") {
           features.forEach((feature) => {

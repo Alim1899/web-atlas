@@ -14,6 +14,25 @@ export const mapCategories = [
     name: "ბუნება",
     layers: [
       {
+        გეომორფოლოგია: [
+          {
+            id: "morphology",
+            label: "მორფოლოგია",
+            type: "polygon",
+          },
+          {
+            id: "dynamiclandforms",
+            label: "დინამიკური ფორმები",
+            type: "points",
+          },
+          {
+            id: "linearlandforms",
+            label: "ხაზობრივი რელიეფი",
+            type: "line",
+          },
+        ],
+      },
+      {
         "მიწისქვეშა მტკნარი წყლები": [
           {
             id: "hydrogeology",
@@ -194,26 +213,7 @@ export const mapCategories = [
           },
         ],
       },
-      {
-        გეომორფოლოგია: [
-          {
-            id: "morphology",
-            label: "მორფოლოგია",
-            type: "polygon",
-          },
-          {
-            id: "dynamiclandforms",
-            label: "დინამიკური ფორმები",
-            type: "points",
-          },
-          {
-            id: "linearlandforms",
-            label: "ხაზობრივი რელიეფი",
-            type: "line",
-          },
-        ],
-      },
-      
+           
       {
         "მეწყერი და ქვათაცვენა": [
           {
