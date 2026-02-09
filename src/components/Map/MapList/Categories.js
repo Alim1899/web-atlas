@@ -13,50 +13,7 @@ export const mapCategories = [
     icon: GiForest,
     name: "ბუნება",
     layers: [
-  
-      
-
       {
-        გეოლოგია: [
-          {
-            id: "parentrocks",
-            label: "ამგები ქანები",
-            type: "polygon",
-          },
-          {
-            id: "metalore",
-            label: "მეტალები",
-            type: "points",
-          },
-          {
-            id: "nonmetalore",
-            label: "არამეტალები",
-            type: "points",
-          },
-          {
-            id: "faults",
-            label: "რღვევები",
-            type: "line",
-          },
-        ],
-      },
-       {
-        ტყეები: [
-          {
-            id: "forest",
-            label: "ძირითადი მერქნიანი სახეობები",
-            type: "polygon",
-          },
-           {
-            id: "vegetation",
-            label: "მცენარეული საფარი",
-            type: "polygon",
-          },
-     
-        ],
-      },
-          //  ||||||||||||||||     TESTED     ||||||||||||||||||||\\\
-          {
         ნიადაგები: [
           {
             id: "soiltypes",
@@ -109,7 +66,7 @@ export const mapCategories = [
           },
         ],
       },
-            {
+      {
         მიწისძვრები: [
           {
             id: "earthquakenew",
@@ -128,7 +85,7 @@ export const mapCategories = [
           },
         ],
       },
-   {
+      {
         გეომორფოლოგია: [
           {
             id: "morphology",
@@ -161,26 +118,26 @@ export const mapCategories = [
           },
         ],
       },
-         {
+      {
         აგროკლიმატი: [
           {
             id: "agroclimate",
             label: "აგროკლიმატური ზონები",
             type: "polygon",
           },
-           {
+          {
             id: "activetemperature",
             label: "ჰაერის 10°C-ზე მეტი აქტიურ ტემპერატურათა ჯამი",
             type: "polygon",
           },
-           {
+          {
             id: "humidity",
             label: "ჰაერის დატენიანების ინდექსი",
             type: "polygon",
           },
         ],
       },
-       {
+      {
         "ცხელი დღეები": [
           {
             id: "hotdays",
@@ -199,7 +156,7 @@ export const mapCategories = [
           },
         ],
       },
-        {
+      {
         "ჰაერის ტემპერატურა": [
           {
             id: "airavg",
@@ -218,7 +175,45 @@ export const mapCategories = [
           },
         ],
       },
-       {
+      {
+        გეოლოგია: [
+          {
+            id: "parentrocks",
+            label: "ამგები ქანები",
+            type: "polygon",
+          },
+          {
+            id: "metalore",
+            label: "მეტალები",
+            type: "points",
+          },
+          {
+            id: "nonmetalore",
+            label: "არამეტალები",
+            type: "points",
+          },
+          {
+            id: "faults",
+            label: "რღვევები",
+            type: "line",
+          },
+        ],
+      },
+      {
+        ტყეები: [
+          {
+            id: "forest",
+            label: "ძირითადი მერქნიანი სახეობები",
+            type: "polygon",
+          },
+          {
+            id: "vegetation",
+            label: "მცენარეული საფარი",
+            type: "polygon",
+          },
+        ],
+      },
+      {
         "სითბური ტალღები": [
           {
             id: "hotwaves",
@@ -232,7 +227,7 @@ export const mapCategories = [
           },
         ],
       },
-         {
+      {
         "ღვარცოფი და ნაპირგარეცხვა": [
           {
             id: "erosion",
@@ -251,7 +246,6 @@ export const mapCategories = [
           },
         ],
       },
-   
     ],
   },
   {

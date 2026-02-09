@@ -33,7 +33,7 @@ export const useLegend = () => {
       if (shape === "polygon") {
         if (el[1].group_en === "Geology") {
           features.forEach((feature) => {
-            const { name_ge, description_ge, color, unicode } =
+            const { name_ge, description_ge, index, color, unicode } =
               feature.properties;
             const txt = description_ge || name_ge;
             if (!data.some((d) => d.txt === txt)) {
@@ -41,8 +41,10 @@ export const useLegend = () => {
                 txt,
                 color,
                 unicode,
+                index,
               });
             }
+            data.sort((a, b) => (a.index ?? 0) - (b.index ?? 0));
           });
         } else if (
           groupEn === "Fresh groundwater" ||
@@ -87,15 +89,14 @@ export const useLegend = () => {
               ),
           );
         } else if (el[1].group_en === "Precipitation") {
-          
           features.forEach((feature) => {
-            const {  description_en, color } = feature.properties;
-            const txt = description_en 
-            if (txt && !data.some((d) => d.txt === txt )) {
+            const { description_en, color } = feature.properties;
+            const txt = description_en;
+            if (txt && !data.some((d) => d.txt === txt)) {
               data.push({ txt, color });
             }
           });
-        } else if (groupEn === "Landscape" ||groupEn==="Soils") {
+        } else if (groupEn === "Landscape" || groupEn === "Soils") {
           features.forEach((feature) => {
             const { name_ge, color, index } = feature.properties;
             const txt = name_ge;
@@ -149,20 +150,22 @@ export const useLegend = () => {
           features.forEach((feature) => {
             const { name_ge, description_ge, color } = feature.properties;
             const txt = description_ge || name_ge;
-    
+
             if (txt && !data.some((d) => d.txt === txt && d.color === color)) {
               data.push({ txt, color });
             }
           });
         } else {
           features.forEach((feature) => {
-            const { name_ge, description_ge, color } = feature.properties;
+            const { name_ge, description_ge, color, index } =
+              feature.properties;
 
             const txt = description_ge || name_ge;
             if (txt && !data.some((d) => d.txt === txt && d.color === color)) {
-              data.push({ txt, color });
+              data.push({ txt, color, index: index || null });
             }
           });
+          data.sort((a, b) => (a.index ?? 0) - (b.index ?? 0));
         }
       }
 
@@ -174,7 +177,7 @@ export const useLegend = () => {
             if (n < 3) return { type: "<3 ", size: [20, 20] };
             if (n >= 3 && n < 4) return { type: ">3 - <4 ", size: [27, 27] };
             if (n >= 4 && n < 5) return { type: ">4 - <5 ", size: [35, 35] };
-            if (n >= 5 && n < 6) return { type: ">5 - <6 ", size: [40,40] };
+            if (n >= 5 && n < 6) return { type: ">5 - <6 ", size: [40, 40] };
             if (n >= 6) return { type: ">6 ", size: [50, 50] };
           };
           const resizeSvg = (sign, size) => {
@@ -241,7 +244,6 @@ export const useLegend = () => {
           });
         }
       }
-
       const name = el[0] || "unnamed";
 
       const finalData =
