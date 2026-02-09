@@ -13,101 +13,9 @@ export const mapCategories = [
     icon: GiForest,
     name: "ბუნება",
     layers: [
+  
+      
 
-     
-     
-      {
-        "ჰაერის ტემპერატურა": [
-          {
-            id: "airavg",
-            label: "ჰაერის საშუალო მრავალწლიური ტემპერატურა, 1990-2022",
-            type: "polygon",
-          },
-          {
-            id: "airmax",
-            label: "ჰაერის მაქსიმალური მრავალწლიური ტემპერატურა, 1990-2022",
-            type: "polygon",
-          },
-          {
-            id: "precipitation",
-            label: "ატმოსფერული ნალექების მრავალწლიური ჯამი, 1990-2022",
-            type: "polygon",
-          },
-        ],
-      },
-         
-      {
-        ტყეები: [
-          {
-            id: "forest",
-            label: "ძირითადი მერქნიანი სახეობები",
-            type: "polygon",
-          },
-           {
-            id: "vegetation",
-            label: "მცენარეული საფარი",
-            type: "polygon",
-          },
-     
-        ],
-      },
-      {
-        "ღვარცოფი და ნაპირგარეცხვა": [
-          {
-            id: "erosion",
-            label: "ნაპირგარეცხვა",
-            type: "polygon",
-          },
-          {
-            id: "madflow",
-            label: "ღვარცოფი",
-            type: "points",
-          },
-          {
-            id: "madflowzoning",
-            label: "ღვარცოფის საფრთხის კატეგორია",
-            type: "polygon",
-          },
-        ],
-      },
-      {
-        ნიადაგები: [
-          {
-            id: "soiltypes",
-            label: "ნიადაგის ტიპები",
-            type: "polygon",
-          },
-          {
-            id: "soilproducer",
-            label: "ნიადაგწარმომქმნელი ქანები",
-            type: "polygon",
-          },
-          {
-            id: "soilph",
-            label: "ნიადაგის მჟავიანობა",
-            type: "polygon",
-          },
-        ],
-      },
-      {
-        მიწისძვრები: [
-          {
-            id: "earthquakenew",
-            label: "ინსტრუმენტული პერიოდის",
-            type: "points",
-          },
-          {
-            id: "earthquakeold",
-            label: "ისტორიული პერიოდის (1900 წლამდე)",
-            type: "points",
-          },
-          {
-            id: "seismostations",
-            label: "სეისმო სადგურები",
-            type: "points",
-          },
-        ],
-      },
       {
         გეოლოგია: [
           {
@@ -132,7 +40,41 @@ export const mapCategories = [
           },
         ],
       },
+       {
+        ტყეები: [
+          {
+            id: "forest",
+            label: "ძირითადი მერქნიანი სახეობები",
+            type: "polygon",
+          },
+           {
+            id: "vegetation",
+            label: "მცენარეული საფარი",
+            type: "polygon",
+          },
+     
+        ],
+      },
           //  ||||||||||||||||     TESTED     ||||||||||||||||||||\\\
+          {
+        ნიადაგები: [
+          {
+            id: "soiltypes",
+            label: "ნიადაგის ტიპები",
+            type: "polygon",
+          },
+          {
+            id: "soilproducer",
+            label: "ნიადაგწარმომქმნელი ქანები",
+            type: "polygon",
+          },
+          {
+            id: "soilph",
+            label: "ნიადაგის მჟავიანობა",
+            type: "polygon",
+          },
+        ],
+      },
       {
         "მეწყერი და ქვათაცვენა": [
           {
@@ -164,6 +106,25 @@ export const mapCategories = [
             id: "landscape",
             label: "ლანდშაფტის ტიპები",
             type: "polygon",
+          },
+        ],
+      },
+            {
+        მიწისძვრები: [
+          {
+            id: "earthquakenew",
+            label: "ინსტრუმენტული პერიოდის",
+            type: "points",
+          },
+          {
+            id: "earthquakeold",
+            label: "ისტორიული პერიოდის (1900 წლამდე)",
+            type: "points",
+          },
+          {
+            id: "seismostations",
+            label: "სეისმო სადგურები",
+            type: "points",
           },
         ],
       },
@@ -238,6 +199,25 @@ export const mapCategories = [
           },
         ],
       },
+        {
+        "ჰაერის ტემპერატურა": [
+          {
+            id: "airavg",
+            label: "ჰაერის საშუალო მრავალწლიური ტემპერატურა, 1990-2022",
+            type: "polygon",
+          },
+          {
+            id: "airmax",
+            label: "ჰაერის მაქსიმალური მრავალწლიური ტემპერატურა, 1990-2022",
+            type: "polygon",
+          },
+          {
+            id: "precipitation",
+            label: "ატმოსფერული ნალექების მრავალწლიური ჯამი, 1990-2022",
+            type: "polygon",
+          },
+        ],
+      },
        {
         "სითბური ტალღები": [
           {
@@ -248,6 +228,25 @@ export const mapCategories = [
           {
             id: "draught",
             label: "გვალვის ინდექსი, 1990-2022",
+            type: "polygon",
+          },
+        ],
+      },
+         {
+        "ღვარცოფი და ნაპირგარეცხვა": [
+          {
+            id: "erosion",
+            label: "ნაპირგარეცხვა",
+            type: "points",
+          },
+          {
+            id: "madflow",
+            label: "ღვარცოფი",
+            type: "points",
+          },
+          {
+            id: "madflowzoning",
+            label: "ღვარცოფის საფრთხის კატეგორია",
             type: "polygon",
           },
         ],

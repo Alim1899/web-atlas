@@ -5,11 +5,11 @@ import "leaflet-polylinedecorator";
 export const pointToLayer = (feature, latlng) => {
   const getIconSize = (size) => {
     if (!size) return [[20, 20]];
-    if (size < 3) return [10, 10];
-    if (size >= 3 && size < 4) return [15, 15];
-    if (size >= 4 && size < 5) return [20, 20];
-    if (size >= 5 && size < 6) return [25, 25];
-    if (size >= 6) return [30, 30];
+    if (size < 3) return [11, 11];
+    if (size >= 3 && size < 4) return [17, 17];
+    if (size >= 4 && size < 5) return [23, 23];
+    if (size >= 5 && size < 6) return [29, 29];
+    if (size >= 6) return [35, 35];
 
     return [40, 40]; // fallback
   };

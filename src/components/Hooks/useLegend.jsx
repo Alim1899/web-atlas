@@ -21,7 +21,6 @@ export const useLegend = () => {
   const { state } = useMaps();
   const { dataChart } = state;
   const { dispatch: rightBarDispatch } = useRightBar();
-
   const legendData = useMemo(() => {
     return dataChart.reduce((acc, el) => {
       const hasSubHeader = el[1]?.sub_header || false;
@@ -29,7 +28,6 @@ export const useLegend = () => {
       const features = el[1].features;
       const group = el[1].group_ge || "default";
       const groupEn = el[1].group_en;
-      console.log(groupEn);
       const data = [];
       const header = el[1].legend_header || el[1].layerName_ge;
       if (shape === "polygon") {
@@ -93,12 +91,11 @@ export const useLegend = () => {
           features.forEach((feature) => {
             const {  description_en, color } = feature.properties;
             const txt = description_en 
-            console.log(txt);
             if (txt && !data.some((d) => d.txt === txt )) {
               data.push({ txt, color });
             }
           });
-        } else if (el[1].group_en === "Landscape") {
+        } else if (groupEn === "Landscape" ||groupEn==="Soils") {
           features.forEach((feature) => {
             const { name_ge, color, index } = feature.properties;
             const txt = name_ge;
@@ -174,11 +171,11 @@ export const useLegend = () => {
           const getIconSize = (size) => {
             const n = Number(size) || 0;
             if (!size) return { type: "", size: [20, 20] };
-            if (n < 3) return { type: "<3 ", size: [15, 15] };
-            if (n >= 3 && n < 4) return { type: ">3 - <4 ", size: [20, 20] };
-            if (n >= 4 && n < 5) return { type: ">4 - <5 ", size: [25, 25] };
-            if (n >= 5 && n < 6) return { type: ">5 - <6 ", size: [30, 30] };
-            if (n >= 6) return { type: ">6 ", size: [35, 35] };
+            if (n < 3) return { type: "<3 ", size: [20, 20] };
+            if (n >= 3 && n < 4) return { type: ">3 - <4 ", size: [27, 27] };
+            if (n >= 4 && n < 5) return { type: ">4 - <5 ", size: [35, 35] };
+            if (n >= 5 && n < 6) return { type: ">5 - <6 ", size: [40,40] };
+            if (n >= 6) return { type: ">6 ", size: [50, 50] };
           };
           const resizeSvg = (sign, size) => {
             const { size: wh } = getIconSize(size);
@@ -249,7 +246,6 @@ export const useLegend = () => {
 
       const finalData =
         name === "activetemperature" ? sortLegendData(data) : data;
-      console.log(finalData);
       if (!acc[group]) acc[group] = [];
       acc[group].push({
         name,
