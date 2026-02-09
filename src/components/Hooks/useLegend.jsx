@@ -46,6 +46,44 @@ export const useLegend = () => {
               });
             }
           });
+        }
+        else if(el[1].group_en==="Fresh groundwater") {
+          const grouped=[];
+          features.forEach((feature) => {
+            const { name_ge,unicode, description_ge,subheader,color,index } = feature.properties;
+            
+    const txt = description_ge || name_ge;
+    if (!txt) return;
+
+    const key = subheader || "";
+
+    if (!grouped[key]) {
+      grouped[key] = [];
+    }
+
+    // avoid duplicates
+    const exists = grouped[key].some(
+      (d) => d.txt === txt && d.color === color
+    );
+
+    if (!exists) {
+      grouped[key].push({ txt, color, subheader, index,unicode });
+    }
+  });
+
+  // 👉 convert to final array structure
+  console.log(grouped);
+  data.push(
+    ...Object.entries(grouped)
+      .map(([subheader, items]) => ({
+        subheader,
+        items: items.sort((a, b) => (a.index ?? 0) - (b.index ?? 0)), // sort inside each group
+      }))
+      .sort(
+        (a, b) =>
+          (a.items[0]?.index ?? 0) - (b.items[0]?.index ?? 0)
+      ) // sort groups by first index
+  );
         } else if (el[1].group_en === "Precipitation") {
           features.forEach((feature) => {
             const { name_ge, description_en, color, } = feature.properties;
@@ -162,6 +200,18 @@ export const useLegend = () => {
               });
             }
           });
+        } else if(el[1].group_en==="Fresh groundwater") {
+          features.forEach((feature) => {
+            const { name_ge,type_ge, description_ge, location_ge } = feature.properties;
+            const sign = feature.sign;
+            if (!data.some((d) => d.type_ge === type_ge)) {
+              data.push({
+                name: `${description_ge} ${name_ge}. ${type_ge}`,
+                sign,
+                location: location_ge || "",
+              });
+            }
+          })
         } else {
           features.forEach((feature) => {
             const { name_ge, location_ge } = feature.properties;
