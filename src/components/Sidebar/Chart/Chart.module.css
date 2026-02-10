@@ -3,6 +3,7 @@
   display: grid;
   grid-template-rows: 2fr 1fr;
   overflow: hidden;
+  
 }
 
 .wrapper > * {
@@ -13,18 +14,19 @@
   height: 100%;
   display: grid;
   grid-template-columns: 20% 80%;
-  align-items: center;
   overflow: hidden;
 }
 
 .diagram {
   height: 100%;
   min-height: 0;
+  
 }
 
 .chartArea {
   height: 100%;
   min-height: 0;
+  
 }
 
 .legendScroll {
@@ -45,4 +47,14 @@
 ::-webkit-scrollbar-thumb {
   width: 3px;
   background-color: black;
+}
+
+.chart{
+  display: grid;
+  flex-direction: column;
+  grid-template-columns: 30% 70%;
+}
+.head{
+  margin-top: 20px;
+  
 }

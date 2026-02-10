@@ -17,7 +17,6 @@ const ChartPie = ({ data, dataKey, nameKey }) => {
     activeIndex === null || activeIndex === index ? 1 : 0.35;
 
   const activeData = tooltipIndex !== null ? data[tooltipIndex] : null;
-
   return (
     <div className={classes.wrapper}>
       <div className={classes.chartArea}>
@@ -78,7 +77,7 @@ const ChartPie = ({ data, dataKey, nameKey }) => {
       {translit(activeData.name_ge)}
     </p>
     <p>
-      {translit(activeData.descriptionGe) || activeData.description_ge}
+      {translit(activeData.description_ge) || activeData.description_en}
     </p>
     <p>
       <strong>

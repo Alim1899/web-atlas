@@ -16,45 +16,77 @@ const useChartData = () => {
       .map(([key, layer]) => {
         const summarized = {};
         const layerName = layer.layerName_en;
-
-        layer.features.forEach(({ properties }) => {
-          const {
-            name_ge,
-            name_en,
-            description_en,
-            description_ge,
-            area,
-            color,
-          } = properties;
-
-          const name = name_ge || name_en;
-
-          if (!summarized[name]) {
-            summarized[name] = {
-              name_ge: name_ge || "",
-              name_en: name_en || "",
-              description_en: description_en ? [description_en] : [],
-              description_ge: description_ge ? [description_ge] : [],
-              area: area?.toFixed(2) || "",
-              totalArea: 0,
-              color: color,
-            };
-          } else {
-            // Push new descriptions if they are unique
-            if (description_en && !summarized[name].description_en.includes(description_en)) {
-              summarized[name].description_en.push(description_en);
+        const group = layer.group_en;
+        const header = layer.legend_header;
+        if (group === "Precipitation") {
+          
+          layer.features.forEach(({properties})=>{
+            
+            const {name_ge,description_en,color,area,index}= properties;
+            
+            const name = description_en;
+            if (!summarized[name]) {
+              summarized[name] = {
+                name_ge: description_en || "",
+             
+                description_en: name_ge ? name_ge : [],
+                area: area?.toFixed(2) || "",
+                totalArea: 0,
+                color,
+                index,
+              };
             }
-            if (description_ge && !summarized[name].description_ge.includes(description_ge)) {
-              summarized[name].description_ge.push(description_ge);
+               summarized[name].totalArea += area;
+
+          })
+          
+        } else {
+          layer.features.forEach(({ properties }) => {
+            const {
+              name_ge,
+              name_en,
+              description_en,
+              description_ge,
+              area,
+              color,
+              index,
+            } = properties;
+            const name = name_ge || name_en;
+
+            if (!summarized[name]) {
+              summarized[name] = {
+                name_ge: name_ge || "",
+                name_en: name_en || "",
+                description_en: description_en ? [description_en] : [],
+                description_ge: description_ge ? [description_ge] : [],
+                area: area?.toFixed(2) || "",
+                totalArea: 0,
+                color: color,
+                index: index,
+              };
+            } else {
+              // Push new descriptions if they are unique
+              if (
+                description_en &&
+                !summarized[name].description_en.includes(description_en)
+              ) {
+                summarized[name].description_en.push(description_en);
+              }
+              if (
+                description_ge &&
+                !summarized[name].description_ge.includes(description_ge)
+              ) {
+                summarized[name].description_ge.push(description_ge);
+              }
             }
-          }
 
-          summarized[name].totalArea += properties.area;
-        });
-
+            summarized[name].totalArea += properties.area;
+          });
+        }
         return {
           layerName: layerName || "",
           id: key,
+          header:header,
           data: summarized,
         };
       });

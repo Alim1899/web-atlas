@@ -5,9 +5,11 @@ import MapHeaders from "../Helpers/MapHeaders";
 
 const Chart = ({ chartData, activeLayers, selectedLayer, handleSelected }) => {
   const selectedChart = chartData.find((el) => el.id === selectedLayer);
+
   return (
     <DraggableContainer header="დიაგრამა">
       <div className={classes.chart}>
+      <div className={classes.head}>
         <MapHeaders
           activeLayers={activeLayers}
           chartData={chartData}
@@ -16,6 +18,8 @@ const Chart = ({ chartData, activeLayers, selectedLayer, handleSelected }) => {
           selectedChart={selectedChart}
           layer="diagram"
         />
+      </div>
+        
 
         {selectedChart && (
           <div className={classes.diagram}>

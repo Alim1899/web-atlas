@@ -33,7 +33,7 @@ const MapHeaders = ({
       
               return (
                 <div style={{ fontWeight: "900" }}>
-               <option style={{fontSize:"1rem",fontWeight:"900"}}>{option.label}</option>
+               <option style={{fontSize:"0.8rem",fontWeight:"900"}}>{option.label}</option>
                  
                 </div>
               );
