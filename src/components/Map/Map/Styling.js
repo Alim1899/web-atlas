@@ -3,13 +3,33 @@ import point from "../../../assets/map/point.svg";
 import "leaflet-polylinedecorator";
 
 export const pointToLayer = (feature, latlng) => {
+const name = feature.properties.name_en;
   const getIconSize = (size) => {
+    if(name==='Hail - total'){    
     if (!size) return [[20, 20]];
+    if (size < 1) return [10, 10];
+    if (size >= 1 && size < 2) return [13, 13];
+    if (size >= 2 && size < 3) return [18, 18];
+    if (size >= 3 && size < 4) return [23, 23];
+    if (size >= 4 && size < 5) return [28, 28];
+     if (size >= 5 && size < 7) return [32, 32];
+    if (size >= 7) return [38, 38];
+    }else  if(name==='Hail - 100'){    
+    if (!size) return [[20, 20]];
+    if (size < 1) return [13, 12];
+    if (size >= 1 && size < 2) return [19, 19];
+    if (size >= 2 && size < 3) return [24, 24];
+    if (size >= 3 && size < 4) return [30, 30];
+    if (size >= 5) return [38, 38];
+    } else{
+      if (!size) return [[20, 20]];
     if (size < 3) return [11, 11];
     if (size >= 3 && size < 4) return [17, 17];
     if (size >= 4 && size < 5) return [23, 23];
     if (size >= 5 && size < 6) return [29, 29];
     if (size >= 6) return [35, 35];
+    }
+    
 
     return [40, 40]; // fallback
   };

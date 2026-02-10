@@ -168,17 +168,16 @@ export const useLegend = () => {
           data.sort((a, b) => (a.index ?? 0) - (b.index ?? 0));
         }
       }
-
       if (shape === "points" || shape === "line") {
         if (el[1].layerName_en === "Instrumental period") {
           const getIconSize = (size) => {
             const n = Number(size) || 0;
             if (!size) return { type: "", size: [20, 20] };
-            if (n < 3) return { type: "<3 ", size: [20, 20] };
-            if (n >= 3 && n < 4) return { type: ">3 - <4 ", size: [27, 27] };
-            if (n >= 4 && n < 5) return { type: ">4 - <5 ", size: [35, 35] };
-            if (n >= 5 && n < 6) return { type: ">5 - <6 ", size: [40, 40] };
-            if (n >= 6) return { type: ">6 ", size: [50, 50] };
+            if (n < 3) return { type: "≤ 3 ", size: [20, 20] };
+            if (n >= 3 && n < 4) return { type: "3 - 4 ", size: [27, 27] };
+            if (n >= 4 && n < 5) return { type: "4 - 5 ", size: [35, 35] };
+            if (n >= 5 && n < 6) return { type: "5 - 6 ", size: [40, 40] };
+            if (n >= 6) return { type: "> 6 ", size: [50, 50] };
           };
           const resizeSvg = (sign, size) => {
             const { size: wh } = getIconSize(size);
@@ -202,6 +201,77 @@ export const useLegend = () => {
                 size: getIconSize(size).size,
               });
             }
+          });
+        } else if (groupEn === "Area monitoring") {
+          features.forEach((feature) => {
+            const { type_ge } = feature.properties;
+            const sign = feature.sign;
+            if (!data.some((d) => d.name === type_ge)) {
+              data.push({
+                name: type_ge,
+                sign,
+              });
+            }
+          });
+        } else if (groupEn === "Hail") {
+          const type = el[0];
+          const getIconSize = (size) => {
+            const n = Number(size) || 0;
+            if (type === "hail100") {
+              if (!size) return { type: "", size: [20, 20] };
+              if (n < 1) return { type: "≤ 1 ", size: [15, 15] };
+              if (n >= 1 && n < 2)
+                return { type: " 1  -   2 ", size: [21, 21] };
+              if (n >= 2 && n < 3)
+                return { type: " 2  -   3 ", size: [26, 26] };
+              if (n >= 3 && n < 4)
+                return { type: " 3  -   4 ", size: [32, 32] };
+              if (n >= 4 && n < 5)
+                return { type: " 4  -   5 ", size: [37, 37] };
+              if (n >= 5 && n < 7)
+                return { type: "  5 -   7 ", size: [43, 43] };
+              if (n >= 7) return { type: "> 7 ", size: [50, 50] };
+            } else {
+              if (!size) return { type: "", size: [20, 20] };
+              if (n < 1) return { type: "≤ 1 ", size: [15, 15] };
+              if (n >= 1 && n < 2) return { type: "1 -  2 ", size: [21, 21] };
+              if (n >= 2 && n < 3) return { type: "2  -  3 ", size: [30, 30] };
+              if (n >= 3 && n < 4) return { type: "3  -  4 ", size: [40, 40] };
+              if (n >= 4) return { type: "> 4", size: [50, 50] };
+            }
+          };
+          const resizeSvg = (sign, size) => {
+            const { size: wh } = getIconSize(size);
+            const [w, h] = wh;
+            return sign.replace(
+              /<svg\b([^>]*)>/i,
+              `<svg$1 width="${w}" height="${h}">`,
+            );
+          };
+
+          features.forEach((feature) => {
+            const size = feature.properties?.size ?? feature.size;
+            const sizedSvg = resizeSvg(feature.sign, size);
+            const label = `${getIconSize(size).type} `;
+
+            if (!data.some((d) => d.name === label)) {
+              data.push({
+                name: `${getIconSize(size).type} `,
+                sign: sizedSvg,
+                location: "",
+                size: getIconSize(size).size,
+              });
+            }
+          });
+          data.sort((a, b) => {
+            const aSize = Array.isArray(a?.size)
+              ? Number(a.size[0])
+              : -Infinity;
+            const bSize = Array.isArray(b?.size)
+              ? Number(b.size[0])
+              : -Infinity;
+
+            return bSize - aSize; // [50,50] first
           });
         } else if (el[1].group_en === "Geology") {
           features.forEach((feature) => {
