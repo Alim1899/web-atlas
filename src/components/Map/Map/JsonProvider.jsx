@@ -4,7 +4,7 @@ import { useQueries } from "@tanstack/react-query";
 import Spinner from "../../UI/Loader/Spinner";
 import { isEqual } from "lodash";
 import fetchGeoJson from "./Fetch";
-import { pointToLayer, polygonStyle, lineToLayer, onEachLine } from "./Styling";
+import { pointToLayer, polygonStyle, lineToLayer, onEachLine, onEachPolygonFeature } from "./Styling";
 import { useEffect } from "react";
 export default function JsonProvider() {
   const { state, dispatch } = useMaps();
@@ -40,6 +40,7 @@ export default function JsonProvider() {
       {layersToDisplay.map((el) => {
         return el[1].shape === "polygon" ? (
           <GeoJSON
+          onEachFeature={onEachPolygonFeature}
             key={el[0]}
             data={el[1]}
             style={(feature) =>

@@ -3,33 +3,32 @@ import point from "../../../assets/map/point.svg";
 import "leaflet-polylinedecorator";
 
 export const pointToLayer = (feature, latlng) => {
-const name = feature.properties.name_en;
+  const name = feature.properties.name_en;
   const getIconSize = (size) => {
-    if(name==='Hail - total'){    
-    if (!size) return [[20, 20]];
-    if (size < 1) return [10, 10];
-    if (size >= 1 && size < 2) return [13, 13];
-    if (size >= 2 && size < 3) return [18, 18];
-    if (size >= 3 && size < 4) return [23, 23];
-    if (size >= 4 && size < 5) return [28, 28];
-     if (size >= 5 && size < 7) return [32, 32];
-    if (size >= 7) return [38, 38];
-    }else  if(name==='Hail - 100'){    
-    if (!size) return [[20, 20]];
-    if (size < 1) return [13, 12];
-    if (size >= 1 && size < 2) return [19, 19];
-    if (size >= 2 && size < 3) return [24, 24];
-    if (size >= 3 && size < 4) return [30, 30];
-    if (size >= 5) return [38, 38];
-    } else{
+    if (name === "Hail - total") {
       if (!size) return [[20, 20]];
-    if (size < 3) return [11, 11];
-    if (size >= 3 && size < 4) return [17, 17];
-    if (size >= 4 && size < 5) return [23, 23];
-    if (size >= 5 && size < 6) return [29, 29];
-    if (size >= 6) return [35, 35];
+      if (size < 1) return [10, 10];
+      if (size >= 1 && size < 2) return [13, 13];
+      if (size >= 2 && size < 3) return [18, 18];
+      if (size >= 3 && size < 4) return [23, 23];
+      if (size >= 4 && size < 5) return [28, 28];
+      if (size >= 5 && size < 7) return [32, 32];
+      if (size >= 7) return [38, 38];
+    } else if (name === "Hail - 100") {
+      if (!size) return [[20, 20]];
+      if (size < 1) return [13, 12];
+      if (size >= 1 && size < 2) return [19, 19];
+      if (size >= 2 && size < 3) return [24, 24];
+      if (size >= 3 && size < 4) return [30, 30];
+      if (size >= 5) return [38, 38];
+    } else {
+      if (!size) return [[20, 20]];
+      if (size < 3) return [11, 11];
+      if (size >= 3 && size < 4) return [17, 17];
+      if (size >= 4 && size < 5) return [23, 23];
+      if (size >= 5 && size < 6) return [29, 29];
+      if (size >= 6) return [35, 35];
     }
-    
 
     return [40, 40]; // fallback
   };
@@ -41,7 +40,6 @@ const name = feature.properties.name_en;
 
   const iconSrc = feature.sign ? svgToDataUrl(feature.sign) : point;
   const marker = L.marker(latlng, {
-    
     icon: L.divIcon({
       html: `<img src="${iconSrc}" width="${iconSize[0][0]}" height="${iconSize[0][1]}" />`,
       iconSize: iconSize,
@@ -127,11 +125,38 @@ export const onEachLine = (feature, layer, map) => {
 };
 
 export const onEachPolygonFeature = (feature, layer) => {
-  console.log(feature,layer);
-  if (feature.properties && feature.properties.Zone_) {
+  const { name_ge, index,unicode } = feature.properties;
+  const txt = name_ge||""
+  const realIndex =unicode|| index||1;
+  if (name_ge!==null&&index!==null){
+    layer.bindTooltip(`
+      <div style="
+      font-weight:900;
+      height:20px;
+      width:20px;
+      text-align: center;
+      background-color:unset;
+    ">${realIndex}</div>`,
+     {
+      permanent: true,      // always visible
+      direction: "center",  // place it inside polygon
+      opacity: 0.9,
+    });
     layer.bindPopup(`
-      <strong>Zone:</strong> ${feature.properties.Zone_}<br>
-      <strong>Type:</strong> ${feature.properties.Agro_tipe}
-      `);
+      <strong>${realIndex}. ${txt}</strong>`
+    )
+    
   }
-};
+   layer.on("tooltipopen", (e) => {
+      const el = e.tooltip?.getElement?.();
+      if (!el) return;
+
+      el.style.background = "transparent";
+      el.style.border = "none";
+      el.style.padding = "0";
+      el.style.margin = "0";
+    });
+
+    layer.bindPopup(`<strong>${realIndex}. ${txt}</strong>`);
+  }
+

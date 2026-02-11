@@ -75,7 +75,7 @@ export const useLegend = () => {
             );
 
             if (!exists) {
-              grouped[key].push({ txt, color, subheader, index, unicode });
+              grouped[key].push({ txt, color, subheader, index, unicode:unicode||index });
             }
           });
           data.push(
@@ -104,10 +104,11 @@ export const useLegend = () => {
               data.push({
                 txt,
                 color,
-                index,
+                unicode:index,
               });
-              data.sort((a, b) => (a.index ?? 0) - (b.index ?? 0));
+              
             }
+            data.sort((a, b) => (a.unicode ?? 0) - (b.unicode ?? 0));
           });
         } else if (el[1].layerName_en === "Agroclimatic Zones") {
           const grouped = {}; // <-- temp object
@@ -156,15 +157,17 @@ export const useLegend = () => {
             }
           });
         } else {
+          let i = 1;
           features.forEach((feature) => {
-            const { name_ge, description_ge, color, index } =
-              feature.properties;
-
+            const { name_ge, description_ge, color, index } = feature.properties;
+           
             const txt = description_ge || name_ge;
             if (txt && !data.some((d) => d.txt === txt && d.color === color)) {
-              data.push({ txt, color, index: index || null });
+              data.push({ txt, color, index: index || i,unicode:i });
+               i++
             }
           });
+
           data.sort((a, b) => (a.index ?? 0) - (b.index ?? 0));
         }
       }

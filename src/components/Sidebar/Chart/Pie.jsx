@@ -6,7 +6,6 @@ import {
   ResponsiveContainer,
   Sector,
 } from "recharts";
-import translit from "translit-geo";
 import { useState } from "react";
 
 const ChartPie = ({ data, dataKey, nameKey }) => {
@@ -74,10 +73,10 @@ const ChartPie = ({ data, dataKey, nameKey }) => {
     }}
   >
     <p style={{ fontWeight: 600 }}>
-      {translit(activeData.name_ge)}
+      {activeData.name_ge}
     </p>
     <p>
-      {translit(activeData.description_ge) || activeData.description_en}
+      {activeData.description_ge || activeData.description_en}
     </p>
     <p>
       <strong>
@@ -113,7 +112,7 @@ const ChartPie = ({ data, dataKey, nameKey }) => {
             }}
           >
             <span style={{ color: item.color, marginRight: "6px" }}>⬤</span>
-            <span style={{ color: item.color }}>{translit(item[nameKey])}</span>
+            <span style={{ color: item.color }}>{item[nameKey]}</span>
           </div>
         ))}
       </div>
