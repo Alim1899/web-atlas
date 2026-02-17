@@ -1,7 +1,6 @@
 import L from "leaflet";
 import point from "../../../assets/map/point.svg";
 import "leaflet-polylinedecorator";
-
 export const pointToLayer = (feature, latlng) => {
   const name = feature.properties.name_en;
   const getIconSize = (size) => {
@@ -124,39 +123,46 @@ export const onEachLine = (feature, layer, map) => {
   });
 };
 
-export const onEachPolygonFeature = (feature, layer) => {
-  const { name_ge, index,unicode } = feature.properties;
-  const txt = name_ge||""
-  const realIndex =unicode|| index||1;
-  if (name_ge!==null&&index!==null){
-    layer.bindTooltip(`
-      <div style="
-      font-weight:900;
-      height:20px;
-      width:20px;
-      text-align: center;
-      background-color:unset;
-    ">${realIndex}</div>`,
-     {
-      permanent: true,      // always visible
-      direction: "center",  // place it inside polygon
-      opacity: 0.9,
-    });
-    layer.bindPopup(`
-      <strong>${realIndex}. ${txt}</strong>`
-    )
-    
-  }
-   layer.on("tooltipopen", (e) => {
-      const el = e.tooltip?.getElement?.();
-      if (!el) return;
 
-      el.style.background = "transparent";
-      el.style.border = "none";
-      el.style.padding = "0";
-      el.style.margin = "0";
-    });
+
+export const onEachPolygonFeature = (feature, layer, enabled = true) => {
+  // Always clear previous bindings (important when re-rendering / multiple layers)
+  layer.unbindTooltip?.();
+  layer.unbindPopup?.();
+
+  if (!enabled) return;
+
+  const { name_ge, index, unicode } = feature.properties || {};
+  const txt = name_ge || "";
+  const realIndex = unicode || index || 1;
+
+  // your condition (adjust if you want unicode-only etc.)
+  if (name_ge != null && index != null) {
+    layer.bindTooltip(
+      `<div style="
+        font-weight:900;
+        height:20px;
+        width:20px;
+        text-align:center;
+        background-color:unset;
+        border:none;
+      ">${realIndex}</div>`,
+      {
+        permanent: true,
+        direction: "center",
+        opacity: 0.9,
+      }
+    );
 
     layer.bindPopup(`<strong>${realIndex}. ${txt}</strong>`);
   }
 
+  layer.on("tooltipopen", (e) => {
+    const el = e.tooltip?.getElement?.();
+    if (!el) return;
+    el.style.background = "transparent";
+    el.style.border = "none";
+    el.style.padding = "0";
+    el.style.margin = "0";
+  });
+};

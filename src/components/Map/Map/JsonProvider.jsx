@@ -11,6 +11,7 @@ export default function JsonProvider() {
   const map = useMap();
   const { activeLayers, dataChart } = state;
   const layerIds = activeLayers.map((layer) => layer.id);
+const topLayerId = activeLayers?.[activeLayers.length - 1]?.id; 
 
   const queries = useQueries({
     queries: layerIds.map((layer) => ({
@@ -38,10 +39,16 @@ export default function JsonProvider() {
   return (
     <>
       {layersToDisplay.map((el) => {
+          const isTop = el[0] === topLayerId;
+      
         return el[1].shape === "polygon" ? (
+          
           <GeoJSON
-          onEachFeature={onEachPolygonFeature}
-            key={el[0]}
+          onEachFeature={(feature, layer) =>
+        onEachPolygonFeature(feature, layer, isTop)
+      }
+           
+             key={`${el[0]}-${topLayerId}`} 
             data={el[1]}
             style={(feature) =>
               polygonStyle(
