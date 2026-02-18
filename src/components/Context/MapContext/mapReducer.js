@@ -5,6 +5,7 @@ const initialState = {
     attribution: "&copy; <a href='https://carto.com/'>CARTO</a>",
   },
   dataChart: [],
+  queryKey:""
 };
 
 const mapReducer = (state = initialState, action) => {
@@ -25,6 +26,7 @@ const mapReducer = (state = initialState, action) => {
               label: action.label,
               info: action.info,
               group: action.group || "",
+             
             },
           ];
 
@@ -65,6 +67,8 @@ const mapReducer = (state = initialState, action) => {
       };
     case "SET_DATA_CHART":
       return { ...state, dataChart: action.payload };
+       case "SET_QUERY":
+      return { ...state, queryKey: action.payload };
 
     default:
       return state;

@@ -13,7 +13,7 @@ export const mapCategories = [
     icon: GiForest,
     name: "ბუნება",
     layers: [
-        {
+      {
         "გარემოს მონიტორინგი": [
           {
             id: "meteo",
@@ -25,7 +25,7 @@ export const mapCategories = [
             label: "ჰიდროლოგიური საგუშაგო",
             type: "points",
           },
-                  ],
+        ],
       },
       {
         სეტყვა: [
@@ -39,7 +39,7 @@ export const mapCategories = [
             label: "100%-ით დაზიანებული ფართობი ერთი სეტყვიანობის შემთხვევაზე",
             type: "points",
           },
-                  ],
+        ],
       },
       {
         ნიადაგები: [
@@ -277,6 +277,77 @@ export const mapCategories = [
     ],
   },
   {
+    key: "history",
+    icon: GiSwordTie,
+    name: "ისტორია",
+    layers: [
+      {
+        ბრძოლები: [
+          {
+            id: "battles",
+            label: "ბრძოლები ქვემო ქართლის ტერიტორიაზე, XI-XVIIსს.",
+            type: "points",
+          },
+        ],
+      },
+          {
+         ნაგებობები: [
+          {
+            id: "castles",
+            label: "თავდაცვითი ნაგებობები",
+            type: "points",
+          },
+        ],
+      },
+        {
+         "მართლმადიდებელი ეკლესიის ეპარქიები": [
+          {
+            id: "eparchy",
+            label: "ეპარქიების საზღვრები",
+            type: "polygon",
+          },
+            {
+            id: "churches",
+            label: "აქტიური მონასტრები",
+            type: "points",
+          },
+        ],
+      },
+       {
+         "გერმანული დასახლებები ქვემო ქართლში": [
+          {
+            id: "germans",
+            label: "გერმანული დასახლებები",
+            type: "points",
+          },
+            {
+            id: "germanspoly",
+            label: "1941 წ. გადასახლებული გერმანული ოჯახების რაოდენობა",
+            type: "polygon",
+          },
+        ],
+      },
+        {
+         მეგალითები: [
+          {
+            id: "megaliths",
+            label: "მეგალითები",
+            type: "points",
+          },
+          ],
+      },
+       {
+         პეტროგლიფები: [
+          {
+            id: "petroglyphs",
+            label: "პეტროგლიფები",
+            type: "points",
+          },
+          ],
+      },
+    ],
+  },
+  {
     key: "population",
     icon: FaPeopleRoof,
     name: "მოსახლეობა",
@@ -304,12 +375,6 @@ export const mapCategories = [
     key: "tourism",
     icon: PiPersonSimpleHikeBold,
     name: "ტურიზმი",
-    layers: [],
-  },
-  {
-    key: "history",
-    icon: GiSwordTie,
-    name: "ისტორია",
     layers: [],
   },
 ];

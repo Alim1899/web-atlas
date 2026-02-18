@@ -7,12 +7,16 @@ import useLeftBar from "../../Context/LeftBarContext/useLeftBar";
 
 import CategoriesList from "./CategoriesList";
 import LayersList from "./LayerList";
+import { useEffect } from "react";
 
 const MapList = () => {
   const { state: barState, dispatch: barDispatch } = useLeftBar();
   const { dispatch: mapDispatch } = useMaps();
   const { isOpen, selectedCategory, expandedLayer } = barState;
-
+  useEffect(() => {
+    if (!selectedCategory) return;
+    mapDispatch({ type: "SET_QUERY", payload: selectedCategory });
+  }, [selectedCategory, mapDispatch]);
   return (
     <div className={classes.mapHeaders}>
       {isOpen && (

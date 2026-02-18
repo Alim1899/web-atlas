@@ -9,14 +9,13 @@ import { useEffect } from "react";
 export default function JsonProvider() {
   const { state, dispatch } = useMaps();
   const map = useMap();
-  const { activeLayers, dataChart } = state;
+  const { activeLayers, dataChart,queryKey } = state;
   const layerIds = activeLayers.map((layer) => layer.id);
 const topLayerId = activeLayers?.[activeLayers.length - 1]?.id; 
-
   const queries = useQueries({
     queries: layerIds.map((layer) => ({
       queryKey: ["geojson", layer],
-      queryFn: () => fetchGeoJson("nature", layer),
+      queryFn: () => fetchGeoJson(queryKey, layer),
       staleTime: 1,
       retry: 2,
     })),
