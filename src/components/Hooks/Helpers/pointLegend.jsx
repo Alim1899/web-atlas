@@ -212,6 +212,33 @@ const pointLegend = (data, features = [], layer, groupEn, type) => {
       oldNames.sort((a, b) => a.index - b.index);
       data.push(oldNames,years);
     },
+     "Petroglyphs":()=>{
+ features.forEach((feature) => {
+        const { type_en, } = feature.properties || {};
+        const sign = feature.sign;
+        console.log(feature.properties);
+        if(!data.some((d)=>d.type===type_en)){
+          data.push({
+            sign,
+            type:type_en,
+            name:"პეტროგლიფები"
+          })
+        }
+ })
+    },
+     "Megaliths":()=>{
+ features.forEach((feature) => {
+        const { type_en,type_ge } = feature.properties || {};
+        const sign = feature.sign;
+        if(!data.some((d)=>d.type===type_en)){
+          data.push({
+            sign,
+            type:type_en,
+            name:type_ge
+          })
+        }
+ })
+    },
 
     default: () => {
       features.forEach((feature) => {
