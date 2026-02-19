@@ -180,39 +180,17 @@ export const onEachPointFeature = (feature, layer, enabled = true) => {
  
 
   if (!enabled) return;
-  const { name_ge, name, index, unicode, type_ge } = feature.properties || {};
+  const { name_ge, name, index, unicode, type_ge,location_ge } = feature.properties || {};
   const title = name_ge || name || "";
   const realIndex = unicode ?? index; // keep undefined if missing
 
-  // Tooltip (only if we have something to show)
-  if (realIndex != null) {
-    layer.bindTooltip(
-      `<div style="
-        font-weight:900;
-        height:20px;
-        min-width:20px;
-        padding:0 4px;
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        background:transparent;
-        border:none;
-        outline:none;
-      ">${realIndex}</div>`,
-      {
-        permanent: true,          // if you want always visible
-        direction: "top",
-        offset: [0, -10],         // move it above the marker
-        opacity: 0.95,
-        interactive: false,
-      }
-    );
-  }
+  const type = type_ge ?? location_ge?? "";
+
 
   // Popup on click
   if (title || realIndex != null) {
     const head = realIndex != null ? `${realIndex}. ` : "";
-    layer.bindPopup(`<strong>${head}${title} - ${type_ge}</strong>`);
+    layer.bindPopup(`<strong>${head}${title} - ${type}</strong>`);
   }
 
   // Same styling cleanup

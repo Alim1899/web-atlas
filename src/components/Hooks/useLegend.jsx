@@ -30,6 +30,8 @@ export const useLegend = () => {
       const groupEn = el[1].group_en;
       const data = [];
       const header = el[1].legend_header || el[1].layerName_ge;
+      console.log(groupEn);
+      // |||||    POLYGON FEATURES     ||||||||||||
       if (shape === "polygon") {
         if (el[1].group_en === "Geology") {
           features.forEach((feature) => {
@@ -177,6 +179,8 @@ export const useLegend = () => {
           data.sort((a, b) => (a.index ?? 0) - (b.index ?? 0));
         }
       }
+
+      // ||||||||||       POINTS AND LINES         ||||||| |
       if (shape === "points" || shape === "line") {
         if (el[1].layerName_en === "Instrumental period") {
           const getIconSize = (size) => {
@@ -311,7 +315,7 @@ export const useLegend = () => {
         } else if (groupEn === "Wars") {
           const signs = [];
           const wars = [];
-          const restored = []
+          const restored = [];
           features.forEach((feature) => {
             const { name_ge, index, unicode, type_ge, type_en } =
               feature.properties;
@@ -325,42 +329,75 @@ export const useLegend = () => {
                 });
             }
 
-             if (!wars.some((d) => d.index === index)) {
-
-        type_en !== "Restored"? wars.push({
-                name: name_ge,
-                index,
-                year:unicode,
-                type:type_ge,
-                sign,
-                type_en
-                 }):restored.push({
-                name: name_ge,
-                index,
-                sign,
-                year:unicode,
-                type:type_ge,
-                type_en
-
-                 })
+            if (!wars.some((d) => d.index === index)) {
+              type_en !== "Restored"
+                ? wars.push({
+                    name: name_ge,
+                    index,
+                    year: unicode,
+                    type: type_ge,
+                    sign,
+                    type_en,
+                  })
+                : restored.push({
+                    name: name_ge,
+                    index,
+                    sign,
+                    year: unicode,
+                    type: type_ge,
+                    type_en,
+                  });
             }
           });
-          wars.sort((a,b)=>a.year-b.year)
-         data.push(signs,wars,restored);
-
-        }else if(groupEn==='Defensive buildings'){
+          wars.sort((a, b) => a.year - b.year);
+          data.push(signs, wars, restored);
+        } else if (groupEn === "Defensive buildings") {
           features.forEach((feature) => {
             const { type_ge, location_ge } = feature.properties;
             const sign = feature.sign;
 
             if (!data.some((d) => d.sign === sign)) {
               data.push({
-                name:type_ge,
+                name: type_ge,
                 sign,
-                type:type_ge,
+                type: type_ge,
                 location: location_ge || "",
               });
             }
+          });
+        } else if (groupEn === "Orthodox church eparchies") {
+          const signs = [];
+          const grouped = {};
+
+          features.forEach((feature) => {
+            const { name_ge, unicode, index, type_ge, eparchy } =
+              feature.properties;
+            const sign = feature.sign;
+            console.log(name_ge);
+            if (!signs.some((d) => d.sign === sign)) {
+              signs.push({
+                type: type_ge,
+                sign,
+              });
+            }
+            if (unicode > 0) {
+              if (!grouped[eparchy]) {
+                grouped[eparchy] = [];
+              }
+
+              if (!grouped[eparchy].some((d) => d.unicode === unicode)) {
+                grouped[eparchy].push({
+                  name: name_ge,
+                  sign,
+                  unicode,
+                  index,
+                  type: type_ge,
+                  eparchy,
+                });
+              }
+            }
+
+            data.push(signs, grouped);
           });
         } else {
           features.forEach((feature) => {
@@ -377,6 +414,8 @@ export const useLegend = () => {
           });
         }
       }
+
+      // |||||||||||||||||||||||||   LAST TOUCHES TO DATA      ||||||||||||||||||||||||||||||||||||||||||||\\
       const name = el[0] || "unnamed";
 
       const finalData =
@@ -389,7 +428,6 @@ export const useLegend = () => {
         data: finalData,
         header,
       });
-console.log(acc);
       return acc;
     }, {});
   }, [dataChart]);

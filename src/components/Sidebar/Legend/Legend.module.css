@@ -107,3 +107,20 @@ font-size: 1.1rem;
   text-indent: 10px;
 }
 
+
+
+/* CUSTOM LEGEND STYLES */
+.eparchy{
+  border-bottom:1px solid var(--light-text)
+}
+.eparchy>h5{
+  text-align: center;
+  width: 50%;
+  font-size: clamp(0.7rem, 1.8vw, 1.4rem);
+  margin: 10px;
+}
+.eparchy>div{
+  display: grid;
+  grid-template-columns: 10% 90%;
+  margin-top: 5px;
+}

@@ -7,6 +7,7 @@
   display: flex;
   justify-content: space-between;
   width: auto;
+  max-width: 400px;
   box-shadow: 1px 1px black;
   height: var(--bar-height);
   font-weight: 900;
