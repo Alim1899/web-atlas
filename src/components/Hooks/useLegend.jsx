@@ -27,25 +27,22 @@ export const useLegend = () => {
     return dataChart.reduce((acc, el) => {
       const hasSubHeader = el[1]?.sub_header || false;
       const shape = el[1].shape;
-      const layer = el[1].layerName_en
+      const layer = el[1].layerName_en;
       const features = el[1].features;
       const group = el[1].group_ge || "default";
       const groupEn = el[1].group_en;
       const data = [];
       const header = el[1].legend_header || el[1].layerName_ge;
-      const type = el[0]
+      const type = el[0];
 
-      // |||||    POLYGON FEATURES     ||||||||||||
       if (shape === "polygon") {
-     polygonLegend(data,features,groupEn,layer)
+        polygonLegend(data, features, groupEn, layer);
       }
 
-      // ||||||||||       POINTS AND LINES         ||||||| |
       if (shape === "points" || shape === "line") {
-        pointLegend(data,features,layer,groupEn,type)
+        pointLegend(data, features, layer, groupEn, type);
       }
 
-      // |||||||||||||||||||||||||   LAST TOUCHES TO DATA      ||||||||||||||||||||||||||||||||||||||||||||\\
       const name = el[0] || "unnamed";
 
       const finalData =

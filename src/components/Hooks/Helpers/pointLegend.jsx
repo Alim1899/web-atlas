@@ -178,30 +178,39 @@ const pointLegend = (data, features = [], layer, groupEn, type) => {
 
       data.push(signs, grouped);
     },
-    Germans: () => {
-      const signs = [];
-      const wars = [];
-      const restored = [];
+    "German population in Kvemo Kartli": () => {
+      const years = [];
+      const oldNames = [];
+      ;
 
       features.forEach((feature) => {
-        const { name_ge, index, unicode, type_ge, type_en } = feature.properties || {};
+  console.log(feature.properties);
+        const { name_ge, index,name_ge_old, type_en,location_ge } = feature.properties || {};
         const sign = feature.sign;
 
-        if (!signs.some((d) => d.sign === sign)) {
-          if (type_en !== "Restored") signs.push({ sign, type: type_ge });
+        if (!years.some((d) => d.sign === sign)) {
+
+         years.push({ sign, type: type_en });
         }
 
-        if (!wars.some((d) => d.index === index)) {
-          if (type_en !== "Restored") {
-            wars.push({ name: name_ge, index, year: unicode, type: type_ge, sign, type_en });
-          } else {
-            restored.push({ name: name_ge, index, sign, year: unicode, type: type_ge, type_en });
-          }
+        if(!oldNames.some((d)=>d.nameGe===name_ge)){
+          oldNames.push(
+            {
+              newName:name_ge,
+              oldName:name_ge_old,
+              year:type_en,
+              index,
+              sign,
+              location:location_ge
+            }
+          )
         }
+
+       
       });
 
-      wars.sort((a, b) => a.year - b.year);
-      data.push(signs, wars, restored);
+      oldNames.sort((a, b) => a.index - b.index);
+      data.push(oldNames,years);
     },
 
     default: () => {
