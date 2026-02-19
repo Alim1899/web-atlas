@@ -3,6 +3,10 @@ import point from "../../../assets/map/point.svg";
 import "leaflet-polylinedecorator";
 export const pointToLayer = (feature, latlng) => {
   const name = feature.properties.name_en;
+   if (!latlng || !Number.isFinite(latlng.lat) || !Number.isFinite(latlng.lng)) {
+    console.warn("Invalid latlng", { latlng, feature });
+    return null;
+  }
   const getIconSize = (size) => {
     if (name === "Hail - total") {
       if (!size) return [[20, 20]];
@@ -33,14 +37,18 @@ export const pointToLayer = (feature, latlng) => {
   };
   const svgToDataUrl = (svg) =>
     `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
+
+ const sign = feature?.sign;
+  const iconSrc = sign ? svgToDataUrl(sign) : point;
+
+
   const size = feature.properties?.size;
 
-  const iconSize = getIconSize(size);
-
-  const iconSrc = feature.sign ? svgToDataUrl(feature.sign) : point;
+  const iconSize = getIconSize(size)[0];
+ 
   const marker = L.marker(latlng, {
     icon: L.divIcon({
-      html: `<img src="${iconSrc}" width="${iconSize[0][0]}" height="${iconSize[0][1]}" />`,
+      html: `<img src="${iconSrc}" width="${iconSize[0]}" height="${iconSize[1]}" />`,
       iconSize: iconSize,
       iconAnchor: [10, 10],
       popupAnchor: [0, -10],
@@ -146,6 +154,7 @@ export const onEachPolygonFeature = (feature, layer, enabled = true) => {
         text-align:center;
         background-color:unset;
         border:none;
+        outline: none
       ">${realIndex}</div>`,
       {
         permanent: true,
@@ -164,5 +173,56 @@ export const onEachPolygonFeature = (feature, layer, enabled = true) => {
     el.style.border = "none";
     el.style.padding = "0";
     el.style.margin = "0";
+  });
+};
+
+export const onEachPointFeature = (feature, layer, enabled = true) => {
+ 
+
+  if (!enabled) return;
+  const { name_ge, name, index, unicode, type_ge } = feature.properties || {};
+  const title = name_ge || name || "";
+  const realIndex = unicode ?? index; // keep undefined if missing
+
+  // Tooltip (only if we have something to show)
+  if (realIndex != null) {
+    layer.bindTooltip(
+      `<div style="
+        font-weight:900;
+        height:20px;
+        min-width:20px;
+        padding:0 4px;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        background:transparent;
+        border:none;
+        outline:none;
+      ">${realIndex}</div>`,
+      {
+        permanent: true,          // if you want always visible
+        direction: "top",
+        offset: [0, -10],         // move it above the marker
+        opacity: 0.95,
+        interactive: false,
+      }
+    );
+  }
+
+  // Popup on click
+  if (title || realIndex != null) {
+    const head = realIndex != null ? `${realIndex}. ` : "";
+    layer.bindPopup(`<strong>${head}${title} - ${type_ge}</strong>`);
+  }
+
+  // Same styling cleanup
+  layer.on("tooltipopen", (e) => {
+    const el = e.tooltip?.getElement?.();
+    if (!el) return;
+    el.style.background = "transparent";
+    el.style.border = "none";
+    el.style.padding = "0";
+    el.style.margin = "0";
+    el.style.boxShadow = "none";
   });
 };

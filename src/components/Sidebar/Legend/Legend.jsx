@@ -43,6 +43,7 @@ const Legend = () => {
                 {!!el.header && <h2 className={classes.header}>{el.header}</h2>}
                 {el.shape === "polygon" && (
                   <>
+                  {   console.log(el)}
                     {/* ✅ GROUPED (has subheader) */}
                     {el.hasSubHeader &&
                       el.data.map((group, gIdx) => (
@@ -88,10 +89,9 @@ const Legend = () => {
                   </>
                 )}
 
-                {(el.shape === "points" || el.shape === "line") &&
+                {(el.shape === "points" || el.shape === "line")?
                 el.name === "battles"
                   ? (() => {
-                   
                       const sign = el.data[2][1].sign;
 
                       return (
@@ -145,22 +145,27 @@ const Legend = () => {
                             ))}
                           </>
                           <>
-                            <h4 style={{ display:"flex",alignItems:"center",marginLeft:"2vw"}}>
-                            დავით აღმაშენებლის მიერ დაბრუნებული ქალაქები  {" "}
+                            <h4
+                              style={{
+                                display: "flex",
+                                alignItems: "center",
+                                marginLeft: "2vw",
+                              }}
+                            >
+                              დავით აღმაშენებლის მიერ დაბრუნებული ქალაქები{" "}
                               <img
                                 className={classes.legendIcon}
                                 src={sign ? svgToDataUrl(sign) : point}
                                 width={35}
                                 height={35}
                               />
-                              
                             </h4>
                             {el.data?.[2]?.map((item, i) => (
                               <div
                                 key={`${el.type}-${i}`}
                                 className={classes.legendItem}
                               >
-                               <div></div>
+                                <div></div>
                                 <span className={classes.span}>
                                   {item.name} - {item.year}
                                 </span>
@@ -187,7 +192,8 @@ const Legend = () => {
                           {item.location && `, ${item.location}`}
                         </span>
                       </div>
-                    ))}
+                    )):null
+                    }
               </div>
             </div>
           ))}

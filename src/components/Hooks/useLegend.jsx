@@ -389,7 +389,7 @@ export const useLegend = () => {
         data: finalData,
         header,
       });
-
+console.log(acc);
       return acc;
     }, {});
   }, [dataChart]);
