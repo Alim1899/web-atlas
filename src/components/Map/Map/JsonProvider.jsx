@@ -16,7 +16,7 @@ const topLayerId = activeLayers?.[activeLayers.length - 1]?.id;
     queries: layerIds.map((layer) => ({
       queryKey: ["geojson", layer],
       queryFn: () => fetchGeoJson(queryKey, layer),
-      staleTime: 1,
+      staleTime: 1000,
       retry: 2,
     })),
   });

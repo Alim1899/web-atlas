@@ -37,82 +37,160 @@ const Legend = () => {
             options={headers}
           />
 
-      
-  {activeData?.map((el) => (
-    <div key={el.name ?? el.header} className={classes.legendGroup}>
-         <div className={classes.items}>
-      {!!el.header && <h2 className={classes.header}>{el.header}</h2>}
-     {el.shape === "polygon" && (
-  <>
-    {/* ✅ GROUPED (has subheader) */}
-    {el.hasSubHeader &&
-      el.data.map((group, gIdx) => (
-        <div
-          className={classes.subheader}
-          key={`${el.name}-${group.subheader}-${gIdx}`}
-        >
-          {group.subheader && <h2>{group.subheader}</h2>}
+          {activeData?.map((el) => (
+            <div key={el.name ?? el.header} className={classes.legendGroup}>
+              <div className={classes.items}>
+                {!!el.header && <h2 className={classes.header}>{el.header}</h2>}
+                {el.shape === "polygon" && (
+                  <>
+                    {/* ✅ GROUPED (has subheader) */}
+                    {el.hasSubHeader &&
+                      el.data.map((group, gIdx) => (
+                        <div
+                          className={classes.subheader}
+                          key={`${el.name}-${group.subheader}-${gIdx}`}
+                        >
+                          {group.subheader && <h2>{group.subheader}</h2>}
 
-          {group.items?.map((elem, iIdx) => (
-            <div
-              key={`${el.name}-${group.subheader}-${elem.index ?? iIdx}`}
-              className={classes.legendItem}
-            >
-              <div
-                className={classes.legendColor}
-                style={{ backgroundColor: elem.color }}
-              >
-                <span>{elem?.unicode}</span>
+                          {group.items?.map((elem, iIdx) => (
+                            <div
+                              key={`${el.name}-${group.subheader}-${elem.index ?? iIdx}`}
+                              className={classes.legendItem}
+                            >
+                              <div
+                                className={classes.legendColor}
+                                style={{ backgroundColor: elem.color }}
+                              >
+                                <span>{elem?.unicode}</span>
+                              </div>
+
+                              <span className={classes.span}>{elem.txt}</span>
+                            </div>
+                          ))}
+                        </div>
+                      ))}
+
+                    {!el.hasSubHeader &&
+                      el.data.map((item, idx) => (
+                        <div
+                          key={`${el.name}-${idx}`}
+                          className={classes.legendItem}
+                        >
+                          <div
+                            className={classes.legendColor}
+                            style={{ backgroundColor: item.color }}
+                          >
+                            <span>{item?.unicode}</span>
+                          </div>
+                          <span className={classes.span}>{item.txt}</span>
+                        </div>
+                      ))}
+                  </>
+                )}
+
+                {(el.shape === "points" || el.shape === "line") &&
+                el.name === "battles"
+                  ? (() => {
+                   
+                      const sign = el.data[2][1].sign;
+
+                      return (
+                        <>
+                          {el.data?.[0]?.map((item, i) => (
+                            <div
+                              key={`${el.type}-${i}`}
+                              className={classes.legendItem}
+                            >
+                              <img
+                                className={classes.legendIcon}
+                                src={
+                                  item.sign ? svgToDataUrl(item.sign) : point
+                                }
+                                alt={item.type}
+                                width={
+                                  Array.isArray(item.size) ? item.size[0] : 40
+                                }
+                                height={
+                                  Array.isArray(item.size) ? item.size[1] : 40
+                                }
+                              />
+                              <span className={classes.span}>{item.type}</span>
+                            </div>
+                          ))}
+
+                          <>
+                            <h4 style={{ marginLeft: "5vw" }}>ბრძოლები</h4>
+                            {el.data?.[1]?.map((item, i) => (
+                              <div
+                                key={`${el.type}-${i}`}
+                                className={classes.legendItem}
+                              >
+                                <img
+                                  className={classes.legendIcon}
+                                  src={
+                                    item.sign ? svgToDataUrl(item.sign) : point
+                                  }
+                                  alt={item.name}
+                                  width={
+                                    Array.isArray(item.size) ? item.size[0] : 25
+                                  }
+                                  height={
+                                    Array.isArray(item.size) ? item.size[1] : 25
+                                  }
+                                />
+                                <span className={classes.span}>
+                                  {item.name} - {item.year}
+                                </span>
+                              </div>
+                            ))}
+                          </>
+                          <>
+                            <h4 style={{ display:"flex",alignItems:"center",marginLeft:"2vw"}}>
+                            დავით აღმაშენებლის მიერ დაბრუნებული ქალაქები  {" "}
+                              <img
+                                className={classes.legendIcon}
+                                src={sign ? svgToDataUrl(sign) : point}
+                                width={35}
+                                height={35}
+                              />
+                              
+                            </h4>
+                            {el.data?.[2]?.map((item, i) => (
+                              <div
+                                key={`${el.type}-${i}`}
+                                className={classes.legendItem}
+                              >
+                               <div></div>
+                                <span className={classes.span}>
+                                  {item.name} - {item.year}
+                                </span>
+                              </div>
+                            ))}
+                          </>
+                        </>
+                      );
+                    })()
+                  : el.data.map((item, i) => (
+                      <div
+                        key={`${el.name}-${i}`}
+                        className={classes.legendItem}
+                      >
+                        <img
+                          className={classes.legendIcon}
+                          src={item.sign ? svgToDataUrl(item.sign) : point}
+                          alt={item.name}
+                          width={Array.isArray(item.size) ? item.size[0] : 40}
+                          height={Array.isArray(item.size) ? item.size[1] : 40}
+                        />
+                        <span className={classes.span}>
+                          {item.name}
+                          {item.location && `, ${item.location}`}
+                        </span>
+                      </div>
+                    ))}
               </div>
-
-              <span className={classes.span}>{elem.txt}</span>
             </div>
           ))}
-        </div>
-      ))}
-
-
-    {!el.hasSubHeader &&
-      el.data.map((item, idx) => (
-        <div key={`${el.name}-${idx}`} className={classes.legendItem}>
-          <div
-            className={classes.legendColor}
-            style={{ backgroundColor: item.color }}
-          >
-            <span>{item?.unicode}</span>
-          </div>
-          <span className={classes.span}>{item.txt}</span>
-        </div>
-      ))}
-  </>
-)}
-  {(el.shape === "points" || el.shape === "line") &&
-     
-        el.data.map((item, i) => (
-     
-          <div key={`${el.name}-${i}`} className={classes.legendItem}>
-            <img
-              className={classes.legendIcon}
-              src={item.sign ? svgToDataUrl(item.sign) : point}
-              alt={item.name}
-              width={Array.isArray(item.size) ? item.size[0] : 40}
-              height={Array.isArray(item.size) ? item.size[1] : 40}
-            />
-            <span className={classes.span}>
-              {item.name}
-              {item.location && `, ${item.location}`}
-            </span>
-          </div>
-        ))}
-   </div>
-    
-
-
-         
-    
-    </div>
-  ))}
-
         </div>
       )}
     </DraggableContainer>

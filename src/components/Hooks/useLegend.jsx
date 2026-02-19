@@ -75,7 +75,13 @@ export const useLegend = () => {
             );
 
             if (!exists) {
-              grouped[key].push({ txt, color, subheader, index, unicode:unicode||index });
+              grouped[key].push({
+                txt,
+                color,
+                subheader,
+                index,
+                unicode: unicode || index,
+              });
             }
           });
           data.push(
@@ -104,9 +110,8 @@ export const useLegend = () => {
               data.push({
                 txt,
                 color,
-                unicode:index,
+                unicode: index,
               });
-              
             }
             data.sort((a, b) => (a.unicode ?? 0) - (b.unicode ?? 0));
           });
@@ -159,12 +164,13 @@ export const useLegend = () => {
         } else {
           let i = 1;
           features.forEach((feature) => {
-            const { name_ge, description_ge, color, index } = feature.properties;
-           
+            const { name_ge, description_ge, color, index } =
+              feature.properties;
+
             const txt = description_ge || name_ge;
             if (txt && !data.some((d) => d.txt === txt && d.color === color)) {
-              data.push({ txt, color, index: index || i,unicode:i });
-               i++
+              data.push({ txt, color, index: index || i, unicode: i });
+              i++;
             }
           });
 
@@ -298,6 +304,60 @@ export const useLegend = () => {
               data.push({
                 name: `${description_ge} ${name_ge}. ${type_ge}`,
                 sign,
+                location: location_ge || "",
+              });
+            }
+          });
+        } else if (groupEn === "Wars") {
+          const signs = [];
+          const wars = [];
+          const restored = []
+          features.forEach((feature) => {
+            const { name_ge, index, unicode, type_ge, type_en } =
+              feature.properties;
+            const sign = feature.sign;
+
+            if (!signs.some((d) => d.sign === sign)) {
+              type_en !== "Restored" &&
+                signs.push({
+                  sign,
+                  type: type_ge,
+                });
+            }
+
+             if (!wars.some((d) => d.index === index)) {
+
+        type_en !== "Restored"? wars.push({
+                name: name_ge,
+                index,
+                year:unicode,
+                type:type_ge,
+                sign,
+                type_en
+                 }):restored.push({
+                name: name_ge,
+                index,
+                sign,
+                year:unicode,
+                type:type_ge,
+                type_en
+
+                 })
+            }
+          });
+          wars.sort((a,b)=>a.year-b.year)
+         data.push(signs,wars,restored);
+
+        }else if(groupEn==='Defensive buildings'){
+          features.forEach((feature) => {
+            const { type_ge, location_ge } = feature.properties;
+            const sign = feature.sign;
+
+            if (!data.some((d) => d.sign === sign)) {
+              data.push({
+                name:type_ge,
+                sign,
+                type:type_ge,
                 location: location_ge || "",
               });
             }
