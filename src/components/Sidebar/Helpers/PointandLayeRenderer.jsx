@@ -113,7 +113,6 @@ const PointandLayeRenderer = ({ el, classes }) => {
             else return `${first}, ${second}`
            }
       return  (
-
            <>
           {el.data?.[0]?.map((item, i) => (
             <div key={`${el.type}-${i}`} className={classes.legendItem}>

@@ -290,8 +290,8 @@ export const mapCategories = [
           },
         ],
       },
-          {
-         ნაგებობები: [
+      {
+        ნაგებობები: [
           {
             id: "castles",
             label: "თავდაცვითი ნაგებობები",
@@ -299,51 +299,51 @@ export const mapCategories = [
           },
         ],
       },
-        {
-         "მართლმადიდებელი ეკლესიის ეპარქიები": [
+      {
+        "მართლმადიდებელი ეკლესიის ეპარქიები": [
           {
             id: "eparchy",
             label: "ეპარქიების საზღვრები",
             type: "polygon",
           },
-            {
+          {
             id: "churches",
             label: "აქტიური მონასტრები",
             type: "points",
           },
         ],
       },
-       {
-         "გერმანული დასახლებები ქვემო ქართლში": [
+      {
+        "გერმანული დასახლებები ქვემო ქართლში": [
           {
             id: "germans",
             label: "გერმანული დასახლებები",
             type: "points",
           },
-            {
+          {
             id: "germanspoly",
             label: "1941 წ. გადასახლებული გერმანული ოჯახების რაოდენობა",
             type: "polygon",
           },
         ],
       },
-        {
-         მეგალითები: [
+      {
+        მეგალითები: [
           {
             id: "megaliths",
             label: "მეგალითები",
             type: "points",
           },
-          ],
+        ],
       },
-       {
-         პეტროგლიფები: [
+      {
+        პეტროგლიფები: [
           {
             id: "petroglyphs",
             label: "პეტროგლიფები",
             type: "points",
           },
-          ],
+        ],
       },
     ],
   },
@@ -375,6 +375,16 @@ export const mapCategories = [
     key: "tourism",
     icon: PiPersonSimpleHikeBold,
     name: "ტურიზმი",
-    layers: [],
+    layers: [
+      {
+      "ბუნების ძეგლები": [
+          {
+            id: "waterfall",
+            label: "ბუნების ძეგლები",
+            type: "points",
+          },
+        ],
+      },
+    ],
   },
 ];
