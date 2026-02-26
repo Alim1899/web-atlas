@@ -59,7 +59,7 @@ const useChartData = () => {
                 name_en: name_en || "",
                 description_en: description_en ? [description_en] : [],
                 description_ge: description_ge ? [description_ge] : [],
-                area: area?.toFixed(2) || "",
+                area: Number(area)?.toFixed(2) || "",
                 totalArea: 0,
                 color: color,
                 index: index,

@@ -348,17 +348,80 @@ export const mapCategories = [
     ],
   },
   {
+    key: "economy",
+    icon: GiMoneyStack,
+    name: "ეკონომიკა",
+    layers: [
+       {
+        "ბოტანიკა": [
+          {
+            id: "botanics",
+            label: "ბოტანიკურ-აგრონომიული არეები",
+            type: "polygon",
+          },
+        ],
+      },
+       {
+        "ელექტროენერგეტიკა": [
+          {
+            id: "energy",
+            label: "ელექტროენერგეტიკა",
+            type: "points",
+          },
+        ],
+      },
+       {
+        "კულტურულ მცენარეთა ზონები": [
+          {
+            id: "cultivate",
+            label: "კულტურულ მცენარეთა ზონები",
+            type: "polygon",
+          },
+        ],
+      },
+        {
+        "სოფლის მეურნეობა": [
+          {
+            id: "farming",
+            label: "მეურნეობის სარგებლობაში არსებული მიწის ფართობი, 2021",
+            type: "polygon",
+          },
+              {
+            id: "beneficiars",
+            label: "სოფლის მეურნეობის პროექტების ბენეფიციარები 2019-2024",
+            type: "polygon",
+          },
+             {
+            id: "production",
+            label: "სოფლის მეურნეობის საწარმოო მიმართულება",
+            type: "polygon",
+          },
+        ],
+      },
+      {
+        "მზის ნათება": [
+          {
+            id: "sunshine",
+            label: "მზის ნათების წლიური ხანგრძლივობა (საათი)",
+            type: "polygon",
+          },
+            {
+            id: "sunstations",
+            label: "მზის ელექტროსადგურები",
+            type: "points",
+          },
+        ],
+      },
+             
+    ],
+  },
+  {
     key: "population",
     icon: FaPeopleRoof,
     name: "მოსახლეობა",
     layers: [],
   },
-  {
-    key: "economy",
-    icon: GiMoneyStack,
-    name: "ეკონომიკა",
-    layers: [],
-  },
+  
   {
     key: "education",
     icon: FaBookOpenReader,
