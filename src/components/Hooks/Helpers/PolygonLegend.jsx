@@ -129,7 +129,21 @@ const polygonLegend = ( data, features,groupEn,layer ) => {
               data.push({ txt, color });
             }
           });
+        } else if(groupEn==='Botanics') {
+          let i = 1;
+          features.forEach((feature) => {
+            const { name_ge, description_ge, color, index,unicode } =
+              feature.properties;
+            const txt = description_ge || name_ge;
+            if (txt && !data.some((d) => d.txt === txt && d.color === color)) {
+              data.push({ txt, color, index: index || i, unicode:unicode|| index ||i });
+              i++;
+            }
+          });
+
+          data.sort((a, b) => (a.index ?? 0) - (b.index ?? 0));
         } else {
+          
           let i = 1;
           features.forEach((feature) => {
             const { name_ge, description_ge, color, index } =
@@ -143,6 +157,7 @@ const polygonLegend = ( data, features,groupEn,layer ) => {
           });
 
           data.sort((a, b) => (a.index ?? 0) - (b.index ?? 0));
+        
         }
 };
 export default polygonLegend;
