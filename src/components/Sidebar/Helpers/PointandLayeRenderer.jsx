@@ -107,13 +107,13 @@ const PointandLayeRenderer = ({ el, classes }) => {
         </>
       );
     }
-    case "germans": {       
-           const locator = (first,second)=>{
-            if(first===second) return first;
-            else return `${first}, ${second}`
-           }
-      return  (
-           <>
+    case "germans": {
+      const locator = (first, second) => {
+        if (first === second) return first;
+        else return `${first}, ${second}`;
+      };
+      return (
+        <>
           {el.data?.[0]?.map((item, i) => (
             <div key={`${el.type}-${i}`} className={classes.legendItem}>
               <img
@@ -123,27 +123,79 @@ const PointandLayeRenderer = ({ el, classes }) => {
                 width={Array.isArray(item.size) ? item.size[0] : 20}
                 height={Array.isArray(item.size) ? item.size[1] : 20}
               />
-              <span className={classes.span}>{item.oldName} - {(locator(item.newName,item.location))}</span>
+              <span className={classes.span}>
+                {item.oldName} - {locator(item.newName, item.location)}
+              </span>
             </div>
           ))}
-           <>
-             <h2 className={classes.header}>გერმანული დასახლებების შექმნის წლები</h2>
-          {el.data?.[1]?.map((item, i) => (
+          <>
+            <h2 className={classes.header}>
+              გერმანული დასახლებების შექმნის წლები
+            </h2>
+            {el.data?.[1]?.map((item, i) => (
+              <div key={`${el.type}-${i}`} className={classes.legendItem}>
+                <img
+                  className={classes.legendIcon}
+                  src={item.sign ? svgToDataUrl(item.sign) : point}
+                  alt={item.type}
+                  width={Array.isArray(item.size) ? item.size[0] : 40}
+                  height={Array.isArray(item.size) ? item.size[1] : 40}
+                />
+                <span className={classes.span}>{item.type}</span>
+              </div>
+            ))}
+          </>
+        </>
+      );
+    }
+    case "energy": {
+      const hydro = Object.values(el.data[0]);
+      const thermal = Object.values(el.data[1]);
+      return (
+        <>
+            <h2 className={classes.headerIcon}>
+            {Object.keys(el.data[1])}
+            <img
+              alt='"header'
+              src={svgToDataUrl(thermal[0][1].sign)}
+              height={40}
+            />
+          </h2>
+          {thermal[0].map((item, i) => (
             <div key={`${el.type}-${i}`} className={classes.legendItem}>
               <img
                 className={classes.legendIcon}
                 src={item.sign ? svgToDataUrl(item.sign) : point}
                 alt={item.type}
-                width={Array.isArray(item.size) ? item.size[0] : 40}
-                height={Array.isArray(item.size) ? item.size[1] : 40}
+                width={Array.isArray(item.size) ? item.size[0] : 20}
+                height={Array.isArray(item.size) ? item.size[1] : 20}
               />
               <span className={classes.span}>{item.type}</span>
             </div>
           ))}
-           </>
-          
-          </>
-          )
+          <h2 className={classes.headerIcon}>
+            {Object.keys(el.data[0])}
+            <img
+              alt='"header'
+              src={svgToDataUrl(hydro[0][1].sign)}
+              width={40}
+            />
+          </h2>
+          {hydro[0].map((item, i) => (
+            <div key={`${el.type}-${i}`} className={classes.legendItem}>
+              <img
+                className={classes.legendIcon}
+                src={item.sign ? svgToDataUrl(item.sign) : point}
+                alt={item.type}
+                width={Array.isArray(item.size) ? item.size[0] : 20}
+                height={Array.isArray(item.size) ? item.size[1] : 20}
+              />
+              <span className={classes.span}>{item.type}</span>
+            </div>
+          ))}
+          <></>
+        </>
+      );
     }
 
     default:

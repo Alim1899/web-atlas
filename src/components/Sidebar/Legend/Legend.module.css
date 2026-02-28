@@ -124,3 +124,14 @@ font-size: 1.1rem;
   grid-template-columns: 10% 90%;
   margin-top: 5px;
 }
+.headerIcon{
+   display: grid;
+  grid-template-columns: 80% 5%;
+  width: 40%;
+  align-items: center;
+  height: 45px;
+  font-size: clamp(0.7rem, 2vw, 1rem);
+  padding: 0;
+  border-bottom: 1px solid var(--light-text);
+  margin-left: 1vw;
+}
