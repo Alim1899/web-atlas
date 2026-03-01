@@ -1,26 +1,18 @@
 import classes from "./Chart.module.css";
-import {
-  PieChart,
-  Pie,
-  Cell,
-  ResponsiveContainer,
-  Sector,
-} from "recharts";
+import { PieChart, Pie, Cell, ResponsiveContainer, Sector } from "recharts";
 import FarmingChart from "./FarmingChart";
 import { useState } from "react";
 
-const ChartPie = ({selectedLayer, data, dataKey, nameKey }) => {
+const ChartPie = ({ selectedLayer, data, dataKey, nameKey }) => {
   const [activeIndex, setActiveIndex] = useState(null);
   const [tooltipIndex, setTooltipIndex] = useState(null);
 
-
-  
   const getOpacity = (index) =>
     activeIndex === null || activeIndex === index ? 1 : 0.35;
   const activeData = tooltipIndex !== null ? data[tooltipIndex] : null;
-  if(selectedLayer==='farming')return <FarmingChart data={data}/>
+  if (["ownership", "status", "agroforms"].includes(selectedLayer))
+    return <FarmingChart data={data} />;
 
-  console.log(data);
   return (
     <div className={classes.wrapper}>
       <div className={classes.chartArea}>
@@ -59,46 +51,39 @@ const ChartPie = ({selectedLayer, data, dataKey, nameKey }) => {
                 />
               ))}
             </Pie>
-
-    
           </PieChart>
         </ResponsiveContainer>
       </div>
-   {activeData && (
-  <div
-    style={{
-      position: "absolute",
-      top: "20px",
-      left: "40%",
-      backgroundColor: activeData.color,
-      border: "1px solid #ccc",
-      borderRadius: "8px",
-      padding: "5px",
-      zIndex:"999999999"
-    }}
-  >
-    <p style={{ fontWeight: 600 }}>
-      {activeData.name_ge}
-    </p>
-    <p>
-      {activeData.description_ge || activeData.description_en}
-    </p>
-    <p>
-      <strong>
-        {Number(activeData.totalArea)
-          .toLocaleString("en-US", {
-            minimumFractionDigits: 1,
-            maximumFractionDigits: 1,
-          })
-          .replace(/,/g, " ")}{" "}
-        m²
-      </strong>
-    </p>
-  </div>
-)}
+      {activeData && (
+        <div
+          style={{
+            position: "absolute",
+            top: "20px",
+            left: "40%",
+            backgroundColor: activeData.color,
+            border: "1px solid #ccc",
+            borderRadius: "8px",
+            padding: "5px",
+            zIndex: "999999999",
+          }}
+        >
+          <p style={{ fontWeight: 600 }}>{activeData.name_ge}</p>
+          <p>{activeData.description_ge || activeData.description_en}</p>
+          <p>
+            <strong>
+              {Number(activeData.totalArea)
+                .toLocaleString("en-US", {
+                  minimumFractionDigits: 1,
+                  maximumFractionDigits: 1,
+                })
+                .replace(/,/g, " ")}{" "}
+              m²
+            </strong>
+          </p>
+        </div>
+      )}
       <div className={classes.legendScroll}>
         {data.map((item, index) => (
-          
           <div
             key={item.name_ge}
             className={classes.listItem}
@@ -111,7 +96,7 @@ const ChartPie = ({selectedLayer, data, dataKey, nameKey }) => {
               setTooltipIndex(null);
             }}
             style={{
-              opacity: getOpacity(index), 
+              opacity: getOpacity(index),
               fontWeight: activeIndex === index ? 900 : 400,
               cursor: "pointer",
             }}

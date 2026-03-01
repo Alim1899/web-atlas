@@ -1,6 +1,5 @@
 // components/ChartFarmingMini.jsx
 import { useMemo, useState } from "react";
-import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import {
   ResponsiveContainer,
   PieChart,
@@ -34,28 +33,7 @@ export default function FarmingChart({ data }) {
   const rows = data?.[selectedKey] ?? [];
   return (
     <div className={classes.farming}>
-      <FormControl size="small" sx={{ minWidth: 260 }}>
-        <InputLabel
-          id="farming-header-label"
-          style={{ marginTop: "5px", color: "whitesmoke" }}
-        >
-          აირჩიე სექცია
-        </InputLabel>
-        <Select
-          labelId="farming-header-label"
-          label="აირჩიე სექცია"
-          value={selectedKey}
-          className={classes.select}
-          onChange={(e) => setSelectedKey(e.target.value)}
-        >
-          {keys.map((k) => (
-            <MenuItem key={k} value={k}>
-              {k}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-
+    
       {/* title */}
       {selectedKey && <div style={{ fontWeight: 700, marginTop: 4 }}></div>}
 
@@ -77,7 +55,9 @@ export default function FarmingChart({ data }) {
                         data={slices}
                         dataKey="value"
                         nameKey="name"
-                        outerRadius={70}
+                        outerRadius={50}
+                        paddingAngle={5}
+                        label={({ value }) => value}
                       >
                         {slices.map((_, i) => {
                           const colors = Object.values(row.color);

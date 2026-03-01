@@ -21,52 +21,73 @@ const useChartData = () => {
         const header = layer.legend_header;
 
         if (group === "Farming") {
+          const ownership = [];
+          const status = [];
           const agro = [];
-          const ownershipType = [];
-          const legalStatus = [];
-          layer.features.forEach(({ properties }) => {
-            const {
-              name_ge,
-              Legal_farm,
-              arable_land,
-              greenhouse,
-              household_farm,
-              natural_meadow,
-              parennial_plant,
-              private_owner,
-              state_owner,
-            } = properties;
-            const legalStatusHeader =
-              "მეურნეობების რაოდენობა იურიდიული სტატუსის მიხედვით";
-            const ownershipTypeHeader =
-              "სასოფლო-სამეურნეო მიწების განაწილება საკუთრების ფორმების მიხედვით(%)";
-            const agroHeader =
-              "მეურნეობების სარგებლობაში არსებული სასოფლო-სამეურნეო მიწის ფართობი მიწათსარებლობის ფორმების მიხედვით (ჰა)";
-
-            legalStatus.push({
-              name_ge,
-              "იურიდიული პირი": Legal_farm,
-              "შინა მეურნეობა": household_farm,
-               color:{private:"#802771",state:"#de94c0"}
+          const name = layer.layerName_en;
+          if (name === "Ownership") {
+            layer.features.forEach(({ properties }) => {
+              const {
+                name_ge,
+                private_owner,
+                state_owner,
+                color_one,
+                color_two,
+              } = properties;
+              ownership.push({
+                name_ge,
+                კერძო: private_owner,
+                სახელმწიფო: state_owner,
+                color: { first: color_one, second: color_two },
+              });
+              summarized[name] = ownership;
             });
-            summarized[legalStatusHeader] = legalStatus;
-            ownershipType.push({
-              name_ge,
-              კერძო: private_owner,
-              სახელმწიფო: state_owner,
-              color:{private:"#c6db62",state:"#7ec67c"}
+          } else if (name === "Status") {
+            layer.features.forEach(({ properties }) => {
+              const {
+                name_ge,
+                color_one,
+                color_two,
+                legal_farm,
+                household_farm,
+              } = properties;
+              status.push({
+                name_ge,
+                "შინა მეურნეობა": household_farm,
+                "იურიდიული პირი": legal_farm,
+                color: { first: color_one, second: color_two },
+              });
+              summarized[name] = status;
             });
-            summarized[ownershipTypeHeader] = ownershipType;
-            agro.push({
-              name_ge,
-              "სათიბი და საძოვარი": natural_meadow,
-              სახნავი: arable_land,
-              "მრავალწლიური ნარგავი": parennial_plant,
-              სათბური: greenhouse,
-              color:{first:"#34a055",second:"#bd6d2f",third:"#ee127a",fourth:"#6d70b7"}
+          } else if (name === "Agroforms") {
+            layer.features.forEach(({ properties }) => {
+              const {
+                name_ge,
+                color_one,
+                color_two,
+                color_three,
+                color_four,
+                greenhouse,
+                arable,
+                natural,
+                parennial,
+              } = properties;
+              agro.push({
+                name_ge,
+                "სათიბი და საძოვარი": natural,
+                ისახნავი: arable,
+                "მრავალწლიანი ნარგავი": parennial,
+                სათბური: greenhouse,
+                color: {
+                  first: color_one,
+                  second: color_two,
+                  third: color_three,
+                  fourth: color_four,
+                },
+              });
+              summarized[name] = agro;
             });
-            summarized[agroHeader] = agro;
-          });
+          }
         } else if (group === "Precipitation") {
           layer.features.forEach(({ properties }) => {
             const { name_ge, description_en, color, area, index } = properties;

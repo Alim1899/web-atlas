@@ -5,7 +5,6 @@ import MapHeaders from "../Helpers/MapHeaders";
 
 const Chart = ({ chartData, activeLayers, selectedLayer, handleSelected }) => {
   const selectedChart = chartData.find((el) => el.id === selectedLayer);
-console.log(selectedLayer);
   return (
     <DraggableContainer header="დიაგრამა">
       <div className={classes.chart}>

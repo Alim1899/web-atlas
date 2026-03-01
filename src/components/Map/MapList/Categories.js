@@ -352,8 +352,8 @@ export const mapCategories = [
     icon: GiMoneyStack,
     name: "ეკონომიკა",
     layers: [
-       {
-        "ბოტანიკა": [
+      {
+        ბოტანიკა: [
           {
             id: "botanics",
             label: "ბოტანიკურ-აგრონომიული არეები",
@@ -361,8 +361,8 @@ export const mapCategories = [
           },
         ],
       },
-       {
-        "ელექტროენერგეტიკა": [
+      {
+        ელექტროენერგეტიკა: [
           {
             id: "energy",
             label: "ელექტროენერგეტიკა",
@@ -370,7 +370,7 @@ export const mapCategories = [
           },
         ],
       },
-       {
+      {
         "კულტურულ მცენარეთა ზონები": [
           {
             id: "cultivate",
@@ -379,19 +379,36 @@ export const mapCategories = [
           },
         ],
       },
-        {
-        "სოფლის მეურნეობა": [
+
+      {
+        "მეურნეობის სარგებლობაში არსებული მიწის ფართობი, 2021": [
           {
-            id: "farming",
-            label: "მეურნეობის სარგებლობაში არსებული მიწის ფართობი, 2021",
+            id: "ownership",
+            label:
+              "სასოფლო-სამეურნეო მიწების განაწილება საკუთრების ფორმების მიხედვით (%).",
             type: "polygon",
           },
-              {
+          {
+            id: "status",
+            label: "მეურნეობების რაოდენობა იურიდიული სტატუსის მიხედვით",
+            type: "polygon",
+          },
+          {
+            id: "agroforms",
+            label:
+              "მეურნეობის სარგებლობაში არსებული სასოფლო-სამეურნეო მიწის ფართობი მიწათსარგებლობის ფორმების მიხედვით (ჰა)",
+            type: "polygon",
+          },
+        ],
+      },
+      {
+        "სოფლის მეურნეობა": [
+          {
             id: "beneficiars",
             label: "სოფლის მეურნეობის პროექტების ბენეფიციარები 2019-2024",
             type: "polygon",
           },
-             {
+          {
             id: "production",
             label: "სოფლის მეურნეობის საწარმოო მიმართულება",
             type: "polygon",
@@ -405,14 +422,13 @@ export const mapCategories = [
             label: "მზის ნათების წლიური ხანგრძლივობა (საათი)",
             type: "polygon",
           },
-            {
+          {
             id: "sunstations",
             label: "მზის ელექტროსადგურები",
             type: "points",
           },
         ],
       },
-             
     ],
   },
   {
@@ -421,7 +437,7 @@ export const mapCategories = [
     name: "მოსახლეობა",
     layers: [],
   },
-  
+
   {
     key: "education",
     icon: FaBookOpenReader,
@@ -440,7 +456,7 @@ export const mapCategories = [
     name: "ტურიზმი",
     layers: [
       {
-      "ბუნების ძეგლები": [
+        "ბუნების ძეგლები": [
           {
             id: "waterfall",
             label: "ბუნების ძეგლები",
