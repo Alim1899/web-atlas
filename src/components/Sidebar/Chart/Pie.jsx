@@ -6,16 +6,21 @@ import {
   ResponsiveContainer,
   Sector,
 } from "recharts";
+import FarmingChart from "./FarmingChart";
 import { useState } from "react";
 
-const ChartPie = ({ data, dataKey, nameKey }) => {
+const ChartPie = ({selectedLayer, data, dataKey, nameKey }) => {
   const [activeIndex, setActiveIndex] = useState(null);
   const [tooltipIndex, setTooltipIndex] = useState(null);
 
+
+  
   const getOpacity = (index) =>
     activeIndex === null || activeIndex === index ? 1 : 0.35;
-
   const activeData = tooltipIndex !== null ? data[tooltipIndex] : null;
+  if(selectedLayer==='farming')return <FarmingChart data={data}/>
+
+  console.log(data);
   return (
     <div className={classes.wrapper}>
       <div className={classes.chartArea}>

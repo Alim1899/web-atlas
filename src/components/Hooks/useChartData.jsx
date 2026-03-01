@@ -13,22 +13,68 @@ const useChartData = () => {
   const chartData = useMemo(() => {
     return dataChart
       .filter((el) => el[1].shape === "polygon")
+
       .map(([key, layer]) => {
         const summarized = {};
         const layerName = layer.layerName_en;
         const group = layer.group_en;
         const header = layer.legend_header;
-        if (group === "Precipitation") {
-          
-          layer.features.forEach(({properties})=>{
-            
-            const {name_ge,description_en,color,area,index}= properties;
-            
+
+        if (group === "Farming") {
+          const agro = [];
+          const ownershipType = [];
+          const legalStatus = [];
+          layer.features.forEach(({ properties }) => {
+            const {
+              name_ge,
+              Legal_farm,
+              arable_land,
+              greenhouse,
+              household_farm,
+              natural_meadow,
+              parennial_plant,
+              private_owner,
+              state_owner,
+            } = properties;
+            const legalStatusHeader =
+              "მეურნეობების რაოდენობა იურიდიული სტატუსის მიხედვით";
+            const ownershipTypeHeader =
+              "სასოფლო-სამეურნეო მიწების განაწილება საკუთრების ფორმების მიხედვით(%)";
+            const agroHeader =
+              "მეურნეობების სარგებლობაში არსებული სასოფლო-სამეურნეო მიწის ფართობი მიწათსარებლობის ფორმების მიხედვით (ჰა)";
+
+            legalStatus.push({
+              name_ge,
+              "იურიდიული პირი": Legal_farm,
+              "შინა მეურნეობა": household_farm,
+               color:{private:"#802771",state:"#de94c0"}
+            });
+            summarized[legalStatusHeader] = legalStatus;
+            ownershipType.push({
+              name_ge,
+              კერძო: private_owner,
+              სახელმწიფო: state_owner,
+              color:{private:"#c6db62",state:"#7ec67c"}
+            });
+            summarized[ownershipTypeHeader] = ownershipType;
+            agro.push({
+              name_ge,
+              "სათიბი და საძოვარი": natural_meadow,
+              სახნავი: arable_land,
+              "მრავალწლიური ნარგავი": parennial_plant,
+              სათბური: greenhouse,
+              color:{first:"#34a055",second:"#bd6d2f",third:"#ee127a",fourth:"#6d70b7"}
+            });
+            summarized[agroHeader] = agro;
+          });
+        } else if (group === "Precipitation") {
+          layer.features.forEach(({ properties }) => {
+            const { name_ge, description_en, color, area, index } = properties;
             const name = description_en;
             if (!summarized[name]) {
               summarized[name] = {
                 name_ge: description_en || "",
-             
+
                 description_en: name_ge ? name_ge : [],
                 area: area?.toFixed(2) || "",
                 totalArea: 0,
@@ -36,10 +82,8 @@ const useChartData = () => {
                 index,
               };
             }
-               summarized[name].totalArea += area;
-
-          })
-          
+            summarized[name].totalArea += area;
+          });
         } else {
           layer.features.forEach(({ properties }) => {
             const {
@@ -86,7 +130,7 @@ const useChartData = () => {
         return {
           layerName: layerName || "",
           id: key,
-          header:header,
+          header: header,
           data: summarized,
         };
       });

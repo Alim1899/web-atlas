@@ -143,7 +143,6 @@ const polygonLegend = ( data, features,groupEn,layer ) => {
 
           data.sort((a, b) => (a.index ?? 0) - (b.index ?? 0));
         } else {
-          
           let i = 1;
           features.forEach((feature) => {
             const { name_ge, description_ge, color, index } =

@@ -5,7 +5,7 @@ import MapHeaders from "../Helpers/MapHeaders";
 
 const Chart = ({ chartData, activeLayers, selectedLayer, handleSelected }) => {
   const selectedChart = chartData.find((el) => el.id === selectedLayer);
-
+console.log(selectedLayer);
   return (
     <DraggableContainer header="დიაგრამა">
       <div className={classes.chart}>
@@ -25,9 +25,10 @@ const Chart = ({ chartData, activeLayers, selectedLayer, handleSelected }) => {
           <div className={classes.diagram}>
             <ChartPie
               key={selectedChart.id}
-              data={Object.values(selectedChart.data)}
+              data={selectedLayer==='farming'?selectedChart.data:Object.values(selectedChart.data)}
               dataKey="totalArea"
               nameKey="name_ge"
+              selectedLayer={selectedLayer}
             />
           </div>
         )}
