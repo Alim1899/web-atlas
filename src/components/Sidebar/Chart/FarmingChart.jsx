@@ -29,7 +29,7 @@ export default function FarmingChart({ data }) {
   if (selectedKey && !keys.includes(selectedKey)) {
     setSelectedKey(keys[0] ?? "");
   }
-
+console.log(data);
   const rows = data?.[selectedKey] ?? [];
   return (
     <div className={classes.farming}>

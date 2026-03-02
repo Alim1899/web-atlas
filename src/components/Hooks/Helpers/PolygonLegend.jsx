@@ -159,7 +159,6 @@ const polygonLegend = (data, features, groupEn, layer) => {
       const { name_ge,color, index } = feature.properties;
 
 const txt = name_ge;
-console.log(index, i);
       if (txt && !data.some((d) => d.txt === txt && d.color === color)) {
         data.push({ txt, color, index: index || i, unicode: index });
         i++;

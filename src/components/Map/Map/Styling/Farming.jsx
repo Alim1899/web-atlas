@@ -66,6 +66,19 @@ export function handleFarming({ name, enabled, feature, extra, L, layer }) {
       extra.color_four,
     ];
   }
+    if (name === "beneficiars") {
+    values = [
+      extra.agro_credit,
+      extra.agro_insurance,
+      extra.plant_future,
+    
+    ];
+    colors = [
+      extra.color_one,
+      extra.color_two,
+      extra.color_three,
+    ];
+  }
 
   if (!values.some((v) => Number(v))) return true;
 

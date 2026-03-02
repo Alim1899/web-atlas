@@ -17,11 +17,11 @@ export const pieSvg = ({ values = [], colors = [], size = 70 }) => {
   const total = cleanValues.reduce((a, b) => a + b, 0) || 1;
 
   const r = size / 2;
-  const cx = r;
-  const cy = r;
+  const cx = r-50;
+  const cy = r-70;
 
   // how far labels go outside
-  const pad = Math.round(size * 0.8); // tweak: 0.6–1.0
+  const pad = Math.round(size * 1); // tweak: 0.6–1.0
 
   // IMPORTANT: bigger "canvas"
   const vbX = -pad;
@@ -29,8 +29,8 @@ export const pieSvg = ({ values = [], colors = [], size = 70 }) => {
 
   let a0 = -Math.PI / 2;
 
-  const labelRadius = r * 1.45;
-  const elbowRadius = r * 1.08;
+  const labelRadius = r * 1.95;
+  const elbowRadius = r * 1.68;
 
   const slices = cleanValues.map((v, i) => {
     const da = (v / total) * Math.PI * 2;
@@ -46,7 +46,7 @@ export const pieSvg = ({ values = [], colors = [], size = 70 }) => {
     const lp = polar(cx, cy, labelRadius, mid);
 
     const isRight = lp.x >= cx;
-    const tx = lp.x + (isRight ? 6 : -6);
+    const tx = lp.x + (isRight ? 10 : -10);
 
     const showLabel = true;
 
@@ -61,7 +61,7 @@ export const pieSvg = ({ values = [], colors = [], size = 70 }) => {
       elbowY: elbow.y,
       tx,
       ty: lp.y,
-      anchor: isRight ? "start" : "end",
+      anchor:isRight?"start": 'end',
       label: showLabel ? String(Math.round(v)) : "",
       showLabel,
     };
@@ -94,6 +94,20 @@ export const pieSvg = ({ values = [], colors = [], size = 70 }) => {
       .join("")}
   </svg>`;
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 export const bubbleSvg = (
   legal,

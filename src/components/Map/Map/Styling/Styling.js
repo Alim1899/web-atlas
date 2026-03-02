@@ -83,7 +83,7 @@ export const onEachPolygonFeature = (feature, layer, enabled = true, name) => {
   const extra = feature.properties;
 
   // ✅ ONLY farming uses symbols logic
-  if (["ownership", "status", "agroforms"].includes(name)) {
+  if (["ownership", "status", "agroforms","beneficiars"].includes(name)) {
   const handled = handleFarming({
     name,
     enabled,
@@ -94,8 +94,6 @@ export const onEachPolygonFeature = (feature, layer, enabled = true, name) => {
   });
   if (handled) return;
   } else {
-    // ✅ EVERY OTHER LAYER: your code exactly
-    // Always clear previous bindings (important when re-rendering / multiple layers)
     layer.unbindTooltip?.();
     layer.unbindPopup?.();
 
@@ -107,7 +105,7 @@ export const onEachPolygonFeature = (feature, layer, enabled = true, name) => {
     if (name_ge != null && index != null) {
       layer.bindTooltip(
         `<div style="
-        font-weight:900;
+        font-weight:800;
         height:20px;
         width:20px;
         text-align:center;

@@ -24,7 +24,9 @@ const useChartData = () => {
           const ownership = [];
           const status = [];
           const agro = [];
+          const benef = []
           const name = layer.layerName_en;
+          console.log(name);
           if (name === "Ownership") {
             layer.features.forEach(({ properties }) => {
               const {
@@ -86,6 +88,31 @@ const useChartData = () => {
                 },
               });
               summarized[name] = agro;
+            });
+          } if (name === "Beneficiars") {
+            layer.features.forEach(({ properties }) => {
+              const {
+                name_ge,
+                color_one,
+                color_two,
+                color_three,
+                agro_credit,
+                agro_insurance,
+                plant_future,
+              } = properties;
+              benef.push({
+                name_ge,
+                "დანერგე მომავალი": plant_future,
+                "აგრო დაზღვევა": agro_insurance,
+                "შეღავათიანი აგროკრედიტი": agro_credit,
+                color: {
+                  first: color_one,
+                  second: color_two,
+                  third: color_three,
+           
+                },
+              });
+              summarized[name] = benef;
             });
           }
         } else if (group === "Precipitation") {

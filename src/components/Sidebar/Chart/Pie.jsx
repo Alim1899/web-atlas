@@ -10,7 +10,7 @@ const ChartPie = ({ selectedLayer, data, dataKey, nameKey }) => {
   const getOpacity = (index) =>
     activeIndex === null || activeIndex === index ? 1 : 0.35;
   const activeData = tooltipIndex !== null ? data[tooltipIndex] : null;
-  if (["ownership", "status", "agroforms"].includes(selectedLayer))
+  if (["ownership", "status", "agroforms",'beneficiars'].includes(selectedLayer))
     return <FarmingChart data={data} />;
 
   return (
