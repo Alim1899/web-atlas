@@ -1,8 +1,7 @@
 import L from "leaflet";
 import point from "../../../../assets/map/point.svg";
 import "leaflet-polylinedecorator";
-import { centroid } from "@turf/turf";
-import { pieSvg } from "./Symbols";
+import { handleFarming } from "./Farming";
 export const pointToLayer = (feature, latlng) => {
   const name = feature.properties.name_en;
   if (!latlng || !Number.isFinite(latlng.lat) || !Number.isFinite(latlng.lng)) {
@@ -80,106 +79,20 @@ export function polygonStyle(featre, layer, id, fillColor) {
 }
 
 export const onEachPolygonFeature = (feature, layer, enabled = true, name) => {
-  const addPieMarker = ({ layer, center, values, colors, size = 70 }) => {
-
-    const place = () => {
-      if (!layer._map) return;
-
-      // cleanup old
-      if (layer.__farmingMarkers?.length) {
-        layer.__farmingMarkers.forEach((m) => m.remove());
-      }
-
-  
-const html = pieSvg({ values, colors, size });
-
-const icon = L.divIcon({
-  className: "farming-icon",
-  style:'overflow:visible',
-  html,
-  iconSize: [size, size],
-  iconAnchor: [size, size],
-    
-      });
-
-      const marker = L.marker(center, { icon, interactive: false }).addTo(
-        layer._map,
-      );
-
-      layer.__farmingMarkers = [marker];
-    };
-
-    if (layer._map) place();
-    else layer.once("add", place);
-  };
+ 
   const extra = feature.properties;
-  // clear existing tooltip/popup
-  layer.unbindTooltip?.();
-  layer.unbindPopup?.();
-  // remove old markers if toggling/re-rendering
-  if (layer.__farmingMarkers) {
-    layer.__farmingMarkers.forEach((m) => m.remove());
-    layer.__farmingMarkers = null;
-  }
 
   // ✅ ONLY farming uses symbols logic
   if (["ownership", "status", "agroforms"].includes(name)) {
-    if (!enabled) return;
-    const { name_ge } = feature.properties || {};
-    if (!name_ge) return;
-    // need lookup data
-
-    if (name === "status") {
-      const values = [extra.legal_farm, extra.household_farm];
-      const colors = [extra.color_one, extra.color_two];
-
-      if (!values.some((v) => Number(v))) return;
-
-      const c = centroid(feature).geometry.coordinates;
-      const center = L.latLng(c[1], c[0]);
-
-      addPieMarker({ layer, center, values, colors, size: 70 });
-    } else if (name === "ownership") {
-      const values = [extra.private_owner, extra.state_owner];
-      const colors = [extra.color_one, extra.color_two];
-
-      if (!values.some((v) => Number(v))) return;
-
-      const c = centroid(feature).geometry.coordinates;
-      const center = L.latLng(c[1], c[0]);
-
-      addPieMarker({ layer, center, values, colors, size: 70 });
-    } else if (name === "agroforms") {
-      const values = [
-        extra.natural,
-        extra.arable,
-        extra.greenhouse,
-        extra.parennial,
-      ];
-      const colors = [
-        extra.color_one,
-        extra.color_two,
-        extra.color_three,
-        extra.color_four,
-      ];
-
-      if (!values.some((v) => Number(v))) return;
-
-      const c = centroid(feature).geometry.coordinates;
-      const center = L.latLng(c[1], c[0]);
-
-      addPieMarker({ layer, center, values, colors, size: 70 });
-    }
-
-    // cleanup on remove
-    layer.once("remove", () => {
-      if (layer.__farmingMarkers) {
-        layer.__farmingMarkers.forEach((m) => m.remove());
-        layer.__farmingMarkers = null;
-      }
-    });
-
-    return; // ✅ STOP: do not run your normal polygon code for farming
+  const handled = handleFarming({
+    name,
+    enabled,
+    feature,
+    extra,
+    L,
+    layer,
+  });
+  if (handled) return;
   } else {
     // ✅ EVERY OTHER LAYER: your code exactly
     // Always clear previous bindings (important when re-rendering / multiple layers)
