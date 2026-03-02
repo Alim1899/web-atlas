@@ -1,162 +1,187 @@
-const polygonLegend = ( data, features,groupEn,layer ) => {
-   if (groupEn === "Geology") {
-          features.forEach((feature) => {
-            const { name_ge, description_ge, index, color, unicode } =
-              feature.properties;
-            const txt = description_ge || name_ge;
-            if (!data.some((d) => d.txt === txt)) {
-              data.push({
-                txt,
-                color,
-                unicode,
-                index,
-              });
-            }
-            data.sort((a, b) => (a.index ?? 0) - (b.index ?? 0));
-          });
-        } else if (
-          groupEn === "Fresh groundwater" ||
-          groupEn === "Geomorphology"
-        ) {
-          const grouped = [];
-          features.forEach((feature) => {
-            const {
-              name_ge,
-              unicode,
-              description_ge,
-              subheader,
-              color,
-              index,
-            } = feature.properties;
+const polygonLegend = (data, features, groupEn, layer) => {
+  console.log(groupEn);
+  if (groupEn === "Geology") {
+    features.forEach((feature) => {
+      const { name_ge, description_ge, index, color, unicode } =
+        feature.properties;
+      const txt = description_ge || name_ge;
+      if (!data.some((d) => d.txt === txt)) {
+        data.push({
+          txt,
+          color,
+          unicode,
+          index,
+        });
+      }
+      data.sort((a, b) => (a.index ?? 0) - (b.index ?? 0));
+    });
+  } else if (groupEn === "Fresh groundwater" || groupEn === "Geomorphology") {
+    const grouped = [];
+    features.forEach((feature) => {
+      const { name_ge, unicode, description_ge, subheader, color, index } =
+        feature.properties;
 
-            const txt = description_ge || name_ge;
-            if (!txt) return;
+      const txt = description_ge || name_ge;
+      if (!txt) return;
 
-            const key = subheader || "";
+      const key = subheader || "";
 
-            if (!grouped[key]) {
-              grouped[key] = [];
-            }
+      if (!grouped[key]) {
+        grouped[key] = [];
+      }
 
-            const exists = grouped[key].some(
-              (d) => d.txt === txt && d.color === color,
-            );
+      const exists = grouped[key].some(
+        (d) => d.txt === txt && d.color === color,
+      );
 
-            if (!exists) {
-              grouped[key].push({
-                txt,
-                color,
-                subheader,
-                index,
-                unicode: unicode || index,
-              });
-            }
-          });
-          data.push(
-            ...Object.entries(grouped)
-              .map(([subheader, items]) => ({
-                subheader,
-                items: items.sort((a, b) => (a.index ?? 0) - (b.index ?? 0)), // sort inside each group
-              }))
-              .sort(
-                (a, b) => (a.items[0]?.index ?? 0) - (b.items[0]?.index ?? 0),
-              ),
-          );
-        } else if (groupEn=== "Precipitation") {
-          features.forEach((feature) => {
-            const { description_en, color } = feature.properties;
-            const txt = description_en;
-            if (txt && !data.some((d) => d.txt === txt)) {
-              data.push({ txt, color });
-            }
-          });
-        } else if (groupEn === "Landscape" || groupEn === "Soils") {
-          features.forEach((feature) => {
-            const { name_ge, color, index } = feature.properties;
-            const txt = name_ge;
-            if (!data.some((d) => d.txt === txt)) {
-              data.push({
-                txt,
-                color,
-                unicode: index,
-              });
-            }
-            data.sort((a, b) => (a.unicode ?? 0) - (b.unicode ?? 0));
-          });
-        } else if (layer === "Agroclimatic Zones") {
-          const grouped = {}; // <-- temp object
+      if (!exists) {
+        grouped[key].push({
+          txt,
+          color,
+          subheader,
+          index,
+          unicode: unicode || index,
+        });
+      }
+    });
+    data.push(
+      ...Object.entries(grouped)
+        .map(([subheader, items]) => ({
+          subheader,
+          items: items.sort((a, b) => (a.index ?? 0) - (b.index ?? 0)), // sort inside each group
+        }))
+        .sort((a, b) => (a.items[0]?.index ?? 0) - (b.items[0]?.index ?? 0)),
+    );
+  } else if (groupEn === "Precipitation") {
+    features.forEach((feature) => {
+      const { description_en, color } = feature.properties;
+      const txt = description_en;
+      if (txt && !data.some((d) => d.txt === txt)) {
+        data.push({ txt, color });
+      }
+    });
+  } else if (groupEn === "Landscape" || groupEn === "Soils") {
+    features.forEach((feature) => {
+      const { name_ge, color, index } = feature.properties;
+      const txt = name_ge;
+      if (!data.some((d) => d.txt === txt)) {
+        data.push({
+          txt,
+          color,
+          unicode: index,
+        });
+      }
+      data.sort((a, b) => (a.unicode ?? 0) - (b.unicode ?? 0));
+    });
+  } else if (layer === "Agroclimatic Zones") {
+    const grouped = {}; // <-- temp object
 
-          features.forEach((feature) => {
-            const { name_ge, description_ge, color, subheader, index } =
-              feature.properties;
+    features.forEach((feature) => {
+      const { name_ge, description_ge, color, subheader, index } =
+        feature.properties;
 
-            const txt = description_ge || name_ge;
-            if (!txt) return;
+      const txt = description_ge || name_ge;
+      if (!txt) return;
 
-            const key = subheader || "";
+      const key = subheader || "";
 
-            if (!grouped[key]) {
-              grouped[key] = [];
-            }
+      if (!grouped[key]) {
+        grouped[key] = [];
+      }
 
-            // avoid duplicates
-            const exists = grouped[key].some(
-              (d) => d.txt === txt && d.color === color,
-            );
+      // avoid duplicates
+      const exists = grouped[key].some(
+        (d) => d.txt === txt && d.color === color,
+      );
 
-            if (!exists) {
-              grouped[key].push({ txt, color, subheader, index });
-            }
-          });
+      if (!exists) {
+        grouped[key].push({ txt, color, subheader, index });
+      }
+    });
 
-          // 👉 convert to final array structure
-          data.push(
-            ...Object.entries(grouped)
-              .map(([subheader, items]) => ({
-                subheader,
-                items: items.sort((a, b) => (a.index ?? 0) - (b.index ?? 0)), // sort inside each group
-              }))
-              .sort(
-                (a, b) => (a.items[0]?.index ?? 0) - (b.items[0]?.index ?? 0),
-              ), // sort groups by first index
-          );
-        } else if (groupEn === "Warm days") {
-          features.forEach((feature) => {
-            const { name_ge, description_ge, color } = feature.properties;
-            const txt = description_ge || name_ge;
+    // 👉 convert to final array structure
+    data.push(
+      ...Object.entries(grouped)
+        .map(([subheader, items]) => ({
+          subheader,
+          items: items.sort((a, b) => (a.index ?? 0) - (b.index ?? 0)), // sort inside each group
+        }))
+        .sort((a, b) => (a.items[0]?.index ?? 0) - (b.items[0]?.index ?? 0)), // sort groups by first index
+    );
+  } else if (groupEn === "Warm days") {
+    features.forEach((feature) => {
+      const { name_ge, description_ge, color } = feature.properties;
+      const txt = description_ge || name_ge;
 
-            if (txt && !data.some((d) => d.txt === txt && d.color === color)) {
-              data.push({ txt, color });
-            }
-          });
-        } else if(groupEn==='Botanics') {
-          let i = 1;
-          features.forEach((feature) => {
-            const { name_ge, description_ge, color, index,unicode } =
-              feature.properties;
-            const txt = description_ge || name_ge;
-            if (txt && !data.some((d) => d.txt === txt && d.color === color)) {
-              data.push({ txt, color, index: index || i, unicode:unicode|| index ||i });
-              i++;
-            }
-          });
+      if (txt && !data.some((d) => d.txt === txt && d.color === color)) {
+        data.push({ txt, color });
+      }
+    });
+  } else if (groupEn === "Botanics") {
+    let i = 1;
+    features.forEach((feature) => {
+      const { name_ge, description_ge, color, index, unicode } =
+        feature.properties;
+      const txt = description_ge || name_ge;
+      if (txt && !data.some((d) => d.txt === txt && d.color === color)) {
+        data.push({
+          txt,
+          color,
+          index: index || i,
+          unicode: unicode || index || i,
+        });
+        i++;
+      }
+    });
 
-          data.sort((a, b) => (a.index ?? 0) - (b.index ?? 0));
-        } else {
-          let i = 1;
-          features.forEach((feature) => {
-            const { name_ge, description_ge, color, index } =
-              feature.properties;
+    data.sort((a, b) => (a.index ?? 0) - (b.index ?? 0));
+  } else if (groupEn === "Farming") {
+    const { color_one, color_two,color_three,color_four, index } = features[0].properties;
+    if(layer==="Ownership"){
+        data.push({ txt: "კერძო საკუთრება", color: color_one, index });
+    data.push({ txt: "სახელმწიფო საკუთრება", color: color_two, index });
+    }else if(layer==='Status'){
+      data.push({ txt: "შინა მეურნეობა", color: color_one, index });
+    data.push({ txt: "იურიდიული პირი", color: color_two, index });
+    }else if(layer==='Agroforms'){
+       data.push({ txt: "ბუნებრივი სათიბი და საძოვარი", color: color_one, index });
+    data.push({ txt: "სახნავი", color: color_two, index });
+     data.push({ txt: "მრავალწლიანი ნარგავი", color: color_three, index });
+    data.push({ txt: "სათბური", color: color_four, index });
+    }  else if(layer==='Beneficiars'){
+           data.push({ txt: "დანერგე მომავალი", color: color_one, index });
+    data.push({ txt: "აგროდაზღვევა", color: color_two, index });
+     data.push({ txt: "შეღავათიანი აგროკრედიტი", color: color_three, index });
+    }
+  }else if (groupEn==='Sunshine'){
+    let i = 1;
+    features.forEach((feature) => {
+      const { name_ge,color, index } = feature.properties;
 
-            const txt = description_ge || name_ge;
-            if (txt && !data.some((d) => d.txt === txt && d.color === color)) {
-              data.push({ txt, color, index: index || i, unicode: i });
-              i++;
-            }
-          });
+const txt = name_ge;
+console.log(index, i);
+      if (txt && !data.some((d) => d.txt === txt && d.color === color)) {
+        data.push({ txt, color, index: index || i, unicode: index });
+        i++;
+      }
+    });
 
-          data.sort((a, b) => (a.index ?? 0) - (b.index ?? 0));
-        
-        }
+    data.sort((a, b) => (a.index ?? 0) - (b.index ?? 0));
+
+  }else{
+    let i = 1;
+    features.forEach((feature) => {
+      const { name_ge, description_ge, color, index } = feature.properties;
+
+      const txt = description_ge || name_ge;
+      if (txt && !data.some((d) => d.txt === txt && d.color === color)) {
+        data.push({ txt, color, index: index || i, unicode: i });
+        i++;
+      }
+    });
+
+    data.sort((a, b) => (a.index ?? 0) - (b.index ?? 0));
+
+  }
 };
 export default polygonLegend;
