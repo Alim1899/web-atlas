@@ -346,10 +346,18 @@ const pointLegend = (data, features = [], layer, groupEn, type) => {
 features.forEach((feature) => {
         const { type_ge,index } = feature.properties || {};
         const sign = feature.sign;
-        console.log(index);
 
         if (type_ge && !data.some((d) => d.name === type_ge)) {
           data.push({ name: type_ge, sign,index });
+        }
+      });
+    },
+     Archeology:()=>{
+features.forEach((feature) => {
+        const { type_ge,index } = feature.properties || {};
+        const sign = feature.sign;
+        if (type_ge && !data.some((d) => d.name === type_ge)) {
+          data.push({ name: type_ge, sign,unicode:index,index });
         }
       });
     },

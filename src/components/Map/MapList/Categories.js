@@ -290,6 +290,15 @@ export const mapCategories = [
           },
         ],
       },
+       {
+        არქოლოგია: [
+          {
+            id: "archeology",
+            label: "არქეოლოგიური ძეგლები",
+            type: "points",
+          },
+        ],
+      },
       {
         ნაგებობები: [
           {

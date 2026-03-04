@@ -5,7 +5,7 @@ import { handleFarming } from "./Farming";
 export const pointToLayer = (feature, latlng) => {
   const name = feature.properties.name_en;
   const type = feature.properties.type_en;
-  const power = feature?.properties.power
+  const power = feature?.properties.power;
   if (!latlng || !Number.isFinite(latlng.lat) || !Number.isFinite(latlng.lng)) {
     console.warn("Invalid latlng", { latlng, feature });
     return null;
@@ -36,24 +36,22 @@ export const pointToLayer = (feature, latlng) => {
         if (size >= 5 && size < 6) return [29, 29];
         if (size >= 6) return [35, 35];
       }
-    }else if (type === "Hydroelectric power plant") {
-      console.log("yeas");
-      console.log(size);
+    } else if (type === "Hydroelectric power plant") {
       if (!size) return [[20, 20]];
       if (size < 1) return [11, 11];
       if (size >= 1 && size < 5) return [17, 17];
       if (size >= 5 && size < 14) return [23, 23];
       if (size >= 15) return [65, 65];
-    }if (type === "Thermal power plant") {
-      console.log("yeas");
-      console.log(size);
+    }
+    if (type === "Thermal power plant") {
       if (!size) return [[20, 20]];
-      if (size ===110) return [11, 11];
+      if (size === 110) return [11, 11];
       if (size >= 230 && size < 270) return [17, 17];
-      if (size ===300) return [65, 65];
+      if (size === 300) return [65, 65];
     }
     return [40, 40]; // fallback
   };
+
   const svgToDataUrl = (svg) =>
     `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
 
@@ -62,7 +60,7 @@ export const pointToLayer = (feature, latlng) => {
 
   const size = feature.properties?.size;
 
-  const iconSize = getIconSize(power?power:size,type)[0];
+  const iconSize = getIconSize(power ? power : size, type)[0];
 
   const marker = L.marker(latlng, {
     icon: L.divIcon({
@@ -155,9 +153,9 @@ export const onEachPointFeature = (feature, layer, enabled = true) => {
   if (!enabled) return;
   const { name_ge, name, index, unicode, type_ge, location_ge } =
     feature.properties || {};
-  const title = name_ge || name || "";
+  const title = name_ge || name || location_ge;
   const realIndex = unicode ?? index; // keep undefined if missing
-
+console.log(title);
   const type = type_ge ?? location_ge ?? "";
 
   // Popup on click

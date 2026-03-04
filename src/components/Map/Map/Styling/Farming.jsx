@@ -1,6 +1,6 @@
 // Farming.js
 import { centroid } from "@turf/turf";
-import { pieSvg } from "./Symbols.js";
+import { pieSvg } from "./symbols.js";
 
 export function handleFarming({ name, enabled, feature, extra, L, layer }) {
 
