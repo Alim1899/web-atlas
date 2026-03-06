@@ -290,7 +290,7 @@ export const mapCategories = [
           },
         ],
       },
-       {
+      {
         არქოლოგია: [
           {
             id: "archeology",
@@ -408,7 +408,7 @@ export const mapCategories = [
               "მეურნეობის სარგებლობაში არსებული სასოფლო-სამეურნეო მიწის ფართობი მიწათსარგებლობის ფორმების მიხედვით (ჰა)",
             type: "polygon",
           },
-            {
+          {
             id: "beneficiars",
             label: "სოფლის მეურნეობის პროექტების ბენეფიციარები 2019-2024",
             type: "polygon",
@@ -417,7 +417,6 @@ export const mapCategories = [
       },
       {
         "სოფლის მეურნეობა": [
-        
           {
             id: "production",
             label: "სოფლის მეურნეობის საწარმოო მიმართულება",
@@ -445,9 +444,42 @@ export const mapCategories = [
     key: "population",
     icon: FaPeopleRoof,
     name: "მოსახლეობა",
-    layers: [],
+    layers: [
+      {
+        "იძულებით გადაადგილებული პირები": [
+          {
+            id: "ecomigrants",
+            label:
+              "ბუნების სტიქიური მოვლენების შედეგად იძულებით გადაადგილებული ოჯახების რაოდენობა დასახლებების მიხედვით",
+            type: "Polygon",
+          },
+        ],
+      },
+      {
+        "ეროვნული შემადგენლობა და აღმსარებლობა": [
+          {
+            id: "religy",
+            label: "აღმსარებლობა",
+            type: "polygon",
+          },
+          {
+            id: "ethnicity",
+            label: "ეროვნული შემადგენლობა (%).",
+            type: "polygon",
+          },
+        ],
+      },
+        {
+        "მაღალმთიანი დასახლებები": [
+          {
+            id: "mountsettlements",
+            label: "მაღალმთიანი დასახლებები, 2023",
+            type: "points",
+          },
+          ],
+      },
+    ],
   },
-
   {
     key: "education",
     icon: FaBookOpenReader,
