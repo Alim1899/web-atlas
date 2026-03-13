@@ -24,7 +24,7 @@ const useChartData = () => {
           const ownership = [];
           const status = [];
           const agro = [];
-          const benef = []
+          const benef = [];
           const name = layer.layerName_en;
           console.log(name);
           if (name === "Ownership") {
@@ -89,7 +89,8 @@ const useChartData = () => {
               });
               summarized[name] = agro;
             });
-          } if (name === "Beneficiars") {
+          }
+          if (name === "Beneficiars") {
             layer.features.forEach(({ properties }) => {
               const {
                 name_ge,
@@ -109,12 +110,13 @@ const useChartData = () => {
                   first: color_one,
                   second: color_two,
                   third: color_three,
-           
                 },
               });
               summarized[name] = benef;
             });
           }
+        } else if (group === "Merital") {
+          console.log(group);
         } else if (group === "Precipitation") {
           layer.features.forEach(({ properties }) => {
             const { name_ge, description_en, color, area, index } = properties;

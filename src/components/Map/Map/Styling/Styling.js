@@ -1,7 +1,8 @@
 import L from "leaflet";
 import point from "../../../../assets/map/point.svg";
 import "leaflet-polylinedecorator";
-import { handleFarming } from "./Farming";
+import {handleFarming} from './Farming'
+import { handleMerital } from "./Merital";
 export const pointToLayer = (feature, latlng) => {
   const name = feature.properties.name_en;
   const type = feature.properties.type_en;
@@ -108,6 +109,17 @@ export const onEachPolygonFeature = (feature, layer, enabled = true, name) => {
       layer,
     });
     if (handled) return;
+  } else if (["meritalmen", "meritalwomen"].includes(name)){
+    
+     const handled = handleMerital({
+    name,
+    enabled,
+    feature,
+    extra,
+    L,
+    layer,
+  });
+  if (handled) return;
   } else {
     layer.unbindTooltip?.();
     layer.unbindPopup?.();
