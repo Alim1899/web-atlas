@@ -167,6 +167,36 @@ const txt = name_ge;
 
     data.sort((a, b) => (a.index ?? 0) - (b.index ?? 0));
 
+  }else if(groupEn==="Merital"){
+    features.forEach((feature) => {      
+       const { color_one,color_two,color_three,color_four,color_five } = feature.properties;
+
+
+
+
+
+       const items = [
+      { txt: "იმყოფება ქორწინებაში", color: color_one, index: 1 },
+      { txt: "არასოდეს ყოფილა ქორწინებაში", color: color_two, index: 2 },
+      { txt: "ქვრივი", color: color_three, index: 3 },
+      { txt: "განქორწინებული, განშორებული", color: color_four, index: 4 },
+      { txt: "არ არის მითითებული", color: color_five, index: 5 },
+    ];
+
+
+items.forEach((item) => {
+
+      const exists = data.some(d => d.index === item.index);
+
+      if (!exists) {
+        data.push(item);
+      }
+
+    });
+    });
+   
+
+    data.sort((a, b) => (a.index ?? 0) - (b.index ?? 0));
   }else{
     let i = 1;
     features.forEach((feature) => {
