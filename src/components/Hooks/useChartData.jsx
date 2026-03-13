@@ -26,7 +26,6 @@ const useChartData = () => {
           const agro = [];
           const benef = [];
           const name = layer.layerName_en;
-          console.log(name);
           if (name === "Ownership") {
             layer.features.forEach(({ properties }) => {
               const {
@@ -116,8 +115,80 @@ const useChartData = () => {
             });
           }
         } else if (group === "Merital") {
-          console.log(group);
-        } else if (group === "Precipitation") {
+
+  const merital = [];
+  const name = layer.layerName_en;
+
+  layer.features.forEach(({ properties }) => {
+
+    const {
+      name_ge,
+
+      married_old,
+      married_new,
+
+      divorced_old,
+      divorced_new,
+
+      unmarried_old,
+      unmarried_new,
+
+      widowed_old,
+      widowed_new,
+
+      no_info_old,
+      no_info_new,
+
+      color_one,
+      color_two,
+      color_three,
+      color_four,
+      color_five,
+    } = properties;
+
+    merital.push({
+
+      name_ge,
+
+      old: {
+        "იმყოფება ქორწინებაში": married_old,
+        "არასოდეს ყოფილა ქორწინებაში": unmarried_old,
+        ქვრივი: widowed_old,
+        "განქორწინებული, განშორებული": divorced_old,
+        "არ არის მითითებული": no_info_old,
+
+        color: {
+          first: color_one,
+          second: color_two,
+          third: color_three,
+          fourth: color_four,
+          fifth: color_five,
+        },
+      },
+
+      new: {
+        "იმყოფება ქორწინებაში": married_new,
+        "არასოდეს ყოფილა ქორწინებაში": unmarried_new,
+        ქვრივი: widowed_new,
+        "განქორწინებული, განშორებული": divorced_new,
+        "არ არის მითითებული": no_info_new,
+
+        color: {
+          first: color_one,
+          second: color_two,
+          third: color_three,
+          fourth: color_four,
+          fifth: color_five,
+        },
+      }
+
+    });
+
+  });
+
+  summarized[name] = merital;
+
+}else if (group === "Precipitation") {
           layer.features.forEach(({ properties }) => {
             const { name_ge, description_en, color, area, index } = properties;
             const name = description_en;

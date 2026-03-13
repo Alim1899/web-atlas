@@ -54,11 +54,12 @@
 }
 
 /* || FARMING CHART */
-.farming {
+.farming,.marital {
   margin-top: 10px;
   text-align: center;
   color: var(--light-text);
 }
+
 .select{
 max-width: 40vw;
 }
@@ -69,9 +70,10 @@ max-width: 40vw;
   height: auto;
   background-color: var(--light-text);
 font-weight: 900;
+
  
 }
-.pies {
+.pies,.maritalPies {
   display: flex;
  flex-wrap: wrap;
   justify-content: center;
@@ -84,6 +86,13 @@ font-weight: 900;
   gap: 0;
   margin-top: 20px;
   font-weight: 900;
+}
+.maritalPie{
+  width: 30%;
+  margin: 0;
+  padding: 0;
+  gap: 0;
+  margin-top: 20px;
 }
 .farmHeader{
   text-align: center;

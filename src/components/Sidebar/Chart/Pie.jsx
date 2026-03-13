@@ -1,6 +1,7 @@
 import classes from "./Chart.module.css";
 import { PieChart, Pie, Cell, ResponsiveContainer, Sector } from "recharts";
 import FarmingChart from "./FarmingChart";
+import MeritalChart from "./MeritalChart";
 import { useState } from "react";
 
 const ChartPie = ({ selectedLayer, data, dataKey, nameKey }) => {
@@ -12,7 +13,8 @@ const ChartPie = ({ selectedLayer, data, dataKey, nameKey }) => {
   const activeData = tooltipIndex !== null ? data[tooltipIndex] : null;
   if (["ownership", "status", "agroforms",'beneficiars'].includes(selectedLayer))
     return <FarmingChart data={data} />;
-
+if (['meritalmen','meritalwomen'].includes(selectedLayer))
+  return <MeritalChart data={data} />;
   return (
     <div className={classes.wrapper}>
       <div className={classes.chartArea}>
