@@ -55,6 +55,9 @@ const topLayerId = activeLayers?.[activeLayers.length - 1]?.id;
                 activeLayers,
                 el[0],
                 feature.properties.color,
+                feature.properties.color_one,
+                 feature.properties.color_two,
+                 map
               )
             }
           />

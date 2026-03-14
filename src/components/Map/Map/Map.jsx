@@ -5,7 +5,7 @@ import JsonProvider from "./JsonProvider";
 import useMaps from "../../Context/MapContext/useMaps";
 
 function Map() {
-  const center = [41.42, 44.48];
+  const center = [41.42, 44.38];
   const { state } = useMaps();
   const { baselayer } = state;
   const { url, attribution } = baselayer;
@@ -14,7 +14,7 @@ function Map() {
       <div className={classes.shape}>
         <MapContainer
           center={center}
-          zoom={10}
+          zoom={10.2}
           zoomControl={false}
           style={{ height: "100%", width: "100%" }}
         >

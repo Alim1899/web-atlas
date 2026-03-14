@@ -1,8 +1,9 @@
 import L from "leaflet";
 import point from "../../../../assets/map/point.svg";
 import "leaflet-polylinedecorator";
-import {handleFarming} from './Farming'
+import { handleFarming } from "./Farming";
 import { handleMerital } from "./Merital";
+import  { Rate } from "./Rate";
 export const pointToLayer = (feature, latlng) => {
   const name = feature.properties.name_en;
   const type = feature.properties.type_en;
@@ -84,19 +85,26 @@ export const lineToLayer = (feature) => {
   };
 };
 
-export function polygonStyle(featre, layer, id, fillColor) {
-  const foundLayer = layer.find((lyr) => lyr.id === id) || {};
+export function polygonStyle(
+  feature,
+  layers,
+  id,
+  fillColor,
+) {
+  const foundLayer = layers.find((lyr) => lyr.id === id) || {};
   return {
-    fillColor: fillColor,
+    fillColor: fillColor||'lightblue',
     weight: foundLayer.weight,
     opacity: 1,
-    color: "gray",
+    color: "lightyellow",
     fillOpacity: foundLayer.opacity || 1,
   };
 }
 
 export const onEachPolygonFeature = (feature, layer, enabled = true, name) => {
   const extra = feature.properties;
+
+
 
   // ✅ ONLY farming uses symbols logic
   if (["ownership", "status", "agroforms", "beneficiars"].includes(name)) {
@@ -109,18 +117,27 @@ export const onEachPolygonFeature = (feature, layer, enabled = true, name) => {
       layer,
     });
     if (handled) return;
-  } else if (["meritalmen", "meritalwomen"].includes(name)){
-    
-     const handled = handleMerital({
-    name,
-    enabled,
-    feature,
-    extra,
-    L,
-    layer,
-  });
-  if (handled) return;
-  } else {
+  } else if (["meritalmen", "meritalwomen"].includes(name)) {
+    const handled = handleMerital({
+      name,
+      enabled,
+      feature,
+      extra,
+      L,
+      layer,
+    });
+    if (handled) return;
+  } else if(['birthrate','deathrate'].includes(name)){
+ const handled = Rate({
+      name,
+      enabled,
+      feature,
+      extra,
+      L,
+      layer,
+    });
+    if (handled) return;
+  } {
     layer.unbindTooltip?.();
     layer.unbindPopup?.();
 
@@ -167,7 +184,7 @@ export const onEachPointFeature = (feature, layer, enabled = true) => {
     feature.properties || {};
   const title = name_ge || name || location_ge;
   const realIndex = unicode ?? index; // keep undefined if missing
-console.log(title);
+  console.log(title);
   const type = type_ge ?? location_ge ?? "";
 
   // Popup on click

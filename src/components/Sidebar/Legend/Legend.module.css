@@ -34,7 +34,7 @@ flex-direction: column;
   grid-template-columns: 50% 50%;
 } */
 .legendColor{
-  width: 60px !important;
+  width: 75px !important;
   height: 40px;
   display: flex;
   justify-content: center;
@@ -43,9 +43,9 @@ color: var(--dark-text);
 font-weight: 900;
 margin-left: 0.5vw;
 
+
 }
 .span{
-
   font-size: clamp(0.6rem,2vw,1.1rem);
 }
 .legendIcon{

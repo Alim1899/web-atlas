@@ -22,6 +22,7 @@
     "dotenv": "^16.4.7",
     "firebase": "^11.3.1",
     "leaflet-polylinedecorator": "^1.6.0",
+    "leaflet.pattern": "^0.1.0",
     "prop-types": "^15.8.1",
     "react": "^19.0.0",
     "react-dnd": "^16.0.1",

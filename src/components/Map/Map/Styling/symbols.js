@@ -329,3 +329,80 @@ export const pieDoubleSvg = ({ oldValues, newValues, colors, size = 120 }) => {
   </svg>
   `;
 };
+
+
+export const halfCircleSvg = ({
+  size = 120,
+  color_old ,
+  color_new ,
+
+}) => {
+
+  const cx = size / 2;
+  const cy = size / 2;
+  const r = size * 0.48;
+
+  return `
+  <svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">
+
+    <!-- OLD half -->
+    <path
+      d="
+        M ${cx} ${cy - r}
+        A ${r} ${r} 0 0 1 ${cx} ${cy + r}
+        L ${cx} ${cy}
+        Z
+      "
+      fill="${color_new}"
+    />
+
+    <!-- NEW half -->
+    <path
+      d="
+        M ${cx} ${cy + r}
+        A ${r} ${r} 0 0 1 ${cx} ${cy - r}
+        L ${cx} ${cy}
+        Z
+      "
+      fill="${color_old}"
+    />
+
+    <circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#fff" stroke-width="2"/>
+
+      <line
+    x1="${cx}"
+    y1="${cy - r}"
+    x2="${cx}"
+    y2="${cy + r}"
+    stroke="#abccba"
+    stroke-width="2"
+  />
+    <text
+      x="${cx + r * 0.55}"
+      y="${cy}"
+      text-anchor="middle"
+      dominant-baseline="middle"
+      font-size="14"
+      font-weight="700"
+      fill="#112233"
+    >
+      2022
+    </text>
+  
+    <text
+      x="${cx - r * 0.55}"
+      y="${cy}"
+      text-anchor="middle"
+      dominant-baseline="middle"
+      font-size="14"
+      font-weight="700"
+      fill="#112233"
+    >
+    2012
+    </text>
+
+
+
+  </svg>
+  `;
+};

@@ -1,5 +1,4 @@
 const polygonLegend = (data, features, groupEn, layer) => {
-  console.log(groupEn);
   if (groupEn === "Geology") {
     features.forEach((feature) => {
       const { name_ge, description_ge, index, color, unicode } =
@@ -136,29 +135,34 @@ const polygonLegend = (data, features, groupEn, layer) => {
 
     data.sort((a, b) => (a.index ?? 0) - (b.index ?? 0));
   } else if (groupEn === "Farming") {
-    const { color_one, color_two,color_three,color_four, index } = features[0].properties;
-    if(layer==="Ownership"){
-        data.push({ txt: "კერძო საკუთრება", color: color_one, index });
-    data.push({ txt: "სახელმწიფო საკუთრება", color: color_two, index });
-    }else if(layer==='Status'){
+    const { color_one, color_two, color_three, color_four, index } =
+      features[0].properties;
+    if (layer === "Ownership") {
+      data.push({ txt: "კერძო საკუთრება", color: color_one, index });
+      data.push({ txt: "სახელმწიფო საკუთრება", color: color_two, index });
+    } else if (layer === "Status") {
       data.push({ txt: "შინა მეურნეობა", color: color_one, index });
-    data.push({ txt: "იურიდიული პირი", color: color_two, index });
-    }else if(layer==='Agroforms'){
-       data.push({ txt: "ბუნებრივი სათიბი და საძოვარი", color: color_one, index });
-    data.push({ txt: "სახნავი", color: color_two, index });
-     data.push({ txt: "მრავალწლიანი ნარგავი", color: color_three, index });
-    data.push({ txt: "სათბური", color: color_four, index });
-    }  else if(layer==='Beneficiars'){
-           data.push({ txt: "დანერგე მომავალი", color: color_one, index });
-    data.push({ txt: "აგროდაზღვევა", color: color_two, index });
-     data.push({ txt: "შეღავათიანი აგროკრედიტი", color: color_three, index });
+      data.push({ txt: "იურიდიული პირი", color: color_two, index });
+    } else if (layer === "Agroforms") {
+      data.push({
+        txt: "ბუნებრივი სათიბი და საძოვარი",
+        color: color_one,
+        index,
+      });
+      data.push({ txt: "სახნავი", color: color_two, index });
+      data.push({ txt: "მრავალწლიანი ნარგავი", color: color_three, index });
+      data.push({ txt: "სათბური", color: color_four, index });
+    } else if (layer === "Beneficiars") {
+      data.push({ txt: "დანერგე მომავალი", color: color_one, index });
+      data.push({ txt: "აგროდაზღვევა", color: color_two, index });
+      data.push({ txt: "შეღავათიანი აგროკრედიტი", color: color_three, index });
     }
-  }else if (groupEn==='Sunshine'){
+  } else if (groupEn === "Sunshine") {
     let i = 1;
     features.forEach((feature) => {
-      const { name_ge,color, index } = feature.properties;
+      const { name_ge, color, index } = feature.properties;
 
-const txt = name_ge;
+      const txt = name_ge;
       if (txt && !data.some((d) => d.txt === txt && d.color === color)) {
         data.push({ txt, color, index: index || i, unicode: index });
         i++;
@@ -166,38 +170,72 @@ const txt = name_ge;
     });
 
     data.sort((a, b) => (a.index ?? 0) - (b.index ?? 0));
+  } else if (groupEn === "Merital") {
+    features.forEach((feature) => {
+      const { color_one, color_two, color_three, color_four, color_five } =
+        feature.properties;
 
-  }else if(groupEn==="Merital"){
-    features.forEach((feature) => {      
-       const { color_one,color_two,color_three,color_four,color_five } = feature.properties;
+      const items = [
+        { txt: "იმყოფება ქორწინებაში", color: color_one, index: 1 },
+        { txt: "არასოდეს ყოფილა ქორწინებაში", color: color_two, index: 2 },
+        { txt: "ქვრივი", color: color_three, index: 3 },
+        { txt: "განქორწინებული, განშორებული", color: color_four, index: 4 },
+        { txt: "არ არის მითითებული", color: color_five, index: 5 },
+      ];
 
+      items.forEach((item) => {
+        const exists = data.some((d) => d.index === item.index);
 
-
-
-
-       const items = [
-      { txt: "იმყოფება ქორწინებაში", color: color_one, index: 1 },
-      { txt: "არასოდეს ყოფილა ქორწინებაში", color: color_two, index: 2 },
-      { txt: "ქვრივი", color: color_three, index: 3 },
-      { txt: "განქორწინებული, განშორებული", color: color_four, index: 4 },
-      { txt: "არ არის მითითებული", color: color_five, index: 5 },
-    ];
-
-
-items.forEach((item) => {
-
-      const exists = data.some(d => d.index === item.index);
-
-      if (!exists) {
-        data.push(item);
-      }
-
+        if (!exists) {
+          data.push(item);
+        }
+      });
     });
-    });
-   
 
     data.sort((a, b) => (a.index ?? 0) - (b.index ?? 0));
-  }else{
+  } else if (groupEn === "Population") {
+
+  const legendMap = new Map();
+
+  features.forEach((feature) => {
+
+    const {
+      rate_one,
+      rate_two,
+      color_one,
+      color_two
+    } = feature.properties;
+
+    if (rate_one && !legendMap.has(rate_one)) {
+      legendMap.set(rate_one, { txt: rate_one, color: color_one });
+    }
+
+    if (rate_two && !legendMap.has(rate_two)) {
+      legendMap.set(rate_two, { txt: rate_two, color: color_two });
+    }
+
+  });
+
+  const arr = Array.from(legendMap.values());
+
+  const getValue = (txt) => {
+    if (txt.startsWith(">")) return parseFloat(txt.replace(">", ""));
+    if (txt.includes("-")) return parseFloat(txt.split("-")[1]);
+    return parseFloat(txt);
+  };
+
+  arr.sort((a, b) => getValue(b.txt) - getValue(a.txt));
+
+  arr.forEach((d, i) => {
+    data.push({
+      txt: d.txt,
+      color: d.color,
+      index: i + 1,
+      unicode: d.txt
+    });
+  });
+
+} else {
     let i = 1;
     features.forEach((feature) => {
       const { name_ge, description_ge, color, index } = feature.properties;
@@ -210,7 +248,6 @@ items.forEach((item) => {
     });
 
     data.sort((a, b) => (a.index ?? 0) - (b.index ?? 0));
-
   }
 };
 export default polygonLegend;

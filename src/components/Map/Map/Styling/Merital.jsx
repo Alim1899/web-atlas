@@ -47,7 +47,7 @@ export function handleMerital({ enabled, feature, extra, L, layer }) {
 
   const { name_ge } = feature.properties || {};
   if (!name_ge) return true;
-
+console.log(extra);
   let oldValues = [];
   let newValues = [];
   let colors = [];
