@@ -446,6 +446,25 @@ export const mapCategories = [
     name: "მოსახლეობა",
     layers: [
       {
+        "საქალაქო და სასოფლო დასახლებები": [
+          {
+            id: "density",
+            label: "მოსახლეობის სიმჭიდროვე",
+            type: "polygon",
+          },
+          {
+            id: "pplcount",
+            label: "საქალაქო დასახლებები 1989-2014",
+            type: "polygon",
+          },
+          {
+            id: "villages",
+            label: "სასოფლო დასახლებები, 2014",
+            type: "points",
+          },
+        ],
+      },
+      {
         "მოსახლეობის რაოდენობის ცვლილება": [
           {
             id: "pplchange",
@@ -481,25 +500,7 @@ export const mapCategories = [
             },
           ],
       },
-      {
-        "საქალაქო და სასოფლო დასახლებები": [
-          {
-            id: "density",
-            label: "მოსახლეობის სიმჭიდროვე",
-            type: "polygon",
-          },
-          {
-            id: "pplcount",
-            label: "საქალაქო დასახლებები 1989-2014",
-            type: "polygon",
-          },
-          {
-            id: "pplbysettlement",
-            label: "სასოფლო დასახლებები, 2014",
-            type: "points",
-          },
-        ],
-      },
+      
       {
         "იძულებით გადაადგილებული პირები": [
           {
