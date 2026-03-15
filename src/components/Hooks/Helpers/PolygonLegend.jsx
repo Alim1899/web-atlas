@@ -195,73 +195,86 @@ const polygonLegend = (data, features, groupEn, layer) => {
     data.sort((a, b) => (a.index ?? 0) - (b.index ?? 0));
   } else if (groupEn === "Population") {
     const getValue = (txt) => {
-    if (txt.startsWith(">")) return parseFloat(txt.replace(">", ""));
-    if (txt.includes("-")) return parseFloat(txt.split("-")[1]);
-    return parseFloat(txt);
-  };
-if(layer==='Death rate'){
-  const legendMap = new Map();
+      if (txt.startsWith(">")) return parseFloat(txt.replace(">", ""));
+      if (txt.includes("-")) return parseFloat(txt.split("-")[1]);
+      return parseFloat(txt);
+    };
+    if (layer === "Death rate") {
+      const legendMap = new Map();
 
-  features.forEach((feature) => {
+      features.forEach((feature) => {
+        const { rate_one, rate_two, color_one, color_two } = feature.properties;
 
-    const {
-      rate_one,
-      rate_two,
-      color_one,
-      color_two
-    } = feature.properties;
+        if (rate_one && !legendMap.has(rate_one)) {
+          legendMap.set(rate_one, { txt: rate_one, color: color_one });
+        }
 
-    if (rate_one && !legendMap.has(rate_one)) {
-      legendMap.set(rate_one, { txt: rate_one, color: color_one });
+        if (rate_two && !legendMap.has(rate_two)) {
+          legendMap.set(rate_two, { txt: rate_two, color: color_two });
+        }
+      });
+
+      const arr = Array.from(legendMap.values());
+      arr.sort((a, b) => getValue(b.txt) - getValue(a.txt));
+
+      arr.forEach((d, i) => {
+        data.push({
+          txt: d.txt,
+          color: d.color,
+          index: i + 1,
+          unicode: d.txt,
+        });
+      });
     }
+    if (layer === "Birth rate") {
+      const legendMap = new Map([
+        ["> 14.5", { txt: "> 14.5", color: "#e5738a" }],
+        ["13.1 - 14.4", { txt: "13.1 - 14.4", color: "#e996a8" }],
+        ["11.5 - 12.9", { txt: "11.5 - 12.9", color: "#efb7c3" }],
+        ["10.0 - 11.4", { txt: "10.0 - 11.4", color: "#e6cfd5" }],
+        ["< 9.9", { txt: "< 9.9", color: "#e0e0e0" }],
+      ]);
+      const arr = Array.from(legendMap.values());
+      arr.sort((a, b) => getValue(b.txt) - getValue(a.txt));
 
-    if (rate_two && !legendMap.has(rate_two)) {
-      legendMap.set(rate_two, { txt: rate_two, color: color_two });
+      arr.forEach((d, i) => {
+        data.push({
+          txt: d.txt,
+          color: d.color,
+          index: i + 1,
+          unicode: d.txt,
+        });
+      });
     }
+    if(layer==='Population change'){
+      const grouped = {}
+      features.forEach((feature) => {
+        const {color,type_en,sub_header,index } = feature.properties;
+const txt =  type_en;
+ const key = sub_header || "";
+      if (!grouped[key]) {
+        grouped[key] = [];
+      }
 
-  });
-
-  const arr = Array.from(legendMap.values());
-    arr.sort((a, b) => getValue(b.txt) - getValue(a.txt));
-
-  arr.forEach((d, i) => {
-    console.log(d.color);
-    data.push({
-      txt: d.txt,
-      color: d.color,
-      index: i + 1,
-      unicode: d.txt
-    });
-  });
-}
-if(layer==="Birth rate"){
-   const legendMap = new Map([
-  ["> 14.5", { txt: "> 14.5", color: "#e5738a" }],
-  ["13.1 - 14.4", { txt: "13.1 - 14.4", color: "#e996a8" }],
-  ["11.5 - 12.9", { txt: "11.5 - 12.9", color: "#efb7c3" }],
-  ["10.0 - 11.4", { txt: "10.0 - 11.4", color: "#e6cfd5" }],
-  ["< 9.9", { txt: "< 9.9", color: "#e0e0e0" }]
-]);
-const arr = Array.from(legendMap.values());
-  arr.sort((a, b) => getValue(b.txt) - getValue(a.txt));
-
-  arr.forEach((d, i) => {
-    console.log(d.color);
-    data.push({
-      txt: d.txt,
-      color: d.color,
-      index: i + 1,
-      unicode: d.txt
-    });
-  });
-}
-  
-
-  
-
-
-
-} else {
+      // avoid duplicates
+      const exists = grouped[key].some(
+        (d) => d.txt === txt && d.color === color,
+      );
+      if (!exists) {
+        grouped[key].push({ txt, color, subheader:sub_header, index });
+      }
+      });
+      
+       data.push(
+      ...Object.entries(grouped)
+        .map(([subheader, items]) => ({
+          subheader,
+          items: items.sort((a, b) => (a.index ?? 0) - (b.index ?? 0)), // sort inside each group
+        }))
+        .sort((a, b) => (a.items[0]?.index ?? 0) - (b.items[0]?.index ?? 0)), // sort groups by first index
+    );
+    }
+  } else {
     let i = 1;
     features.forEach((feature) => {
       const { name_ge, description_ge, color, index } = feature.properties;
@@ -273,7 +286,6 @@ const arr = Array.from(legendMap.values());
       }
     });
 
-    data.sort((a, b) => (a.index ?? 0) - (b.index ?? 0));
   }
 };
 export default polygonLegend;

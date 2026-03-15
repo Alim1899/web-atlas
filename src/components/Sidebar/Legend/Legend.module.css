@@ -59,7 +59,9 @@ font-size: 1.1rem;
 }
 .subheader>h2{
   font-size: 1.3rem;
-  text-align: center;
+  text-align: left;
+  width: 90%;
+  margin: auto;
 }
 
 

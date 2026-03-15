@@ -188,7 +188,7 @@ const useChartData = () => {
           layer.features.forEach(({ properties }) => {
             const { name_ge, rate_one, rate_two, color_one, color_two } =
               properties;
-              console.log(properties.rate_one);
+              console.log(properties);
               if(name==='Birth rate'||name==='Death rate'){
                 birthrate.push({
               name_ge,
