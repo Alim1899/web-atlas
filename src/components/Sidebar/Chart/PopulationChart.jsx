@@ -67,24 +67,61 @@ function HalfCircle({ oldRate, newRate, oldColor, newColor, size = 120 }) {
     </svg>
   );
 }
+function RateCircle({ rate, color, size = 120 }) {
+  const cx = size / 2;
+  const cy = size / 2;
+  const r = size * 0.48;
 
-export default function PopulationChart({ data }) {
+  return (
+    <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
+      {/* circle */} <circle cx={cx} cy={cy} r={r} fill={color} />
+      ```
+      {/* value */}
+      <text
+        x={cx}
+        y={cy}
+        textAnchor="middle"
+        dominantBaseline="middle"
+        fontSize="14"
+        fontWeight="900"
+        fill="#112233"
+      >
+        {rate}
+      </text>
+    </svg>
+  );
+}
+
+export default function PopulationChart({ data, name }) {
+  console.log(name);
+  console.log(data[0]);
+
   if (!Array.isArray(data)) return null;
   return (
     <div className={classes.populationList}>
       {data[0].map((row, i) => (
         <div key={i} className={classes.populationItem}>
           <h4 className={classes.name}>{row.name_ge}</h4>
-          <div className={classes.item}>
+         
+            {["birthrate", "deathrate"].includes(name) && (
+               <div className={classes.item}>
             <span>2012</span>
-            <HalfCircle
-              oldRate={row.new.rate}
-              newRate={row.old.rate}
-              oldColor={row.old.color.second}
-              newColor={row.new.color.first}
-            />
-            <span>2022</span>
+              <HalfCircle
+                oldRate={row.new.rate}
+                newRate={row.old.rate}
+                oldColor={row.old.color.second}
+                newColor={row.new.color.first}
+              />
+              <span>2022</span>
           </div>
+            )}
+             {["pplchange"].includes(name) && (
+              <RateCircle
+                rate={row.rate}
+                color={row.color}
+              />
+            )}
+            
         </div>
       ))}
     </div>

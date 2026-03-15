@@ -184,32 +184,43 @@ const useChartData = () => {
           summarized[name] = merital;
         } else if (group === "Population") {
           const birthrate = [];
+          const pplchange = [];
           const name = layer.layerName_en;
           layer.features.forEach(({ properties }) => {
-            const { name_ge, rate_one, rate_two, color_one, color_two } =
-              properties;
-              console.log(properties);
-              if(name==='Birth rate'||name==='Death rate'){
-                birthrate.push({
+            const {
               name_ge,
-              old: {
-                rate: rate_one,
-                color: {
-                  first: color_one,
-                  second: color_two,
+              rate_one,
+              type_en,
+              rate_two,
+              color_one,
+              color_two,
+              color,
+            } = properties;
+            if (name === "Birth rate" || name === "Death rate") {
+              birthrate.push({
+                name_ge,
+                old: {
+                  rate: rate_one,
+                  color: {
+                    first: color_one,
+                    second: color_two,
+                  },
                 },
-              },
-              new: {
-                rate:rate_two,
-                color: {
-                  first: color_one,
-                  second: color_two,
+                new: {
+                  rate: rate_two,
+                  color: {
+                    first: color_one,
+                    second: color_two,
+                  },
                 },
-              },
-            });
-              }
-            summarized[name]=birthrate;
+              });
+              summarized[name] = birthrate;
+            } else if (name === "Population change") {
+              pplchange.push({ name_ge: name_ge, rate: type_en, color: color });
+              summarized[name] = pplchange;
+            }
           });
+          console.log(summarized);
         } else if (group === "Precipitation") {
           layer.features.forEach(({ properties }) => {
             const { name_ge, description_en, color, area, index } = properties;

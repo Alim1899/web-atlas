@@ -8,7 +8,7 @@ import { useState } from "react";
 const ChartPie = ({ selectedLayer, data, dataKey, nameKey }) => {
   const [activeIndex, setActiveIndex] = useState(null);
   const [tooltipIndex, setTooltipIndex] = useState(null);
-
+console.log(data);
   const getOpacity = (index) =>
     activeIndex === null || activeIndex === index ? 1 : 0.35;
   const activeData = tooltipIndex !== null ? data[tooltipIndex] : null;
@@ -18,8 +18,8 @@ const ChartPie = ({ selectedLayer, data, dataKey, nameKey }) => {
     return <FarmingChart data={data} />;
   if (["meritalmen", "meritalwomen"].includes(selectedLayer))
     return <MeritalChart data={data} />;
-  if (["birthrate", "deathrate"].includes(selectedLayer))
-    return <PopulationChart data={data} />;
+  if (["birthrate", "deathrate","pplchange"].includes(selectedLayer))
+    return <PopulationChart data={data} name={selectedLayer} />;
   return (
     <div className={classes.wrapper}>
       <div className={classes.chartArea}>
