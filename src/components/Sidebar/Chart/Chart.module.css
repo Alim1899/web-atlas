@@ -73,7 +73,7 @@ font-weight: 900;
 
  
 }
-.pies,.maritalPies {
+.pies,.maritalPies,.populationList {
   display: flex;
  flex-wrap: wrap;
   justify-content: center;
@@ -105,4 +105,23 @@ font-weight: 900;
 }
 .cell>div>div>div>ul{
   font-size: 0.6rem;
+}
+
+/* POPULATION */
+
+
+.populationItem{
+  width: 30%;
+  text-align: center;
+  color:var(--light-text);
+  margin: 10px ;
+}
+.name{
+  padding: 0;
+  margin: 5px;
+}
+.item{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

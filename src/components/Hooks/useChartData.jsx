@@ -115,80 +115,102 @@ const useChartData = () => {
             });
           }
         } else if (group === "Merital") {
+          const merital = [];
+          const name = layer.layerName_en;
 
-  const merital = [];
-  const name = layer.layerName_en;
+          layer.features.forEach(({ properties }) => {
+            const {
+              name_ge,
 
-  layer.features.forEach(({ properties }) => {
+              married_old,
+              married_new,
 
-    const {
-      name_ge,
+              divorced_old,
+              divorced_new,
 
-      married_old,
-      married_new,
+              unmarried_old,
+              unmarried_new,
 
-      divorced_old,
-      divorced_new,
+              widowed_old,
+              widowed_new,
 
-      unmarried_old,
-      unmarried_new,
+              no_info_old,
+              no_info_new,
 
-      widowed_old,
-      widowed_new,
+              color_one,
+              color_two,
+              color_three,
+              color_four,
+              color_five,
+            } = properties;
 
-      no_info_old,
-      no_info_new,
+            merital.push({
+              name_ge,
 
-      color_one,
-      color_two,
-      color_three,
-      color_four,
-      color_five,
-    } = properties;
+              old: {
+                "იმყოფება ქორწინებაში": married_old,
+                "არასოდეს ყოფილა ქორწინებაში": unmarried_old,
+                ქვრივი: widowed_old,
+                "განქორწინებული, განშორებული": divorced_old,
+                "არ არის მითითებული": no_info_old,
 
-    merital.push({
+                color: {
+                  first: color_one,
+                  second: color_two,
+                  third: color_three,
+                  fourth: color_four,
+                  fifth: color_five,
+                },
+              },
 
-      name_ge,
+              new: {
+                "იმყოფება ქორწინებაში": married_new,
+                "არასოდეს ყოფილა ქორწინებაში": unmarried_new,
+                ქვრივი: widowed_new,
+                "განქორწინებული, განშორებული": divorced_new,
+                "არ არის მითითებული": no_info_new,
 
-      old: {
-        "იმყოფება ქორწინებაში": married_old,
-        "არასოდეს ყოფილა ქორწინებაში": unmarried_old,
-        ქვრივი: widowed_old,
-        "განქორწინებული, განშორებული": divorced_old,
-        "არ არის მითითებული": no_info_old,
+                color: {
+                  first: color_one,
+                  second: color_two,
+                  third: color_three,
+                  fourth: color_four,
+                  fifth: color_five,
+                },
+              },
+            });
+          });
 
-        color: {
-          first: color_one,
-          second: color_two,
-          third: color_three,
-          fourth: color_four,
-          fifth: color_five,
-        },
-      },
-
-      new: {
-        "იმყოფება ქორწინებაში": married_new,
-        "არასოდეს ყოფილა ქორწინებაში": unmarried_new,
-        ქვრივი: widowed_new,
-        "განქორწინებული, განშორებული": divorced_new,
-        "არ არის მითითებული": no_info_new,
-
-        color: {
-          first: color_one,
-          second: color_two,
-          third: color_three,
-          fourth: color_four,
-          fifth: color_five,
-        },
-      }
-
-    });
-
-  });
-
-  summarized[name] = merital;
-
-}else if (group === "Precipitation") {
+          summarized[name] = merital;
+        } else if (group === "Population") {
+          const birthrate = [];
+          const name = layer.layerName_en;
+          layer.features.forEach(({ properties }) => {
+            const { name_ge, rate_one, rate_two, color_one, color_two } =
+              properties;
+              console.log(properties.rate_one);
+              if(name==='Birth rate'||name==='Death rate'){
+                birthrate.push({
+              name_ge,
+              old: {
+                rate: rate_one,
+                color: {
+                  first: color_one,
+                  second: color_two,
+                },
+              },
+              new: {
+                rate:rate_two,
+                color: {
+                  first: color_one,
+                  second: color_two,
+                },
+              },
+            });
+              }
+            summarized[name]=birthrate;
+          });
+        } else if (group === "Precipitation") {
           layer.features.forEach(({ properties }) => {
             const { name_ge, description_en, color, area, index } = properties;
             const name = description_en;

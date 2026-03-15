@@ -2,6 +2,7 @@ import classes from "./Chart.module.css";
 import { PieChart, Pie, Cell, ResponsiveContainer, Sector } from "recharts";
 import FarmingChart from "./FarmingChart";
 import MeritalChart from "./MeritalChart";
+import PopulationChart from "./PopulationChart";
 import { useState } from "react";
 
 const ChartPie = ({ selectedLayer, data, dataKey, nameKey }) => {
@@ -11,10 +12,14 @@ const ChartPie = ({ selectedLayer, data, dataKey, nameKey }) => {
   const getOpacity = (index) =>
     activeIndex === null || activeIndex === index ? 1 : 0.35;
   const activeData = tooltipIndex !== null ? data[tooltipIndex] : null;
-  if (["ownership", "status", "agroforms",'beneficiars'].includes(selectedLayer))
+  if (
+    ["ownership", "status", "agroforms", "beneficiars"].includes(selectedLayer)
+  )
     return <FarmingChart data={data} />;
-if (['meritalmen','meritalwomen'].includes(selectedLayer))
-  return <MeritalChart data={data} />;
+  if (["meritalmen", "meritalwomen"].includes(selectedLayer))
+    return <MeritalChart data={data} />;
+  if (["birthrate", "deathrate"].includes(selectedLayer))
+    return <PopulationChart data={data} />;
   return (
     <div className={classes.wrapper}>
       <div className={classes.chartArea}>
