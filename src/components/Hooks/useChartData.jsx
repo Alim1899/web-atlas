@@ -220,7 +220,6 @@ const useChartData = () => {
               summarized[name] = pplchange;
             }
           });
-          console.log(summarized);
         } else if (group === "Precipitation") {
           layer.features.forEach(({ properties }) => {
             const { name_ge, description_en, color, area, index } = properties;

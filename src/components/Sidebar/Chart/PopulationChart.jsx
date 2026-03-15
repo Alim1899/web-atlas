@@ -93,8 +93,6 @@ function RateCircle({ rate, color, size = 120 }) {
 }
 
 export default function PopulationChart({ data, name }) {
-  console.log(name);
-  console.log(data[0]);
 
   if (!Array.isArray(data)) return null;
   return (

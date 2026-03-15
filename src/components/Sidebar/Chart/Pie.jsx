@@ -8,7 +8,6 @@ import { useState } from "react";
 const ChartPie = ({ selectedLayer, data, dataKey, nameKey }) => {
   const [activeIndex, setActiveIndex] = useState(null);
   const [tooltipIndex, setTooltipIndex] = useState(null);
-console.log(data);
   const getOpacity = (index) =>
     activeIndex === null || activeIndex === index ? 1 : 0.35;
   const activeData = tooltipIndex !== null ? data[tooltipIndex] : null;

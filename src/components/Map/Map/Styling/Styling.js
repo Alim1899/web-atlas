@@ -127,7 +127,7 @@ export const onEachPolygonFeature = (feature, layer, enabled = true, name) => {
       layer,
     });
     if (handled) return;
-  } else if(['birthrate','deathrate'].includes(name)){
+  } else if(['birthrate','deathrate',"pplchange"].includes(name)){
  const handled = Rate({
       name,
       enabled,
@@ -142,6 +142,7 @@ export const onEachPolygonFeature = (feature, layer, enabled = true, name) => {
     layer.unbindPopup?.();
 
     if (!enabled) return;
+    console.log(feature.properties);
     const { name_ge, index, unicode } = feature.properties || {};
     const txt = name_ge || "";
     const realIndex = unicode || index || 1;
@@ -178,6 +179,7 @@ export const onEachPolygonFeature = (feature, layer, enabled = true, name) => {
   }
 };
 
+// ||||||||||||||||||||||||||||||
 export const onEachPointFeature = (feature, layer, enabled = true) => {
   if (!enabled) return;
   const { name_ge, name, index, unicode, type_ge, location_ge } =
@@ -205,6 +207,9 @@ export const onEachPointFeature = (feature, layer, enabled = true) => {
   });
 };
 
+
+
+// ||||||||||||||||||||||||||||||
 export const onEachLine = (feature, layer, map) => {
   const tickSvg = `
 <svg viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
