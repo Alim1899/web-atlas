@@ -113,7 +113,7 @@ export default function PopulationChart({ data, name }) {
               <span>2022</span>
           </div>
             )}
-             {["pplchange"].includes(name) && (
+             {["pplchange",'density'].includes(name) && (
               <RateCircle
                 rate={row.rate}
                 color={row.color}

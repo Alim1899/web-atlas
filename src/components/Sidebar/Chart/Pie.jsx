@@ -17,7 +17,7 @@ const ChartPie = ({ selectedLayer, data, dataKey, nameKey }) => {
     return <FarmingChart data={data} />;
   if (["meritalmen", "meritalwomen"].includes(selectedLayer))
     return <MeritalChart data={data} />;
-  if (["birthrate", "deathrate","pplchange"].includes(selectedLayer))
+  if (["birthrate", "deathrate","pplchange","density"].includes(selectedLayer))
     return <PopulationChart data={data} name={selectedLayer} />;
   return (
     <div className={classes.wrapper}>

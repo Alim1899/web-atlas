@@ -8,7 +8,6 @@ const useChartData = () => {
   const [selectedLayer, setSelectedLayer] = useState(
     sessionStorage.getItem("selectedLayer") || "",
   );
-
   // Computed chart data
   const chartData = useMemo(() => {
     return dataChart
@@ -19,7 +18,6 @@ const useChartData = () => {
         const layerName = layer.layerName_en;
         const group = layer.group_en;
         const header = layer.legend_header;
-
         if (group === "Farming") {
           const ownership = [];
           const status = [];
@@ -220,6 +218,18 @@ const useChartData = () => {
               summarized[name] = pplchange;
             }
           });
+        }else if(group==='Settlements'){
+          const densities = []
+           layer.features.forEach(({ properties }) => {
+            const {
+              name_ge,
+              color,
+             density
+            } = properties;
+            console.log(properties);
+            densities.push({ name_ge: name_ge, rate:density, color: color });
+              summarized[name] = densities;
+           })
         } else if (group === "Precipitation") {
           layer.features.forEach(({ properties }) => {
             const { name_ge, description_en, color, area, index } = properties;

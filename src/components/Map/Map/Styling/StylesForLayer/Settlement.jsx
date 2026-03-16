@@ -8,7 +8,6 @@ export function Settlement({ name, enabled, feature, L, layer }) {
   const c = centerOfMass(feature).geometry.coordinates;
   const center = L.latLng(c[1], c[0]);
 
-console.log(density);
   if (name === "density") {
     const place = () => {
       if (!layer._map) return;
@@ -27,7 +26,7 @@ console.log(density);
         2.5 2.5-1.12 2.5-2.5 2.5z"/>
       </svg>
     </span>
-    ${name_ge || "-"} ${density || ""}კაცი/კვ.მ
+    ${name_ge || "-"} ${density || ""}
   </div>
 `,
         iconSize: [120, 40],

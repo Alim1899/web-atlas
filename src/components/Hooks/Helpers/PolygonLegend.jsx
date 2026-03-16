@@ -246,34 +246,45 @@ const polygonLegend = (data, features, groupEn, layer) => {
         });
       });
     }
-    if(layer==='Population change'){
-      const grouped = {}
+    if (layer === "Population change") {
+      const grouped = {};
       features.forEach((feature) => {
-        const {color,type_en,sub_header,index } = feature.properties;
-const txt =  type_en;
- const key = sub_header || "";
-      if (!grouped[key]) {
-        grouped[key] = [];
-      }
+        const { color, type_en, sub_header, index } = feature.properties;
+        const txt = type_en;
+        const key = sub_header || "";
+        if (!grouped[key]) {
+          grouped[key] = [];
+        }
 
-      // avoid duplicates
-      const exists = grouped[key].some(
-        (d) => d.txt === txt && d.color === color,
-      );
-      if (!exists) {
-        grouped[key].push({ txt, color, subheader:sub_header, index });
-      }
+        // avoid duplicates
+        const exists = grouped[key].some(
+          (d) => d.txt === txt && d.color === color,
+        );
+        if (!exists) {
+          grouped[key].push({ txt, color, subheader: sub_header, index });
+        }
       });
-      
-       data.push(
-      ...Object.entries(grouped)
-        .map(([subheader, items]) => ({
-          subheader,
-          items: items.sort((a, b) => (a.index ?? 0) - (b.index ?? 0)), // sort inside each group
-        }))
-        .sort((a, b) => (a.items[0]?.index ?? 0) - (b.items[0]?.index ?? 0)), // sort groups by first index
-    );
+
+      data.push(
+        ...Object.entries(grouped)
+          .map(([subheader, items]) => ({
+            subheader,
+            items: items.sort((a, b) => (a.index ?? 0) - (b.index ?? 0)), // sort inside each group
+          }))
+          .sort((a, b) => (a.items[0]?.index ?? 0) - (b.items[0]?.index ?? 0)), // sort groups by first index
+      );
     }
+  } else if (groupEn === "Settlements") {
+    if (layer === "Density") {
+      features.forEach((feature) => {
+        const { color, type_en, index } = feature.properties;
+        const txt = type_en;
+         if (txt && !data.some((d) => d.txt === txt && d.color === color)) {
+        data.push({ txt, color,index });
+      }
+    })
+    data.sort((a,b)=>a.index-b.index)
+  }
   } else {
     let i = 1;
     features.forEach((feature) => {
@@ -285,7 +296,6 @@ const txt =  type_en;
         i++;
       }
     });
-
   }
 };
 export default polygonLegend;
