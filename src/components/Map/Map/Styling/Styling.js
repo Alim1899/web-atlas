@@ -1,9 +1,10 @@
 import L from "leaflet";
 import point from "../../../../assets/map/point.svg";
 import "leaflet-polylinedecorator";
-import { handleFarming } from "./Farming";
-import { handleMerital } from "./Merital";
-import { Rate } from "./Rate";
+import { handleFarming } from "./StylesForLayer/Farming";
+import { handleMerital } from "./StylesForLayer/Merital";
+import { Rate } from "./StylesForLayer/Rate";
+import { Settlement } from "./StylesForLayer/Settlement";
 export const pointToLayer = (feature, latlng) => {
   const name = feature.properties.name_en;
   const villageName = feature.properties.type_ge;
@@ -16,10 +17,9 @@ export const pointToLayer = (feature, latlng) => {
   }
   const getIconSize = (size, type) => {
     if (["სოფელი", "ნასოფლარი", "ქალაქი", "დაბა"].includes(villageName)) {
-      console.log(sign);
       if (!size) return [[20, 20]];
-      
-      if ( size <= 10) return [5, 5];
+
+      if (size <= 10) return [5, 5];
       if (size >= 11 && size < 100) return [10, 10];
       if (size >= 100 && size < 500) return [15, 15];
       if (size >= 500 && size < 1500) return [22, 22];
@@ -78,7 +78,6 @@ export const pointToLayer = (feature, latlng) => {
   const size = feature.properties?.size;
 
   const iconSize = getIconSize(power ? power : size, type)[0];
-  if (!sign) console.log(feature.properties.type_en);
   const marker = L.marker(latlng, {
     icon: L.divIcon({
       html: `<img src="${iconSrc}" width="${iconSize[0]}" height="${iconSize[1]}" />`,
@@ -145,6 +144,10 @@ export const onEachPolygonFeature = (feature, layer, enabled = true, name) => {
       layer,
     });
     if (handled) return;
+  } else if (["density"].includes(name)) {
+
+    const handled = Settlement({name, enabled, feature, L, layer});
+    if(handled) return;
   }
   {
     layer.unbindTooltip?.();
