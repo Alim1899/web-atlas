@@ -1,53 +1,13 @@
 // MeritalStatus.js
-import { pieDoubleSvg } from "./symbols.js";
+import { addPieMarker } from "../Functions.jsx";
 import centerOfMass from "@turf/center-of-mass";
 export function handleMerital({ enabled, feature, extra, L, layer }) {
-  const addPieMarker = ({
-    layer,
-    center,
-    oldValues,
-    newValues,
-    colors,
-    size = 80,
-  }) => {
-    const place = () => {
-      if (!layer._map) return;
 
-      if (layer.__meritalMarkers?.length) {
-        layer.__meritalMarkers.forEach((m) => m.remove());
-      }
-
-      const html = pieDoubleSvg({
-        oldValues,
-        newValues,
-        colors,
-        size,
-      });
-
-      const icon = L.divIcon({
-        className: "merital-icon",
-        html,
-        iconSize: [size * 4, size * 4],
-        iconAnchor: [size / 4, size / 2],
-      });
-
-      const marker = L.marker(center, {
-        icon,
-        interactive: false,
-      }).addTo(layer._map);
-
-      layer.__meritalMarkers = [marker];
-    };
-
-    if (layer._map) place();
-    else layer.once("add", place);
-  };
 
   if (!enabled) return true;
 
   const { name_ge } = feature.properties || {};
   if (!name_ge) return true;
-console.log(extra);
   let oldValues = [];
   let newValues = [];
   let colors = [];

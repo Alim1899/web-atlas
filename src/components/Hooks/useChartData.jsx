@@ -226,7 +226,6 @@ const useChartData = () => {
               color,
              density
             } = properties;
-            console.log(properties);
             densities.push({ name_ge: name_ge, rate:density, color: color });
               summarized[name] = densities;
            })

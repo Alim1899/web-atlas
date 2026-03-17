@@ -275,6 +275,7 @@ const polygonLegend = (data, features, groupEn, layer) => {
       );
     }
   } else if (groupEn === "Settlements") {
+
     if (layer === "Density") {
       features.forEach((feature) => {
         const { color, type_en, index } = feature.properties;
@@ -284,6 +285,10 @@ const polygonLegend = (data, features, groupEn, layer) => {
       }
     })
     data.sort((a,b)=>a.index-b.index)
+  }else if (layer==='City population'){
+   data.push({color:"#d0c021",txt:1989,index:1})
+   data.push({color:"#b03b55",txt:2014,index:2})
+    
   }
   } else {
     let i = 1;

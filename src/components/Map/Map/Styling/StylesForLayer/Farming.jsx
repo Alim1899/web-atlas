@@ -1,38 +1,7 @@
 // Farming.js
 import { centroid } from "@turf/turf";
-import { pieSvg } from "./symbols.js";
-
+import { addPieMarker } from "../Functions.jsx";
 export function handleFarming({ name, enabled, feature, extra, L, layer }) {
-
-  const addPieMarker = ({ layer, center, values, colors, size = 70 }) => {
-
-    const place = () => {
-      if (!layer._map) return;
-
-      if (layer.__farmingMarkers?.length) {
-        layer.__farmingMarkers.forEach((m) => m.remove());
-      }
-
-      const html = pieSvg({ values, colors, size });
-
-      const icon = L.divIcon({
-        className: "farming-icon",
-        html,
-        iconSize: [size, size],
-        iconAnchor: [size / 2, size / 2],
-      });
-
-      const marker = L.marker(center, {
-        icon,
-        interactive: false,
-      }).addTo(layer._map);
-
-      layer.__farmingMarkers = [marker];
-    };
-
-    if (layer._map) place();
-    else layer.once("add", place);
-  };
 
   if (!enabled) return true;
 
@@ -84,7 +53,7 @@ export function handleFarming({ name, enabled, feature, extra, L, layer }) {
 
   const c = centroid(feature).geometry.coordinates;
   const center = L.latLng(c[1], c[0]);
-
+console.log(values,colors);
   addPieMarker({ layer, center, values, colors });
 
   layer.once("remove", () => {

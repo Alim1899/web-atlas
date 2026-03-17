@@ -90,7 +90,6 @@ export const pointToLayer = (feature, latlng) => {
 
   return marker;
 };
-
 export const lineToLayer = (feature) => {
   return {
     color: feature.properties?.color || "#ff7800",
@@ -105,14 +104,13 @@ export function polygonStyle(feature, layers, id, fillColor) {
     fillColor: fillColor || "lightblue",
     weight: foundLayer.weight,
     opacity: 1,
-    color: "lightyellow",
+    color: "#fdb968",
     fillOpacity: foundLayer.opacity || 1,
   };
 }
 
 export const onEachPolygonFeature = (feature, layer, enabled = true, name) => {
   const extra = feature.properties;
-
   // ✅ ONLY farming uses symbols logic
   if (["ownership", "status", "agroforms", "beneficiars"].includes(name)) {
     const handled = handleFarming({
@@ -144,9 +142,9 @@ export const onEachPolygonFeature = (feature, layer, enabled = true, name) => {
       layer,
     });
     if (handled) return;
-  } else if (["density"].includes(name)) {
+  } else if (["density",'pplcount'].includes(name)) {
 
-    const handled = Settlement({name, enabled, feature, L, layer});
+    const handled = Settlement({name, enabled, feature,extra, L, layer});
     if(handled) return;
   }
   {

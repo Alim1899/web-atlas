@@ -1,51 +1,8 @@
 // MeritalStatus.js
-import { halfCircleSvg } from "./symbols.js";
 import centerOfMass from "@turf/center-of-mass";
-
+import { addHalfMarker } from "../Functions.jsx";
 export function Rate({ name, enabled, feature, extra, L, layer }) {
-  const addHalfMarker = ({
-    layer,
-    center,
-    oldValue,
-    newValue,
-    color_old,
-    color_new,
-    size = 120,
-  }) => {
-    const place = () => {
-      if (!layer._map) return;
-
-      // remove old markers
-      if (layer.__rateMarkers?.length) {
-        layer.__rateMarkers.forEach((m) => m.remove());
-      }
-
-      const html = halfCircleSvg({
-        oldValue,
-        newValue,
-        color_old,
-        color_new,
-        size,
-      });
-
-      const icon = L.divIcon({
-        className: "rate-icon",
-        html,
-        iconSize: [size, size],
-        iconAnchor: [size / 2, size / 2],
-      });
-
-      const marker = L.marker(center, {
-        icon,
-        interactive: false,
-      }).addTo(layer._map);
-
-      layer.__rateMarkers = [marker];
-    };
-
-    if (layer._map) place();
-    else layer.once("add", place);
-  };
+ 
   if (!enabled) return true;
 
   const { name_ge, type_en } = feature.properties || {};
@@ -101,6 +58,8 @@ export function Rate({ name, enabled, feature, extra, L, layer }) {
 
   const color_old = extra.color_one;
   const color_new = extra.color_two;
+  const year_old = 2012;
+  const year_new = 2022
 
   addHalfMarker({
     layer,
@@ -109,6 +68,9 @@ export function Rate({ name, enabled, feature, extra, L, layer }) {
     newValue,
     color_old,
     color_new,
+    year_old,
+    year_new
+    
   });
 
   layer.once("remove", () => {
