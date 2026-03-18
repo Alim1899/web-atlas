@@ -200,20 +200,20 @@ const PointandLayeRenderer = ({ el, classes }) => {
     case "villages": {
       const getIconSize = (size) => {
         return size === 1
-          ? 58
+          ? 60
           : size === 2
-            ? 42
+            ? 49
             : size === 3
-              ? 35
+              ? 42
               : size === 4
-                ? 30
+                ? 35
                 : size === 5
-                  ? 22
+                  ? 28
                   : size === 6
-                  ?15
+                  ?22
                   :size===7
                   ?15
-                  : 20;
+                  : 15;
       };
       return (
         <>

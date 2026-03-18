@@ -16,17 +16,14 @@ export const pointToLayer = (feature, latlng) => {
     return null;
   }
   const getIconSize = (size, type) => {
-    if (["სოფელი", "ნასოფლარი", "ქალაქი", "დაბა"].includes(villageName)) {
-      if (!size) return [[20, 20]];
-
-      if (size <= 10) return [5, 5];
-      if (size >= 11 && size < 100) return [10, 10];
-      if (size >= 100 && size < 500) return [15, 15];
-      if (size >= 500 && size < 1500) return [22, 22];
-      if (size >= 1500 && size < 3000) return [30, 30];
-      if (size >= 3000 && size < 5000) return [38, 8];
-
-      if (size >= 5000) return [4, 44];
+    if (["სოფელი", "ნასოფლარი", "ქალაქი", "დაბა"].includes(villageName)) {  
+      if (size <= 10) return [15, 15];
+      if (size >= 11 && size < 100) return [22,22];
+      if (size >= 100 && size < 500) return [28, 28];
+      if (size >= 500 && size < 1500) return [35, 35];
+      if (size >= 1500 && size < 3000) return [42, 42];
+      if (size >= 3000 && size < 5000) return [49, 49];
+      if (size >= 5000) return [60, 60];
     }
     if (!type) {
       if (name === "Hail - total") {
@@ -75,8 +72,7 @@ export const pointToLayer = (feature, latlng) => {
 
   const sign = feature?.sign;
   const iconSrc = sign ? svgToDataUrl(sign, type) : point;
-  const size = feature.properties?.size;
-
+  const size = feature.properties?.size||feature.properties?.index
   const iconSize = getIconSize(power ? power : size, type)[0];
   const marker = L.marker(latlng, {
     icon: L.divIcon({
@@ -141,10 +137,9 @@ export const onEachPolygonFeature = (feature, layer, enabled = true, name) => {
       layer,
     });
     if (handled) return;
-  } else if (["density",'pplcount'].includes(name)) {
-
-    const handled = Settlement({name, enabled, feature,extra, L, layer});
-    if(handled) return;
+  } else if (["density", "pplcount"].includes(name)) {
+    const handled = Settlement({ name, enabled, feature, extra, L, layer });
+    if (handled) return;
   }
   {
     layer.unbindTooltip?.();
@@ -189,9 +184,15 @@ export const onEachPolygonFeature = (feature, layer, enabled = true, name) => {
 };
 
 // ||||||||||||||||||||||||||||||
-export const onEachPointFeature = (feature, layer, enabled = true) => {
+export const onEachPointFeature = (feature, layer,layerName, enabled = true, ) => {
   if (!enabled) return;
-  const { name_ge, name, index, unicode, type_ge, location_ge } =
+    if(layerName==='villages'){
+    const {name_ge,size,location_ge,type_ge} = feature.properties||{};
+    
+    layer.bindPopup(`<strong>${type_ge} ${name_ge}, ${location_ge} - ${size} მოსახლე</strong>`);
+  
+  }else {
+      const { name_ge, name, index, unicode, type_ge, location_ge } =
     feature.properties || {};
   const title = name_ge || name || location_ge;
   const realIndex = unicode ?? index; // keep undefined if missing
@@ -203,6 +204,9 @@ export const onEachPointFeature = (feature, layer, enabled = true) => {
     layer.bindPopup(`<strong>${head}${title} - ${type}</strong>`);
   }
 
+
+
+
   // Same styling cleanup
   layer.on("tooltipopen", (e) => {
     const el = e.tooltip?.getElement?.();
@@ -213,6 +217,8 @@ export const onEachPointFeature = (feature, layer, enabled = true) => {
     el.style.margin = "0";
     el.style.boxShadow = "none";
   });
+  }
+
 };
 
 // ||||||||||||||||||||||||||||||

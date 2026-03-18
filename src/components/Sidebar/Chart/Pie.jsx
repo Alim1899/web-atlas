@@ -4,7 +4,7 @@ import MeritalChart from "./ChartsForLayer/MeritalChart";
 import PopulationChart from "./ChartsForLayer/PopulationChart";
 import { useState } from "react";
 import FarmingChart from './ChartsForLayer/FarmingChart'
-
+                                                              
 const ChartPie = ({ selectedLayer, data, dataKey, nameKey }) => {
   const [activeIndex, setActiveIndex] = useState(null);
   const [tooltipIndex, setTooltipIndex] = useState(null);

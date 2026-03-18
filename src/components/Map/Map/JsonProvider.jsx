@@ -66,7 +66,7 @@ const topLayerId = activeLayers?.[activeLayers.length - 1]?.id;
   key={el[0]}
   data={el[1]}
   pointToLayer={pointToLayer}
-  onEachFeature={(feature, layer) => onEachPointFeature(feature, layer)}
+  onEachFeature={(feature, layer) => onEachPointFeature(feature, layer,el[0])}
 />
         ) : (
           <GeoJSON

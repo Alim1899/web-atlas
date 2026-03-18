@@ -48,9 +48,7 @@ margin-left: 0.5vw;
 .span{
   font-size: clamp(0.6rem,2vw,1.1rem);
 }
-.legendIcon{
 
-}
 .header{
   width: 50%;
 margin: 20px;
@@ -136,4 +134,8 @@ font-size: 1.1rem;
   padding: 0;
   border-bottom: 1px solid var(--light-text);
   margin-left: 1vw;
+}
+
+.legendIcon{
+  width: 60px;
 }

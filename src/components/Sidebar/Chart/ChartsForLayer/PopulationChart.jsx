@@ -70,7 +70,6 @@ function RateCircle({ rate, color, size = 120 }) {
   const cx = size / 2;
   const cy = size / 2;
   const r = size * 0.48;
-  console.log(color, rate);
   return (
     <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
       {/* circle */} <circle cx={cx} cy={cy} r={r} fill={color} />
@@ -111,8 +110,8 @@ export default function PopulationChart({ data, name }) {
               <span>2022</span>
             </div>
           )}
-          {["pplcount", "density"].includes(name) &&
-            (name === "density" ? (
+          {["pplcount", "density","pplchange"].includes(name) &&
+            (["pplchange","density"].includes(name) ? (
               <RateCircle rate={row.rate} color={row.color} />
             ) : 
               <div className={classes.item}>

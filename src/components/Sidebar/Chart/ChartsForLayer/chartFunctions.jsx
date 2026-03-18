@@ -5,7 +5,7 @@ export function BarCompare({ oldValue, newValue, oldColor, newColor, size = 120 
   const max = Math.max(oldValue, newValue);
 
   const barWidth = width * 0.25;
-  const gap = width * 0.15;
+  const gap = width * 0.04;
 
   const oldHeight = (oldValue / max) * (height * 0.8);
   const newHeight = (newValue / max) * (height * 0.8);
@@ -22,6 +22,5 @@ export function BarCompare({ oldValue, newValue, oldColor, newColor, size = 120 
       newColor={newColor}
       oldValue={oldValue}
       newValue={newValue}
-      
     />
   );}
