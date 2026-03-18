@@ -8,7 +8,7 @@ const values = [oldValue,newValue]
   const color_old = extra.color_one;
   const color_new = extra.color_two;
   const colors = [color_old,color_new]
-  const { name_ge, density } = feature.properties || {};
+  const { name_ge } = feature.properties || {};
   const c = centerOfMass(feature).geometry.coordinates;
   const center = L.latLng(c[1], c[0]);
 
@@ -30,7 +30,7 @@ const values = [oldValue,newValue]
         2.5 2.5-1.12 2.5-2.5 2.5z"/>
       </svg>
     </span>
-    ${name_ge || "-"} ${density || ""}
+    ${name_ge || "-"}
   </div>
 `,
         iconSize: [120, 40],

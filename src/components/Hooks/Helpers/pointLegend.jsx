@@ -297,7 +297,7 @@ const pointLegend = (data, features = [], layer, groupEn, type) => {
         );
       };
       features.forEach((feature) => {
-        const { type_en, power,index } = feature.properties || {};
+        const { type_en, power, index } = feature.properties || {};
         const size = power;
         const sign = feature.sign;
         const sizedSvg = resizeSvg(sign, size);
@@ -308,7 +308,7 @@ const pointLegend = (data, features = [], layer, groupEn, type) => {
               type: getHydroSize(size).type,
               name: power,
               size: getHydroSize(size).size,
-              index
+              index,
             })
           : thermal.push({
               sign: sizedSvg,
@@ -319,47 +319,59 @@ const pointLegend = (data, features = [], layer, groupEn, type) => {
             });
       });
       data.push({
-        ჰიდროელექტროსადგური: hydro.filter(
-          (item, index, arr) =>
-            index ===
-            arr.findIndex(
-              (el) =>
-                el.size[0] === item.size[0] && el.size[1] === item.size[1],
-            ),
-        )
-        .sort((a,b)=>a.index-b.index)
+        ჰიდროელექტროსადგური: hydro
+          .filter(
+            (item, index, arr) =>
+              index ===
+              arr.findIndex(
+                (el) =>
+                  el.size[0] === item.size[0] && el.size[1] === item.size[1],
+              ),
+          )
+          .sort((a, b) => a.index - b.index),
       });
       data.push({
-        თბოელექტროსადგური: thermal.filter(
-          (item, index, arr) =>
-            index ===
-            arr.findIndex(
-              (el) =>
-                el.size[0] === item.size[0] && el.size[1] === item.size[1],
-            ),
-        )
-        .sort((a,b)=>a.index-b.index)
+        თბოელექტროსადგური: thermal
+          .filter(
+            (item, index, arr) =>
+              index ===
+              arr.findIndex(
+                (el) =>
+                  el.size[0] === item.size[0] && el.size[1] === item.size[1],
+              ),
+          )
+          .sort((a, b) => a.index - b.index),
       });
-    
     },
-    Sunshine:()=>{
-features.forEach((feature) => {
-        const { type_ge,index } = feature.properties || {};
+    Sunshine: () => {
+      features.forEach((feature) => {
+        const { type_ge, index } = feature.properties || {};
         const sign = feature.sign;
 
         if (type_ge && !data.some((d) => d.name === type_ge)) {
-          data.push({ name: type_ge, sign,index });
+          data.push({ name: type_ge, sign, index });
         }
       });
     },
-     Archeology:()=>{
-features.forEach((feature) => {
-        const { type_ge,index } = feature.properties || {};
+    Archeology: () => {
+      features.forEach((feature) => {
+        const { type_ge, index } = feature.properties || {};
         const sign = feature.sign;
         if (type_ge && !data.some((d) => d.name === type_ge)) {
-          data.push({ name: type_ge, sign,unicode:index,index });
+          data.push({ name: type_ge, sign, unicode: index, index });
         }
       });
+    },
+    Settlements: () => {
+      features.forEach((feature) => {
+        const { type_en,index } = feature.properties || {};
+        const sign = feature.sign;
+
+        if (type_en && !data.some((d) => d.name === type_en)) {
+          data.push({ name: type_en, sign,index,size:index });
+        }
+      });
+      data.sort((a,b)=>a.index-b.index)
     },
 
     default: () => {

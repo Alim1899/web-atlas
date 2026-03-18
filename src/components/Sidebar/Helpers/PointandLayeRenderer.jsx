@@ -153,7 +153,7 @@ const PointandLayeRenderer = ({ el, classes }) => {
       const thermal = Object.values(el.data[1]);
       return (
         <>
-            <h2 className={classes.headerIcon}>
+          <h2 className={classes.headerIcon}>
             {Object.keys(el.data[1])}
             <img
               alt='"header'
@@ -194,6 +194,41 @@ const PointandLayeRenderer = ({ el, classes }) => {
             </div>
           ))}
           <></>
+        </>
+      );
+    }
+    case "villages": {
+      const getIconSize = (size) => {
+        return size === 1
+          ? 58
+          : size === 2
+            ? 42
+            : size === 3
+              ? 35
+              : size === 4
+                ? 30
+                : size === 5
+                  ? 22
+                  : size === 6
+                  ?15
+                  :size===7
+                  ?15
+                  : 20;
+      };
+      return (
+        <>
+          {el.data?.map((item, i) => (
+            <div key={`${el.type}-${i}`} className={classes.legendItem}>
+              <img
+                className={classes.legendIcon}
+                src={item.sign ? svgToDataUrl(item.sign) : point}
+                alt={item.type}
+                width={getIconSize(item.size)}
+                height={getIconSize(item.size)}
+              />
+              <span className={classes.span}>{item.name}</span>
+            </div>
+          ))}
         </>
       );
     }
