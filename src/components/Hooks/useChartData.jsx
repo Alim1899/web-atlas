@@ -218,17 +218,23 @@ const useChartData = () => {
               summarized[name] = pplchange;
             }
           });
-        }else if(group==='Settlements'){
-          const densities = []
-           layer.features.forEach(({ properties }) => {
-            const {
-              name_ge,
-              color,
-             density
-            } = properties;
-            densities.push({ name_ge: name_ge, rate:density, color: color });
-              summarized[name] = densities;
-           })
+        } else if (group === "Settlements") {
+          const cName = layer.layerName_en;
+          const densities = [];
+          const change = [];
+          if (cName === "Density") {
+            layer.features.forEach(({ properties }) => {
+              const { name_ge, color, density } = properties;
+              densities.push({ name_ge: name_ge, rate: density, color: color });
+              summarized[cName] = densities;
+            });
+          }else if(cName ==='City population'){
+             layer.features.forEach(({ properties }) => {
+              const { name_ge, color_one,color_two, size_old,size_new } = properties;
+              change.push({ name_ge: name_ge, rate: {size_old,size_new}, color: [color_one,color_two] });
+              summarized[cName] = change;
+            });
+          }
         } else if (group === "Precipitation") {
           layer.features.forEach(({ properties }) => {
             const { name_ge, description_en, color, area, index } = properties;

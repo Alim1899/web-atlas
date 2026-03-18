@@ -288,7 +288,6 @@ const polygonLegend = (data, features, groupEn, layer) => {
   }else if (layer==='City population'){
    data.push({color:"#d0c021",txt:1989,index:1})
    data.push({color:"#b03b55",txt:2014,index:2})
-    
   }
   } else {
     let i = 1;

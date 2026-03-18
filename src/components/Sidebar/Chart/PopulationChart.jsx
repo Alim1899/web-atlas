@@ -93,17 +93,17 @@ function RateCircle({ rate, color, size = 120 }) {
 }
 
 export default function PopulationChart({ data, name }) {
-
   if (!Array.isArray(data)) return null;
+  console.log(data);
   return (
     <div className={classes.populationList}>
       {data[0].map((row, i) => (
         <div key={i} className={classes.populationItem}>
           <h4 className={classes.name}>{row.name_ge}</h4>
-         
-            {["birthrate", "deathrate"].includes(name) && (
-               <div className={classes.item}>
-            <span>2012</span>
+
+          {["birthrate", "deathrate"].includes(name) && (
+            <div className={classes.item}>
+              <span>2012</span>
               <HalfCircle
                 oldRate={row.new.rate}
                 newRate={row.old.rate}
@@ -111,15 +111,16 @@ export default function PopulationChart({ data, name }) {
                 newColor={row.new.color.first}
               />
               <span>2022</span>
-          </div>
-            )}
-             {["pplchange",'density'].includes(name) && (
-              <RateCircle
-                rate={row.rate}
-                color={row.color}
-              />
-            )}
-            
+            </div>
+          )}
+          {["pplchange", "density"].includes(name) &&
+            (name === "density" ? (
+              <RateCircle rate={row.rate} color={row.color} />
+            ) : (
+              name === "pplchange" && (
+                <RateCircle rate={row.rate} color={row.color} />
+              )
+            ))}
         </div>
       ))}
     </div>

@@ -34,7 +34,7 @@ const values = [oldValue,newValue]
   </div>
 `,
         iconSize: [120, 40],
-        iconAnchor: [60, 20],
+        iconAnchor: [20, 20],
       });
 
       const marker = L.marker(center, {
@@ -67,17 +67,17 @@ const values = [oldValue,newValue]
         html: `
   <div class="rate-text">
     <span class="rate-icon">
-      <svg width="12" height="12" viewBox="0 0 36 36" fill="currentColor">
+      <svg width="8" height="8" viewBox="0 0 36 36" fill="currentColor">
         <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5
         c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12
         2.5 2.5-1.12 2.5-2.5 2.5z"/>
       </svg>
     </span>
-    ${name_ge || "-"} ${density || ""}
+    ${name_ge || "-"}
   </div>
 `,
         iconSize: [120, 40],
-        iconAnchor: [30, 50],
+        iconAnchor:[20,70]
       });
 
       const marker = L.marker(center, {

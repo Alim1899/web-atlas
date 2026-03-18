@@ -104,14 +104,13 @@ export function polygonStyle(feature, layers, id, fillColor) {
     fillColor: fillColor || "lightblue",
     weight: foundLayer.weight,
     opacity: 1,
-    color: "#fdb968",
+    color: "#be6d09d7",
     fillOpacity: foundLayer.opacity || 1,
   };
 }
 
 export const onEachPolygonFeature = (feature, layer, enabled = true, name) => {
   const extra = feature.properties;
-  // ✅ ONLY farming uses symbols logic
   if (["ownership", "status", "agroforms", "beneficiars"].includes(name)) {
     const handled = handleFarming({
       name,
