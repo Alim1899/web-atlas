@@ -6,7 +6,7 @@ import {
   Legend,
   Tooltip,
 } from "recharts";
-import classes from "./Chart.module.css";
+import classes from "../Chart.module.css";
 
 const n = (x) => (Number.isFinite(+x) ? +x : 0);
 

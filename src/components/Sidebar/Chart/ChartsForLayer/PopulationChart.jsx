@@ -1,10 +1,9 @@
-import classes from "./Chart.module.css";
-
+import classes from "../Chart.module.css";
+import { BarCompare } from "./chartFunctions";
 function HalfCircle({ oldRate, newRate, oldColor, newColor, size = 120 }) {
   const cx = size / 2;
   const cy = size / 2;
   const r = size * 0.48;
-
   return (
     <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
       {/* OLD half */}
@@ -71,7 +70,7 @@ function RateCircle({ rate, color, size = 120 }) {
   const cx = size / 2;
   const cy = size / 2;
   const r = size * 0.48;
-
+  console.log(color, rate);
   return (
     <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
       {/* circle */} <circle cx={cx} cy={cy} r={r} fill={color} />
@@ -93,8 +92,8 @@ function RateCircle({ rate, color, size = 120 }) {
 }
 
 export default function PopulationChart({ data, name }) {
-  if (!Array.isArray(data)) return null;
   console.log(data);
+  if (!Array.isArray(data)) return null;
   return (
     <div className={classes.populationList}>
       {data[0].map((row, i) => (
@@ -113,14 +112,22 @@ export default function PopulationChart({ data, name }) {
               <span>2022</span>
             </div>
           )}
-          {["pplchange", "density"].includes(name) &&
+          {["pplcount", "density"].includes(name) &&
             (name === "density" ? (
               <RateCircle rate={row.rate} color={row.color} />
-            ) : (
-              name === "pplchange" && (
-                <RateCircle rate={row.rate} color={row.color} />
-              )
-            ))}
+            ) : 
+              <div className={classes.item}>
+<span>1989</span>
+                {name === "pplcount" && 
+                <BarCompare
+                  oldValue={row.rate.size_old}
+                  newValue={row.rate.size_new}
+                  oldColor={row.color[0]}
+                  newColor={row.color[1]}
+                />}
+                <span>2014</span>
+              </div>          
+            )}
         </div>
       ))}
     </div>

@@ -1,9 +1,9 @@
 import classes from "./Chart.module.css";
 import { PieChart, Pie, Cell, ResponsiveContainer, Sector } from "recharts";
-import FarmingChart from "./FarmingChart";
-import MeritalChart from "./MeritalChart";
-import PopulationChart from "./PopulationChart";
+import MeritalChart from "./ChartsForLayer/MeritalChart";
+import PopulationChart from "./ChartsForLayer/PopulationChart";
 import { useState } from "react";
+import FarmingChart from './ChartsForLayer/FarmingChart'
 
 const ChartPie = ({ selectedLayer, data, dataKey, nameKey }) => {
   const [activeIndex, setActiveIndex] = useState(null);
@@ -17,7 +17,7 @@ const ChartPie = ({ selectedLayer, data, dataKey, nameKey }) => {
     return <FarmingChart data={data} />;
   if (["meritalmen", "meritalwomen"].includes(selectedLayer))
     return <MeritalChart data={data} />;
-  if (["birthrate", "deathrate","pplchange","density"].includes(selectedLayer))
+  if (["birthrate", "deathrate","pplchange","density","pplcount"].includes(selectedLayer))
     return <PopulationChart data={data} name={selectedLayer} />;
   return (
     <div className={classes.wrapper}>
