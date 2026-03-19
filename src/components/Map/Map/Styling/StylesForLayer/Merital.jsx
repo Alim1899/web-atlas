@@ -1,5 +1,5 @@
 // MeritalStatus.js
-import { addPieMarker } from "../Functions.jsx";
+import { addDoublePieMarker } from "../Functions.jsx";
 import centerOfMass from "@turf/center-of-mass";
 export function handleMerital({ enabled, feature, extra, L, layer }) {
 
@@ -41,8 +41,7 @@ export function handleMerital({ enabled, feature, extra, L, layer }) {
 
 const c = centerOfMass(feature).geometry.coordinates
   const center = L.latLng(c[1], c[0]);
-
-  addPieMarker({ layer, center, oldValues, newValues, colors });
+  addDoublePieMarker({ layer, center, oldValues, newValues, colors });
 
   layer.once("remove", () => {
     if (layer.__meritalMarkers) {

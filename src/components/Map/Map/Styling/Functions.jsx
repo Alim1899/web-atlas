@@ -7,7 +7,7 @@ export const addDoublePieMarker = ({
   oldValues,
   newValues,
   colors,
-  size = 80,
+  size = 120,
 }) => {
   const place = () => {
     if (!layer._map) return;
@@ -90,7 +90,7 @@ export const addHalfMarker = ({
 };
 
  export const addPieMarker = ({ layer, center, values, colors, size = 70 }) => {
-
+console.log(values);
     const place = () => {
       if (!layer._map) return;
 
