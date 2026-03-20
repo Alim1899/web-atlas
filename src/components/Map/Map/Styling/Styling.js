@@ -5,20 +5,27 @@ import { handleFarming } from "./StylesForLayer/Farming";
 import { handleMerital } from "./StylesForLayer/Merital";
 import { Rate } from "./StylesForLayer/Rate";
 import { Settlement } from "./StylesForLayer/Settlement";
-export const pointToLayer = (feature, latlng) => {
+export const pointToLayer = (feature, latlng, layerName) => {
   const name = feature.properties.name_en;
   const villageName = feature.properties.type_ge;
   const type = feature.properties.type_en;
-
   const power = feature?.properties.power;
+  console.log(feature.properties);
   if (!latlng || !Number.isFinite(latlng.lat) || !Number.isFinite(latlng.lng)) {
     console.warn("Invalid latlng", { latlng, feature });
     return null;
   }
   const getIconSize = (size, type) => {
-    if (["სოფელი", "ნასოფლარი", "ქალაქი", "დაბა"].includes(villageName)) {  
+    if (layerName === "ecomigrants") {
+      if (size === 5) return [15, 15];
+      if (size == 4) return [22, 22];
+      if (size == 3) return [28, 28];
+      if (size == 2) return [35, 35];
+      if (size == 1) return [49, 49];
+    }
+    if (["სოფელი", "ნასოფლარი", "ქალაქი", "დაბა"].includes(villageName)) {
       if (size <= 10) return [15, 15];
-      if (size >= 11 && size < 100) return [22,22];
+      if (size >= 11 && size < 100) return [22, 22];
       if (size >= 100 && size < 500) return [28, 28];
       if (size >= 500 && size < 1500) return [35, 35];
       if (size >= 1500 && size < 3000) return [42, 42];
@@ -72,7 +79,7 @@ export const pointToLayer = (feature, latlng) => {
 
   const sign = feature?.sign;
   const iconSrc = sign ? svgToDataUrl(sign, type) : point;
-  const size = feature.properties?.size||feature.properties?.index
+  const size = feature.properties?.size || feature.properties?.index;
   const iconSize = getIconSize(power ? power : size, type)[0];
   const marker = L.marker(latlng, {
     icon: L.divIcon({
@@ -184,41 +191,45 @@ export const onEachPolygonFeature = (feature, layer, enabled = true, name) => {
 };
 
 // ||||||||||||||||||||||||||||||
-export const onEachPointFeature = (feature, layer,layerName, enabled = true, ) => {
+export const onEachPointFeature = (
+  feature,
+  layer,
+  layerName,
+  enabled = true,
+) => {
   if (!enabled) return;
-    if(layerName==='villages'){
-    const {name_ge,size,location_ge,type_ge} = feature.properties||{};
-    
-    layer.bindPopup(`<strong>${type_ge} ${name_ge}, ${location_ge} - ${size} მოსახლე</strong>`);
-  
-  }else {
-      const { name_ge, name, index, unicode, type_ge, location_ge } =
-    feature.properties || {};
-  const title = name_ge || name || location_ge;
-  const realIndex = unicode ?? index; // keep undefined if missing
-  const type = type_ge ?? location_ge ?? "";
+  if (layerName === "villages" || layerName === "ecomigrants") {
+    const { name_ge, size, location_ge, type_ge } = feature.properties || {};
 
-  // Popup on click
-  if (title || realIndex != null) {
-    const head = realIndex != null ? `${realIndex}. ` : "";
-    layer.bindPopup(`<strong>${head}${title} - ${type}</strong>`);
+    layer.bindPopup(
+      layerName === "villages"
+        ? `<strong>${type_ge} ${name_ge}, ${location_ge} - ${size} მოსახლე</strong>`
+        : `<strong>${type_ge} ${name_ge}, ${location_ge} </strong>`,
+    );
+  } else {
+    const { name_ge, name, index, unicode, type_ge, location_ge } =
+      feature.properties || {};
+    const title = name_ge || name || location_ge;
+    const realIndex = unicode ?? index; // keep undefined if missing
+    const type = type_ge ?? location_ge ?? "";
+
+    // Popup on click
+    if (title || realIndex != null) {
+      const head = realIndex != null ? `${realIndex}. ` : "";
+      layer.bindPopup(`<strong>${head}${title} - ${type}</strong>`);
+    }
+
+    // Same styling cleanup
+    layer.on("tooltipopen", (e) => {
+      const el = e.tooltip?.getElement?.();
+      if (!el) return;
+      el.style.background = "transparent";
+      el.style.border = "none";
+      el.style.padding = "0";
+      el.style.margin = "0";
+      el.style.boxShadow = "none";
+    });
   }
-
-
-
-
-  // Same styling cleanup
-  layer.on("tooltipopen", (e) => {
-    const el = e.tooltip?.getElement?.();
-    if (!el) return;
-    el.style.background = "transparent";
-    el.style.border = "none";
-    el.style.padding = "0";
-    el.style.margin = "0";
-    el.style.boxShadow = "none";
-  });
-  }
-
 };
 
 // ||||||||||||||||||||||||||||||
