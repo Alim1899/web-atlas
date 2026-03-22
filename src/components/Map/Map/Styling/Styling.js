@@ -5,82 +5,23 @@ import { handleFarming } from "./StylesForLayer/Farming";
 import { handleMerital } from "./StylesForLayer/Merital";
 import { Rate } from "./StylesForLayer/Rate";
 import { Settlement } from "./StylesForLayer/Settlement";
+import { getIconSize } from "./Functions";
 export const pointToLayer = (feature, latlng, layerName) => {
   const name = feature.properties.name_en;
-  const villageName = feature.properties.type_ge;
   const type = feature.properties.type_en;
   const power = feature?.properties.power;
-  console.log(feature.properties);
   if (!latlng || !Number.isFinite(latlng.lat) || !Number.isFinite(latlng.lng)) {
     console.warn("Invalid latlng", { latlng, feature });
     return null;
   }
-  const getIconSize = (size, type) => {
-    if (layerName === "ecomigrants") {
-      if (size === 5) return [15, 15];
-      if (size == 4) return [22, 22];
-      if (size == 3) return [28, 28];
-      if (size == 2) return [35, 35];
-      if (size == 1) return [49, 49];
-    }
-    if (["სოფელი", "ნასოფლარი", "ქალაქი", "დაბა"].includes(villageName)) {
-      if (size <= 10) return [15, 15];
-      if (size >= 11 && size < 100) return [22, 22];
-      if (size >= 100 && size < 500) return [28, 28];
-      if (size >= 500 && size < 1500) return [35, 35];
-      if (size >= 1500 && size < 3000) return [42, 42];
-      if (size >= 3000 && size < 5000) return [49, 49];
-      if (size >= 5000) return [60, 60];
-    }
-    if (!type) {
-      if (name === "Hail - total") {
-        if (!size) return [[20, 20]];
-        if (size < 1) return [10, 10];
-        if (size >= 1 && size < 2) return [13, 13];
-        if (size >= 2 && size < 3) return [18, 18];
-        if (size >= 3 && size < 4) return [23, 23];
-        if (size >= 4 && size < 5) return [28, 28];
-        if (size >= 5 && size < 7) return [32, 32];
-        if (size >= 7) return [38, 38];
-      } else if (name === "Hail - 100") {
-        if (!size) return [[20, 20]];
-        if (size < 1) return [13, 12];
-        if (size >= 1 && size < 2) return [19, 19];
-        if (size >= 2 && size < 3) return [24, 24];
-        if (size >= 3 && size < 4) return [30, 30];
-        if (size >= 5) return [38, 38];
-      } else {
-        if (!size) return [[20, 20]];
-        if (size < 3) return [11, 11];
-        if (size >= 3 && size < 4) return [17, 17];
-        if (size >= 4 && size < 5) return [23, 23];
-        if (size >= 5 && size < 6) return [29, 29];
-        if (size >= 6) return [35, 35];
-      }
-    } else if (type === "Hydroelectric power plant") {
-      if (!size) return [[20, 20]];
-      if (size < 1) return [11, 11];
-      if (size >= 1 && size < 5) return [17, 17];
-      if (size >= 5 && size < 14) return [23, 23];
-      if (size >= 15) return [65, 65];
-    }
-    if (type === "Thermal power plant") {
-      if (!size) return [[20, 20]];
-      if (size === 110) return [11, 11];
-      if (size >= 230 && size < 270) return [17, 17];
-      if (size === 300) return [65, 65];
-    }
-
-    return [40, 40]; // fallback
-  };
+ 
 
   const svgToDataUrl = (svg) =>
     `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
-
   const sign = feature?.sign;
   const iconSrc = sign ? svgToDataUrl(sign, type) : point;
   const size = feature.properties?.size || feature.properties?.index;
-  const iconSize = getIconSize(power ? power : size, type)[0];
+  const iconSize = getIconSize(power ? power : size, type,layerName,name)[0];
   const marker = L.marker(latlng, {
     icon: L.divIcon({
       html: `<img src="${iconSrc}" width="${iconSize[0]}" height="${iconSize[1]}" />`,
