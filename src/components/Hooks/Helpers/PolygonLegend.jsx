@@ -275,20 +275,36 @@ const polygonLegend = (data, features, groupEn, layer) => {
       );
     }
   } else if (groupEn === "Settlements") {
-
     if (layer === "Density") {
       features.forEach((feature) => {
         const { color, type_en, index } = feature.properties;
         const txt = type_en;
-         if (txt && !data.some((d) => d.txt === txt && d.color === color)) {
-        data.push({ txt, color,index });
-      }
-    })
-    data.sort((a,b)=>a.index-b.index)
-  }else if (layer==='City population'){
-   data.push({color:"#d0c021",txt:1989,index:1})
-   data.push({color:"#b03b55",txt:2014,index:2})
-  }
+        if (txt && !data.some((d) => d.txt === txt && d.color === color)) {
+          data.push({ txt, color, index });
+        }
+      });
+      data.sort((a, b) => a.index - b.index);
+    } else if (layer === "City population") {
+      data.push({ color: "#d0c021", txt: 1989, index: 1 });
+      data.push({ color: "#b03b55", txt: 2014, index: 2 });
+    }
+  } else if (groupEn === "Migrants") {
+    features.forEach((feature) => {
+      const { color_one, color_two } = feature.properties;
+
+      const items = [
+        { txt: "სტიქიური მოვლენების შედეგად", color: color_one, index: 1 },
+        { txt: "საომარი მოქმედების შედეგად", color: color_two, index: 2 },
+      ];
+
+      items.forEach((item) => {
+        const exists = data.some((d) => d.index === item.index);
+
+        if (!exists) {
+          data.push(item);
+        }
+      });
+    });
   } else {
     let i = 1;
     features.forEach((feature) => {
