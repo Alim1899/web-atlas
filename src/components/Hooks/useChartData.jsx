@@ -228,13 +228,38 @@ const useChartData = () => {
               densities.push({ name_ge: name_ge, rate: density, color: color });
               summarized[cName] = densities;
             });
-          }else if(cName ==='City population'){
-             layer.features.forEach(({ properties }) => {
-              const { name_ge, color_one,color_two, size_old,size_new } = properties;
-              change.push({ name_ge: name_ge, rate: {size_old,size_new}, color: [color_one,color_two] });
+          } else if (cName === "City population") {
+            layer.features.forEach(({ properties }) => {
+              const { name_ge, color_one, color_two, size_old, size_new } =
+                properties;
+              change.push({
+                name_ge: name_ge,
+                rate: { size_old, size_new },
+                color: [color_one, color_two],
+              });
               summarized[cName] = change;
             });
           }
+        } else if (group === "Migrants") {
+          const migrants = [];
+          layer.features.forEach(({ properties }) => {
+            const { name_ge, color_one, color_two, conflict, natural } =
+              properties;
+            migrants.push({
+              name_ge: name_ge,
+              old: {
+                rate: conflict,
+                color: { first: color_one, second: color_two },
+              },
+              new: {
+                rate: natural,
+                color: { first: color_one, second: color_two },
+              },
+              rate: { size_old: conflict, size_new: natural },
+              color: [color_one, color_two],
+            });
+            summarized[migrants] = migrants;
+          });
         } else if (group === "Precipitation") {
           layer.features.forEach(({ properties }) => {
             const { name_ge, description_en, color, area, index } = properties;

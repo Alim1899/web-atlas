@@ -4,6 +4,7 @@ function HalfCircle({ oldRate, newRate, oldColor, newColor, size = 120 }) {
   const cx = size / 2;
   const cy = size / 2;
   const r = size * 0.48;
+  console.log(oldRate,newRate,oldColor,newColor);
   return (
     <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
       {/* OLD half */}
@@ -91,6 +92,7 @@ function RateCircle({ rate, color, size = 120 }) {
 }
 
 export default function PopulationChart({ data, name }) {
+  console.log(name);
   if (!Array.isArray(data)) return null;
   return (
     <div className={classes.populationList}>
@@ -98,16 +100,16 @@ export default function PopulationChart({ data, name }) {
         <div key={i} className={classes.populationItem}>
           <h4 className={classes.name}>{row.name_ge}</h4>
 
-          {["birthrate", "deathrate"].includes(name) && (
+          {["birthrate", "deathrate","migrantscount"].includes(name) && (
             <div className={classes.item}>
-              <span>2012</span>
+             {["birthrate", "deathrate"].includes(name &&<span>2012</span>) }
               <HalfCircle
                 oldRate={row.new.rate}
                 newRate={row.old.rate}
                 oldColor={row.old.color.second}
                 newColor={row.new.color.first}
               />
-              <span>2022</span>
+              {["birthrate", "deathrate"].includes(name &&<span>2024</span>) }
             </div>
           )}
           {["pplcount", "density","pplchange"].includes(name) &&
@@ -116,7 +118,7 @@ export default function PopulationChart({ data, name }) {
             ) : 
               <div className={classes.item}>
 <span>1989</span>
-                {name === "pplcount" && 
+                {["pplcount"].includes(name) && 
                 <BarCompare
                   oldValue={row.rate.size_old}
                   newValue={row.rate.size_new}

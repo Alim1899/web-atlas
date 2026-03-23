@@ -85,7 +85,7 @@ export const onEachPolygonFeature = (feature, layer, enabled = true, name) => {
       layer,
     });
     if (handled) return;
-  } else if (["density", "pplcount"].includes(name)) {
+  } else if (["density", "pplcount","migrantscount"].includes(name)) {
     const handled = Settlement({ name, enabled, feature, extra, L, layer });
     if (handled) return;
   }

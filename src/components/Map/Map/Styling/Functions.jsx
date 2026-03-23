@@ -90,7 +90,6 @@ export const addHalfMarker = ({
 };
 
  export const addPieMarker = ({ layer, center, values, colors, size = 70 }) => {
-console.log(values);
     const place = () => {
       if (!layer._map) return;
 
@@ -119,7 +118,7 @@ console.log(values);
     else layer.once("add", place);
   };
 
-  export   const getIconSize = (size, type,layerName) => {
+  export   const getIconSize = (size, type,layerName,name) => {
       if (["ecomigrants", "warmigrants"].includes(layerName)) {
   switch(layerName){
     case "warmigrants":{
