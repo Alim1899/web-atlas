@@ -139,13 +139,12 @@ export const onEachPointFeature = (
   enabled = true,
 ) => {
   if (!enabled) return;
-  if (layerName === "villages" || layerName === "ecomigrants") {
+  if (["ecomigrants","villages","warmigrants"].includes(layerName)) {
     const { name_ge, size, location_ge, type_ge } = feature.properties || {};
-
     layer.bindPopup(
       layerName === "villages"
         ? `<strong>${type_ge} ${name_ge}, ${location_ge} - ${size} მოსახლე</strong>`
-        : `<strong>${type_ge} ${name_ge}, ${location_ge} </strong>`,
+        : `<strong> ${name_ge}, ${location_ge} </strong>`,
     );
   } else {
     const { name_ge, name, index, unicode, type_ge, location_ge } =
@@ -162,6 +161,7 @@ export const onEachPointFeature = (
 
     // Same styling cleanup
     layer.on("tooltipopen", (e) => {
+      console.log("l");
       const el = e.tooltip?.getElement?.();
       if (!el) return;
       el.style.background = "transparent";

@@ -133,10 +133,10 @@ export const addHalfMarker = ({
     break;
     case "ecomigrants":{
         if (size === 5) return [15, 15];
-        if (size == 4) return [22, 22];
+        if (size == 4) return [20, 22];
         if (size == 3) return [30, 30];
-        if (size == 2) return [35, 35];
-        if (size == 1) return [42, 42];
+        if (size == 2) return [40, 40];
+        if (size == 1) return [50, 50];
     }
   }
         

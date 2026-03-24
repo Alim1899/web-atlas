@@ -364,14 +364,62 @@ const pointLegend = (data, features = [], layer, groupEn, type) => {
     },
     Settlements: () => {
       features.forEach((feature) => {
-        const { type_en,index } = feature.properties || {};
+        const { type_en, index } = feature.properties || {};
         const sign = feature.sign;
 
         if (type_en && !data.some((d) => d.name === type_en)) {
-          data.push({ name: type_en, sign,index,size:index });
+          data.push({ name: type_en, sign, index, size: index });
         }
       });
-      data.sort((a,b)=>a.index-b.index)
+      data.sort((a, b) => a.index - b.index);
+    },
+    Migrants: () => {
+      const getIconSize = (size) => {
+        if(layer==='Conflict migrants'){
+            const n = Number(size) || 0;
+        if (n === 7) return { type: "1 - 10", size: [15, 15]};
+        if (n === 6) return { type: "11 - 50 ", size: [25, 25]};
+        if (n === 5) return { type: "51 - 100 ", size: [25, 25]};
+        if (n === 4) return { type: "101 - 300 ", size: [30, 30]};
+        if (n === 3) return { type: "301 - 500 ", size: [35, 35]};
+        if (n === 2) return { type: "501 - 1000 ", size: [40, 40]};
+        if (n === 1) return { type: "1001 - 3000 ", size: [50, 50]};
+        } else if(layer==='Natural migrants'){
+            const n = Number(size) || 0;
+      
+        if (n === 5) return { type: "51 - 100 ", size: [15, 15]};
+        if (n === 4) return { type: "101 - 300 ", size: [25, 25]};
+        if (n === 3) return { type: "301 - 500 ", size: [35, 35]};
+        if (n === 2) return { type: "501 - 1000 ", size: [40, 40]};
+        if (n === 1) return { type: "1001 - 3000 ", size: [50, 50]};
+        }
+      
+      };
+
+      const resizeSvg = (sign, size) => {
+        const [w, h] = getIconSize(size).size;
+        return sign.replace(
+          /<svg\b([^>]*)>/i,
+          `<svg$1 width="${w}" height="${h}">`,
+        );
+      };
+      features.forEach((feature) => {
+        const {index} = feature.properties
+        const size = feature.properties?.index ?? feature.index;
+        const sizedSvg = resizeSvg(feature.sign, size);
+        const label = `${getIconSize(size).type} `;
+
+        if (!data.some((d) => d.name === label)) {
+          data.push({
+            name: label,
+            sign: sizedSvg,
+            location: "",
+            size: getIconSize(size).size,
+            index
+          });
+        }
+      });
+      data.sort((a, b) => a.index - b.index);
     },
 
     default: () => {
