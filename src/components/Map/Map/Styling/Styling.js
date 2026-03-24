@@ -6,41 +6,8 @@ import { handleMerital } from "./StylesForLayer/Merital";
 import { Rate } from "./StylesForLayer/Rate";
 import { Settlement } from "./StylesForLayer/Settlement";
 import { getIconSize } from "./Functions";
-export const pointToLayer = (feature, latlng, layerName) => {
-  const name = feature.properties.name_en;
-  const type = feature.properties.type_en;
-  const power = feature?.properties.power;
-  if (!latlng || !Number.isFinite(latlng.lat) || !Number.isFinite(latlng.lng)) {
-    console.warn("Invalid latlng", { latlng, feature });
-    return null;
-  }
- 
 
-  const svgToDataUrl = (svg) =>
-    `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
-  const sign = feature?.sign;
-  const iconSrc = sign ? svgToDataUrl(sign, type) : point;
-  const size = feature.properties?.size || feature.properties?.index;
-  const iconSize = getIconSize(power ? power : size, type,layerName,name)[0];
-  const marker = L.marker(latlng, {
-    icon: L.divIcon({
-      html: `<img src="${iconSrc}" width="${iconSize[0]}" height="${iconSize[1]}" />`,
-      iconSize: iconSize,
-      iconAnchor: [10, 10],
-      popupAnchor: [0, -10],
-      className: "",
-    }),
-  });
-
-  return marker;
-};
-export const lineToLayer = (feature) => {
-  return {
-    color: feature.properties?.color || "#ff7800",
-    weight: 1,
-    opacity: 1,
-  };
-};
+// ||||||||     POLYGON     ||||||||||||||||||||||
 
 export function polygonStyle(feature, layers, id, fillColor) {
   const foundLayer = layers.find((lyr) => lyr.id === id) || {};
@@ -53,9 +20,10 @@ export function polygonStyle(feature, layers, id, fillColor) {
   };
 }
 
+
 export const onEachPolygonFeature = (feature, layer, enabled = true, name) => {
   const extra = feature.properties;
-  if (["ownership", "status", "agroforms", "beneficiars"].includes(name)) {
+  if (["ownership", "status", "agroforms", "beneficiars","ethnicity","religy"].includes(name)) {
     const handled = handleFarming({
       name,
       enabled,
@@ -131,7 +99,7 @@ export const onEachPolygonFeature = (feature, layer, enabled = true, name) => {
   }
 };
 
-// ||||||||||||||||||||||||||||||
+// ||||||||     POINTS     ||||||||||||||||||||||
 export const onEachPointFeature = (
   feature,
   layer,
@@ -172,8 +140,36 @@ export const onEachPointFeature = (
     });
   }
 };
+export const pointToLayer = (feature, latlng, layerName) => {
+  const name = feature.properties.name_en;
+  const type = feature.properties.type_en;
+  const power = feature?.properties.power;
+  if (!latlng || !Number.isFinite(latlng.lat) || !Number.isFinite(latlng.lng)) {
+    console.warn("Invalid latlng", { latlng, feature });
+    return null;
+  }
+ 
 
-// ||||||||||||||||||||||||||||||
+  const svgToDataUrl = (svg) =>
+    `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
+  const sign = feature?.sign;
+  const iconSrc = sign ? svgToDataUrl(sign, type) : point;
+  const size = feature.properties?.size || feature.properties?.index;
+  const iconSize = getIconSize(power ? power : size, type,layerName,name)[0];
+  const marker = L.marker(latlng, {
+    icon: L.divIcon({
+      html: `<img src="${iconSrc}" width="${iconSize[0]}" height="${iconSize[1]}" />`,
+      iconSize: iconSize,
+      iconAnchor: [10, 10],
+      popupAnchor: [0, -10],
+      className: "",
+    }),
+  });
+
+  return marker;
+};
+
+// |||||||||||||  LINE   |||||||||||||||||
 export const onEachLine = (feature, layer, map) => {
   const tickSvg = `
 <svg viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
@@ -225,4 +221,11 @@ export const onEachLine = (feature, layer, map) => {
   layer.on("remove", () => {
     map.removeLayer(decorator);
   });
+};
+export const lineToLayer = (feature) => {
+  return {
+    color: feature.properties?.color || "#ff7800",
+    weight: 1,
+    opacity: 1,
+  };
 };

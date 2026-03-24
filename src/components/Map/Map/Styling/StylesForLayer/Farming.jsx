@@ -1,67 +1,39 @@
-// Farming.js
-import { centroid } from "@turf/turf";
-import { addPieMarker } from "../Functions.jsx";
-export function handleFarming({ name, enabled, feature, extra, L, layer }) {
+import { pointOnFeature } from "@turf/turf";
+import { farmingConfig } from "./farmingConfig.jsx";
+import { addTextMarker, getTextMarkerHTML,addPieWithCleanup } from "../AddMarker.jsx";
 
+export function handleFarming({ name, enabled, feature, extra, L, layer }) {
   if (!enabled) return true;
 
   const { name_ge } = feature.properties || {};
   if (!name_ge) return true;
 
-  let values = [];
-  let colors = [];
+  const config = farmingConfig[name];
+  if (!config) return true;
+const c = pointOnFeature(feature).geometry.coordinates;
 
-  if (name === "status") {
-    values = [extra.legal_farm, extra.household_farm];
-    colors = [extra.color_one, extra.color_two];
-  }
-
-  if (name === "ownership") {
-    values = [extra.private_owner, extra.state_owner];
-    colors = [extra.color_one, extra.color_two];
-  }
-
-  if (name === "agroforms") {
-    values = [
-      extra.natural,
-      extra.arable,
-      extra.greenhouse,
-      extra.parennial,
-    ];
-    colors = [
-      extra.color_one,
-      extra.color_two,
-      extra.color_three,
-      extra.color_four,
-    ];
-  }
-    if (name === "beneficiars") {
-    values = [
-      extra.agro_credit,
-      extra.agro_insurance,
-      extra.plant_future,
-    
-    ];
-    colors = [
-      extra.color_one,
-      extra.color_two,
-      extra.color_three,
-    ];
-  }
+  const values = config.getValues(extra);
+  const colors = config.getColors(extra);
 
   if (!values.some((v) => Number(v))) return true;
 
-  const c = centroid(feature).geometry.coordinates;
   const center = L.latLng(c[1], c[0]);
-console.log(values,colors);
-  addPieMarker({ layer, center, values, colors });
 
-  layer.once("remove", () => {
-    if (layer.__farmingMarkers) {
-      layer.__farmingMarkers.forEach((m) => m.remove());
-      layer.__farmingMarkers = null;
-    }
+  // ✅ 1. ADD TEXT MARKER
+  addTextMarker({
+    layer,
+    center,
+    html: getTextMarkerHTML(name_ge, 10),
+    iconAnchor: [20, 70], // same style as Settlement
   });
 
-  return true; // signal handled
+  // ✅ 2. ADD PIE MARKER
+  addPieWithCleanup({
+    layer,
+    center,
+    values,
+    colors,
+  });
+
+  return true;
 }

@@ -445,7 +445,29 @@ export const mapCategories = [
     icon: FaPeopleRoof,
     name: "მოსახლეობა",
     layers: [
-      
+        {
+        "ეროვნული შემადგენლობა და აღმსარებლობა": [
+          {
+            id: "religy",
+            label: "აღმსარებლობა",
+            type: "polygon",
+          },
+          {
+            id: "ethnicity",
+            label: "ეროვნული შემადგენლობა (%).",
+            type: "polygon",
+          },
+        ],
+      },
+      {
+        "მაღალმთიანი დასახლებები": [
+          {
+            id: "mountsettlements",
+            label: "მაღალმთიანი დასახლებები, 2023",
+            type: "points",
+          },
+        ],
+      },
       {
         "იძულებით გადაადგილებული პირები": [
             {
@@ -469,29 +491,7 @@ export const mapCategories = [
           },
         ],
       },
-      {
-        "ეროვნული შემადგენლობა და აღმსარებლობა": [
-          {
-            id: "religy",
-            label: "აღმსარებლობა",
-            type: "polygon",
-          },
-          {
-            id: "ethnicity",
-            label: "ეროვნული შემადგენლობა (%).",
-            type: "polygon",
-          },
-        ],
-      },
-      {
-        "მაღალმთიანი დასახლებები": [
-          {
-            id: "mountsettlements",
-            label: "მაღალმთიანი დასახლებები, 2023",
-            type: "points",
-          },
-        ],
-      },
+    
       {
         "საქალაქო და სასოფლო დასახლებები": [
           {
