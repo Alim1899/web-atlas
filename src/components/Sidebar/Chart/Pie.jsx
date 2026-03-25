@@ -12,9 +12,9 @@ const ChartPie = ({ selectedLayer, data, dataKey, nameKey }) => {
     activeIndex === null || activeIndex === index ? 1 : 0.35;
   const activeData = tooltipIndex !== null ? data[tooltipIndex] : null;
   if (
-    ["ownership", "status", "agroforms", "beneficiars"].includes(selectedLayer)
+    ["ownership", "status", "agroforms", "beneficiars","religy","ethnicity"].includes(selectedLayer)
   )
-    return <FarmingChart data={data} />;
+    return <FarmingChart data={data} layer={selectedLayer}/>;
   if (["meritalmen", "meritalwomen"].includes(selectedLayer))
     return <MeritalChart data={data} />;
   if (["birthrate", "deathrate","pplchange","density","pplcount","migrantscount"].includes(selectedLayer))

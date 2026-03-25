@@ -60,6 +60,17 @@
   color: var(--light-text);
 }
 
+.farming{
+  display: grid;
+grid-template-columns: 80% 20%;
+align-items: start;
+}
+.legend {
+height: auto;
+margin: auto 0;
+}
+
+
 .select{
 max-width: 40vw;
 }
@@ -106,6 +117,16 @@ font-weight: 900;
 .cell>div>div>div>ul{
   font-size: 0.6rem;
 }
+.legendItem{
+  display: flex;
+  justify-content: flex-start;
+}
+.legendColor{
+  margin: 5px;
+  height: 20px;
+  width: 20px;
+  background-color: red;
+}
 
 /* POPULATION */
 
@@ -124,4 +145,5 @@ font-weight: 900;
   display: flex;
   justify-content: center;
   align-items: center;
+  
 }

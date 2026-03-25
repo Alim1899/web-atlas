@@ -12,17 +12,18 @@ const useChartData = () => {
   const chartData = useMemo(() => {
     return dataChart
       .filter((el) => el[1].shape === "polygon")
-
       .map(([key, layer]) => {
         const summarized = {};
         const layerName = layer.layerName_en;
         const group = layer.group_en;
         const header = layer.legend_header;
-        if (group === "Farming") {
+        if (group === "Farming" || group === "Religy") {
           const ownership = [];
           const status = [];
           const agro = [];
           const benef = [];
+          const ethnicity = [];
+          const religy = [];
           const name = layer.layerName_en;
           if (name === "Ownership") {
             layer.features.forEach(({ properties }) => {
@@ -110,6 +111,62 @@ const useChartData = () => {
                 },
               });
               summarized[name] = benef;
+            });
+          } else if (name === "Religy") {
+            layer.features.forEach(({ properties }) => {
+              const {
+                name_ge,
+                color_one,
+                color_two,
+                color_three,
+                color_four,
+                Muslim,
+                Orthodox,
+                armenian,
+                other,
+              } = properties;
+              religy.push({
+                name_ge,
+                მართლმადიდებულური: Orthodox,
+                მუსლიმური: Muslim,
+                "სომხური-სამოციქულო": armenian,
+                სხვა: other,
+                color: {
+                  first: color_one,
+                  second: color_two,
+                  third: color_three,
+                  color_four,
+                },
+              });
+              summarized[name] = religy;
+            });
+          }else if (name === "Ethnics") {
+            layer.features.forEach(({ properties }) => {
+              const {
+                name_ge,
+                color_one,
+                color_two,
+                color_three,
+                color_four,
+                armenian,
+                azerbaijan,
+                georgian,
+                others,
+              } = properties;
+              ethnicity.push({
+                name_ge,
+                ქართველი: georgian,
+                აზერბაიჯანელი: azerbaijan,
+                "სომეხი": armenian,
+                სხვა: others,
+                color: {
+                  first: color_one,
+                  second: color_two,
+                  third: color_three,
+                  color_four,
+                },
+              });
+              summarized[name] = ethnicity;
             });
           }
         } else if (group === "Merital") {
