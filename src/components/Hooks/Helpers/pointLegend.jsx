@@ -421,6 +421,17 @@ const pointLegend = (data, features = [], layer, groupEn, type) => {
       });
       data.sort((a, b) => a.index - b.index);
     },
+    "High mountain settlements":()=>{
+ features.forEach((feature) => {
+        const { type_en, } = feature.properties || {};
+        const sign = feature.sign;
+        const type = type_en==='other'?"სხვა დასახლებებები":"მაღალმთიანი სტატუსის მქონე დასახლებული პუნქტი"
+
+        if (sign && !data.some((d) => d.sign === sign)) {
+          data.push({ name: type, sign, type_en  });
+        }
+      });
+    },
 
     default: () => {
       features.forEach((feature) => {
@@ -433,7 +444,6 @@ const pointLegend = (data, features = [], layer, groupEn, type) => {
       });
     },
   };
-
   // choose handler: layer-based has priority, then groupEn-based
   const handler =
     handlers[layer] ||

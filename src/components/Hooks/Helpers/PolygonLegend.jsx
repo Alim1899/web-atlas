@@ -134,7 +134,7 @@ const polygonLegend = (data, features, groupEn, layer) => {
     });
 
     data.sort((a, b) => (a.index ?? 0) - (b.index ?? 0));
-  } else if (groupEn === "Farming") {
+  } else if (["Religy", "Farming"].includes(groupEn)) {
     const { color_one, color_two, color_three, color_four, index } =
       features[0].properties;
     if (layer === "Ownership") {
@@ -156,6 +156,16 @@ const polygonLegend = (data, features, groupEn, layer) => {
       data.push({ txt: "დანერგე მომავალი", color: color_one, index });
       data.push({ txt: "აგროდაზღვევა", color: color_two, index });
       data.push({ txt: "შეღავათიანი აგროკრედიტი", color: color_three, index });
+    } else if (layer === "Religy") {
+      data.push({ txt: "მართლმადიდებლური", color: color_one, index });
+      data.push({ txt: "მუსლიმური", color: color_two, index });
+      data.push({ txt: "სომხური-სამოციულო", color: color_three, index });
+       data.push({ txt: "სხვა", color: color_four, index });
+    }else if(layer==="Ethnics"){
+        data.push({ txt: "ქართველი", color: color_one, index });
+      data.push({ txt: "აზერბაიჯანელი", color: color_two, index });
+      data.push({ txt: "სომეხი", color: color_three, index });
+       data.push({ txt: "სხვა", color: color_four, index });
     }
   } else if (groupEn === "Sunshine") {
     let i = 1;

@@ -232,6 +232,25 @@ const PointandLayeRenderer = ({ el, classes }) => {
         </>
       );
     }
+     case "mountsettlements": {
+    
+      return (
+        <>
+          {el.data?.map((item, i) => (
+            <div key={`${el.type}-${i}`} className={classes.legendItem}>
+              <img
+                className={classes.legendIcon}
+                src={item.sign ? svgToDataUrl(item.sign) : point}
+                alt={item.type}
+                width={20}
+                height={20}
+              />
+              <span className={classes.span}>{item.name}</span>
+            </div>
+          ))}
+        </>
+      );
+    }
 
     default:
       return el.data.map((item, i) => (
