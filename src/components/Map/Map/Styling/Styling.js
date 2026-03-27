@@ -144,6 +144,7 @@ export const pointToLayer = (feature, latlng, layerName) => {
   const name = feature.properties.name_en;
   const type = feature.properties.type_en;
   const power = feature?.properties.power;
+  if(!type)console.log(feature.properties);
   if (!latlng || !Number.isFinite(latlng.lat) || !Number.isFinite(latlng.lng)) {
     console.warn("Invalid latlng", { latlng, feature });
     return null;

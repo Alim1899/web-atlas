@@ -3,6 +3,7 @@ import {
   GiMoneyStack,
   GiGreekTemple,
   GiSwordTie,
+  GiMedicalPack,
 } from "react-icons/gi";
 import { FaPeopleRoof } from "react-icons/fa6";
 import { PiPersonSimpleHikeBold } from "react-icons/pi";
@@ -441,11 +442,80 @@ export const mapCategories = [
     ],
   },
   {
+    key: "healthcare",
+    icon: GiMedicalPack,
+    name: "ჯანდაცვა",
+    layers: [
+      {
+        ჯილეხი: [
+          {
+            id: "anthrax",
+            label: "ჯილეხის კერები ნიადაგში, 1950-2019",
+            type: "points",
+          },
+          {
+            id: "anthrax_animals",
+            label:
+              "ცხოველებში ჯილეხით დაავადების შემთხვევების რაოდენობა, 1985-2019",
+            type: "points",
+          },
+          {
+            id: "anthrax_humans",
+            label:
+              "ადამიანებში ჯილეხით დაავადების შემთხვევების რაოდენობა, 1957-2019",
+            type: "points",
+          },
+        ],
+      },
+      {
+        ბრუცელიოზი: [
+          {
+            id: "brucela_animals",
+            label: "ბრუცელიოზი ცხოველებში, 1976-2020",
+            type: "points",
+          },
+          {
+            id: "brucela_humans",
+            label: "ბრუცელიოზი ადამიანებში, 1976-2020",
+            type: "points",
+          },
+        ],
+      },
+      {
+        ენცეპალიტი: [
+          {
+            id: "encepalite_animals",
+            label: "ენცეპალიტი ცხოველებში, 1976-2020",
+            type: "points",
+          },
+          {
+            id: "encepalite_humans",
+            label: "ენცეპალიტი ადამიანებში, 1976-2020",
+            type: "points",
+          },
+        ],
+      },{
+        ტულარემია: [
+          {
+            id: "tularemia_animals",
+            label: "ტულარემია ცხოველებში, 1946-2020",
+            type: "points",
+          },
+          {
+            id: "tularemia_humans",
+            label: "ტულარემია ადამიანებში, 1946-2020",
+            type: "points",
+          },
+        ],
+      },
+    ],
+  },
+  {
     key: "population",
     icon: FaPeopleRoof,
     name: "მოსახლეობა",
     layers: [
-        {
+      {
         "ეროვნული შემადგენლობა და აღმსარებლობა": [
           {
             id: "religy",
@@ -470,7 +540,7 @@ export const mapCategories = [
       },
       {
         "იძულებით გადაადგილებული პირები": [
-            {
+          {
             id: "migrantscount",
             label:
               "იძულებით გადაადგილებული პირების რაოდენობა მუნიციპალიტეტების მიხედვით",
@@ -482,7 +552,7 @@ export const mapCategories = [
               "ბუნების სტიქიური მოვლენების შედეგად იძულებით გადაადგილებული ოჯახების რაოდენობა დასახლებების მიხედვით",
             type: "points",
           },
-        
+
           {
             id: "warmigrants",
             label:
@@ -491,7 +561,7 @@ export const mapCategories = [
           },
         ],
       },
-    
+
       {
         "საქალაქო და სასოფლო დასახლებები": [
           {
@@ -565,16 +635,6 @@ export const mapCategories = [
     key: "tourism",
     icon: PiPersonSimpleHikeBold,
     name: "ტურიზმი",
-    layers: [
-      {
-        "ბუნების ძეგლები": [
-          {
-            id: "waterfall",
-            label: "ბუნების ძეგლები",
-            type: "points",
-          },
-        ],
-      },
-    ],
+    layers: [],
   },
 ];
