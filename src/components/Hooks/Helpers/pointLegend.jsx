@@ -375,25 +375,24 @@ const pointLegend = (data, features = [], layer, groupEn, type) => {
     },
     Migrants: () => {
       const getIconSize = (size) => {
-        if(layer==='Conflict migrants'){
-            const n = Number(size) || 0;
-        if (n === 7) return { type: "1 - 10", size: [15, 15]};
-        if (n === 6) return { type: "11 - 50 ", size: [25, 25]};
-        if (n === 5) return { type: "51 - 100 ", size: [25, 25]};
-        if (n === 4) return { type: "101 - 300 ", size: [30, 30]};
-        if (n === 3) return { type: "301 - 500 ", size: [35, 35]};
-        if (n === 2) return { type: "501 - 1000 ", size: [40, 40]};
-        if (n === 1) return { type: "1001 - 3000 ", size: [50, 50]};
-        } else if(layer==='Natural migrants'){
-            const n = Number(size) || 0;
-      
-        if (n === 5) return { type: "51 - 100 ", size: [15, 15]};
-        if (n === 4) return { type: "101 - 300 ", size: [25, 25]};
-        if (n === 3) return { type: "301 - 500 ", size: [35, 35]};
-        if (n === 2) return { type: "501 - 1000 ", size: [40, 40]};
-        if (n === 1) return { type: "1001 - 3000 ", size: [50, 50]};
+        if (layer === "Conflict migrants") {
+          const n = Number(size) || 0;
+          if (n === 7) return { type: "1 - 10", size: [15, 15] };
+          if (n === 6) return { type: "11 - 50 ", size: [25, 25] };
+          if (n === 5) return { type: "51 - 100 ", size: [25, 25] };
+          if (n === 4) return { type: "101 - 300 ", size: [30, 30] };
+          if (n === 3) return { type: "301 - 500 ", size: [35, 35] };
+          if (n === 2) return { type: "501 - 1000 ", size: [40, 40] };
+          if (n === 1) return { type: "1001 - 3000 ", size: [50, 50] };
+        } else if (layer === "Natural migrants") {
+          const n = Number(size) || 0;
+
+          if (n === 5) return { type: "51 - 100 ", size: [15, 15] };
+          if (n === 4) return { type: "101 - 300 ", size: [25, 25] };
+          if (n === 3) return { type: "301 - 500 ", size: [35, 35] };
+          if (n === 2) return { type: "501 - 1000 ", size: [40, 40] };
+          if (n === 1) return { type: "1001 - 3000 ", size: [50, 50] };
         }
-      
       };
 
       const resizeSvg = (sign, size) => {
@@ -404,7 +403,7 @@ const pointLegend = (data, features = [], layer, groupEn, type) => {
         );
       };
       features.forEach((feature) => {
-        const {index} = feature.properties
+        const { index } = feature.properties;
         const size = feature.properties?.index ?? feature.index;
         const sizedSvg = resizeSvg(feature.sign, size);
         const label = `${getIconSize(size).type} `;
@@ -415,22 +414,65 @@ const pointLegend = (data, features = [], layer, groupEn, type) => {
             sign: sizedSvg,
             location: "",
             size: getIconSize(size).size,
-            index
+            index,
           });
         }
       });
       data.sort((a, b) => a.index - b.index);
     },
-    "High mountain settlements":()=>{
- features.forEach((feature) => {
-        const { type_en, } = feature.properties || {};
+    "High mountain settlements": () => {
+      features.forEach((feature) => {
+        const { type_en } = feature.properties || {};
         const sign = feature.sign;
-        const type = type_en==='other'?"სხვა დასახლებებები":"მაღალმთიანი სტატუსის მქონე დასახლებული პუნქტი"
+        const type =
+          type_en === "other"
+            ? "სხვა დასახლებებები"
+            : "მაღალმთიანი სტატუსის მქონე დასახლებული პუნქტი";
 
         if (sign && !data.some((d) => d.sign === sign)) {
-          data.push({ name: type, sign, type_en  });
+          data.push({ name: type, sign, type_en });
         }
       });
+    },
+    Anthrax: () => {
+      const getIconSize = (size) => {
+        const n = size || 0;
+        if (!size) return { type: "", size: [20, 20] };
+        if (n === "1") return { type: "1", size: [20, 20] };
+        if (n === "2-3") return { type: "2-3", size: [27, 27] };
+        if (n === "4-6") return { type: "4-6", size: [35, 35] };
+        if (n === "8-10") return { type: "8-10", size: [45, 45] };
+        if (n === "30-50") return { type: "30-50", size: [15, 15] };
+        if (n === "70-90") return { type: "70-90", size: [30, 30] };
+        if (n === "213") return { type: "213", size: [55, 55] };
+        return { type: "", size: [20, 20] }; // fallback, თორემ დანარჩენ შემთხვევებში undefined დაბრუნდება
+      };
+
+      const resizeSvg = (sign, size) => {
+        const [w, h] = getIconSize(size).size;
+        return sign.replace(
+          /<svg\b([^>]*)>/i,
+          `<svg$1 width="${w}" height="${h}">`,
+        );
+      };
+
+      features.forEach((feature) => {
+        const { type_en, index, name_ge } = feature.properties || {};
+        const sign = feature.sign;
+
+        if (type_en && !data.some((d) => d.type === type_en)) {
+          const sizedSvg = resizeSvg(sign, type_en);
+
+          data.push({
+            name: name_ge || "",
+            sign: sizedSvg || null,
+            type: type_en || "",
+            index,
+            size: getIconSize(type_en).size || 20,
+          });
+        }
+      });
+      data.sort((a, b) => a.index - b.index);
     },
 
     default: () => {

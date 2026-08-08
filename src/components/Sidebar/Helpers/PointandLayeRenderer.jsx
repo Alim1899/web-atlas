@@ -210,10 +210,10 @@ const PointandLayeRenderer = ({ el, classes }) => {
                 : size === 5
                   ? 28
                   : size === 6
-                  ?22
-                  :size===7
-                  ?15
-                  : 15;
+                    ? 22
+                    : size === 7
+                      ? 15
+                      : 15;
       };
       return (
         <>
@@ -232,8 +232,7 @@ const PointandLayeRenderer = ({ el, classes }) => {
         </>
       );
     }
-     case "mountsettlements": {
-    
+    case "mountsettlements": {
       return (
         <>
           {el.data?.map((item, i) => (
@@ -246,6 +245,43 @@ const PointandLayeRenderer = ({ el, classes }) => {
                 height={20}
               />
               <span className={classes.span}>{item.name}</span>
+            </div>
+          ))}
+        </>
+      );
+    }
+    case "anthrax": {
+      return (
+        <>
+          {el.data?.map((item, i) => (
+            <div key={`${el.type}-${i}`} className={classes.legendItem}>
+              <img
+                className={classes.legendIcon}
+                src={item.sign ? svgToDataUrl(item.sign) : point}
+                alt={item.type}
+                width={20}
+                height={20}
+              />
+              <span className={classes.span}>{item.name}</span>
+            </div>
+          ))}
+        </>
+      );
+    }
+    case "anthrax_animals":
+    case "anthrax_humans": {
+      return (
+        <>
+          {el.data?.map((item, i) => (
+            <div key={`${el.type}-${i}`} className={classes.legendItem}>
+              <img
+                className={classes.legendIcon}
+                src={item.sign ? svgToDataUrl(item.sign) : point}
+                alt={item.type}
+                width={Array.isArray(item.size) ? item.size[0] : 20}
+                height={Array.isArray(item.size) ? item.size[1] : 20}
+              />
+              <span className={classes.span}>{item.type}</span>
             </div>
           ))}
         </>

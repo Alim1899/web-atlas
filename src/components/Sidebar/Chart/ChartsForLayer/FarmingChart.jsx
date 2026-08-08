@@ -23,7 +23,6 @@ const buildSlices = (row) => {
 
 export default function FarmingChart({ data,layer }) {
   const keys = useMemo(() => Object.keys(data ?? {}), [data]);
-console.log(layer);
   const [selectedKey, setSelectedKey] = useState(() => keys[0] ?? "");
 
   if (selectedKey && !keys.includes(selectedKey)) {
