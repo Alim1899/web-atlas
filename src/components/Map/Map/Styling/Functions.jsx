@@ -119,6 +119,15 @@ export const addPieMarker = ({ layer, center, values, colors, size = 70 }) => {
 };
 
 export const getIconSize = (size, type, layerName, name) => {
+
+
+if(["brucela_humans","brucela_animals"].includes(layerName)){
+   if (type === "1-5") return [15,15];
+        if (type === "6-19") return [25, 25];
+        if (type === "20-30") return [36, 36];
+        if (type == "37") return [55, 55];
+}
+
   if (["ecomigrants", "warmigrants"].includes(layerName)) {
     switch (layerName) {
       case "warmigrants": {

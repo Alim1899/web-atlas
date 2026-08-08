@@ -115,12 +115,19 @@ export const onEachPointFeature = (
   enabled = true,
 ) => {
   if (!enabled) return;
+  console.log(layerName);
   if (["ecomigrants", "villages", "warmigrants"].includes(layerName)) {
     const { name_ge, size, location_ge, type_ge } = feature.properties || {};
     layer.bindPopup(
       layerName === "villages"
         ? `<strong>${type_ge} ${name_ge}, ${location_ge} - ${size} მოსახლე</strong>`
         : `<strong> ${name_ge}, ${location_ge} </strong>`,
+    );
+  } else if (["brucela_humans", "brucela_animals"].includes(layerName)) {
+    console.log(feature.properties);
+    const { name_ge, location_ge, size, type_ge } = feature.properties || {};
+    layer.bindPopup(
+      `<strong>${type_ge} ${name_ge} -  ${location_ge} - ${size} შემთხვევა</strong>`,
     );
   } else if (
     ["anthrax", "anthrax_humans", "anthrax_animals"].includes(layerName)

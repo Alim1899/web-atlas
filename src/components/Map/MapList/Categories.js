@@ -447,6 +447,20 @@ export const mapCategories = [
     name: "ჯანდაცვა",
     layers: [
       {
+        ბრუცელიოზი: [
+          {
+            id: "brucela_animals",
+            label: "ბრუცელიოზი ცხოველებში, 1976-2020",
+            type: "points",
+          },
+          {
+            id: "brucela_humans",
+            label: "ბრუცელიოზი ადამიანებში, 1976-2020",
+            type: "points",
+          },
+        ],
+      },
+      {
         ჯილეხი: [
           {
             id: "anthrax",
@@ -467,20 +481,7 @@ export const mapCategories = [
           },
         ],
       },
-      {
-        ბრუცელიოზი: [
-          {
-            id: "brucela_animals",
-            label: "ბრუცელიოზი ცხოველებში, 1976-2020",
-            type: "points",
-          },
-          {
-            id: "brucela_humans",
-            label: "ბრუცელიოზი ადამიანებში, 1976-2020",
-            type: "points",
-          },
-        ],
-      },
+      
       {
         ენცეპალიტი: [
           {
