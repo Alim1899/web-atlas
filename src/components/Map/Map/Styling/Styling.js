@@ -20,10 +20,18 @@ export function polygonStyle(feature, layers, id, fillColor) {
   };
 }
 
-
 export const onEachPolygonFeature = (feature, layer, enabled = true, name) => {
   const extra = feature.properties;
-  if (["ownership", "status", "agroforms", "beneficiars","ethnicity","religy"].includes(name)) {
+  if (
+    [
+      "ownership",
+      "status",
+      "agroforms",
+      "beneficiars",
+      "ethnicity",
+      "religy",
+    ].includes(name)
+  ) {
     const handled = handleFarming({
       name,
       enabled,
@@ -53,7 +61,7 @@ export const onEachPolygonFeature = (feature, layer, enabled = true, name) => {
       layer,
     });
     if (handled) return;
-  } else if (["density", "pplcount","migrantscount"].includes(name)) {
+  } else if (["density", "pplcount", "migrantscount"].includes(name)) {
     const handled = Settlement({ name, enabled, feature, extra, L, layer });
     if (handled) return;
   }
@@ -107,12 +115,23 @@ export const onEachPointFeature = (
   enabled = true,
 ) => {
   if (!enabled) return;
-  if (["ecomigrants","villages","warmigrants"].includes(layerName)) {
+  if (["ecomigrants", "villages", "warmigrants"].includes(layerName)) {
     const { name_ge, size, location_ge, type_ge } = feature.properties || {};
     layer.bindPopup(
       layerName === "villages"
         ? `<strong>${type_ge} ${name_ge}, ${location_ge} - ${size} მოსახლე</strong>`
         : `<strong> ${name_ge}, ${location_ge} </strong>`,
+    );
+  } else if (
+    ["anthrax", "anthrax_humans", "anthrax_animals"].includes(layerName)
+  ) {
+    const { name_ge, location_ge, type_en } = feature.properties || {};
+    layer.bindPopup(
+      layerName === "anthrax"
+        ? `<strong>ჯილეხის კერა ნიადაგში</strong>`
+        : layerName === "anthrax_animals"
+          ? `<strong>${name_ge}, ${location_ge} - ${type_en}</strong>`
+          : `<strong>${name_ge} - ${type_en}</strong>`,
     );
   } else {
     const { name_ge, name, index, unicode, type_ge, location_ge } =
@@ -140,6 +159,7 @@ export const onEachPointFeature = (
     });
   }
 };
+
 export const pointToLayer = (feature, latlng, layerName) => {
   const name = feature.properties.name_en;
   const type = feature.properties.type_en;
@@ -148,14 +168,13 @@ export const pointToLayer = (feature, latlng, layerName) => {
     console.warn("Invalid latlng", { latlng, feature });
     return null;
   }
- 
 
   const svgToDataUrl = (svg) =>
     `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
   const sign = feature?.sign;
   const iconSrc = sign ? svgToDataUrl(sign, type) : point;
   const size = feature.properties?.size || feature.properties?.index;
-  const iconSize = getIconSize(power ? power : size, type,layerName,name)[0];
+  const iconSize = getIconSize(power ? power : size, type, layerName, name)[0];
   const marker = L.marker(latlng, {
     icon: L.divIcon({
       html: `<img src="${iconSrc}" width="${iconSize[0]}" height="${iconSize[1]}" />`,

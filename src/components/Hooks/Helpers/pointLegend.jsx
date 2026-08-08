@@ -442,7 +442,7 @@ const pointLegend = (data, features = [], layer, groupEn, type) => {
         if (n === "2-3") return { type: "2-3", size: [27, 27] };
         if (n === "4-6") return { type: "4-6", size: [35, 35] };
         if (n === "8-10") return { type: "8-10", size: [45, 45] };
-        if (n === "30-50") return { type: "30-50", size: [15, 15] };
+        if (n === "30-50") return { type: "30-50", size: [20, 20] };
         if (n === "70-90") return { type: "70-90", size: [30, 30] };
         if (n === "213") return { type: "213", size: [55, 55] };
         return { type: "", size: [20, 20] }; // fallback, თორემ დანარჩენ შემთხვევებში undefined დაბრუნდება
