@@ -9,6 +9,7 @@ function Map() {
   const { state } = useMaps();
   const { baselayer } = state;
   const { url, attribution } = baselayer;
+
   return (
     <div className={classes.main}>
       <div className={classes.shape}>

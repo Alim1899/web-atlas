@@ -1,5 +1,4 @@
 const pointLegend = (data, features = [], layer, groupEn, type) => {
-  console.log(layer);
   const handlers = {
     "Instrumental period": () => {
       const getIconSize = (size) => {

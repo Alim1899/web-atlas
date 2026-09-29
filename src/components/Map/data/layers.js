@@ -26,18 +26,20 @@ export const basemaps = {
     attribution:
       "&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors",
   },
-  cartoLight: {
-    url: "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
-    attribution: "&copy; <a href='https://carto.com/'>CARTO</a>",
-  },
-  cartoDark: {
-    url: "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
-    attribution: "&copy; <a href='https://carto.com/'>CARTO</a>",
-  },
-  esriTopo: {
-    url: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}",
-    attribution: "&copy; <a href='https://www.esri.com/'>Esri</a>",
-  },
+  // cartoLight: {
+  //   url: "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+  //   attribution: "&copy; <a href='https://carto.com/'>CARTO</a>",
+  // },
+  // cartoDark: {
+  //   url: "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
+  //   attribution: "&copy; <a href='https://carto.com/'>CARTO</a>",
+  // },
+esriTopo: {
+  url: "https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png",
+  attribution:
+    "&copy; <a href='https://opentopomap.org'>OpenTopoMap</a> (CC-BY-SA), data &copy; OpenStreetMap contributors",
+  maxZoom: 10,
+},
 };
 
 export default maps;
