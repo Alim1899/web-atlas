@@ -4,6 +4,7 @@
   overflow: hidden;
   min-height: 58vh;
   align-items: center;
+  
 }
 
 .wrapper > * {
@@ -80,6 +81,7 @@ max-width: 40vw;
   text-wrap: wrap;
   height: auto;
   background-color: var(--light-text);
+  
 font-weight: 900;
 
  
@@ -126,6 +128,7 @@ font-weight: 900;
   height: 20px;
   width: 20px;
   background-color: red;
+  
 }
 
 /* POPULATION */

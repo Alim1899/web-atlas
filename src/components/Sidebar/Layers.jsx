@@ -6,22 +6,11 @@ const Layers = () => {
 
   return (
     <ul className={classes.layers}>
-      {Object.entries(basemaps).map((el) => {
-        return (
-          <li
-            key={el[0]}
-            onClick={() =>
-              dispatch({
-                type: "SET_MAP",
-                url: basemaps[el[0]].url,
-                attribution: basemaps[el[0]].attribution,
-              })
-            }
-          >
-            {el[0]}
-          </li>
-        );
-      })}
+   {Object.entries(basemaps).map(([id, b]) => (
+  <li key={id} onClick={() => dispatch({ type: "SET_MAP", payload: b })}>
+    {b.name}
+  </li>
+))}
     </ul>
   );
 };

@@ -1,13 +1,10 @@
+import { basemaps } from "../../Map/data/layers";
 const initialState = {
   activeLayers: [],
-  baselayer: {
-    url: "https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}",
-    attribution: "&copy; Google Maps",
-  },
+  baselayer: basemaps.light,
   dataChart: [],
-  queryKey:""
+  queryKey: "",
 };
-
 const mapReducer = (state = initialState, action) => {
   switch (action.type) {
     case "TOGGLE_LAYER": {
@@ -60,11 +57,8 @@ const mapReducer = (state = initialState, action) => {
             : layer,
         ),
       };
-    case "SET_MAP":
-      return {
-        ...state,
-        baselayer: { url: action.url, attribution: action.attribution },
-      };
+   case "SET_MAP":
+  return { ...state, baselayer: action.payload };
     case "SET_DATA_CHART":
       return { ...state, dataChart: action.payload };
        case "SET_QUERY":

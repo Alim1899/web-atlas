@@ -2,7 +2,6 @@ import useChartData from "../Hooks/useChartData";
 import {
   FaChevronUp,
   FaChevronDown,
-  FaLayerGroup,
   FaMap,
   FaInfoCircle,
   FaChartPie,
@@ -48,12 +47,6 @@ const Sidebar = () => {
               onClick={() => togglePanel("chart")}
               className={classes.icon}
               title="დიაგრამა"
-            />
-
-            <FaLayerGroup
-              onClick={() => togglePanel("layers")}
-              className={classes.icon}
-              title="ფენები"
             />
 
             <FaMap

@@ -1,6 +1,5 @@
 :root {
   --background-color: #2f3c49;
-  --dark-background: #2f3d48;
   --light-background: #495e71;
   --foreground-color: #035a4e;
   --navbar-light: #d8d8d8;
@@ -8,16 +7,50 @@
   --navbar-dark-transparent: #2a7380;
   --navbar: #cedee0;
   --dark-text: #062906;
-  --light-text: #cde7e1;
-  --header-font-size: clamp(1rem, 4vw, 2rem);
+  --light-text: #f0e9e0;
+  --header-font-size: clamp(1rem, 2vw, 2rem);
   --bar-font-size: clamp(0.5rem, 1.2vw, 0.9rem);
   --navbar-height: clamp(50px, 5vw, 72px);
   --footer-height: clamp(80px, 10vh, 120px);
-  --sidebar-width: clamp(70px, 10vw, 120px);
-  --bar-height: clamp(200px, 65vh, 1200px);
+  --sidebar-width: clamp(70px, 7vw, 100px);
+  --bar-height: clamp(200px, 50vh, 1200px);
 }
 
 body {
   padding: 0;
   margin: 0;
+}
+
+/* ===== Zoom control ===== */
+.leaflet-container .leaflet-control-zoom.leaflet-bar {
+  border: none;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.leaflet-container .leaflet-control-zoom.leaflet-bar a {
+  width: 44px;
+  height: 44px;
+  line-height: 44px;
+  font-size: 22px;
+  background: var(--background-color);
+  color: var(--light-text);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  transition: background 0.15s;
+}
+
+.leaflet-container .leaflet-control-zoom.leaflet-bar a:last-child {
+  border-bottom: none;
+}
+
+.leaflet-container .leaflet-control-zoom.leaflet-bar a:hover {
+  opacity: 0.8;
+}
+
+
+
+.leaflet-bottom.leaflet-right .leaflet-control-zoom {
+  margin-right: 12px;
+  margin-bottom: 8px;
 }

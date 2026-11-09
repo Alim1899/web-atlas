@@ -1,45 +1,46 @@
-const maps = {
-  maptiler: {
-    url: "https://api.maptiler.com/maps/basic/256/{z}/{x}/{y}.png?key=4gNWcAfO6xj7SYyWp2KI",
-    attribution:
-      '&copy; <a href="https://www.maptiler.com/">MapTiler</a> &copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-  },
-  satellite: {
-    attribution:
-      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-    url: "https://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}",
-    subdomains: ["mt0", "mt1", "mt2", "mt3"],
-  },
-};
+const CARTO_KEY = import.meta.env.VITE_CARTO_KEY;
+const cartoAttr =
+  '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/attributions">CARTO</a>';
+
+const carto = (style) =>
+  `https://{s}.basemaps.cartocdn.com/${style}/{z}/{x}/{y}{r}.png?key=${CARTO_KEY}`;
 
 export const basemaps = {
+  light: {
+    name: "Light",
+    url: carto("light_nolabels"),
+    labels: carto("light_only_labels"),
+    attribution: cartoAttr,
+    subdomains: "abcd",
+  },
+  voyager: {
+    name: "Voyager",
+    url: carto("rastertiles/voyager_nolabels"),
+    labels: carto("rastertiles/voyager_only_labels"),
+    attribution: cartoAttr,
+    subdomains: "abcd",
+  },
+  dark: {
+    name: "Dark",
+    url: carto("dark_nolabels"),
+    labels: carto("dark_only_labels"),
+    attribution: cartoAttr,
+    subdomains: "abcd",
+  },
   satellite: {
+    name: "Satellite",
     url: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
-    attribution: "&copy; <a href='https://www.esri.com/'>Esri</a>",
+    labels: carto("dark_only_labels"),
+    attribution: "&copy; Esri, " + cartoAttr,
+    subdomains: "abcd",
   },
-  roadmap: {
-    url: "https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}",
-    attribution: "&copy; Google Maps",
-  },
-  osm: {
-    url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+  topo: {
+    name: "Topo",
+    url: "https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png",
+    labels: null, 
     attribution:
-      "&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors",
+      '&copy; <a href="https://opentopomap.org">OpenTopoMap</a> (CC-BY-SA), &copy; OpenStreetMap contributors',
+    subdomains: "abc",
+    maxZoom: 17,
   },
-  // cartoLight: {
-  //   url: "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
-  //   attribution: "&copy; <a href='https://carto.com/'>CARTO</a>",
-  // },
-  // cartoDark: {
-  //   url: "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
-  //   attribution: "&copy; <a href='https://carto.com/'>CARTO</a>",
-  // },
-esriTopo: {
-  url: "https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png",
-  attribution:
-    "&copy; <a href='https://opentopomap.org'>OpenTopoMap</a> (CC-BY-SA), data &copy; OpenStreetMap contributors",
-  maxZoom: 10,
-},
 };
-
-export default maps;

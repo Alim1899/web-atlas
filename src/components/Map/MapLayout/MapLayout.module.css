@@ -4,9 +4,11 @@
 }
 
 .mapContainer {
-  flex: 1;
   position: fixed;
-  z-index: 0;
+  top: var(--navbar-height);
+  left: 0;
+  right: 0;
+  bottom: var(--footer-height);
   z-index: 10;
 }
 

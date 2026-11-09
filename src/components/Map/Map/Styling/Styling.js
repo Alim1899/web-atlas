@@ -168,31 +168,28 @@ export const onEachPointFeature = (
 };
 
 export const pointToLayer = (feature, latlng, layerName) => {
-  const name = feature.properties.name_en;
-  const type = feature.properties.type_en;
-  const power = feature?.properties.power;
   if (!latlng || !Number.isFinite(latlng.lat) || !Number.isFinite(latlng.lng)) {
     console.warn("Invalid latlng", { latlng, feature });
     return null;
   }
 
-  const svgToDataUrl = (svg) =>
-    `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
-  const sign = feature?.sign;
-  const iconSrc = sign ? svgToDataUrl(sign, type) : point;
-  const size = feature.properties?.size || feature.properties?.index;
-  const iconSize = getIconSize(power ? power : size, type, layerName, name)[0];
-  const marker = L.marker(latlng, {
+  const { name_en: name, type_en: type, power, size, index } = feature.properties || {};
+  const sign = feature.sign;
+  const iconSrc = sign
+    ? `data:image/svg+xml;utf8,${encodeURIComponent(sign)}`
+    : point;
+
+  const [w, h] = getIconSize(power ?? size ?? index, type, layerName, name);
+
+  return L.marker(latlng, {
     icon: L.divIcon({
-      html: `<img src="${iconSrc}" width="${iconSize[0]}" height="${iconSize[1]}" />`,
-      iconSize: iconSize,
-      iconAnchor: [10, 10],
-      popupAnchor: [0, -10],
+      html: `<img src="${iconSrc}" width="${w}" height="${h}" />`,
+      iconSize: [w, h],
+      iconAnchor: [w / 2, h / 2],
+      popupAnchor: [0, -h / 2],
       className: "",
     }),
   });
-
-  return marker;
 };
 
 // |||||||||||||  LINE   |||||||||||||||||

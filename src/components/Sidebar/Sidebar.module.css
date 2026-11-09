@@ -2,7 +2,7 @@
   position: fixed;
   top: calc(var(--navbar-height) + 0.5vw);
   right: 0.5vw;
-  background-color: var(--navbar-dark);
+  background-color: var(--background-color);
   border-radius: 15px;
   z-index: 1;
 }
@@ -13,7 +13,7 @@
 
   width: var(--sidebar-width);
   border-radius: 15px;
-  background-color: var(--navbar-dark);
+  background-color: var(--background-color);
   align-items: center;
   justify-content: center;
   cursor: pointer;
@@ -29,17 +29,17 @@
   height: 40px;
   padding: 0;
   margin: 0;
-  color: antiquewhite;
+  color: var(--light-text);
 }
 
 .icon {
   width: clamp(20px, 5vw, 50px);
   height: clamp(20px, 5vw, 50px);
   cursor: pointer;
-  color: antiquewhite;
+  color: var(--light-text);
 }
-.closeIcon {
-  box-shadow: 1px 2px;
+.closeIcon>svg {
+  box-shadow:var(--light-text) 0px 1px
 }
 
 .content {
@@ -62,49 +62,17 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 15px;
   position: absolute;
   top: 0;
   right: 0;
+
+}
+.open{
+  box-shadow: var(--light-text) 0px 1px;
+  
 }
 
-.layers {
-  list-style-type: none;
-  padding: 0;
 
-  background-color: var(--light-text);
-
-  position: absolute;
-  border-right: 1px solid var(--dark-background);
-  right: var(--sidebar-width);
-  top: var(--navbar-height);
-  border-top-left-radius: 15px;
-  border-bottom-left-radius: 15px;
-}
-
-.layers > li {
-  position: relative;
-  text-transform: capitalize;
-  padding: 10px;
-  cursor: pointer;
-  color: var(--dark-background);
-}
-.layers > li::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 50%; /* Adjust as needed to control border width */
-  height: 1px;
-  background-color: var(
-    --navbar-dark
-  ); /* Use background-color instead of border */
-}
-
-.layers > li:hover {
-  opacity: 0.7;
-}
 
 .icon:hover,
 .open:hover,

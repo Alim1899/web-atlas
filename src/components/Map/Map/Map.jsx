@@ -1,29 +1,54 @@
-import { MapContainer, TileLayer, ZoomControl } from "react-leaflet";
+import { MapContainer, TileLayer, ZoomControl, Pane } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import classes from "./Map.module.css";
 import JsonProvider from "./JsonProvider";
 import useMaps from "../../Context/MapContext/useMaps";
+import BasemapSwitcher from "./BasemapSwitcher/BasemapSwitcher";
 
 function Map() {
-  const center = [41.42, 44.38];
   const { state } = useMaps();
-  const { baselayer } = state;
-  const { url, attribution } = baselayer;
-
+  const { activeLayers, baselayer } = state;
+  const {
+    url,
+    attribution,
+    subdomains = "abc",
+    labels,
+    maxZoom = 20,
+  } = baselayer;
+  const showLabels = labels && activeLayers?.length === 0;
+  console.log(showLabels, activeLayers);
   return (
     <div className={classes.main}>
       <div className={classes.shape}>
         <MapContainer
-          center={center}
-          zoom={10.2}
+          center={[41.52, 44.38]}
+          zoom={9.8}
           zoomControl={false}
           style={{ height: "100%", width: "100%" }}
         >
           <ZoomControl position="bottomright" />
-          <TileLayer attribution={attribution} url={url} maxZoom={20} />
+          <TileLayer
+            key={url}
+            url={url}
+            attribution={attribution}
+            subdomains={subdomains}
+            maxZoom={maxZoom}
+          />
 
           <JsonProvider />
+
+          {showLabels && (
+            <Pane name="labels" style={{ zIndex: 430, pointerEvents: "none" }}>
+              <TileLayer
+                key={labels}
+                url={labels}
+                subdomains="abcd"
+                maxZoom={maxZoom}
+              />
+            </Pane>
+          )}
         </MapContainer>
+        <BasemapSwitcher />
       </div>
     </div>
   );
