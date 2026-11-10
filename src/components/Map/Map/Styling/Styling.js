@@ -6,6 +6,7 @@ import { handleMerital } from "./StylesForLayer/Merital";
 import { Rate } from "./StylesForLayer/Rate";
 import { Settlement } from "./StylesForLayer/Settlement";
 import { getIconSize } from "./Functions";
+import { layerConfig, getClass } from "../../data/layerConfig";
 
 // ||||||||     POLYGON     ||||||||||||||||||||||
 
@@ -115,7 +116,12 @@ export const onEachPointFeature = (
   enabled = true,
 ) => {
   if (!enabled) return;
-  console.log(layerName);
+  const cfg = layerConfig[layerName];
+if (cfg?.popup) {
+  layer.bindPopup(cfg.popup(feature.properties || {}));
+  return;
+}
+
   if (["ecomigrants", "villages", "warmigrants"].includes(layerName)) {
     const { name_ge, size, location_ge, type_ge } = feature.properties || {};
     layer.bindPopup(
@@ -123,13 +129,7 @@ export const onEachPointFeature = (
         ? `<strong>${type_ge} ${name_ge}, ${location_ge} - ${size} მოსახლე</strong>`
         : `<strong> ${name_ge}, ${location_ge} </strong>`,
     );
-  } else if (["brucela_humans", "brucela_animals"].includes(layerName)) {
-    console.log(feature.properties);
-    const { name_ge, location_ge, size, type_ge } = feature.properties || {};
-    layer.bindPopup(
-      `<strong>${type_ge} ${name_ge} -  ${location_ge} - ${size} შემთხვევა</strong>`,
-    );
-  } else if (
+  }else if (
     ["anthrax", "anthrax_humans", "anthrax_animals"].includes(layerName)
   ) {
     const { name_ge, location_ge, type_en } = feature.properties || {};
@@ -173,14 +173,18 @@ export const pointToLayer = (feature, latlng, layerName) => {
     return null;
   }
 
-  const { name_en: name, type_en: type, power, size, index } = feature.properties || {};
+  const { name_en: name, type_en: type, power, size,  } = feature.properties || {};
   const sign = feature.sign;
   const iconSrc = sign
     ? `data:image/svg+xml;utf8,${encodeURIComponent(sign)}`
     : point;
 
-  const [w, h] = getIconSize(power ?? size ?? index, type, layerName, name);
 
+const cfg = layerConfig[layerName];
+const cls = cfg && getClass(cfg, feature.properties);
+const [w, h] = cls
+  ? [cls.size, cls.size]
+  : getIconSize(power ?? size, type, layerName, name);
   return L.marker(latlng, {
     icon: L.divIcon({
       html: `<img src="${iconSrc}" width="${w}" height="${h}" />`,

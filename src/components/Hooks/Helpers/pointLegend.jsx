@@ -1,4 +1,20 @@
+import { layerConfig, sizeSvg } from "../../Map/data/layerConfig";
 const pointLegend = (data, features = [], layer, groupEn, type) => {
+  const cfg = layerConfig[type];
+  if (cfg?.classes) {
+    cfg.classes.forEach((c) => {
+      const f = features.find(
+        (f) => String(f.properties?.[cfg.classField]) === String(c.value),
+      );
+      if (!f?.sign) return; // ამ კლასის შემთხვევა მონაცემებში არ არის
+      data.push({
+        name: c.label ?? String(c.value),
+        sign: sizeSvg(f.sign, c.size),
+        size: [c.size, c.size],
+      });
+    });
+    return;
+  }
   const handlers = {
     "Instrumental period": () => {
       const getIconSize = (size) => {
@@ -474,78 +490,7 @@ const pointLegend = (data, features = [], layer, groupEn, type) => {
       });
       data.sort((a, b) => a.index - b.index);
     },
-    "Brucela in animals": () => {
-      const getIconSize = (size) => {
-        const n = size || 0;
-        if (!size) return { type: "", size: [20, 20] };
-        if (n === "1-5") return { type: "1-5", size: [20, 20] };
-        if (n === "6-19") return { type: "6-19", size: [27, 27] };
-        if (n === "20-30") return { type: "20-30", size: [35, 35] };
-        if (n === "37") return { type: "37", size: [55, 55] };
-        return { type: "", size: [20, 20] };
-      };
-
-      const resizeSvg = (sign, size) => {
-        const [w, h] = getIconSize(size).size;
-        return sign.replace(
-          /<svg\b([^>]*)>/i,
-          `<svg$1 width="${w}" height="${h}">`,
-        );
-      };
-      features.forEach((feature) => {
-        const { type_en, index } = feature.properties || {};
-        const sign = feature.sign;
-
-        if (type_en && !data.some((d) => d.type === type_en)) {
-          const sizedSvg = resizeSvg(sign, type_en);
-
-          data.push({
-            name: type_en || "",
-            sign: sizedSvg || null,
-            type: type_en || "",
-            index,
-            size: getIconSize(type_en).size || 20,
-          });
-        }
-      });
-      data.sort((a, b) => a.index - b.index);
-    },
-    "Brucela in humans": () => {
-      const getIconSize = (size) => {
-        const n = size || 0;
-        if (!size) return { type: "", size: [20, 20] };
-        if (n === "1-5") return { type: "1-5", size: [15, 15] };
-        if (n === "6-19") return { type: "6-19", size: [25, 25] };
-        if (n === "20-30") return { type: "20-30", size: [35, 35] };
-        if (n === "37") return { type: "37", size: [55, 55] };
-        return { type: "", size: [20, 20] };
-      };
-
-      const resizeSvg = (sign, size) => {
-        const [w, h] = getIconSize(size).size;
-        return sign.replace(
-          /<svg\b([^>]*)>/i,
-          `<svg$1 width="${w}" height="${h}">`,
-        );
-      };
-      features.forEach((feature) => {
-        const { type_en, index } = feature.properties || {};
-        const sign = feature.sign;
-
-        if (type_en && !data.some((d) => d.type === type_en)) {
-          const sizedSvg = resizeSvg(sign, type_en);
-
-          data.push({
-            name: type_en || "",
-            sign: sizedSvg || null,
-            type: type_en || "",
-            index,
-            size: getIconSize(type_en).size || 20,
-          });
-        }
-      });
-      data.sort((a, b) => a.index - b.index);
-    },
+    
 
     default: () => {
       features.forEach((feature) => {
