@@ -446,20 +446,38 @@ export const mapCategories = [
     icon: GiMedicalPack,
     name: "ჯანდაცვა",
     layers: [
-       {
+      {
+        "სოციალური დაცვა": [
+          {
+            id: "social_package",
+            label: "სოციალური პაკეტის მიმღებთა რაოდენობა, 2023",
+            type: "polygon",
+          },
+          {
+            id: "subsistence",
+            label: "საარსებო შემწეობა, 2023",
+            type: "polygon",
+          },
+          {
+            id: "pension",
+            label: "პენსიის მიმღებთა რაოდენობა, 2023",
+            type: "polygon",
+          },
+        ],
+      },
+      {
         "ყირიმ-კონგოს ჰემორაგიული ცხელება": [
           {
             id: "cchf_humans",
             label: "ადამიანებში",
             type: "points",
           },
-           {
+          {
             id: "cchf_animals",
             label: "ცხოველებში",
             type: "points",
           },
         ],
-       
       },
       {
         ლეპტოსპიროზი: [
@@ -469,10 +487,9 @@ export const mapCategories = [
             type: "points",
           },
         ],
-       
       },
       {
-         ბრუცელიოზი: [
+        ბრუცელიოზი: [
           {
             id: "brucela_animals",
             label: "ბრუცელიოზი ცხოველებში, 1976-2020",

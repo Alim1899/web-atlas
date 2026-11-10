@@ -4,6 +4,8 @@ import MeritalChart from "./ChartsForLayer/MeritalChart";
 import PopulationChart from "./ChartsForLayer/PopulationChart";
 import { useState } from "react";
 import FarmingChart from './ChartsForLayer/FarmingChart'
+import ConfigBarChart from "./ChartsForLayer/ConfigBarChart";
+import { layerConfig } from "../../Map/data/layerConfig";
                                                               
 const ChartPie = ({ selectedLayer, data, dataKey, nameKey }) => {
   const [activeIndex, setActiveIndex] = useState(null);
@@ -11,6 +13,8 @@ const ChartPie = ({ selectedLayer, data, dataKey, nameKey }) => {
   const getOpacity = (index) =>
     activeIndex === null || activeIndex === index ? 1 : 0.35;
   const activeData = tooltipIndex !== null ? data[tooltipIndex] : null;
+  const cfg = layerConfig[selectedLayer];
+if (cfg?.chart) return <ConfigBarChart data={data} chart={cfg.chart} />;
   if (
     ["ownership", "status", "agroforms", "beneficiars","religy","ethnicity"].includes(selectedLayer)
   )

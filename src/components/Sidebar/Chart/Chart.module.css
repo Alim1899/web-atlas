@@ -42,12 +42,11 @@
 }
 
 ::-webkit-scrollbar {
-  width: 3px;
-  background-color: white;
+  width: 2px;
+  background-color: var(--light-text);
 }
 ::-webkit-scrollbar-thumb {
-  width: 3px;
-  background-color: black;
+  background-color: var(--dark-text);
 }
 
 .head {

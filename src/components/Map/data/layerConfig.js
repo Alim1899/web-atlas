@@ -55,6 +55,48 @@ const leptoCases = {
   classes: smallCasesClasses,
 };
 
+
+// ===== სოციალური დაცვა (სვეტოვანი დიაგრამები) =====
+
+const thousands = (v) => (v / 1000).toFixed(1);
+const num = (v) => Number(v).toLocaleString("ka-GE");
+
+const subsistence = {
+  popup: (p) =>
+    `<strong>${p.name_ge}</strong><br>
+     დარეგისტრირებული ოჯახი: ${num(p.registered)}<br>
+     მიმღები ოჯახი: ${num(p.receiving)}`,
+  chart: {
+    max: 10000,
+    height: 80,
+    format: thousands,
+    bars: [
+      { field: "registered", label: "დარეგისტრირებული ოჯახი", color: "#E9B23F" },
+      { field: "receiving", label: "მიმღები ოჯახი", color: "#D2502B" },
+    ],
+  },
+};
+
+const pension = {
+  popup: (p) => `<strong>${p.name_ge}</strong><br>პენსიის მიმღები: ${num(p.pension)}`,
+  chart: {
+    max: 25000,
+    height: 90,
+    format: thousands,
+    bars: [{ field: "pension", label: "პენსიის მიმღები", color: "#7DB36A" }],
+  },
+};
+
+const socialPackage = {
+  popup: (p) =>
+    `<strong>${p.name_ge}</strong><br>სოციალური პაკეტის მიმღები: ${num(p.social_package)}`,
+  chart: {
+    max: 6000,
+    height: 80,
+    format: thousands,
+    bars: [{ field: "social_package", label: "სოციალური პაკეტის მიმღები", color: "#D88BB5" }],
+  },
+};
 // ===== ფენები =====
 
 export const layerConfig = {
@@ -67,4 +109,7 @@ export const layerConfig = {
   leptospirosis: leptoCases,
     cchf_humans: leptoCases,
   cchf_animals: leptoCases,
+   subsistence,
+  pension,
+  social_package: socialPackage,
 };

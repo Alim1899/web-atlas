@@ -4,6 +4,7 @@ import useRightBar from "../Context/RightBarContext/useRightBar";
 import polygonLegend from "./Helpers/PolygonLegend";
 import pointLegend from "./Helpers/pointLegend";
 import { sortLegendData } from "./Helpers/sortLegendData";
+import { layerConfig } from "../Map/data/layerConfig";
 
 export const useLegend = () => {
   const { state } = useMaps();
@@ -21,10 +22,14 @@ export const useLegend = () => {
       const header = el[1].legend_header || el[1].layerName_ge;
       const type = el[0];
 
-      if (shape === "polygon") {
-        polygonLegend(data, features, groupEn, layer);
-      }
-
+     const cfg = layerConfig[type];
+if (cfg?.chart) {
+  cfg.chart.bars.forEach((b, i) =>
+    data.push({ txt: b.label, color: b.color, index: i + 1 }),
+  );
+} else if (shape === "polygon") {
+  polygonLegend(data, features, groupEn, layer);
+}
       if (shape === "points" || shape === "line") {
         pointLegend(data, features, layer, groupEn, type);
       }

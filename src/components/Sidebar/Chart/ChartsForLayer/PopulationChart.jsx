@@ -4,7 +4,6 @@ function HalfCircle({ oldRate, newRate, oldColor, newColor, size = 120 }) {
   const cx = size / 2;
   const cy = size / 2;
   const r = size * 0.48;
-  console.log(oldRate,newRate,oldColor,newColor);
   return (
     <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
       {/* OLD half */}
@@ -92,7 +91,6 @@ function RateCircle({ rate, color, size = 120 }) {
 }
 
 export default function PopulationChart({ data, name }) {
-  console.log(name);
   if (!Array.isArray(data)) return null;
   return (
     <div className={classes.populationList}>

@@ -7,6 +7,7 @@ import { Rate } from "./StylesForLayer/Rate";
 import { Settlement } from "./StylesForLayer/Settlement";
 import { getIconSize } from "./Functions";
 import { layerConfig, getClass } from "../../data/layerConfig";
+import { addBarChart } from "./StylesForLayer/Barchart";
 
 // ||||||||     POLYGON     ||||||||||||||||||||||
 
@@ -23,6 +24,13 @@ export function polygonStyle(feature, layers, id, fillColor) {
 
 export const onEachPolygonFeature = (feature, layer, enabled = true, name) => {
   const extra = feature.properties;
+  const cfg = layerConfig[name];
+if (cfg?.chart) {
+  layer.unbindPopup?.();
+  if (cfg.popup) layer.bindPopup(cfg.popup(feature.properties || {}));
+  addBarChart({ cfg, feature, layer, enabled });
+  return;
+}
   if (
     [
       "ownership",

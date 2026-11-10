@@ -54,3 +54,16 @@ body {
   margin-right: 12px;
   margin-bottom: 8px;
 }
+
+
+.config-bar-chart .recharts-cartesian-axis-tick-value,
+.config-bar-chart .recharts-cartesian-axis-tick-value tspan {
+  fill: var(--light-text);
+  font-size: 13px;
+}
+
+.config-bar-chart .recharts-cartesian-axis-line,
+.config-bar-chart .recharts-cartesian-axis-tick-line {
+  stroke: var(--light-text);
+  opacity: 0.5;
+}
