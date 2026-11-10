@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { FaLayerGroup } from "react-icons/fa";
 import classes from "./BasemapSwitcher.module.css";
-import { basemaps } from "../../data/layers";
-import useMaps from "../../../Context/MapContext/useMaps";
+import { basemaps } from "../../../data/layers";
+import useMaps from "../../../../Context/MapContext/useMaps";
 
 export default function BasemapSwitcher() {
   const { state, dispatch } = useMaps();

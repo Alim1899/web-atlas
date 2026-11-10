@@ -1,0 +1,11 @@
+.label {
+  white-space: nowrap;
+  text-align: center;
+  line-height: 1;
+  color: var(--background-color);
+  text-shadow: 0 0 3px #fff, 0 0 3px #fff, 0 0 2px #fff;
+  pointer-events: none;
+}
+.city { font-size: 14px; font-weight: 700; }
+.town { font-size: 12px; font-weight: 600; }
+.village { font-size: 11px; font-weight: 400; opacity: 0.85; }

@@ -1,0 +1,3387 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [43.87264313091998, 41.61337101632713]
+      },
+      "properties": { "name_ge": "ბერთა", "type_ge": "სოფელი", "size": 152 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [43.87553448299372, 41.64447043364043]
+      },
+      "properties": {
+        "name_ge": "ყიზილ-ქილისა",
+        "type_ge": "სოფელი",
+        "size": 1252
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [43.930596275153, 41.592256132849876]
+      },
+      "properties": { "name_ge": "საყდრიონი", "type_ge": "სოფელი", "size": 567 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.06475184527038, 41.43844391997126]
+      },
+      "properties": { "name_ge": "უსეინქენდი", "type_ge": "სოფელი", "size": 62 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.140555440062805, 41.30641679894726]
+      },
+      "properties": { "name_ge": "პანტიანი", "type_ge": "სოფელი", "size": 366 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.14184290991658, 41.6011134460767]
+      },
+      "properties": { "name_ge": "კოხტა", "type_ge": "სოფელი", "size": 228 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.16189220858759, 41.73241251813227]
+      },
+      "properties": { "name_ge": "გოდაქლარი", "type_ge": "სოფელი", "size": 49 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.204241270962505, 41.27984065412446]
+      },
+      "properties": { "name_ge": "ბაზაქლო", "type_ge": "სოფელი", "size": 532 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.235350845431576, 41.46904016832396]
+      },
+      "properties": { "name_ge": "ქცია", "type_ge": "სოფელი", "size": 69 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.2575831054362, 41.33315541125151]
+      },
+      "properties": { "name_ge": "ჯავახი", "type_ge": "სოფელი", "size": 423 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.25115965609828, 41.36520609470737]
+      },
+      "properties": {
+        "name_ge": "ყიზილქილისა",
+        "type_ge": "სოფელი",
+        "size": 230
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.31988586963505, 41.21660065989029]
+      },
+      "properties": { "name_ge": "გუგუთი", "type_ge": "სოფელი", "size": 127 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.3463991396555, 41.24973813677703]
+      },
+      "properties": { "name_ge": "კამიშლო", "type_ge": "სოფელი", "size": 219 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.34179515780421, 41.32824878210593]
+      },
+      "properties": {
+        "name_ge": "პატარა დმანისი",
+        "type_ge": "სოფელი",
+        "size": 116
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.44605678550008, 41.463169275000595]
+      },
+      "properties": { "name_ge": "აკაურთა", "type_ge": "სოფელი", "size": 762 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.41124163524304, 41.50745626784282]
+      },
+      "properties": { "name_ge": "სამღერეთი", "type_ge": "სოფელი", "size": 385 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.49155988582991, 41.5152162284235]
+      },
+      "properties": { "name_ge": "სამშვილდე", "type_ge": "სოფელი", "size": 443 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.500283338953004, 41.58193072517632]
+      },
+      "properties": { "name_ge": "ხოპისი", "type_ge": "სოფელი", "size": 12 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.49239187943317, 41.68499643784825]
+      },
+      "properties": { "name_ge": "ღოლოვანი", "type_ge": "ნასოფლარი", "size": 0 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.57620179135223, 41.21910224266141]
+      },
+      "properties": { "name_ge": "ახკერპი", "type_ge": "სოფელი", "size": 610 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.5479215064388, 41.555449446286396]
+      },
+      "properties": { "name_ge": "მაწევანი", "type_ge": "სოფელი", "size": 77 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.691690448331904, 41.26886836238098]
+      },
+      "properties": { "name_ge": "ჯანხოში", "type_ge": "სოფელი", "size": 2 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.65881419653843, 41.44608017230482]
+      },
+      "properties": { "name_ge": "მუხრანა", "type_ge": "სოფელი", "size": 679 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.69850570337564, 41.469570761086615]
+      },
+      "properties": { "name_ge": "ნახიდური", "type_ge": "სოფელი", "size": 3686 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.714835455559694, 41.47435288431426]
+      },
+      "properties": { "name_ge": "თამარისი", "type_ge": "დაბა", "size": 1399 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.7125916068663, 41.510055075110515]
+      },
+      "properties": { "name_ge": "ხაიში", "type_ge": "სოფელი", "size": 491 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.71100546071418, 41.61328877206355]
+      },
+      "properties": { "name_ge": "ღოუბანი", "type_ge": "სოფელი", "size": 516 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.78291684310402, 41.300169328217514]
+      },
+      "properties": {
+        "name_ge": "დამია-გიაურარხი",
+        "type_ge": "სოფელი",
+        "size": 1939
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.76959446912032, 41.43676517336893]
+      },
+      "properties": { "name_ge": "ალავარი", "type_ge": "სოფელი", "size": 200 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.757762778225384, 41.53503715466856]
+      },
+      "properties": {
+        "name_ge": "ახალი მარაბდა",
+        "type_ge": "სოფელი",
+        "size": 173
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.85007831155677, 41.347211139810234]
+      },
+      "properties": {
+        "name_ge": "სეიდხოჯალო",
+        "type_ge": "სოფელი",
+        "size": 501
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.8630089831792, 41.352412673605286]
+      },
+      "properties": { "name_ge": "არაფლო", "type_ge": "სოფელი", "size": 854 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.86015818353103, 41.646058988437446]
+      },
+      "properties": {
+        "name_ge": "ქვემო თელეთი",
+        "type_ge": "სოფელი",
+        "size": 798
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.90330183645908, 41.33000904834033]
+      },
+      "properties": {
+        "name_ge": "აღმამედლო",
+        "type_ge": "სოფელი",
+        "size": 2289
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.91202559987773, 41.3987378490014]
+      },
+      "properties": { "name_ge": "ქუთლარი", "type_ge": "სოფელი", "size": 1413 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.90754500612071, 41.762482000209445]
+      },
+      "properties": {
+        "name_ge": "ზემო ქვიშიანი",
+        "type_ge": "სოფელი",
+        "size": 38
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.95709636178919, 41.38693177815451]
+      },
+      "properties": {
+        "name_ge": "დიდი მუღანლო",
+        "type_ge": "სოფელი",
+        "size": 1286
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [45.02098512990238, 41.429212044518906]
+      },
+      "properties": { "name_ge": "ილმაზლო", "type_ge": "სოფელი", "size": 998 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [45.028034508983815, 41.41869039575757]
+      },
+      "properties": {
+        "name_ge": "ქაფანახჩი",
+        "type_ge": "სოფელი",
+        "size": 1534
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [45.032109452947395, 41.3977085102053]
+      },
+      "properties": {
+        "name_ge": "პირველი ქესალო",
+        "type_ge": "სოფელი",
+        "size": 1267
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [45.06697760288487, 41.489454425473035]
+      },
+      "properties": { "name_ge": "ბირლიკი", "type_ge": "სოფელი", "size": 179 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [45.02494826741774, 41.788014970283996]
+      },
+      "properties": { "name_ge": "მარტყოფი", "type_ge": "სოფელი", "size": 7397 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [45.19068421871635, 41.4629933574479]
+      },
+      "properties": { "name_ge": "მზიანეთი", "type_ge": "სოფელი", "size": 233 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [43.82868154181631, 41.626179561868554]
+      },
+      "properties": { "name_ge": "ბურნაშეთი", "type_ge": "სოფელი", "size": 488 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [43.86229720027288, 41.631414868146365]
+      },
+      "properties": { "name_ge": "ოზნი", "type_ge": "სოფელი", "size": 485 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [43.91224565930583, 41.57819938174054]
+      },
+      "properties": { "name_ge": "აიაზმი", "type_ge": "სოფელი", "size": 415 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [43.91985105448083, 41.65667810102412]
+      },
+      "properties": { "name_ge": "გუმბათი", "type_ge": "სოფელი", "size": 479 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [43.9897653476911, 41.623301722681084]
+      },
+      "properties": { "name_ge": "წინწყარო", "type_ge": "სოფელი", "size": 246 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.01528633532471, 41.651184526071766]
+      },
+      "properties": { "name_ge": "სანთა", "type_ge": "სოფელი", "size": 39 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [43.96715146097221, 41.70284993388921]
+      },
+      "properties": { "name_ge": "ხაჩქოი", "type_ge": "სოფელი", "size": 554 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.05959229698705, 41.37061709450979]
+      },
+      "properties": { "name_ge": "სოგუთლო", "type_ge": "სოფელი", "size": 25 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.032403538085504, 41.709417256964514]
+      },
+      "properties": {
+        "name_ge": "თამალა ხარაბა",
+        "type_ge": "სოფელი",
+        "size": 47
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.126170505614965, 41.403599480701764]
+      },
+      "properties": {
+        "name_ge": "ძველი გედაგდაღი",
+        "type_ge": "სოფელი",
+        "size": 37
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.281770760763024, 41.33084306901696]
+      },
+      "properties": { "name_ge": "ტნუსი", "type_ge": "სოფელი", "size": 400 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.30810282245779, 41.315746658108885]
+      },
+      "properties": { "name_ge": "ანგრევანი", "type_ge": "სოფელი", "size": 47 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.36069582365622, 41.42455361735546]
+      },
+      "properties": {
+        "name_ge": "ხახალაჯვარი",
+        "type_ge": "სოფელი",
+        "size": 213
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.36311886915893, 41.435610039115694]
+      },
+      "properties": { "name_ge": "წიფორი", "type_ge": "სოფელი", "size": 182 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.3237196748982, 41.65343727790885]
+      },
+      "properties": { "name_ge": "გოხნარი", "type_ge": "სოფელი", "size": 25 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.39149532366465, 41.43654529389785]
+      },
+      "properties": {
+        "name_ge": "ფოცხვერიანი",
+        "type_ge": "სოფელი",
+        "size": 391
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.42460979235489, 41.42700430305832]
+      },
+      "properties": { "name_ge": "კიანეთი", "type_ge": "სოფელი", "size": 301 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.381899283634915, 41.47290255913411]
+      },
+      "properties": { "name_ge": "ბერთაკარი", "type_ge": "სოფელი", "size": 120 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.38193553885129, 41.49783146392754]
+      },
+      "properties": { "name_ge": "შიხილო", "type_ge": "სოფელი", "size": 83 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.41306662605115, 41.47018015620069]
+      },
+      "properties": { "name_ge": "სენები", "type_ge": "სოფელი", "size": 154 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.38360824278016, 41.682716051036174]
+      },
+      "properties": { "name_ge": "ალგეთი", "type_ge": "სოფელი", "size": 4253 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.507895766614844, 41.35310369815202]
+      },
+      "properties": {
+        "name_ge": "სამწევრისი",
+        "type_ge": "სოფელი",
+        "size": 299
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.497004056339456, 41.57087561853391]
+      },
+      "properties": { "name_ge": "აბელიანი", "type_ge": "სოფელი", "size": 151 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.49729888877726, 41.612884809797286]
+      },
+      "properties": { "name_ge": "აბრამეთი", "type_ge": "სოფელი", "size": 6 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.514016504029215, 41.70660861912445]
+      },
+      "properties": { "name_ge": "დრე", "type_ge": "სოფელი", "size": 16 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.581003864187835, 41.40812211381084]
+      },
+      "properties": {
+        "name_ge": "ხატისსოფელი",
+        "type_ge": "სოფელი",
+        "size": 387
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.53911088082088, 41.44991639988949]
+      },
+      "properties": { "name_ge": "ბოლნისი", "type_ge": "სოფელი", "size": 8408 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.515846310442114, 41.62619513445604]
+      },
+      "properties": { "name_ge": "ამლევი", "type_ge": "სოფელი", "size": 8 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.5236160722574, 41.66688095350586]
+      },
+      "properties": { "name_ge": "ორბეთი", "type_ge": "სოფელი", "size": 234 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.65004991734467, 41.24763189317432]
+      },
+      "properties": { "name_ge": "ხოხმელი", "type_ge": "სოფელი", "size": 59 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.65274080105291, 41.339933610414384]
+      },
+      "properties": { "name_ge": "ყუდრო", "type_ge": "სოფელი", "size": 26 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.636814401347856, 41.43648785554615]
+      },
+      "properties": { "name_ge": "ჭაპალა", "type_ge": "სოფელი", "size": 1121 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.61227095018351, 41.49936384059061]
+      },
+      "properties": { "name_ge": "ქოსალარი", "type_ge": "სოფელი", "size": 608 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.62096250824621, 41.58046271417752]
+      },
+      "properties": {
+        "name_ge": "ჯორჯიაშვილი",
+        "type_ge": "სოფელი",
+        "size": 721
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.72928468698029, 41.20980785217216]
+      },
+      "properties": { "name_ge": "ბურდაძორი", "type_ge": "სოფელი", "size": 38 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.765403049811006, 41.58180511193441]
+      },
+      "properties": { "name_ge": "მუხათი", "type_ge": "სოფელი", "size": 524 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.83105520211539, 41.217021460978415]
+      },
+      "properties": { "name_ge": "ბურმა", "type_ge": "სოფელი", "size": 148 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.798366814143854, 41.326412011901674]
+      },
+      "properties": {
+        "name_ge": "ზემო სარალი",
+        "type_ge": "სოფელი",
+        "size": 883
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.866305814768, 41.30168375164077]
+      },
+      "properties": { "name_ge": "კასუმლო", "type_ge": "სოფელი", "size": 2299 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.836741365082254, 41.36980333311271]
+      },
+      "properties": { "name_ge": "შულავერი", "type_ge": "სოფელი", "size": 1551 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.844316994604284, 41.574727010623306]
+      },
+      "properties": {
+        "name_ge": "ახალი კუმისი",
+        "type_ge": "სოფელი",
+        "size": 92
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.879799634849384, 41.38686087957125]
+      },
+      "properties": {
+        "name_ge": "ზემო ყულარი",
+        "type_ge": "სოფელი",
+        "size": 1141
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.92181840205069, 41.36834723608437]
+      },
+      "properties": { "name_ge": "კირიხლო", "type_ge": "სოფელი", "size": 1114 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.901806867022444, 41.61521235119368]
+      },
+      "properties": { "name_ge": "კრწანისი", "type_ge": "სოფელი", "size": 2560 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.96207945924441, 41.61911635438207]
+      },
+      "properties": {
+        "name_ge": "ყარაჯალარი",
+        "type_ge": "სოფელი",
+        "size": 4141
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.97656827944302, 41.79002787937461]
+      },
+      "properties": { "name_ge": "ნორიო", "type_ge": "სოფელი", "size": 3756 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [45.04918856038511, 41.33416339525797]
+      },
+      "properties": {
+        "name_ge": "ქირაჩ მუღანლო",
+        "type_ge": "სოფელი",
+        "size": 1102
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [45.05891135946661, 41.49605161677925]
+      },
+      "properties": { "name_ge": "ახალშენი", "type_ge": "სოფელი", "size": 377 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [45.06287848016176, 41.48741682442884]
+      },
+      "properties": { "name_ge": "კალინინო", "type_ge": "სოფელი", "size": 700 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [45.07359437887511, 41.575136544851205]
+      },
+      "properties": {
+        "name_ge": "ახალი სამგორი",
+        "type_ge": "სოფელი",
+        "size": 1870
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [45.064051574418215, 41.79970728177325]
+      },
+      "properties": { "name_ge": "საცხენისი", "type_ge": "სოფელი", "size": 432 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [45.10759498109952, 41.42241552370141]
+      },
+      "properties": { "name_ge": "ნაზარლო", "type_ge": "სოფელი", "size": 4850 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.507063884707755, 41.36444676892868]
+      },
+      "properties": {
+        "name_ge": "ზემო ბოლნისი",
+        "type_ge": "სოფელი",
+        "size": 365
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.53181684952309, 41.401125780776304]
+      },
+      "properties": {
+        "name_ge": "ქვემო ბოლნისი",
+        "type_ge": "სოფელი",
+        "size": 4162
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.520886765010204, 41.71486152193684]
+      },
+      "properties": { "name_ge": "ვანათი", "type_ge": "სოფელი", "size": 8 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.60286202473133, 41.60427392461807]
+      },
+      "properties": {
+        "name_ge": "არდისუბანი",
+        "type_ge": "სოფელი",
+        "size": 138
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.59877519431596, 41.6572498946653]
+      },
+      "properties": { "name_ge": "პანტიანი", "type_ge": "სოფელი", "size": 36 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.72125838722882, 41.230494275192974]
+      },
+      "properties": { "name_ge": "გიულბახი", "type_ge": "სოფელი", "size": 245 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.717556074209455, 41.528943779982065]
+      },
+      "properties": {
+        "name_ge": "პატარა დურნუკი",
+        "type_ge": "სოფელი",
+        "size": 25
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.78952592288953, 41.24321745729982]
+      },
+      "properties": { "name_ge": "სადახლო", "type_ge": "სოფელი", "size": 7337 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.76230740969959, 41.35235533354542]
+      },
+      "properties": { "name_ge": "შაუმიანი", "type_ge": "სოფელი", "size": 3107 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.84232685078644, 41.300070234964465]
+      },
+      "properties": {
+        "name_ge": "ბეითარაბჩი",
+        "type_ge": "სოფელი",
+        "size": 462
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.8427544300187, 41.384335923723185]
+      },
+      "properties": {
+        "name_ge": "წითელსოფელი",
+        "type_ge": "სოფელი",
+        "size": 695
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.843167337712266, 41.389973863885636]
+      },
+      "properties": { "name_ge": "მარადისი", "type_ge": "სოფელი", "size": 239 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.82462712964988, 41.40057026632003]
+      },
+      "properties": { "name_ge": "იმირი", "type_ge": "სოფელი", "size": 1235 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.819207555202055, 41.62977621828441]
+      },
+      "properties": { "name_ge": "წალასყური", "type_ge": "სოფელი", "size": 593 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.92018163446789, 41.42464816984971]
+      },
+      "properties": {
+        "name_ge": "ხუტორ-ლეჟბადინი",
+        "type_ge": "სოფელი",
+        "size": 273
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.9061538810161, 41.58858207238162]
+      },
+      "properties": { "name_ge": "მთისძირი", "type_ge": "სოფელი", "size": 1393 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.901542234418336, 41.7676888686764]
+      },
+      "properties": {
+        "name_ge": "ქვემო ქვიშიანი",
+        "type_ge": "სოფელი",
+        "size": 23
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [45.006152563502646, 41.47097610307632]
+      },
+      "properties": { "name_ge": "ამბაროვკა", "type_ge": "სოფელი", "size": 578 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.976699569503246, 41.6220800244938]
+      },
+      "properties": {
+        "name_ge": "ფოლადაანთკარი",
+        "type_ge": "სოფელი",
+        "size": 694
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.99841900087241, 41.64854115695049]
+      },
+      "properties": {
+        "name_ge": "გამარჯვება",
+        "type_ge": "სოფელი",
+        "size": 4670
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [45.05224320792135, 41.50660146949102]
+      },
+      "properties": {
+        "name_ge": "თაზაქენდი",
+        "type_ge": "სოფელი",
+        "size": 1185
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [45.07561971604076, 41.76399549280217]
+      },
+      "properties": {
+        "name_ge": "ახალსოფელი",
+        "type_ge": "სოფელი",
+        "size": 1549
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [45.10084895281613, 41.430970482858314]
+      },
+      "properties": { "name_ge": "ქესალო", "type_ge": "სოფელი", "size": 4793 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [45.099842485516966, 41.47792992231839]
+      },
+      "properties": {
+        "name_ge": "თბილწყაროს დასახლ",
+        "type_ge": "ნასოფლარი",
+        "size": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [43.80809683794081, 41.69453185271361]
+      },
+      "properties": { "name_ge": "ხანდო", "type_ge": "სოფელი", "size": 184 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.02564856900242, 41.4147868157664]
+      },
+      "properties": { "name_ge": "მამიშლარი", "type_ge": "სოფელი", "size": 76 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [45.16003589296937, 41.7343181526079]
+      },
+      "properties": { "name_ge": "მუღანლო", "type_ge": "სოფელი", "size": 4210 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [43.91657870592462, 41.629389694608165]
+      },
+      "properties": { "name_ge": "არწივანი", "type_ge": "სოფელი", "size": 485 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [43.891972591411914, 41.656369353688746]
+      },
+      "properties": { "name_ge": "ავრანლო", "type_ge": "სოფელი", "size": 789 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [43.96188574973698, 41.595093513347166]
+      },
+      "properties": { "name_ge": "განთიადი", "type_ge": "სოფელი", "size": 583 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.04967242976865, 41.602753496940416]
+      },
+      "properties": { "name_ge": "ტბეთი", "type_ge": "სოფელი", "size": 548 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.1413208335856, 41.20659935821539]
+      },
+      "properties": { "name_ge": "ირგანჩაი", "type_ge": "სოფელი", "size": 2014 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.16641703933673, 41.413402269354854]
+      },
+      "properties": { "name_ge": "იფნარი", "type_ge": "სოფელი", "size": 1260 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.106487721160526, 41.45081954901606]
+      },
+      "properties": { "name_ge": "ახა", "type_ge": "სოფელი", "size": 47 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.143238148186626, 41.57560695857055]
+      },
+      "properties": { "name_ge": "ხარება", "type_ge": "სოფელი", "size": 268 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.116235627119686, 41.63850667200765]
+      },
+      "properties": { "name_ge": "ბეშთაშენი", "type_ge": "სოფელი", "size": 335 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.15874155724828, 41.69779828310257]
+      },
+      "properties": {
+        "name_ge": "არჯევან-სარვანი",
+        "type_ge": "სოფელი",
+        "size": 547
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.20009203379122, 41.305419148758496]
+      },
+      "properties": {
+        "name_ge": "ქვემო ოროზმანი",
+        "type_ge": "სოფელი",
+        "size": 361
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.224909477404665, 41.353412262084774]
+      },
+      "properties": { "name_ge": "შინდლარი", "type_ge": "სოფელი", "size": 302 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.30280281802655, 41.35537395061674]
+      },
+      "properties": { "name_ge": "ბოსლები", "type_ge": "სოფელი", "size": 397 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.27439457435031, 41.49884796008593]
+      },
+      "properties": {
+        "name_ge": "ზემო ახკალაფა",
+        "type_ge": "ნასოფლარი",
+        "size": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.27633313341859, 41.593942032014446]
+      },
+      "properties": {
+        "name_ge": "პატარა კლდეისი",
+        "type_ge": "ნასოფლარი",
+        "size": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.36357707277547, 41.35197442305683]
+      },
+      "properties": { "name_ge": "მაშავერა", "type_ge": "სოფელი", "size": 649 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.32717110827492, 41.41439968575626]
+      },
+      "properties": { "name_ge": "დარბაზი", "type_ge": "სოფელი", "size": 1604 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.33038298586034, 41.55494277170855]
+      },
+      "properties": {
+        "name_ge": "პატარა ირაგა",
+        "type_ge": "სოფელი",
+        "size": 173
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.31132229419577, 41.7091580796125]
+      },
+      "properties": { "name_ge": "კოდისწყარო", "type_ge": "სოფელი", "size": 8 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.41726170968129, 41.38260083527979]
+      },
+      "properties": { "name_ge": "კაზრეთი", "type_ge": "დაბა", "size": 4340 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.44519005167709, 41.43751197362064]
+      },
+      "properties": { "name_ge": "ქვეში", "type_ge": "სოფელი", "size": 342 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.42152242964474, 41.686941975367965]
+      },
+      "properties": {
+        "name_ge": "დიდი თონეთი",
+        "type_ge": "სოფელი",
+        "size": 499
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.47019175909479, 41.44361452834588]
+      },
+      "properties": { "name_ge": "საბერეთი", "type_ge": "სოფელი", "size": 53 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.506893492662755, 41.45617902500847]
+      },
+      "properties": { "name_ge": "რატევანი", "type_ge": "სოფელი", "size": 1370 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.45849814498914, 41.726375715381785]
+      },
+      "properties": { "name_ge": "ნაოსარი", "type_ge": "ნასოფლარი", "size": 0 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.5317272984486, 41.52710853991412]
+      },
+      "properties": { "name_ge": "დაღეთი", "type_ge": "სოფელი", "size": 101 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.58273356720529, 41.71565286780739]
+      },
+      "properties": { "name_ge": "წყლულეთი", "type_ge": "ნასოფლარი", "size": 0 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.64509141301821, 41.38630406757845]
+      },
+      "properties": { "name_ge": "ტალავერი", "type_ge": "სოფელი", "size": 5038 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.59639915829942, 41.44834865335218]
+      },
+      "properties": {
+        "name_ge": "რაჭისუბანი",
+        "type_ge": "სოფელი",
+        "size": 597
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.61928660678708, 41.54279079129674]
+      },
+      "properties": { "name_ge": "წინწყარო", "type_ge": "სოფელი", "size": 1857 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.61360140573732, 41.57986440418806]
+      },
+      "properties": { "name_ge": "ბოგვი", "type_ge": "სოფელი", "size": 170 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.718580761111305, 41.382470245654694]
+      },
+      "properties": { "name_ge": "მამხუტი", "type_ge": "სოფელი", "size": 2359 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.718406700356915, 41.432668400243195]
+      },
+      "properties": { "name_ge": "ხატავეთი", "type_ge": "სოფელი", "size": 145 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.70751142005941, 41.47381810448552]
+      },
+      "properties": { "name_ge": "ცურტავი", "type_ge": "სოფელი", "size": 2116 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.668488235063585, 41.563245524573674]
+      },
+      "properties": {
+        "name_ge": "შავსაყდარი",
+        "type_ge": "სოფელი",
+        "size": 253
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.73505687445289, 41.24479843089751]
+      },
+      "properties": { "name_ge": "ცოფი", "type_ge": "სოფელი", "size": 596 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.739582996689954, 41.52796331228533]
+      },
+      "properties": { "name_ge": "ქოთიში", "type_ge": "სოფელი", "size": 111 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.74903197474424, 41.53937740441867]
+      },
+      "properties": {
+        "name_ge": "ძველი მარაბდა",
+        "type_ge": "სოფელი",
+        "size": 204
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.837756844047846, 41.37645133865524]
+      },
+      "properties": { "name_ge": "მეწამულა", "type_ge": "სოფელი", "size": 134 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.808147099444064, 41.63642116578155]
+      },
+      "properties": {
+        "name_ge": "მუხრანთელეთი",
+        "type_ge": "სოფელი",
+        "size": 120
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.876482349084874, 41.323810329076004]
+      },
+      "properties": { "name_ge": "ულაშლო", "type_ge": "სოფელი", "size": 692 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.92904957368527, 41.34112229271398]
+      },
+      "properties": { "name_ge": "ყაჩაღანი", "type_ge": "სოფელი", "size": 2487 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.34917833839815, 41.43374900188881]
+      },
+      "properties": { "name_ge": "ჭრეში", "type_ge": "სოფელი", "size": 60 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.366211910142155, 41.45214740624602]
+      },
+      "properties": { "name_ge": "ტანძია", "type_ge": "სოფელი", "size": 518 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.32088987040452, 41.58718328332649]
+      },
+      "properties": {
+        "name_ge": "ვიზიროვკა",
+        "type_ge": "ნასოფლარი",
+        "size": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.309372116103376, 41.70049705495836]
+      },
+      "properties": { "name_ge": "შეხვეტილა", "type_ge": "სოფელი", "size": 19 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.388791221166, 41.253067623567624]
+      },
+      "properties": {
+        "name_ge": "ლოქჯანდარი",
+        "type_ge": "სოფელი",
+        "size": 173
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.379868344057094, 41.42649169453341]
+      },
+      "properties": { "name_ge": "გეტა", "type_ge": "სოფელი", "size": 531 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.42192475108461, 41.71464911935628]
+      },
+      "properties": { "name_ge": "მოხისი", "type_ge": "სოფელი", "size": 1 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.46512234252262, 41.41752091839263]
+      },
+      "properties": { "name_ge": "მუშევანი", "type_ge": "სოფელი", "size": 905 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.50040544806086, 41.43046914058348]
+      },
+      "properties": { "name_ge": "ზვარეთი", "type_ge": "სოფელი", "size": 351 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.46836675554742, 41.60525190341451]
+      },
+      "properties": { "name_ge": "ვაკე", "type_ge": "სოფელი", "size": 3 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.49702776778379, 41.71649180610653]
+      },
+      "properties": {
+        "name_ge": "პირველი შამთა",
+        "type_ge": "სოფელი",
+        "size": 8
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.98619780278048, 41.59535657643892]
+      },
+      "properties": { "name_ge": "აღთაქლა", "type_ge": "სოფელი", "size": 1811 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [45.05001154691195, 41.69176486851546]
+      },
+      "properties": { "name_ge": "ვაზიანი", "type_ge": "სოფელი", "size": 3686 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [45.04996553857137, 41.73477321229949]
+      },
+      "properties": { "name_ge": "სააკაძე", "type_ge": "სოფელი", "size": 317 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [45.08779245180694, 41.5009375937499]
+      },
+      "properties": { "name_ge": "ნაგები", "type_ge": "სოფელი", "size": 397 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [45.16778056480177, 41.447059308904024]
+      },
+      "properties": { "name_ge": "ჯანდარი", "type_ge": "სოფელი", "size": 1468 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [43.89516424770874, 41.5781701579936]
+      },
+      "properties": {
+        "name_ge": "ნარდევანი",
+        "type_ge": "სოფელი",
+        "size": 1055
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [43.94439164093852, 41.65366422666859]
+      },
+      "properties": { "name_ge": "აშკალა", "type_ge": "სოფელი", "size": 960 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.003477055439895, 41.70856372581487]
+      },
+      "properties": { "name_ge": "კაბური", "type_ge": "სოფელი", "size": 298 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.027852835668504, 41.4451298052205]
+      },
+      "properties": {
+        "name_ge": "მეორე სალამალეიქი",
+        "type_ge": "სოფელი",
+        "size": 16
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.09649967835163, 41.415651142444126]
+      },
+      "properties": {
+        "name_ge": "ზემო ყარაბულაღი",
+        "type_ge": "სოფელი",
+        "size": 871
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.08005993832776, 41.5527354164672]
+      },
+      "properties": { "name_ge": "კავთა", "type_ge": "სოფელი", "size": 69 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.12771531632628, 41.36705359314798]
+      },
+      "properties": { "name_ge": "ქარიანი", "type_ge": "სოფელი", "size": 93 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.13920096235834, 41.35057400068289]
+      },
+      "properties": { "name_ge": "კამარლო", "type_ge": "სოფელი", "size": 665 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.10954847638621, 41.65212552775505]
+      },
+      "properties": { "name_ge": "სამადლო", "type_ge": "სოფელი", "size": 82 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.235188558170194, 41.322229222932854]
+      },
+      "properties": { "name_ge": "დალარი", "type_ge": "სოფელი", "size": 178 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.17125644121984, 41.44459979128454]
+      },
+      "properties": { "name_ge": "ყიზილაჯლო", "type_ge": "სოფელი", "size": 184 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.2281804129408, 41.404619375966455]
+      },
+      "properties": { "name_ge": "ორმაშენი", "type_ge": "სოფელი", "size": 88 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.19542421728916, 41.50443263557295]
+      },
+      "properties": { "name_ge": "მამულო", "type_ge": "სოფელი", "size": 51 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.19777495213872, 41.71626990555143]
+      },
+      "properties": { "name_ge": "ჩოლიანი", "type_ge": "სოფელი", "size": 64 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.27482579372714, 41.260499813200404]
+      },
+      "properties": { "name_ge": "საკირე", "type_ge": "სოფელი", "size": 46 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.29464034986389, 41.25361262955145]
+      },
+      "properties": { "name_ge": "გორა", "type_ge": "სოფელი", "size": 11 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.28936799312868, 41.372608624623005]
+      },
+      "properties": {
+        "name_ge": "კაკლიანი (აზერბაიჯ",
+        "type_ge": "სოფელი",
+        "size": 321
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.25221607512536, 41.582892316696416]
+      },
+      "properties": {
+        "name_ge": "დიდი კლდეისი",
+        "type_ge": "სოფელი",
+        "size": 28
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.27806149442042, 41.70129167446773]
+      },
+      "properties": {
+        "name_ge": "ქვემო ჭინჭრიანი",
+        "type_ge": "სოფელი",
+        "size": 16
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.328029993269375, 41.53795992282492]
+      },
+      "properties": {
+        "name_ge": "ალექსეევკა",
+        "type_ge": "სოფელი",
+        "size": 161
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.34968871954623, 41.526542436438824]
+      },
+      "properties": { "name_ge": "ჯვარა", "type_ge": "სოფელი", "size": 119 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.35271936561402, 41.54636508347913]
+      },
+      "properties": { "name_ge": "ჯიგრაშენი", "type_ge": "სოფელი", "size": 100 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.33897386629066, 41.65058612279032]
+      },
+      "properties": {
+        "name_ge": "ახალსოფელი",
+        "type_ge": "სოფელი",
+        "size": 118
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.3540045643906, 41.65068521703214]
+      },
+      "properties": { "name_ge": "ზირბითი", "type_ge": "სოფელი", "size": 39 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.39606997664694, 41.32632487378326]
+      },
+      "properties": { "name_ge": "უკანგორი", "type_ge": "სოფელი", "size": 2 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.41045264746475, 41.45383680636282]
+      },
+      "properties": {
+        "name_ge": "ძეძვნარიანი",
+        "type_ge": "სოფელი",
+        "size": 411
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.40150140279386, 41.523156416486415]
+      },
+      "properties": { "name_ge": "იფნარა", "type_ge": "სოფელი", "size": 11 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.38323804535921, 41.696741245962045]
+      },
+      "properties": { "name_ge": "მანგლისი", "type_ge": "დაბა", "size": 1441 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.74964575180359, 41.41808034813956]
+      },
+      "properties": {
+        "name_ge": "ქვემო არქევანი",
+        "type_ge": "სოფელი",
+        "size": 769
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.73253911324436, 41.60394839384532]
+      },
+      "properties": { "name_ge": "ბორბალო", "type_ge": "სოფელი", "size": 248 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.776222696902884, 41.58167562977736]
+      },
+      "properties": { "name_ge": "კოდა", "type_ge": "სოფელი", "size": 3062 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.77764252452377, 41.57509956096574]
+      },
+      "properties": {
+        "name_ge": "ი.გ.პ დასახლება",
+        "type_ge": "ნასოფლარი",
+        "size": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.82713283052031, 41.3417445470318]
+      },
+      "properties": {
+        "name_ge": "ქვემო სარალი",
+        "type_ge": "სოფელი",
+        "size": 1370
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.819912610539845, 41.44120187463297]
+      },
+      "properties": { "name_ge": "წერეთელი", "type_ge": "სოფელი", "size": 2191 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.82424553123015, 41.43105278719086]
+      },
+      "properties": { "name_ge": "ნორგიული", "type_ge": "სოფელი", "size": 436 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.82605098945179, 41.42326428594627]
+      },
+      "properties": { "name_ge": "საიმერლო", "type_ge": "სოფელი", "size": 1237 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [45.01148460060633, 41.543519017933406]
+      },
+      "properties": {
+        "name_ge": "რუსთავი",
+        "type_ge": "ქალაქი",
+        "size": 132333
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [45.12042152333544, 41.38879693525762]
+      },
+      "properties": {
+        "name_ge": "ვახტანგისი",
+        "type_ge": "სოფელი",
+        "size": 2375
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [45.09807209727622, 41.687973832240104]
+      },
+      "properties": { "name_ge": "მუხროვანი", "type_ge": "სოფელი", "size": 334 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.00475993164816, 41.599564427458844]
+      },
+      "properties": { "name_ge": "სამება", "type_ge": "სოფელი", "size": 693 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [43.960887159268154, 41.607197870354554]
+      },
+      "properties": { "name_ge": "დარაქოი", "type_ge": "სოფელი", "size": 588 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.044599413794394, 41.452749681300624]
+      },
+      "properties": {
+        "name_ge": "პირველი სალამალეი",
+        "type_ge": "სოფელი",
+        "size": 68
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.10082802341495, 41.40069763029468]
+      },
+      "properties": {
+        "name_ge": "ახალი გედაგდაღი",
+        "type_ge": "სოფელი",
+        "size": 159
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.124281454560844, 41.585249217773814]
+      },
+      "properties": { "name_ge": "დაშბაში", "type_ge": "სოფელი", "size": 295 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.22704801720554, 41.721050289983744]
+      },
+      "properties": { "name_ge": "უგუდეთი", "type_ge": "ნასოფლარი", "size": 0 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.25458052347914, 41.34073124970148]
+      },
+      "properties": { "name_ge": "განთიადი", "type_ge": "სოფელი", "size": 544 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.25145062890692, 41.53785421720927]
+      },
+      "properties": { "name_ge": "ბედიანი", "type_ge": "დაბა", "size": 148 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.35485354686194, 41.35043432892752]
+      },
+      "properties": {
+        "name_ge": "ვარდისუბანი",
+        "type_ge": "სოფელი",
+        "size": 349
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.39858119756723, 41.364581519928436]
+      },
+      "properties": { "name_ge": "ბალიჭი", "type_ge": "სოფელი", "size": 783 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.43410412292848, 41.43324287800465]
+      },
+      "properties": { "name_ge": "ჯავშნიანი", "type_ge": "სოფელი", "size": 476 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.38548578719601, 41.520735493441784]
+      },
+      "properties": { "name_ge": "ლიპი", "type_ge": "სოფელი", "size": 7 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.436644937754735, 41.51634100763249]
+      },
+      "properties": {
+        "name_ge": "ზემო ახალშენი",
+        "type_ge": "ნასოფლარი",
+        "size": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.46179114132289, 41.594353544000955]
+      },
+      "properties": {
+        "name_ge": "თეთრიწყარო",
+        "type_ge": "ქალაქი",
+        "size": 3093
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.471130658131806, 41.57157340340199]
+      },
+      "properties": { "name_ge": "ქსოვრეთი", "type_ge": "სოფელი", "size": 14 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.456583278967216, 41.6642485025091]
+      },
+      "properties": {
+        "name_ge": "პატარა თონეთი",
+        "type_ge": "სოფელი",
+        "size": 59
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.56251490410694, 41.24626400450201]
+      },
+      "properties": { "name_ge": "ვერხვიანი", "type_ge": "სოფელი", "size": 4 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.55865554217053, 41.49666481674213]
+      },
+      "properties": { "name_ge": "დისველი", "type_ge": "სოფელი", "size": 397 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.534400312785124, 41.5743398122721]
+      },
+      "properties": { "name_ge": "ჩხიკვთა", "type_ge": "სოფელი", "size": 147 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.54069984032088, 41.59098964170038]
+      },
+      "properties": { "name_ge": "ტბისი", "type_ge": "სოფელი", "size": 60 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.65642744200393, 41.29608353325431]
+      },
+      "properties": { "name_ge": "წერაქვი", "type_ge": "სოფელი", "size": 140 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.60641088291324, 41.438087263345494]
+      },
+      "properties": { "name_ge": "სამტრედო", "type_ge": "სოფელი", "size": 517 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.71558891813276, 41.29258892904915]
+      },
+      "properties": { "name_ge": "სიონი", "type_ge": "სოფელი", "size": 192 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.676445948117035, 41.447235582161504]
+      },
+      "properties": { "name_ge": "ხიდისყური", "type_ge": "სოფელი", "size": 710 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.665696392256194, 41.45021426410311]
+      },
+      "properties": { "name_ge": "ბალახაური", "type_ge": "სოფელი", "size": 455 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.666971300994724, 41.594283987269954]
+      },
+      "properties": { "name_ge": "ასურეთი", "type_ge": "სოფელი", "size": 978 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.75423130779056, 41.2322696394336]
+      },
+      "properties": { "name_ge": "მოლაოღლი", "type_ge": "სოფელი", "size": 1091 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.76553657390212, 41.22989937311567]
+      },
+      "properties": { "name_ge": "ხულდარა", "type_ge": "სოფელი", "size": 915 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.7297289404851, 41.425692358668805]
+      },
+      "properties": {
+        "name_ge": "ზემო არქევანი",
+        "type_ge": "სოფელი",
+        "size": 467
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.85270978486575, 41.22149087062837]
+      },
+      "properties": { "name_ge": "თაზაქენდი", "type_ge": "სოფელი", "size": 478 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.801516602286874, 41.40452602136368]
+      },
+      "properties": { "name_ge": "იმირჭალა", "type_ge": "სოფელი", "size": 208 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.877853155161574, 41.354746681693484]
+      },
+      "properties": {
+        "name_ge": "ახლომახმუდლო",
+        "type_ge": "სოფელი",
+        "size": 554
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.98085611629629, 41.37870982964725]
+      },
+      "properties": { "name_ge": "ლეჟბადინი", "type_ge": "სოფელი", "size": 962 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.971074073804886, 41.475702603815]
+      },
+      "properties": {
+        "name_ge": "ალგეთის მევენახეო",
+        "type_ge": "ნასოფლარი",
+        "size": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.97007952700752, 41.60000488796836]
+      },
+      "properties": {
+        "name_ge": "ყარათაქლა",
+        "type_ge": "სოფელი",
+        "size": 1550
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [45.03751076072215, 41.38488152634006]
+      },
+      "properties": {
+        "name_ge": "მეორე ქესალო",
+        "type_ge": "სოფელი",
+        "size": 1353
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [45.18443247606282, 41.471687215417084]
+      },
+      "properties": {
+        "name_ge": "ლემშვენიერა",
+        "type_ge": "სოფელი",
+        "size": 1642
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [43.85095869624901, 41.6860273205857]
+      },
+      "properties": { "name_ge": "რეხა", "type_ge": "სოფელი", "size": 328 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.03979206523452, 41.715821769237785]
+      },
+      "properties": {
+        "name_ge": "ჩივთქილისა",
+        "type_ge": "სოფელი",
+        "size": 345
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.16757875535816, 41.288569356613834]
+      },
+      "properties": { "name_ge": "მთისძირი", "type_ge": "სოფელი", "size": 212 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.16085900454542, 41.38260578507454]
+      },
+      "properties": { "name_ge": "დაგარახლო", "type_ge": "სოფელი", "size": 447 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.09306206736282, 41.6935986747521]
+      },
+      "properties": { "name_ge": "თეჯისი", "type_ge": "სოფელი", "size": 243 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.11874340264695, 41.68447078453447]
+      },
+      "properties": { "name_ge": "საბეჭისი", "type_ge": "სოფელი", "size": 249 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.20865178401548, 41.250511750215395]
+      },
+      "properties": { "name_ge": "ტყისპირი", "type_ge": "სოფელი", "size": 50 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.171017547876524, 41.336981924977785]
+      },
+      "properties": { "name_ge": "იაყუბლო", "type_ge": "სოფელი", "size": 478 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.23451133440694, 41.51729776750532]
+      },
+      "properties": {
+        "name_ge": "კაკლიანი (ქართული)",
+        "type_ge": "სოფელი",
+        "size": 5
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.26368604418581, 41.30080795795544]
+      },
+      "properties": { "name_ge": "მამიშლო", "type_ge": "სოფელი", "size": 332 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.00134129877737, 41.59517979065993]
+      },
+      "properties": { "name_ge": "წალკა", "type_ge": "ქალაქი", "size": 3136 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.07606400139646, 41.66555419803455]
+      },
+      "properties": { "name_ge": "ახალშენი", "type_ge": "სოფელი", "size": 439 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.128893250589336, 41.43423913940147]
+      },
+      "properties": {
+        "name_ge": "ქვემო ყარაბულაღი",
+        "type_ge": "სოფელი",
+        "size": 196
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.11150550823955, 41.48715912006153]
+      },
+      "properties": { "name_ge": "განახლება", "type_ge": "სოფელი", "size": 113 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.12603702196417, 41.495851422461904]
+      },
+      "properties": { "name_ge": "სარკინეთი", "type_ge": "სოფელი", "size": 96 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.1641160104099, 41.497577802646596]
+      },
+      "properties": { "name_ge": "გომარეთი", "type_ge": "სოფელი", "size": 594 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.108278234475954, 41.541208986812805]
+      },
+      "properties": { "name_ge": "თრიალეთი", "type_ge": "დაბა", "size": 565 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.23165255888069, 41.279025496968366]
+      },
+      "properties": { "name_ge": "ამამლო", "type_ge": "სოფელი", "size": 1100 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.18148986902427, 41.29717733791994]
+      },
+      "properties": {
+        "name_ge": "ზემო ოროზმანი",
+        "type_ge": "სოფელი",
+        "size": 624
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.13337599839159, 41.382191539889465]
+      },
+      "properties": { "name_ge": "დმანისი", "type_ge": "ქალაქი", "size": 3012 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.19276168876634, 41.43558599602032]
+      },
+      "properties": { "name_ge": "საჯა", "type_ge": "სოფელი", "size": 43 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.19916925271192, 41.41419462743611]
+      },
+      "properties": { "name_ge": "ბახჩალარი", "type_ge": "სოფელი", "size": 70 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.277696435222076, 41.46887414359181]
+      },
+      "properties": {
+        "name_ge": "წყნარი აბანო",
+        "type_ge": "ნასოფლარი",
+        "size": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.297995761949664, 41.534353899414825]
+      },
+      "properties": { "name_ge": "მენკალისი", "type_ge": "სოფელი", "size": 26 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.31874289012861, 41.4792031691546]
+      },
+      "properties": { "name_ge": "ფიტარეთი", "type_ge": "ნასოფლარი", "size": 0 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.3346954119271, 41.58774277126571]
+      },
+      "properties": { "name_ge": "ივანოვკა", "type_ge": "სოფელი", "size": 83 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.32508355874974, 41.738579674011255]
+      },
+      "properties": {
+        "name_ge": "დიდი ნამტვრიანი",
+        "type_ge": "ნასოფლარი",
+        "size": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.384514544832655, 41.45220292107965]
+      },
+      "properties": { "name_ge": "იწრია", "type_ge": "სოფელი", "size": 104 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.38388976013049, 41.63875591180188]
+      },
+      "properties": { "name_ge": "საფუძვრები", "type_ge": "სოფელი", "size": 27 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.502008793847175, 41.333858925706735]
+      },
+      "properties": { "name_ge": "ფოლადაური", "type_ge": "სოფელი", "size": 235 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.580016367338885, 41.582030277194306]
+      },
+      "properties": { "name_ge": "საღრაშენი", "type_ge": "სოფელი", "size": 176 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.55767002730852, 41.682258497570444]
+      },
+      "properties": { "name_ge": "წვერი", "type_ge": "ნასოფლარი", "size": 0 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.60088265213636, 41.23840310672983]
+      },
+      "properties": { "name_ge": "ჩანახჩი", "type_ge": "სოფელი", "size": 248 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.635699355615195, 41.60516816188065]
+      },
+      "properties": { "name_ge": "ენაგეთი", "type_ge": "სოფელი", "size": 329 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.69327580916792, 41.53885904934832]
+      },
+      "properties": {
+        "name_ge": "დიდი დურნუკი",
+        "type_ge": "სოფელი",
+        "size": 45
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.78835669225678, 41.30992990153024]
+      },
+      "properties": { "name_ge": "ახლოლალო", "type_ge": "სოფელი", "size": 690 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.78933236788946, 41.44651893104982]
+      },
+      "properties": { "name_ge": "დიოკნისი", "type_ge": "სოფელი", "size": 309 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.84601971759289, 41.36938154565465]
+      },
+      "properties": { "name_ge": "დაშთაფა", "type_ge": "სოფელი", "size": 1092 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.80329983727659, 41.422510980921295]
+      },
+      "properties": {
+        "name_ge": "დიდი ბეგლარი",
+        "type_ge": "სოფელი",
+        "size": 356
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.89093973346343, 41.340449364906576]
+      },
+      "properties": { "name_ge": "კუშჩი", "type_ge": "სოფელი", "size": 404 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.88749863056689, 41.35767148289454]
+      },
+      "properties": { "name_ge": "ენიქენდი", "type_ge": "სოფელი", "size": 448 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.90565863320311, 41.3830733026561]
+      },
+      "properties": {
+        "name_ge": "ქვემო ყულარი",
+        "type_ge": "სოფელი",
+        "size": 565
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.885700532174226, 41.400336035492245]
+      },
+      "properties": { "name_ge": "ბაიდარი", "type_ge": "სოფელი", "size": 882 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.914999249825485, 41.435572225923316]
+      },
+      "properties": {
+        "name_ge": "თაზაქენდი",
+        "type_ge": "სოფელი",
+        "size": 2076
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.9703696100369, 41.353324507487315]
+      },
+      "properties": { "name_ge": "თექალი", "type_ge": "სოფელი", "size": 1536 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.946498900107315, 41.425880588091914]
+      },
+      "properties": {
+        "name_ge": "აზიზქენდი",
+        "type_ge": "სოფელი",
+        "size": 1536
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [45.055552635368535, 41.49879886745849]
+      },
+      "properties": { "name_ge": "ამბართაფა", "type_ge": "სოფელი", "size": 377 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [45.07629329630689, 41.48208746419197]
+      },
+      "properties": { "name_ge": "ბოტანიკა", "type_ge": "სოფელი", "size": 869 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [45.17738524765457, 41.71500622476139]
+      },
+      "properties": {
+        "name_ge": "სართიჭალა",
+        "type_ge": "სოფელი",
+        "size": 6009
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [43.89874342391792, 41.61323544228038]
+      },
+      "properties": { "name_ge": "კუშჩი", "type_ge": "სოფელი", "size": 532 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.13930086117137, 41.342003218990996]
+      },
+      "properties": { "name_ge": "შახმარლო", "type_ge": "სოფელი", "size": 231 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.10533345232985, 41.477623357969186]
+      },
+      "properties": { "name_ge": "ველისპირი", "type_ge": "სოფელი", "size": 81 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.12362664176442, 41.55087890004246]
+      },
+      "properties": { "name_ge": "ხრამჰესი", "type_ge": "დაბა", "size": 78 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.15430868311626, 41.67021483955756]
+      },
+      "properties": { "name_ge": "ბარეთი", "type_ge": "სოფელი", "size": 397 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.21760737641461, 41.30831907794733]
+      },
+      "properties": { "name_ge": "ვაკე", "type_ge": "სოფელი", "size": 239 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.189447599626924, 41.64126244100962]
+      },
+      "properties": { "name_ge": "იმერა", "type_ge": "სოფელი", "size": 317 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.19471914895534, 41.61173678494423]
+      },
+      "properties": {
+        "name_ge": "ჩრდილისუბანი",
+        "type_ge": "სოფელი",
+        "size": 141
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.20070193086487, 41.69215127989848]
+      },
+      "properties": { "name_ge": "ლივადი", "type_ge": "სოფელი", "size": 80 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.3041992021019, 41.3020509922637]
+      },
+      "properties": { "name_ge": "საფარლო", "type_ge": "სოფელი", "size": 329 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.24971347005384, 41.716456504574225]
+      },
+      "properties": { "name_ge": "ნაპილნარი", "type_ge": "სოფელი", "size": 57 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.35201057788699, 41.35589679720951]
+      },
+      "properties": {
+        "name_ge": "დიდი დმანისი",
+        "type_ge": "სოფელი",
+        "size": 650
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.309105523482216, 41.52194040296969]
+      },
+      "properties": { "name_ge": "ნავთიანი", "type_ge": "სოფელი", "size": 10 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.359139409253494, 41.539939468787196]
+      },
+      "properties": {
+        "name_ge": "დიდი ირაგა",
+        "type_ge": "სოფელი",
+        "size": 161
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.33185112858791, 41.69301542688042]
+      },
+      "properties": { "name_ge": "ჯვრისხევი", "type_ge": "სოფელი", "size": 3 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.31000233408176, 41.72413346775237]
+      },
+      "properties": {
+        "name_ge": "პატარა ნამტვრიანი",
+        "type_ge": "სოფელი",
+        "size": 16
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.4258451946032, 41.45281585415492]
+      },
+      "properties": {
+        "name_ge": "ძველი ქვეში",
+        "type_ge": "სოფელი",
+        "size": 1199
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.443937457036014, 41.49478629208525]
+      },
+      "properties": {
+        "name_ge": "ქვემო ახალშენი",
+        "type_ge": "ნასოფლარი",
+        "size": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.42064156948809, 41.531380347583415]
+      },
+      "properties": { "name_ge": "ჭივჭავი", "type_ge": "სოფელი", "size": 313 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.38719688948781, 41.671704769611985]
+      },
+      "properties": {
+        "name_ge": "ცხრაკუდაანი",
+        "type_ge": "ნასოფლარი",
+        "size": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.50557421306551, 41.38248527944782]
+      },
+      "properties": { "name_ge": "ბოლნისი", "type_ge": "სოფელი", "size": 618 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.458470995925026, 41.59183463956547]
+      },
+      "properties": { "name_ge": "გუდარეხი", "type_ge": "სოფელი", "size": 12 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.4867526574069, 41.71391807753012]
+      },
+      "properties": {
+        "name_ge": "მეორე შამთა",
+        "type_ge": "ნასოფლარი",
+        "size": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.56207800753836, 41.5767823129551]
+      },
+      "properties": { "name_ge": "ფარცხისი", "type_ge": "სოფელი", "size": 259 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.58320748522346, 41.562925074290185]
+      },
+      "properties": { "name_ge": "გოლთეთი", "type_ge": "სოფელი", "size": 385 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.540348652403175, 41.66400217217525]
+      },
+      "properties": {
+        "name_ge": "ახალი ზირბითი",
+        "type_ge": "სოფელი",
+        "size": 52
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.540098606290535, 41.705971713295234]
+      },
+      "properties": { "name_ge": "ღვევი", "type_ge": "სოფელი", "size": 14 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.54825749975712, 41.7274842608439]
+      },
+      "properties": {
+        "name_ge": "ლასტიციხე",
+        "type_ge": "ნასოფლარი",
+        "size": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.61911151919329, 41.445827639239866]
+      },
+      "properties": { "name_ge": "მწყნეთი", "type_ge": "სოფელი", "size": 203 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.692652246681746, 41.22674220892573]
+      },
+      "properties": { "name_ge": "ხოჯორნი", "type_ge": "სოფელი", "size": 635 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.66454315693186, 41.43121399542816]
+      },
+      "properties": { "name_ge": "სავანეთი", "type_ge": "სოფელი", "size": 1412 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.7928165091102, 41.28134837865468]
+      },
+      "properties": { "name_ge": "კიროვკა", "type_ge": "სოფელი", "size": 663 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.289274639999846, 41.48898915153749]
+      },
+      "properties": {
+        "name_ge": "ქვემო ახკალაფა",
+        "type_ge": "ნასოფლარი",
+        "size": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.28550107316701, 41.70050446951703]
+      },
+      "properties": { "name_ge": "არხოტი", "type_ge": "სოფელი", "size": 16 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.27689543926251, 41.724435265610296]
+      },
+      "properties": {
+        "name_ge": "ზემო ჭინჭრიანი",
+        "type_ge": "სოფელი",
+        "size": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.57574774873171, 41.41338156278883]
+      },
+      "properties": { "name_ge": "ვანათი", "type_ge": "სოფელი", "size": 510 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.51540578158684, 41.69566963308769]
+      },
+      "properties": { "name_ge": "დიდგორი", "type_ge": "სოფელი", "size": 99 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.631191416044096, 41.24922985834728]
+      },
+      "properties": { "name_ge": "ოფრეთი", "type_ge": "სოფელი", "size": 80 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.75144424194029, 41.27145776175298]
+      },
+      "properties": { "name_ge": "დამია", "type_ge": "სოფელი", "size": 1939 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.73472018901184, 41.310732680647625]
+      },
+      "properties": { "name_ge": "ახკულა", "type_ge": "სოფელი", "size": 86 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.74937778485188, 41.38699707161979]
+      },
+      "properties": { "name_ge": "ხიხანი", "type_ge": "სოფელი", "size": 504 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.74330943046543, 41.439767746963476]
+      },
+      "properties": { "name_ge": "თამარისი", "type_ge": "სოფელი", "size": 1237 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.74177145402912, 41.47102046491572]
+      },
+      "properties": { "name_ge": "ფარიზი", "type_ge": "სოფელი", "size": 774 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.77200215391306, 41.478089884937326]
+      },
+      "properties": {
+        "name_ge": "ყიზილ-აჯლო",
+        "type_ge": "სოფელი",
+        "size": 7291
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.731104156342845, 41.61843192144824]
+      },
+      "properties": { "name_ge": "ერტისი", "type_ge": "სოფელი", "size": 297 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.741690616166004, 41.618470326576585]
+      },
+      "properties": { "name_ge": "ვაშლოვანი", "type_ge": "სოფელი", "size": 770 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.785573535680776, 41.614953726059944]
+      },
+      "properties": { "name_ge": "კუმისი", "type_ge": "სოფელი", "size": 1831 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.84223706674096, 41.32552221922759]
+      },
+      "properties": { "name_ge": "ბაითალო", "type_ge": "სოფელი", "size": 329 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.816890151144705, 41.416937669518866]
+      },
+      "properties": {
+        "name_ge": "პატარა ბეგლარი",
+        "type_ge": "სოფელი",
+        "size": 320
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.88550487760662, 41.47137302186852]
+      },
+      "properties": {
+        "name_ge": "მარნეული",
+        "type_ge": "ქალაქი",
+        "size": 24928
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.86518283161129, 41.45000696301472]
+      },
+      "properties": {
+        "name_ge": "საბირქენდი",
+        "type_ge": "სოფელი",
+        "size": 3403
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.81917217150949, 41.64093718477047]
+      },
+      "properties": {
+        "name_ge": "ზემო თელეთი",
+        "type_ge": "სოფელი",
+        "size": 890
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.83180081493736, 41.64405928503514]
+      },
+      "properties": { "name_ge": "ახალწყალი", "type_ge": "სოფელი", "size": 453 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.893072428433406, 41.448626465902265]
+      },
+      "properties": { "name_ge": "ალგეთი", "type_ge": "სოფელი", "size": 4253 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [45.00518263768391, 41.35445025889867]
+      },
+      "properties": {
+        "name_ge": "ხანჯიგაზლო",
+        "type_ge": "სოფელი",
+        "size": 380
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.94440778940343, 41.41578363921179]
+      },
+      "properties": {
+        "name_ge": "აჯისაქენდი",
+        "type_ge": "სოფელი",
+        "size": 522
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.99923190162248, 41.45274342233725]
+      },
+      "properties": { "name_ge": "ქეშალო", "type_ge": "სოფელი", "size": 3237 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [45.062931435548045, 41.45282862391283]
+      },
+      "properties": {
+        "name_ge": "ქვემო ქაფანახჩი",
+        "type_ge": "ნასოფლარი",
+        "size": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [45.075567019177385, 41.464636813502075]
+      },
+      "properties": { "name_ge": "ლელაშხა", "type_ge": "ნასოფლარი", "size": 0 }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [45.0214445015721, 41.59557608214956]
+      },
+      "properties": {
+        "name_ge": "გამარჯვება I",
+        "type_ge": "სოფელი",
+        "size": 313
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [44.60472199958095, 41.32900000028191]
+      },
+      "properties": {
+        "name_ge": "პატარა დარბაზი",
+        "type_ge": "სოფელი",
+        "size": 6
+      }
+    },
+    {
+  "type": "Feature",
+  "geometry": { "type": "Point", "coordinates": [45.0928, 41.6406] },
+  "properties": { "name_ge": "გარდაბანი", "type_ge": "ქალაქი", "size": 0 }
+},
+{
+  "type": "Feature",
+  "geometry": { "type": "Point", "coordinates": [44.538, 41.407] },
+  "properties": { "name_ge": "ბოლნისი", "type_ge": "ქალაქი", "size": 0 }
+}
+  ]
+}

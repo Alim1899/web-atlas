@@ -639,3 +639,17 @@ export const mapCategories = [
     layers: [],
   },
 ];
+
+
+// { meteo: "points", soiltypes: "polygon", ... }
+const collectTypes = (node, out = {}) => {
+  if (Array.isArray(node)) {
+    node.forEach((n) => collectTypes(n, out));
+  } else if (node && typeof node === "object") {
+    if (node.id && node.type) out[node.id] = node.type;
+    else Object.values(node).forEach((v) => collectTypes(v, out));
+  }
+  return out;
+};
+
+export const layerTypes = collectTypes(mapCategories.map((c) => c.layers));
