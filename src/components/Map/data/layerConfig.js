@@ -55,7 +55,6 @@ const leptoCases = {
   classes: smallCasesClasses,
 };
 
-
 // ===== სოციალური დაცვა (სვეტოვანი დიაგრამები) =====
 
 const thousands = (v) => (v / 1000).toFixed(1);
@@ -71,14 +70,19 @@ const subsistence = {
     height: 80,
     format: thousands,
     bars: [
-      { field: "registered", label: "დარეგისტრირებული ოჯახი", color: "#E9B23F" },
+      {
+        field: "registered",
+        label: "დარეგისტრირებული ოჯახი",
+        color: "#E9B23F",
+      },
       { field: "receiving", label: "მიმღები ოჯახი", color: "#D2502B" },
     ],
   },
 };
 
 const pension = {
-  popup: (p) => `<strong>${p.name_ge}</strong><br>პენსიის მიმღები: ${num(p.pension)}`,
+  popup: (p) =>
+    `<strong>${p.name_ge}</strong><br>პენსიის მიმღები: ${num(p.pension)}`,
   chart: {
     max: 25000,
     height: 90,
@@ -94,9 +98,94 @@ const socialPackage = {
     max: 6000,
     height: 80,
     format: thousands,
-    bars: [{ field: "social_package", label: "სოციალური პაკეტის მიმღები", color: "#D88BB5" }],
+    bars: [
+      {
+        field: "social_package",
+        label: "სოციალური პაკეტის მიმღები",
+        color: "#D88BB5",
+      },
+    ],
   },
 };
+
+// ===== სამედიცინო მომსახურება =====
+
+const medicalItems = [
+  {
+    field: "planned_outpatient",
+    label: "გეგმიური და გადაუდებელი ამბულატორიული მომსახურება",
+    color: "#F08CB4",
+  },
+  {
+    field: "planned_inpatient",
+    label: "გეგმიური და გადაუდებელი სტაციონარული მომსახურება",
+    color: "#C77DBA",
+  },
+  {
+    field: "childbirth",
+    label: "მშობიარობა და საკეისრო კვეთა",
+    color: "#B5D33D",
+  },
+  { field: "gynecology", label: "გინეკოლოგიური მომსახურება", color: "#3BAA4A" },
+  {
+    field: "oncology",
+    label: "ონკოლოგიური დაავადებების ადრეული გამოვლენა და სკრინინგი",
+    color: "#F5A623",
+  },
+  {
+    field: "infectious",
+    label: "ინფექციური დაავადებების მართვა",
+    color: "#F2E14C",
+  },
+  {
+    field: "chemotherapy",
+    label: "ქიმიოთერაპია და ჰორმონოთერაპია",
+    color: "#4B4FA3",
+  },
+  { field: "dialysis", label: "დიალიზი", color: "#8E8CD8" },
+  { field: "ophthalmology", label: "ოფთალმოლოგია", color: "#29ABE2" },
+  { field: "immunization", label: "იმუნიზაცია", color: "#E53935" },
+];
+
+const medicalServices = {
+  popup: (p) => {
+    const yes = medicalItems.filter((it) => p[it.field] === "კი");
+    return `<strong>${p.name_ge}</strong> (${yes.length} / ${medicalItems.length})<br>
+      ${yes.map((it) => `• ${it.label}`).join("<br>")}`;
+  },
+  chart: {
+    type: "wheel",
+    yes: "კი",
+    size: 58,
+    items: medicalItems,
+    icon: {
+      field: "emergency",
+      label: "სასწრაფო სამედიცინო დახმარების სადგური",
+      color: "#E53935",
+    },
+  },
+};
+
+const staffBars = (doctors, nurses, max) => ({
+  popup: (p) =>
+    `<strong>${p.name_ge}</strong><br>ექიმი: ${num(p[doctors])}<br>ექთანი: ${num(p[nurses])}`,
+  chart: {
+    max,
+    height: 80,
+    bars: [
+      { field: doctors, label: "ექიმი", color: "#1F78B4" },
+      { field: nurses, label: "ექთანი", color: "#6EC6EA" },
+    ],
+  },
+});
+
+const outpatientClinics = {
+  popup: ({ type_ge, name_ge, location_ge }) =>
+    `<strong>${type_ge} ${name_ge}</strong><br>${location_ge}`,
+  classField: "type_en",
+  classes: [{ value: "outpatient", label: "სოფლის ამბულატორია", size: 9 }],
+};
+
 // ===== ფენები =====
 
 export const layerConfig = {
@@ -107,9 +196,13 @@ export const layerConfig = {
   encepalite_animals: sizeCases,
   encepalite_humans: sizeCases,
   leptospirosis: leptoCases,
-    cchf_humans: leptoCases,
+  cchf_humans: leptoCases,
   cchf_animals: leptoCases,
-   subsistence,
+  subsistence,
   pension,
   social_package: socialPackage,
+  medical_services: medicalServices,
+  medical_staff: staffBars("doctors", "nurses", 900),
+  outpatient_staff: staffBars("doctors_outpatient", "nurses_outpatient", 60),
+  outpatient_clinics: outpatientClinics,
 };

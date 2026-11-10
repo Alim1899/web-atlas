@@ -447,6 +447,14 @@ export const mapCategories = [
     name: "ჯანდაცვა",
     layers: [
       {
+  "სამედიცინო მომსახურება": [
+    { id: "medical_services", label: "სამედიცინო მომსახურების სახეები, 2024", type: "polygon" },
+    { id: "medical_staff", label: "ექიმები და ექთნები, 2024", type: "polygon" },
+    { id: "outpatient_staff", label: "ექიმები და ექთნები სოფლის ამბულატორიებში, 2024", type: "polygon" },
+    { id: "outpatient_clinics", label: "სოფლის ამბულატორიები, 2024", type: "points" },
+  ],
+},
+      {
         "სოციალური დაცვა": [
           {
             id: "social_package",

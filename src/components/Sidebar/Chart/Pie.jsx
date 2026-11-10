@@ -6,6 +6,7 @@ import { useState } from "react";
 import FarmingChart from './ChartsForLayer/FarmingChart'
 import ConfigBarChart from "./ChartsForLayer/ConfigBarChart";
 import { layerConfig } from "../../Map/data/layerConfig";
+import ConfigMatrixChart from "./ChartsForLayer/ConfigMatrixChart";
                                                               
 const ChartPie = ({ selectedLayer, data, dataKey, nameKey }) => {
   const [activeIndex, setActiveIndex] = useState(null);
@@ -14,8 +15,10 @@ const ChartPie = ({ selectedLayer, data, dataKey, nameKey }) => {
     activeIndex === null || activeIndex === index ? 1 : 0.35;
   const activeData = tooltipIndex !== null ? data[tooltipIndex] : null;
   const cfg = layerConfig[selectedLayer];
-if (cfg?.chart) return <ConfigBarChart data={data} chart={cfg.chart} />;
-  if (
+if (cfg?.chart)
+  return cfg.chart.type === "wheel"
+    ? <ConfigMatrixChart data={data} chart={cfg.chart} />
+    : <ConfigBarChart data={data} chart={cfg.chart} />;  if (
     ["ownership", "status", "agroforms", "beneficiars","religy","ethnicity"].includes(selectedLayer)
   )
     return <FarmingChart data={data} layer={selectedLayer}/>;

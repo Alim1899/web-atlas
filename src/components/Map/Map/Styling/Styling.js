@@ -8,6 +8,7 @@ import { Settlement } from "./StylesForLayer/Settlement";
 import { getIconSize } from "./Functions";
 import { layerConfig, getClass } from "../../data/layerConfig";
 import { addBarChart } from "./StylesForLayer/Barchart";
+import { addWheelChart } from "./StylesForLayer/WheelChart";
 
 // ||||||||     POLYGON     ||||||||||||||||||||||
 
@@ -25,12 +26,14 @@ export function polygonStyle(feature, layers, id, fillColor) {
 export const onEachPolygonFeature = (feature, layer, enabled = true, name) => {
   const extra = feature.properties;
   const cfg = layerConfig[name];
-if (cfg?.chart) {
-  layer.unbindPopup?.();
-  if (cfg.popup) layer.bindPopup(cfg.popup(feature.properties || {}));
-  addBarChart({ cfg, feature, layer, enabled });
-  return;
-}
+  if (cfg?.chart) {
+    layer.unbindPopup?.();
+    if (cfg.popup) layer.bindPopup(cfg.popup(feature.properties || {}));
+    if (cfg.chart.type === "wheel")
+      addWheelChart({ cfg, feature, layer, enabled });
+    else addBarChart({ cfg, feature, layer, enabled });
+    return;
+  }
   if (
     [
       "ownership",
@@ -125,10 +128,10 @@ export const onEachPointFeature = (
 ) => {
   if (!enabled) return;
   const cfg = layerConfig[layerName];
-if (cfg?.popup) {
-  layer.bindPopup(cfg.popup(feature.properties || {}));
-  return;
-}
+  if (cfg?.popup) {
+    layer.bindPopup(cfg.popup(feature.properties || {}));
+    return;
+  }
 
   if (["ecomigrants", "villages", "warmigrants"].includes(layerName)) {
     const { name_ge, size, location_ge, type_ge } = feature.properties || {};
@@ -137,7 +140,7 @@ if (cfg?.popup) {
         ? `<strong>${type_ge} ${name_ge}, ${location_ge} - ${size} მოსახლე</strong>`
         : `<strong> ${name_ge}, ${location_ge} </strong>`,
     );
-  }else if (
+  } else if (
     ["anthrax", "anthrax_humans", "anthrax_animals"].includes(layerName)
   ) {
     const { name_ge, location_ge, type_en } = feature.properties || {};
@@ -181,18 +184,22 @@ export const pointToLayer = (feature, latlng, layerName) => {
     return null;
   }
 
-  const { name_en: name, type_en: type, power, size,  } = feature.properties || {};
+  const {
+    name_en: name,
+    type_en: type,
+    power,
+    size,
+  } = feature.properties || {};
   const sign = feature.sign;
   const iconSrc = sign
     ? `data:image/svg+xml;utf8,${encodeURIComponent(sign)}`
     : point;
 
-
-const cfg = layerConfig[layerName];
-const cls = cfg && getClass(cfg, feature.properties);
-const [w, h] = cls
-  ? [cls.size, cls.size]
-  : getIconSize(power ?? size, type, layerName, name);
+  const cfg = layerConfig[layerName];
+  const cls = cfg && getClass(cfg, feature.properties);
+  const [w, h] = cls
+    ? [cls.size, cls.size]
+    : getIconSize(power ?? size, type, layerName, name);
   return L.marker(latlng, {
     icon: L.divIcon({
       html: `<img src="${iconSrc}" width="${w}" height="${h}" />`,

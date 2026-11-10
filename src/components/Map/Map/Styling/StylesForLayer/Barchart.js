@@ -51,7 +51,7 @@ export function addBarChart({ cfg, feature, layer, enabled }) {
 
   const p = feature.properties || {};
   const values = cfg.chart.bars.map((b) => Number(p[b.field]) || 0);
-
+  if (values.every((v) => !v)) return;
   // chart_lng / chart_lat-ით დიაგრამის ადგილი ხელით შეიძლება მიეთითოს
   const [lng, lat] =
     p.chart_lng != null
@@ -71,7 +71,12 @@ export function addBarChart({ cfg, feature, layer, enabled }) {
     if (!layer._map) return;
     layer.__barMarker?.remove();
     layer.__barMarker = L.marker(L.latLng(lat, lng), {
-      icon: L.divIcon({ className: "", html, iconSize: [w, h], iconAnchor: [w / 2, h] }),
+      icon: L.divIcon({
+        className: "",
+        html,
+        iconSize: [w, h],
+        iconAnchor: [w / 2, h],
+      }),
       interactive: false,
       keyboard: false,
     }).addTo(layer._map);

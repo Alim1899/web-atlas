@@ -36,11 +36,19 @@ const FARMING_FIELDS = {
 };
 
 const COLOR_KEYS = ["first", "second", "third", "fourth", "fifth"];
-const COLOR_FIELDS = ["color_one", "color_two", "color_three", "color_four", "color_five"];
+const COLOR_FIELDS = [
+  "color_one",
+  "color_two",
+  "color_three",
+  "color_four",
+  "color_five",
+];
 
 // { first: p.color_one, second: p.color_two, ... } — n ფერი
 const colorsOf = (p, n) =>
-  Object.fromEntries(COLOR_KEYS.slice(0, n).map((k, i) => [k, p[COLOR_FIELDS[i]]]));
+  Object.fromEntries(
+    COLOR_KEYS.slice(0, n).map((k, i) => [k, p[COLOR_FIELDS[i]]]),
+  );
 
 const MERITAL_FIELDS = {
   "იმყოფება ქორწინებაში": "married",
@@ -52,7 +60,10 @@ const MERITAL_FIELDS = {
 
 const meritalPart = (p, suffix) => ({
   ...Object.fromEntries(
-    Object.entries(MERITAL_FIELDS).map(([label, key]) => [label, p[`${key}_${suffix}`]]),
+    Object.entries(MERITAL_FIELDS).map(([label, key]) => [
+      label,
+      p[`${key}_${suffix}`],
+    ]),
   ),
   color: colorsOf(p, 5),
 });
@@ -73,12 +84,17 @@ const buildChart = (key, layer) => {
   // კონფიგით აღწერილი სვეტოვანი დიაგრამები
   const cfg = layerConfig[key];
   if (cfg?.chart) {
+    const fields = cfg.chart.bars ?? cfg.chart.items;
+    const val = (p, f) =>
+      cfg.chart.type === "wheel"
+        ? p[f] === cfg.chart.yes
+          ? 1
+          : 0
+        : Number(p[f]) || 0;
     return result(
       props.map((p) => ({
         name_ge: p.name_ge,
-        ...Object.fromEntries(
-          cfg.chart.bars.map((b) => [b.field, Number(p[b.field]) || 0]),
-        ),
+        ...Object.fromEntries(fields.map((b) => [b.field, val(p, b.field)])),
       })),
     );
   }
@@ -121,7 +137,11 @@ const buildChart = (key, layer) => {
     }
     if (name === "Population change") {
       return result({
-        [name]: props.map((p) => ({ name_ge: p.name_ge, rate: p.type_en, color: p.color })),
+        [name]: props.map((p) => ({
+          name_ge: p.name_ge,
+          rate: p.type_en,
+          color: p.color,
+        })),
       });
     }
     return result({});
@@ -130,7 +150,11 @@ const buildChart = (key, layer) => {
   if (group === "Settlements") {
     if (name === "Density") {
       return result({
-        [name]: props.map((p) => ({ name_ge: p.name_ge, rate: p.density, color: p.color })),
+        [name]: props.map((p) => ({
+          name_ge: p.name_ge,
+          rate: p.density,
+          color: p.color,
+        })),
       });
     }
     if (name === "City population") {
@@ -193,9 +217,15 @@ const buildChart = (key, layer) => {
         index: p.index,
       };
     } else {
-      if (p.description_en && !summarized[k].description_en.includes(p.description_en))
+      if (
+        p.description_en &&
+        !summarized[k].description_en.includes(p.description_en)
+      )
         summarized[k].description_en.push(p.description_en);
-      if (p.description_ge && !summarized[k].description_ge.includes(p.description_ge))
+      if (
+        p.description_ge &&
+        !summarized[k].description_ge.includes(p.description_ge)
+      )
         summarized[k].description_ge.push(p.description_ge);
     }
     summarized[k].totalArea += area;
@@ -216,12 +246,12 @@ const useChartData = () => {
     [dataChart],
   );
 
-  // დიაგრამიანი ფენების სია შეიცვალა → ბოლოს ჩართული
-  const chartKey = chartData.map((c) => c.id).join("|");
-  useEffect(() => {
-    setSelectedLayer(chartData.at(-1)?.id ?? "");
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [chartKey]);
+  // ფენების სია შეიცვალა → ბოლოს ჩართული ფენა
+const activeKey = activeLayers.map((l) => l.id).join("|");
+useEffect(() => {
+  setSelectedLayer(activeLayers.at(-1)?.id ?? "");
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+}, [activeKey]);
 
   const handleSelected = (layerId) => setSelectedLayer(layerId);
 
