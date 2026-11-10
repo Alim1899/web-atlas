@@ -1,11 +1,15 @@
-import { layerConfig, sizeSvg } from "../../Map/data/layerConfig";
+import { layerConfig, sizeSvg, matchesClass } from "../../Map/data/layerConfig";
 const pointLegend = (data, features = [], layer, groupEn, type) => {
   const cfg = layerConfig[type];
+
+if (type.startsWith("leptospirosis"))
+  console.log(type, features[0]?.properties,
+    [...new Set(features.map((f) => f.properties?.type_en))]);
   if (cfg?.classes) {
     cfg.classes.forEach((c) => {
-      const f = features.find(
-        (f) => String(f.properties?.[cfg.classField]) === String(c.value),
-      );
+    const f = features.find((f) =>
+  matchesClass(c, f.properties?.[cfg.classField]),
+);
       if (!f?.sign) return; // ამ კლასის შემთხვევა მონაცემებში არ არის
       data.push({
         name: c.label ?? String(c.value),

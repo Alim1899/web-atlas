@@ -447,6 +447,13 @@ export const mapCategories = [
     name: "ჯანდაცვა",
     layers: [
       {
+        ლეპტოსპიროზი: [
+          {
+            id: "leptospirosis",
+            label: "ლეპტოსპიროზი, 1961-2020",
+            type: "points",
+          },
+        ],
         ბრუცელიოზი: [
           {
             id: "brucela_animals",
@@ -481,7 +488,7 @@ export const mapCategories = [
           },
         ],
       },
-      
+
       {
         ენცეპალიტი: [
           {
@@ -495,7 +502,8 @@ export const mapCategories = [
             type: "points",
           },
         ],
-      },{
+      },
+      {
         ტულარემია: [
           {
             id: "tularemia_animals",
@@ -639,7 +647,6 @@ export const mapCategories = [
     layers: [],
   },
 ];
-
 
 // { meteo: "points", soiltypes: "polygon", ... }
 const collectTypes = (node, out = {}) => {

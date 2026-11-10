@@ -1,7 +1,6 @@
 import point from "../../../assets/map/point.svg";
 const PointandLayeRenderer = ({ el, classes }) => {
-  console.log(el.data);
-  console.log(el);
+
   const svgToDataUrl = (svg) =>
     `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
   switch (el.name) {
