@@ -446,6 +446,21 @@ export const mapCategories = [
     icon: GiMedicalPack,
     name: "ჯანდაცვა",
     layers: [
+       {
+        "ყირიმ-კონგოს ჰემორაგიული ცხელება": [
+          {
+            id: "cchf_humans",
+            label: "ადამიანებში",
+            type: "points",
+          },
+           {
+            id: "cchf_animals",
+            label: "ცხოველებში",
+            type: "points",
+          },
+        ],
+       
+      },
       {
         ლეპტოსპიროზი: [
           {
@@ -454,7 +469,10 @@ export const mapCategories = [
             type: "points",
           },
         ],
-        ბრუცელიოზი: [
+       
+      },
+      {
+         ბრუცელიოზი: [
           {
             id: "brucela_animals",
             label: "ბრუცელიოზი ცხოველებში, 1976-2020",

@@ -65,4 +65,6 @@ export const layerConfig = {
   encepalite_animals: sizeCases,
   encepalite_humans: sizeCases,
   leptospirosis: leptoCases,
+    cchf_humans: leptoCases,
+  cchf_animals: leptoCases,
 };
