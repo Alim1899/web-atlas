@@ -115,15 +115,15 @@ const buildChart = (key, layer) => {
     });
   }
 
-  if (group === "Merital") {
-    return result({
-      [name]: props.map((p) => ({
-        name_ge: p.name_ge,
-        old: meritalPart(p, "old"),
-        new: meritalPart(p, "new"),
-      })),
-    });
-  }
+if (group === "Merital") {
+  return result({
+    [name]: props.map((p) => ({
+      name_ge: p.name_ge,
+      old: meritalPart(p, "old"),
+      new: meritalPart(p, "new"),
+    })),
+  });
+}
 
   if (group === "Population") {
     if (name === "Birth rate" || name === "Death rate") {
@@ -136,14 +136,16 @@ const buildChart = (key, layer) => {
       });
     }
     if (name === "Population change") {
-      return result({
-        [name]: props.map((p) => ({
-          name_ge: p.name_ge,
-          rate: p.type_en,
-          color: p.color,
-        })),
-      });
-    }
+  return result({
+    [name]: props.map((p) => ({
+      name_ge: p.name_ge,
+      rate: p.type_en,
+      color: p.color,
+      group: p.sub_header,
+      index: p.index,
+    })),
+  });
+}
     return result({});
   }
 

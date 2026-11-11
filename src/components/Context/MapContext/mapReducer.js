@@ -5,6 +5,7 @@ const initialState = {
   dataChart: [],
   queryKey: "",
   printMode: false,
+  layerYear: {},
 };
 const mapReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -65,7 +66,14 @@ const mapReducer = (state = initialState, action) => {
       return { ...state, queryKey: action.payload };
     case "SET_PRINT_MODE":
       return { ...state, printMode: action.payload };
-
+    case "SET_LAYER_YEAR":
+      return {
+        ...state,
+        layerYear: {
+          ...state.layerYear,
+          [action.payload.id]: action.payload.year,
+        },
+      };
     default:
       return state;
   }

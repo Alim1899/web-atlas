@@ -188,6 +188,40 @@ const outpatientClinics = {
 
 // ===== ფენები =====
 
+const rateYears = [
+  {
+    key: "old",
+    label: "2012",
+    colorField: "color_one",
+    classField: "rate_one",
+  },
+  {
+    key: "new",
+    label: "2022",
+    colorField: "color_two",
+    classField: "rate_two",
+  },
+];
+
+const rateLayer = {
+  years: rateYears,
+  popup: (p) =>
+    `<strong>${p.name_ge}</strong><br>2012: ${p.rate_one} ‰<br>2022: ${p.rate_two} ‰`,
+};
+// ===== მოსახლეობის ცვლილება =====
+// ===== მოსახლეობის ცვლილება =====
+// მონაცემში მხოლოდ კლასია (type_en) და ჯგუფი (sub_header), რიცხვები — არა
+const pplchange = {
+  labels: true,
+  classList: true,
+  popup: (p) =>
+    `<strong>${p.name_ge}</strong><br>2003–2023: ${p.sub_header ?? ""}, ${p.type_en} %`,
+};
+// კლასის ფერი fill-ის მქონე ფენებისთვის
+export const fillFor = (cfg, p) => {
+  const v = cfg.fill.value(p);
+  return (cfg.fill.classes.find((c) => v > c.min) ?? cfg.fill.classes.at(-1)).color;
+};
 export const layerConfig = {
   brucela_humans: cases,
   brucela_animals: cases,
@@ -205,4 +239,7 @@ export const layerConfig = {
   medical_staff: staffBars("doctors", "nurses", 900),
   outpatient_staff: staffBars("doctors_outpatient", "nurses_outpatient", 60),
   outpatient_clinics: outpatientClinics,
+  birthrate: rateLayer,
+  deathrate: rateLayer,
+  pplchange
 };

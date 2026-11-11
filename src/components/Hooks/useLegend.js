@@ -23,19 +23,16 @@ export const useLegend = () => {
       const type = el[0];
 
       const cfg = layerConfig[type];
-      if (cfg?.chart) {
-        const items = cfg.chart.bars ?? cfg.chart.items;
-        items.forEach((b, i) =>
-          data.push({ txt: b.label, color: b.color, index: i + 1 }),
-        );
-        if (cfg.chart.icon) {
-          data.push({
-            txt: cfg.chart.icon.label,
-            color: cfg.chart.icon.color,
-            index: items.length + 1,
-          });
-        }
-      } else if (shape === "polygon") {
+     if (cfg?.chart || cfg?.fill) {
+  const items = [
+    ...(cfg.fill?.classes ?? []),
+    ...(cfg.chart?.bars ?? cfg.chart?.items ?? []),
+    ...(cfg.chart?.icon ? [cfg.chart.icon] : []),
+  ];
+  items.forEach((b, i) =>
+    data.push({ txt: b.label, color: b.color, index: i + 1 }),
+  );
+} else if (shape === "polygon") {
         polygonLegend(data, features, groupEn, layer);
       }
       if (shape === "points" || shape === "line") {

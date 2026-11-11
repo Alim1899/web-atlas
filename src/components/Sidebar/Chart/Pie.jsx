@@ -7,7 +7,8 @@ import FarmingChart from "./ChartsForLayer/FarmingChart";
 import ConfigBarChart from "./ChartsForLayer/ConfigBarChart";
 import { layerConfig } from "../../Map/data/layerConfig";
 import ConfigMatrixChart from "./ChartsForLayer/ConfigMatrixChart";
-
+import ClassChangeChart from "./ChartsForLayer/ClassChangeChart";
+import ClassListChart from "./ChartsForLayer/C;assListChart";
 const ChartPie = ({
   selectedLayer,
   data,
@@ -28,6 +29,10 @@ const ChartPie = ({
     ) : (
       <ConfigBarChart data={data} chart={cfg.chart} compact={compact} />
     );
+    if (cfg?.years)
+  return <ClassChangeChart data={data} years={cfg.years} compact={compact} />;
+    if (cfg?.classList)
+  return <ClassListChart data={data} compact={compact} />;
   if (
     [
       "ownership",

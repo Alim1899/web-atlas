@@ -9,7 +9,7 @@ import { getIconSize } from "./Functions";
 import { layerConfig, getClass } from "../../data/layerConfig";
 import { addBarChart } from "./StylesForLayer/Barchart";
 import { addWheelChart } from "./StylesForLayer/WheelChart";
-
+import { addYearLayer } from "./StylesForLayer/YearLayer";
 // ||||||||     POLYGON     ||||||||||||||||||||||
 
 export function polygonStyle(feature, layers, id, fillColor) {
@@ -23,7 +23,7 @@ export function polygonStyle(feature, layers, id, fillColor) {
   };
 }
 
-export const onEachPolygonFeature = (feature, layer, enabled = true, name) => {
+export const onEachPolygonFeature = (feature, layer, enabled = true, name,data) => {
   const extra = feature.properties;
   const cfg = layerConfig[name];
   if (cfg?.chart) {
@@ -31,9 +31,13 @@ export const onEachPolygonFeature = (feature, layer, enabled = true, name) => {
     if (cfg.popup) layer.bindPopup(cfg.popup(feature.properties || {}));
     if (cfg.chart.type === "wheel")
       addWheelChart({ cfg, feature, layer, enabled });
-    else addBarChart({ cfg, feature, layer, enabled });
+    else addBarChart({ cfg, feature, layer, enabled,data });
     return;
   }
+ if (cfg?.years || cfg?.labels) {
+  addYearLayer({ cfg, feature, layer, enabled });
+  return;
+}
   if (
     [
       "ownership",

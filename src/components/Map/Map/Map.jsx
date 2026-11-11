@@ -8,7 +8,7 @@ import PlaceLabels from "./BaseMap/PlaceLabels/PlaceLabels";
 import { layerTypes } from "../MapList/Categories";
 import BasemapSwitcher from "./BaseMap/BasemapSwitcher/BasemapSwitcher";
 import PrintButton from "../../Print/PrintButton";
-
+import YearToggle from "./YearToggle/YearToggle";
 function Map() {
   const { state } = useMaps();
   const { activeLayers, baselayer, printMode } = state;
@@ -71,6 +71,7 @@ const hasPolygon = printMode
           )}
         </MapContainer>
         <BasemapSwitcher />
+        <YearToggle/>
         <PrintButton />
       </div>
     </div>

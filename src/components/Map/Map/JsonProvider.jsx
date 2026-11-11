@@ -4,14 +4,23 @@ import { useQueries } from "@tanstack/react-query";
 import Spinner from "../../UI/Loader/Spinner";
 import { isEqual } from "lodash";
 import fetchGeoJson from "./Fetch";
-import { pointToLayer, polygonStyle, lineToLayer, onEachLine, onEachPolygonFeature, onEachPointFeature } from "./Styling/Styling";
+import { layerConfig, fillFor } from "../data/layerConfig";
+import { getLayerYear } from "./Styling/StylesForLayer/YearLayer";
+import {
+  pointToLayer,
+  polygonStyle,
+  lineToLayer,
+  onEachLine,
+  onEachPolygonFeature,
+  onEachPointFeature,
+} from "./Styling/Styling";
 import { useEffect } from "react";
 export default function JsonProvider() {
   const { state, dispatch } = useMaps();
   const map = useMap();
-  const { activeLayers, dataChart,queryKey,printMode } = state;
+  const { activeLayers, dataChart, queryKey, printMode, layerYear } = state;
   const layerIds = activeLayers.map((layer) => layer.id);
-const topLayerId = activeLayers?.[activeLayers.length - 1]?.id; 
+  const topLayerId = activeLayers?.[activeLayers.length - 1]?.id;
   const queries = useQueries({
     queries: layerIds.map((layer) => ({
       queryKey: ["geojson", layer],
@@ -27,8 +36,8 @@ const topLayerId = activeLayers?.[activeLayers.length - 1]?.id;
   const isLoading = queries.some((query) => query?.isLoading);
   const layersToDisplay = Object.entries(geoJsonData);
   const visibleLayers = printMode
-  ? layersToDisplay.filter(([id]) => id === topLayerId)
-  : layersToDisplay;
+    ? layersToDisplay.filter(([id]) => id === topLayerId)
+    : layersToDisplay;
   useEffect(() => {
     if (layersToDisplay.length === 0) return;
     const result = isEqual(dataChart, layersToDisplay);
@@ -41,38 +50,37 @@ const topLayerId = activeLayers?.[activeLayers.length - 1]?.id;
   return (
     <>
       {visibleLayers.map((el) => {
-          const isTop = el[0] === topLayerId;
-      
+        const isTop = el[0] === topLayerId;
+
         return el[1].shape === "polygon" ? (
-          
           <GeoJSON
-          onEachFeature={(feature, layer) =>
-        onEachPolygonFeature(feature, layer, isTop,el[0])
-      }
-           
-             key={`${el[0]}-${topLayerId}`} 
-            data={el[1]}
-            style={(feature) =>
-              polygonStyle(
-                feature,
-                activeLayers,
-                el[0],
-                feature.properties.color,
-                feature.properties.color_one,
-                 feature.properties.color_two,
-                 map
-              )
+            onEachFeature={(feature, layer) =>
+              onEachPolygonFeature(feature, layer, isTop, el[0], el[1])
             }
+            key={`${el[0]}-${topLayerId}`}
+            data={el[1]}
+            style={(feature) => {
+  const cfg = layerConfig[el[0]];
+  const year = getLayerYear(cfg, layerYear, el[0]);
+  const fill = cfg?.fill
+    ? fillFor(cfg, feature.properties)
+    : year
+      ? feature.properties[year.colorField]
+      : feature.properties.color;
+  return polygonStyle(feature, activeLayers, el[0], fill);
+}}
           />
         ) : el[1].shape === "points" ? (
           <GeoJSON
-  key={el[0]}
-  data={el[1]}
-   pointToLayer={(feature, latlng) =>
-    pointToLayer(feature, latlng, el[0])
-  }
-  onEachFeature={(feature, layer) => onEachPointFeature(feature, layer,el[0])}
-/>
+            key={el[0]}
+            data={el[1]}
+            pointToLayer={(feature, latlng) =>
+              pointToLayer(feature, latlng, el[0])
+            }
+            onEachFeature={(feature, layer) =>
+              onEachPointFeature(feature, layer, el[0])
+            }
+          />
         ) : (
           <GeoJSON
             key={el[0]}

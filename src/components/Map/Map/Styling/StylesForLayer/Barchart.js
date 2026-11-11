@@ -1,6 +1,10 @@
 import L from "leaflet";
 import { pointOnFeature } from "@turf/turf";
-
+const autoMax = (features = [], bars) =>
+  Math.max(
+    1,
+    ...features.flatMap((f) => bars.map((b) => Number(f.properties?.[b.field]) || 0)),
+  ) * 1.05;
 export const barChartSvg = (values, chart) => {
   const bw = chart.barWidth ?? 16;
   const gap = chart.gap ?? 6;
@@ -46,7 +50,7 @@ export const barChartSvg = (values, chart) => {
   return { svg, w, h: totalH };
 };
 
-export function addBarChart({ cfg, feature, layer, enabled }) {
+export function addBarChart({ cfg, feature, layer, enabled, data }) {
   if (!enabled) return;
 
   const p = feature.properties || {};
@@ -58,7 +62,8 @@ export function addBarChart({ cfg, feature, layer, enabled }) {
       ? [p.chart_lng, p.chart_lat]
       : pointOnFeature(feature).geometry.coordinates;
 
-  const { svg, w, h } = barChartSvg(values, cfg.chart);
+const max = cfg.chart.max ?? autoMax(data?.features, cfg.chart.bars);
+const { svg, w, h } = barChartSvg(values, { ...cfg.chart, max });
   const html = `
     <div style="position:relative;width:${w}px;height:${h}px;pointer-events:none">
       ${svg}
