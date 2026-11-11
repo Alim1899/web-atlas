@@ -1,6 +1,6 @@
 import L from "leaflet";
-import { pointOnFeature } from "@turf/turf";
 import { symbolAnchor, attachLeaderLine } from "../../../data/symbolPositions";
+
 export const wheelSvg = (flags, chart) => {
   const size = chart.size ?? 58;
   const r = size / 2 - 1;
@@ -44,10 +44,9 @@ export function addWheelChart({ cfg, feature, layer, enabled }) {
   const size = chart.size ?? 58;
   const flags = chart.items.map((it) => p[it.field] === chart.yes);
 
-  const [lng, lat] =
-    p.chart_lng != null
-      ? [p.chart_lng, p.chart_lat]
-      : pointOnFeature(feature).geometry.coordinates;
+  // ადგილი: SYMBOL_POSITIONS ან შიდა წერტილი (+ გამყვანი ხაზი)
+  const a = symbolAnchor(feature);
+  attachLeaderLine(layer, a);
 
   const icon =
     chart.icon && p[chart.icon.field] === chart.yes
@@ -68,7 +67,7 @@ export function addWheelChart({ cfg, feature, layer, enabled }) {
   const place = () => {
     if (!layer._map) return;
     layer.__chartMarker?.remove();
-    layer.__chartMarker = L.marker(L.latLng(lat, lng), {
+    layer.__chartMarker = L.marker(L.latLng(a.lat, a.lng), {
       icon: L.divIcon({
         className: "",
         html,

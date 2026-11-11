@@ -42,6 +42,27 @@ const panelSize = useResizeWidth("left");
   const legend = Object.values(legendData)
     .flat()
     .find((el) => el.name === topId);
+    // თემატური ფენა: წილი ფართობში პირდაპირ ლეგენდაში (ცალკე დიაგრამის ნაცვლად)
+const isArea = Array.isArray(chart?.data) && chart.data[0]?.pct !== undefined;
+const shareByColor = new Map(
+  isArea ? chart.data.map((r) => [String(r.color).toLowerCase(), r.pct]) : [],
+);
+const withShare = (d) => {
+  const pct = shareByColor.get(String(d.color).toLowerCase());
+  if (pct === undefined) return d;
+  return { ...d, txt: `${d.txt} — ${pct < 0.1 ? "<0.1" : pct.toFixed(1)} %` };
+};
+const legendView =
+  legend && isArea
+    ? {
+        ...legend,
+        data: legend.data.map((d) =>
+          d.items ? { ...d, items: d.items.map(withShare) } : withShare(d),
+        ),
+      }
+    : legend;
+
+
 
   const save = async () => {
     const sheet = document.getElementById("print-sheet");
@@ -89,26 +110,26 @@ const panelSize = useResizeWidth("left");
     onDoubleClick={panelSize.reset}
     title="გადაათრიე სიგანის შესაცვლელად · ორჯერ დაჭერა — ავტომატური"
   />
-        {legend && (
-          <section className={classes.section}>
-            <h2 className={classes.sectionTitle}>ლეგენდა</h2>
-            {!!legend.header && <h3 className={classes.header}>{legend.header}</h3>}
-            {legend.shape === "polygon" && <PolygonRenderer el={legend} classes={classes} />}
-            {(legend.shape === "points" || legend.shape === "line") && (
-              <PointandLayeRenderer el={legend} classes={classes} />
-            )}
-          </section>
-        )}
+      {legendView && (
+  <section className={classes.section}>
+    <h2 className={classes.sectionTitle}>ლეგენდა</h2>
+    {!!legendView.header && <h3 className={classes.header}>{legendView.header}</h3>}
+    {legendView.shape === "polygon" && (
+      <PolygonRenderer el={legendView} classes={classes} />
+    )}
+    {(legendView.shape === "points" || legendView.shape === "line") && (
+      <PointandLayeRenderer el={legendView} classes={classes} />
+    )}
+  </section>
+)}
 
-       {chart && (
+{chart && !isArea && (
   <section className={classes.section}>
     <h2 className={classes.sectionTitle}>დიაგრამა</h2>
     <div className={classes.chart}>
       <ChartPie
         key={chart.id}
         data={chartValues}
-        dataKey="totalArea"
-        nameKey="name_ge"
         selectedLayer={chart.id}
         compact
       />
