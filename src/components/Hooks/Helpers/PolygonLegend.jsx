@@ -185,13 +185,14 @@ const polygonLegend = (data, features, groupEn, layer) => {
       const { color_one, color_two, color_three, color_four, color_five } =
         feature.properties;
 
-      const items = [
-        { txt: "იმყოფება ქორწინებაში", color: color_one, index: 1 },
-        { txt: "არასოდეს ყოფილა ქორწინებაში", color: color_two, index: 2 },
-        { txt: "ქვრივი", color: color_three, index: 3 },
-        { txt: "განქორწინებული, განშორებული", color: color_four, index: 4 },
-        { txt: "არ არის მითითებული", color: color_five, index: 5 },
-      ];
+    const items = [
+  { txt: "იმყოფება ქორწინებაში", color: color_one, index: 1 },
+  { txt: "არასოდეს ყოფილა ქორწინებაში", color: color_two, index: 2 },
+  { txt: "ქვრივი", color: color_three, index: 3 },
+  { txt: "განქორწინებული, განშორებული", color: color_four, index: 4 },
+  { txt: "არ არის მითითებული", color: color_five, index: 5 },
+  { txt: "შიდა რგოლი — 2002, გარე რგოლი — 2014", color: "transparent", index: 6, unicode: "◎" },
+];
 
       items.forEach((item) => {
         const exists = data.some((d) => d.index === item.index);

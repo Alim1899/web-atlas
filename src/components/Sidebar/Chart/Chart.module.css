@@ -149,3 +149,8 @@ font-weight: 900;
   align-items: center;
   
 }
+
+/* ბეჭდვის რეჟიმი: ერთი სვეტი, ლეგენდის გარეშე */
+.wrapperCompact {
+  position: relative;
+}

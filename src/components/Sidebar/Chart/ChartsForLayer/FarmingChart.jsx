@@ -1,12 +1,6 @@
 // components/ChartFarmingMini.jsx
 import { useMemo, useState } from "react";
-import {
-  ResponsiveContainer,
-  PieChart,
-  Pie,
-  Cell,
-  Tooltip,
-} from "recharts";
+import { ResponsiveContainer, PieChart, Pie, Cell, Tooltip } from "recharts";
 import { getLayerTitle } from "./getLayerTitle";
 import classes from "../Chart.module.css";
 const n = (x) => (Number.isFinite(+x) ? +x : 0);
@@ -21,7 +15,7 @@ const buildSlices = (row) => {
     }));
 };
 
-export default function FarmingChart({ data,layer }) {
+export default function FarmingChart({ data, layer, compact = false }) {
   const keys = useMemo(() => Object.keys(data ?? {}), [data]);
   const [selectedKey, setSelectedKey] = useState(() => keys[0] ?? "");
 
@@ -46,7 +40,6 @@ export default function FarmingChart({ data,layer }) {
   }, [rows]);
   return (
     <div className={classes.farming}>
-   
       {/* title */}
 
       {/* one pie per municipality */}
@@ -84,19 +77,20 @@ export default function FarmingChart({ data,layer }) {
             );
           })}
       </div>
+      {!compact && (
         <div className={classes.legend}>
-<h4>{getLayerTitle(layer)}</h4>
-  {legendData.map((item, i) => (
-    <div key={i} className={classes.legendItem}>
-      <div
-        className={classes.legendColor}
-        style={{ backgroundColor: item.color }}
-      />
-      <span style={{ color: item.color }}>{item.value}</span>
-    </div>
-  ))}
-</div>
-      
+          <h4>{getLayerTitle(layer)}</h4>
+          {legendData.map((item, i) => (
+            <div key={i} className={classes.legendItem}>
+              <div
+                className={classes.legendColor}
+                style={{ backgroundColor: item.color }}
+              />
+              <span style={{ color: item.color }}>{item.value}</span>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

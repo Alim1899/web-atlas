@@ -3,41 +3,69 @@ import { PieChart, Pie, Cell, ResponsiveContainer, Sector } from "recharts";
 import MeritalChart from "./ChartsForLayer/MeritalChart";
 import PopulationChart from "./ChartsForLayer/PopulationChart";
 import { useState } from "react";
-import FarmingChart from './ChartsForLayer/FarmingChart'
+import FarmingChart from "./ChartsForLayer/FarmingChart";
 import ConfigBarChart from "./ChartsForLayer/ConfigBarChart";
 import { layerConfig } from "../../Map/data/layerConfig";
 import ConfigMatrixChart from "./ChartsForLayer/ConfigMatrixChart";
-                                                              
-const ChartPie = ({ selectedLayer, data, dataKey, nameKey, compact = false }) => {
+
+const ChartPie = ({
+  selectedLayer,
+  data,
+  dataKey,
+  nameKey,
+  compact = false,
+}) => {
   const [activeIndex, setActiveIndex] = useState(null);
   const [tooltipIndex, setTooltipIndex] = useState(null);
   const getOpacity = (index) =>
     activeIndex === null || activeIndex === index ? 1 : 0.35;
   const activeData = tooltipIndex !== null ? data[tooltipIndex] : null;
   const cfg = layerConfig[selectedLayer];
-if (cfg?.chart)
-  return cfg.chart.type === "wheel"
-    ? <ConfigMatrixChart data={data} chart={cfg.chart} compact={compact} />
-    : <ConfigBarChart data={data} chart={cfg.chart} compact={compact} />;
-     if (
-    ["ownership", "status", "agroforms", "beneficiars","religy","ethnicity"].includes(selectedLayer)
+
+  if (cfg?.chart)
+    return cfg.chart.type === "wheel" ? (
+      <ConfigMatrixChart data={data} chart={cfg.chart} compact={compact} />
+    ) : (
+      <ConfigBarChart data={data} chart={cfg.chart} compact={compact} />
+    );
+  if (
+    [
+      "ownership",
+      "status",
+      "agroforms",
+      "beneficiars",
+      "religy",
+      "ethnicity",
+    ].includes(selectedLayer)
   )
-    return <FarmingChart data={data} layer={selectedLayer}/>;
+    return <FarmingChart data={data} layer={selectedLayer} compact={compact} />;
   if (["meritalmen", "meritalwomen"].includes(selectedLayer))
-    return <MeritalChart data={data} />;
-  if (["birthrate", "deathrate","pplchange","density","pplcount","migrantscount"].includes(selectedLayer))
+    return <MeritalChart data={data} compact={compact} />;
+  if (
+    [
+      "birthrate",
+      "deathrate",
+      "pplchange",
+      "density",
+      "pplcount",
+      "migrantscount",
+    ].includes(selectedLayer)
+  )
     return <PopulationChart data={data} name={selectedLayer} />;
   return (
-    <div className={classes.wrapper}>
-      <div className={classes.chartArea}>
+    <div className={compact ? classes.wrapperCompact : classes.wrapper}>
+      <div
+        className={classes.chartArea}
+        style={compact ? { height: 260 } : undefined}
+      >
         <ResponsiveContainer width="100%" height="100%">
           <PieChart className={classes.piechart}>
             <Pie
               data={data}
               dataKey={dataKey}
               nameKey={nameKey}
-              innerRadius={120}
-              outerRadius={180}
+              innerRadius={compact ? "55%" : 120}
+              outerRadius={compact ? "85%" : 180}
               paddingAngle={3}
               activeIndex={activeIndex}
               activeShape={(props) => (
@@ -96,30 +124,32 @@ if (cfg?.chart)
           </p>
         </div>
       )}
-      <div className={classes.legendScroll}>
-        {data.map((item, index) => (
-          <div
-            key={item.name_ge}
-            className={classes.listItem}
-            onMouseEnter={() => {
-              setActiveIndex(index);
-              setTooltipIndex(index);
-            }}
-            onMouseLeave={() => {
-              setActiveIndex(null);
-              setTooltipIndex(null);
-            }}
-            style={{
-              opacity: getOpacity(index),
-              fontWeight: activeIndex === index ? 900 : 400,
-              cursor: "pointer",
-            }}
-          >
-            <span style={{ color: item.color, marginRight: "6px" }}>⬤</span>
-            <span style={{ color: item.color }}>{item[nameKey]}</span>
-          </div>
-        ))}
-      </div>
+      {!compact && (
+        <div className={classes.legendScroll}>
+          {data.map((item, index) => (
+            <div
+              key={item.name_ge}
+              className={classes.listItem}
+              onMouseEnter={() => {
+                setActiveIndex(index);
+                setTooltipIndex(index);
+              }}
+              onMouseLeave={() => {
+                setActiveIndex(null);
+                setTooltipIndex(null);
+              }}
+              style={{
+                opacity: getOpacity(index),
+                fontWeight: activeIndex === index ? 900 : 400,
+                cursor: "pointer",
+              }}
+            >
+              <span style={{ color: item.color, marginRight: "6px" }}>⬤</span>
+              <span style={{ color: item.color }}>{item[nameKey]}</span>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
