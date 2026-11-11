@@ -1,5 +1,5 @@
 import L from "leaflet";
-import { pointOnFeature } from "@turf/turf";
+import { symbolAnchor, attachLeaderLine } from "../../../data/symbolPositions";
 const autoMax = (features = [], bars) =>
   Math.max(
     1,
@@ -56,11 +56,10 @@ export function addBarChart({ cfg, feature, layer, enabled, data }) {
   const p = feature.properties || {};
   const values = cfg.chart.bars.map((b) => Number(p[b.field]) || 0);
   if (values.every((v) => !v)) return;
-  // chart_lng / chart_lat-ით დიაგრამის ადგილი ხელით შეიძლება მიეთითოს
-  const [lng, lat] =
-    p.chart_lng != null
-      ? [p.chart_lng, p.chart_lat]
-      : pointOnFeature(feature).geometry.coordinates;
+// ადგილი: SYMBOL_POSITIONS ან შიდა წერტილი (+ გამყვანი ხაზი)
+const a = symbolAnchor(feature);
+const { lat, lng } = a;
+attachLeaderLine(layer, a);
 
 const max = cfg.chart.max ?? autoMax(data?.features, cfg.chart.bars);
 const { svg, w, h } = barChartSvg(values, { ...cfg.chart, max });

@@ -208,8 +208,7 @@ const rateLayer = {
   popup: (p) =>
     `<strong>${p.name_ge}</strong><br>2012: ${p.rate_one} ‰<br>2022: ${p.rate_two} ‰`,
 };
-// ===== მოსახლეობის ცვლილება =====
-// ===== მოსახლეობის ცვლილება =====
+ // ===== მოსახლეობის ცვლილება =====
 // მონაცემში მხოლოდ კლასია (type_en) და ჯგუფი (sub_header), რიცხვები — არა
 const pplchange = {
   labels: true,
@@ -217,11 +216,138 @@ const pplchange = {
   popup: (p) =>
     `<strong>${p.name_ge}</strong><br>2003–2023: ${p.sub_header ?? ""}, ${p.type_en} %`,
 };
+
+// ===== საქალაქო დასახლებები, სიმჭიდროვე, იძულებით გადაადგილებულები =====
+const pctText = (a, b) => {
+  if (!a) return "";
+  const pct = ((b - a) / a) * 100;
+  return `${pct > 0 ? "+" : ""}${pct.toFixed(1)} %`;
+};
+
+const pplcount = {
+  popup: (p) =>
+    `<strong>${p.name_ge}</strong><br>
+     1989: ${num(p.size_old)}<br>
+     2014: ${num(p.size_new)}<br>
+     ცვლილება: ${pctText(p.size_old, p.size_new)}`,
+  chart: {
+    height: 90,
+    format: thousands,
+    valueLabels: true,
+    bars: [
+      { field: "size_old", label: "1989", color: "#D0C021" },
+      { field: "size_new", label: "2014", color: "#B03B55" },
+    ],
+  },
+};
+
+const density = {
+  labels: true,
+  labelValue: (p) => `${num(p.density)} კაცი/კმ²`,
+  popup: (p) =>
+    `<strong>${p.name_ge}</strong><br>სიმჭიდროვე: ${num(p.density)} კაცი/კმ²`,
+  // მხოლოდ დიაგრამის პანელისთვის (რუკაზე სვეტები არ იხატება)
+  panelChart: {
+    colorField: "color",
+    valueLabels: true,
+    bars: [{ field: "density", label: "კაცი/კმ²", color: "#C0395A" }],
+  },
+};
+
+const migrantscount = {
+  popup: (p) =>
+    `<strong>${p.name_ge}</strong><br>
+     საომარი მოქმედებების შედეგად: ${num(p.conflict)}<br>
+     სტიქიური მოვლენების შედეგად: ${num(p.natural)}`,
+  chart: {
+    height: 80,
+    valueLabels: true,
+    bars: [
+      { field: "conflict", label: "საომარი მოქმედებების შედეგად", color: "#A06930" },
+      { field: "natural", label: "სტიქიური მოვლენების შედეგად", color: "#DB2436" },
+    ],
+  },
+};
+
+// ===== მუნიციპალიტეტების შემადგენლობა: 100%-იანი დაწყობილი სვეტები =====
+// ფერები მონაცემიდან: პირველი ველი — color_one, მეორე — color_two, ...
+const COLOR_FIELDS = ["color_one", "color_two", "color_three", "color_four", "color_five"];
+const stack = (unit, fields) => ({
+  stack: {
+    unit,
+    fields: fields.map(([field, label], i) => ({ field, label, colorField: COLOR_FIELDS[i] })),
+  },
+});
+
+const ownership = stack("%", [
+  ["private_owner", "კერძო"],
+  ["state_owner", "სახელმწიფო"],
+]);
+const status = stack("მეურნეობა", [
+  ["household_farm", "შინა მეურნეობა"],
+  ["legal_farm", "იურიდიული პირი"],
+]);
+const agroforms = stack("ჰა", [
+  ["natural", "სათიბი და საძოვარი"],
+  ["arable", "სახნავი"],
+  ["parennial", "მრავალწლიანი ნარგავი"],
+  ["greenhouse", "სათბური"],
+]);
+const beneficiars = stack("ბენეფიციარი", [
+  ["plant_future", "დანერგე მომავალი"],
+  ["agro_insurance", "აგრო დაზღვევა"],
+  ["agro_credit", "შეღავათიანი აგროკრედიტი"],
+]);
+const religy = stack("%", [
+  ["Orthodox", "მართლმადიდებლური"],
+  ["Muslim", "მუსლიმური"],
+  ["armenian", "სომხური-სამოციქულო"],
+  ["other", "სხვა"],
+]);
+const ethnicity = stack("%", [
+  ["georgian", "ქართველი"],
+  ["azerbaijan", "აზერბაიჯანელი"],
+  ["armenian", "სომეხი"],
+  ["others", "სხვა"],
+]);
+
+// ===== თემატური ფენები: კლასების წილი ფართობში =====
+// label — კლასის სახელი, group — ქვესათაური, code — მოკლე აღნიშვნა.
+// კონფიგის გარეშე ფენები ავტომატურად name_ge-ს იყენებს.
+const range = (p) =>
+  p.description_ge !== undefined && p.description_ge !== ""
+    ? `${p.description_en} – ${p.description_ge}`
+    : `≥ ${p.description_en}`;
+
+const area = (spec) => ({ area: spec });
+const byField = (f) => (p) => p[f];
+
+const areaLayers = {
+  hotdays: area({ label: byField("description_ge") }),
+  frozendays: area({ label: byField("description_ge") }),
+  tropicalnights: area({ label: byField("description_ge") }),
+  airavg: area({ label: byField("description_en") }),
+  airmax: area({ label: byField("description_en") }),
+  precipitation: area({ label: byField("description_en") }),
+  hotwaves: area({ label: range }),
+  draught: area({ label: range }),
+  humidity: area({ label: (p) => `${p.name_ge} · ${p.description_ge ?? ""}` }),
+  hydrogeology: area({
+    label: byField("description_ge"),
+    group: (p) => p.subheader ?? p.name_ge,
+    code: byField("unicode"),
+  }),
+  agroclimate: area({ group: byField("subheader") }),
+  morphology: area({ group: byField("subheader") }),
+  parentrocks: area({ code: byField("unicode") }),
+};
+
 // კლასის ფერი fill-ის მქონე ფენებისთვის
 export const fillFor = (cfg, p) => {
   const v = cfg.fill.value(p);
   return (cfg.fill.classes.find((c) => v > c.min) ?? cfg.fill.classes.at(-1)).color;
 };
+
 export const layerConfig = {
   brucela_humans: cases,
   brucela_animals: cases,
@@ -241,5 +367,16 @@ export const layerConfig = {
   outpatient_clinics: outpatientClinics,
   birthrate: rateLayer,
   deathrate: rateLayer,
-  pplchange
+  pplchange,
+  pplcount,
+  density,
+  migrantscount,
+  ownership,
+  status,
+  agroforms,
+  beneficiars,
+  religy,
+  ethnicity,
+  germanspoly: { noChart: true },
+  ...areaLayers,
 };

@@ -1,6 +1,6 @@
 import L from "leaflet";
 import { pointOnFeature } from "@turf/turf";
-
+import { symbolAnchor, attachLeaderLine } from "../../../data/symbolPositions";
 export const wheelSvg = (flags, chart) => {
   const size = chart.size ?? 58;
   const r = size / 2 - 1;

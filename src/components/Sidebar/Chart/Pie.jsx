@@ -1,162 +1,35 @@
-import classes from "./Chart.module.css";
-import { PieChart, Pie, Cell, ResponsiveContainer, Sector } from "recharts";
 import MeritalChart from "./ChartsForLayer/MeritalChart";
-import PopulationChart from "./ChartsForLayer/PopulationChart";
-import { useState } from "react";
-import FarmingChart from "./ChartsForLayer/FarmingChart";
 import ConfigBarChart from "./ChartsForLayer/ConfigBarChart";
-import { layerConfig } from "../../Map/data/layerConfig";
 import ConfigMatrixChart from "./ChartsForLayer/ConfigMatrixChart";
 import ClassChangeChart from "./ChartsForLayer/ClassChangeChart";
-import ClassListChart from "./ChartsForLayer/C;assListChart";
-const ChartPie = ({
-  selectedLayer,
-  data,
-  dataKey,
-  nameKey,
-  compact = false,
-}) => {
-  const [activeIndex, setActiveIndex] = useState(null);
-  const [tooltipIndex, setTooltipIndex] = useState(null);
-  const getOpacity = (index) =>
-    activeIndex === null || activeIndex === index ? 1 : 0.35;
-  const activeData = tooltipIndex !== null ? data[tooltipIndex] : null;
-  const cfg = layerConfig[selectedLayer];
+import ClassListChart from "./ChartsForLayer/ClassListChart";
+import AreaShareChart from "./ChartsForLayer/AreaShareChart";
+import StackChart from "./ChartsForLayer/StackChart";
+import { layerConfig } from "../../Map/data/layerConfig";
 
-  if (cfg?.chart)
-    return cfg.chart.type === "wheel" ? (
-      <ConfigMatrixChart data={data} chart={cfg.chart} compact={compact} />
+// ფენის დიაგრამის არჩევა: ჯერ კონფიგი, შემდეგ ქორწინებრივი,
+// დანარჩენი — კლასების წილი ფართობში (useChartData → areaRows)
+const ChartPie = ({ selectedLayer, data, compact = false }) => {
+  const cfg = layerConfig[selectedLayer];
+  if (cfg?.noChart) return null;
+
+  const ch = cfg?.chart ?? cfg?.panelChart;
+  if (ch)
+    return ch.type === "wheel" ? (
+      <ConfigMatrixChart data={data} chart={ch} compact={compact} />
     ) : (
-      <ConfigBarChart data={data} chart={cfg.chart} compact={compact} />
+      <ConfigBarChart data={data} chart={ch} compact={compact} />
     );
-    if (cfg?.years)
-  return <ClassChangeChart data={data} years={cfg.years} compact={compact} />;
-    if (cfg?.classList)
-  return <ClassListChart data={data} compact={compact} />;
-  if (
-    [
-      "ownership",
-      "status",
-      "agroforms",
-      "beneficiars",
-      "religy",
-      "ethnicity",
-    ].includes(selectedLayer)
-  )
-    return <FarmingChart data={data} layer={selectedLayer} compact={compact} />;
+
+  if (cfg?.stack) return <StackChart data={data} stack={cfg.stack} compact={compact} />;
+  if (cfg?.years)
+    return <ClassChangeChart data={data} years={cfg.years} compact={compact} />;
+  if (cfg?.classList) return <ClassListChart data={data} compact={compact} />;
+
   if (["meritalmen", "meritalwomen"].includes(selectedLayer))
-    return <MeritalChart data={data} compact={compact} />;
-  if (
-    [
-      "birthrate",
-      "deathrate",
-      "pplchange",
-      "density",
-      "pplcount",
-      "migrantscount",
-    ].includes(selectedLayer)
-  )
-    return <PopulationChart data={data} name={selectedLayer} />;
-  return (
-    <div className={compact ? classes.wrapperCompact : classes.wrapper}>
-      <div
-        className={classes.chartArea}
-        style={compact ? { height: 260 } : undefined}
-      >
-        <ResponsiveContainer width="100%" height="100%">
-          <PieChart className={classes.piechart}>
-            <Pie
-              data={data}
-              dataKey={dataKey}
-              nameKey={nameKey}
-              innerRadius={compact ? "55%" : 120}
-              outerRadius={compact ? "85%" : 180}
-              paddingAngle={3}
-              activeIndex={activeIndex}
-              activeShape={(props) => (
-                <Sector {...props} outerRadius={props.outerRadius + 5} />
-              )}
-              onMouseLeave={() => {
-                setActiveIndex(null);
-                setTooltipIndex(null);
-              }}
-            >
-              {data.map((entry, index) => (
-                <Cell
-                  key={entry.name_ge}
-                  fill={entry.color}
-                  opacity={getOpacity(index)} // always a number
-                  onMouseEnter={() => {
-                    setActiveIndex(index);
-                    setTooltipIndex(index);
-                  }}
-                  onMouseLeave={() => {
-                    setActiveIndex(null);
-                    setTooltipIndex(null);
-                  }}
-                  cursor="pointer"
-                />
-              ))}
-            </Pie>
-          </PieChart>
-        </ResponsiveContainer>
-      </div>
-      {activeData && (
-        <div
-          style={{
-            position: "absolute",
-            top: "20px",
-            left: "40%",
-            backgroundColor: activeData.color,
-            border: "1px solid #ccc",
-            borderRadius: "8px",
-            padding: "5px",
-            zIndex: "999999999",
-          }}
-        >
-          <p style={{ fontWeight: 600 }}>{activeData.name_ge}</p>
-          <p>{activeData.description_ge || activeData.description_en}</p>
-          <p>
-            <strong>
-              {Number(activeData.totalArea)
-                .toLocaleString("en-US", {
-                  minimumFractionDigits: 1,
-                  maximumFractionDigits: 1,
-                })
-                .replace(/,/g, " ")}{" "}
-              m²
-            </strong>
-          </p>
-        </div>
-      )}
-      {!compact && (
-        <div className={classes.legendScroll}>
-          {data.map((item, index) => (
-            <div
-              key={item.name_ge}
-              className={classes.listItem}
-              onMouseEnter={() => {
-                setActiveIndex(index);
-                setTooltipIndex(index);
-              }}
-              onMouseLeave={() => {
-                setActiveIndex(null);
-                setTooltipIndex(null);
-              }}
-              style={{
-                opacity: getOpacity(index),
-                fontWeight: activeIndex === index ? 900 : 400,
-                cursor: "pointer",
-              }}
-            >
-              <span style={{ color: item.color, marginRight: "6px" }}>⬤</span>
-              <span style={{ color: item.color }}>{item[nameKey]}</span>
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
-  );
+    return <MeritalChart data={data} layer={selectedLayer} compact={compact} />;
+
+  return <AreaShareChart data={data} compact={compact} />;
 };
 
 export default ChartPie;

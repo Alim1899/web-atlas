@@ -1,17 +1,8 @@
-// MeritalStatus.js — ორმაგი რგოლი ბეჭდური ატლასის მიხედვით:
-// შიდა რგოლი 2002, გარე რგოლი 2014, მნიშვნელობები სეგმენტებთან
-import centerOfMass from "@turf/center-of-mass";
-
+import { symbolAnchor, attachLeaderLine } from "../../../data/symbolPositions";
 const FIELDS = ["married", "unmarried", "widowed", "divorced", "no_info"];
 const COLOR_FIELDS = ["color_one", "color_two", "color_three", "color_four", "color_five"];
 
-// მუნიციპალიტეტები, რომელთა სიმბოლო გვერდზე გადის (გამყვანი ხაზით),
-// როგორც ბეჭდურზე — [lng, lat]
-const OFFSETS = {
-  რუსთავი: [44.84, 41.63],
-   გარდაბანი: [45.1, 41.65],
-    მარნეული: [44.9, 41.45],
-};
+
 
 const S = 170; // SVG-ის ზომა წარწერებიანად
 const C = S / 2;
@@ -96,9 +87,9 @@ export function handleMerital({ enabled, feature, extra, L, layer }) {
   const colors = COLOR_FIELDS.map((k) => p[k]);
   if (!oldValues.some(Boolean) && !newValues.some(Boolean)) return true;
 
-  const [cLng, cLat] = centerOfMass(feature).geometry.coordinates;
-  const [lng, lat] = OFFSETS[name_ge] ?? [cLng, cLat];
-  const moved = !!OFFSETS[name_ge];
+  // ადგილი: SYMBOL_POSITIONS ან შიდა წერტილი (+ გამყვანი ხაზი)
+  const a = symbolAnchor(feature);
+  attachLeaderLine(layer, a);
 
   const html = `
     <div style="position:relative;width:${S}px;height:${S}px;pointer-events:none">
@@ -109,36 +100,18 @@ export function handleMerital({ enabled, feature, extra, L, layer }) {
     </div>`;
 
   const remove = () => {
-    layer.__meritalMarkers?.forEach((m) => m.remove());
-    layer.__meritalMarkers = null;
+    layer.__meritalMarker?.remove();
+    layer.__meritalMarker = null;
   };
 
   const place = () => {
-    const map = layer._map;
-    if (!map) return;
+    if (!layer._map) return;
     remove();
-
-    const markers = [];
-    // გამყვანი ხაზი: მუნიციპალიტეტის ცენტრიდან გადატანილ სიმბოლომდე
-    if (moved) {
-      markers.push(
-        L.polyline(
-          [
-            [cLat, cLng],
-            [lat, lng],
-          ],
-          { color: "#333", weight: 1, interactive: false },
-        ).addTo(map),
-      );
-    }
-    markers.push(
-      L.marker([lat, lng], {
-        icon: L.divIcon({ className: "", html, iconSize: [S, S], iconAnchor: [C, C] }),
-        interactive: false,
-        keyboard: false,
-      }).addTo(map),
-    );
-    layer.__meritalMarkers = markers;
+    layer.__meritalMarker = L.marker([a.lat, a.lng], {
+      icon: L.divIcon({ className: "", html, iconSize: [S, S], iconAnchor: [C, C] }),
+      interactive: false,
+      keyboard: false,
+    }).addTo(layer._map);
   };
 
   if (layer._map) place();

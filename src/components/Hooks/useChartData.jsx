@@ -3,52 +3,12 @@ import { useEffect, useMemo, useState } from "react";
 import useMaps from "../Context/MapContext/useMaps";
 import { layerConfig } from "../Map/data/layerConfig";
 
-// ===== სოფლის მეურნეობა, რელიგია, ეთნოსი: ლეგენდის სახელი → ველი =====
-const FARMING_FIELDS = {
-  Ownership: { კერძო: "private_owner", სახელმწიფო: "state_owner" },
-  Status: {
-    "შინა მეურნეობა": "household_farm",
-    "იურიდიული პირი": "legal_farm",
-  },
-  Agroforms: {
-    "სათიბი და საძოვარი": "natural",
-    სახნავი: "arable",
-    "მრავალწლიანი ნარგავი": "parennial",
-    სათბური: "greenhouse",
-  },
-  Beneficiars: {
-    "დანერგე მომავალი": "plant_future",
-    "აგრო დაზღვევა": "agro_insurance",
-    "შეღავათიანი აგროკრედიტი": "agro_credit",
-  },
-  Religy: {
-    მართლმადიდებლური: "Orthodox",
-    მუსლიმური: "Muslim",
-    "სომხური-სამოციქულო": "armenian",
-    სხვა: "other",
-  },
-  Ethnics: {
-    ქართველი: "georgian",
-    აზერბაიჯანელი: "azerbaijan",
-    სომეხი: "armenian",
-    სხვა: "others",
-  },
-};
-
 const COLOR_KEYS = ["first", "second", "third", "fourth", "fifth"];
-const COLOR_FIELDS = [
-  "color_one",
-  "color_two",
-  "color_three",
-  "color_four",
-  "color_five",
-];
+const COLOR_FIELDS = ["color_one", "color_two", "color_three", "color_four", "color_five"];
 
 // { first: p.color_one, second: p.color_two, ... } — n ფერი
 const colorsOf = (p, n) =>
-  Object.fromEntries(
-    COLOR_KEYS.slice(0, n).map((k, i) => [k, p[COLOR_FIELDS[i]]]),
-  );
+  Object.fromEntries(COLOR_KEYS.slice(0, n).map((k, i) => [k, p[COLOR_FIELDS[i]]]));
 
 const MERITAL_FIELDS = {
   "იმყოფება ქორწინებაში": "married",
@@ -60,20 +20,48 @@ const MERITAL_FIELDS = {
 
 const meritalPart = (p, suffix) => ({
   ...Object.fromEntries(
-    Object.entries(MERITAL_FIELDS).map(([label, key]) => [
-      label,
-      p[`${key}_${suffix}`],
-    ]),
+    Object.entries(MERITAL_FIELDS).map(([label, key]) => [label, p[`${key}_${suffix}`]]),
   ),
   color: colorsOf(p, 5),
 });
 
+// კლასების წილი ფართობში (მ² → კმ²), ერთნაირი კლასები ერთიანდება
+export const areaRows = (props, spec = {}) => {
+  const label = spec.label ?? ((p) => p.name_ge || p.name_en || "—");
+  const groups = new Map();
+
+  props.forEach((p) => {
+    const l = String(label(p) ?? "—");
+    const g = spec.group ? spec.group(p) ?? null : null;
+    const key = `${g ?? ""}|${l}`;
+    const a = (Number(p.area) || 0) / 1e6;
+    const idx = Number(p.index);
+    const cur = groups.get(key) ?? {
+      label: l,
+      group: g,
+      code: spec.code ? spec.code(p) : null,
+      color: p.color,
+      index: Number.isFinite(idx) ? idx : 999,
+      area: 0,
+    };
+    cur.area += a;
+    if (Number.isFinite(idx)) cur.index = Math.min(cur.index, idx);
+    groups.set(key, cur);
+  });
+
+  const rows = [...groups.values()];
+  const total = rows.reduce((s, r) => s + r.area, 0) || 1;
+  rows.forEach((r) => (r.pct = (r.area / total) * 100));
+  return rows.sort((a, b) => a.index - b.index || b.area - a.area);
+};
+
 // ===== ფენა → დიაგრამის მონაცემი =====
-const buildChart = (key, layer) => {
+export const buildChart = (key, layer) => {
   const name = layer.layerName_en;
   const group = layer.group_en;
   const features = layer.features || [];
   const props = features.map((f) => f.properties || {});
+  const cfg = layerConfig[key];
   const result = (data) => ({
     layerName: name || "",
     id: key,
@@ -81,158 +69,75 @@ const buildChart = (key, layer) => {
     data,
   });
 
-  // კონფიგით აღწერილი სვეტოვანი დიაგრამები
-  const cfg = layerConfig[key];
-  if (cfg?.chart) {
-    const fields = cfg.chart.bars ?? cfg.chart.items;
+  if (cfg?.noChart) return result([]);
+
+  // სვეტოვანი / ბორბალი (რუკაზეც) ან მხოლოდ პანელის სვეტები
+  const ch = cfg?.chart ?? cfg?.panelChart;
+  if (ch) {
+    const fields = ch.bars ?? ch.items;
     const val = (p, f) =>
-      cfg.chart.type === "wheel"
-        ? p[f] === cfg.chart.yes
-          ? 1
-          : 0
-        : Number(p[f]) || 0;
+      ch.type === "wheel" ? (p[f] === ch.yes ? 1 : 0) : Number(p[f]) || 0;
     return result(
       props.map((p) => ({
         name_ge: p.name_ge,
+        ...(ch.colorField && { color: p[ch.colorField] }),
         ...Object.fromEntries(fields.map((b) => [b.field, val(p, b.field)])),
       })),
     );
   }
 
-  // სოფლის მეურნეობა, რელიგია, ეთნოსი
-  if (group === "Farming" || group === "Religy") {
-    const fields = FARMING_FIELDS[name];
-    if (!fields) return result({});
-    const n = Object.keys(fields).length;
-    return result({
-      [name]: props.map((p) => ({
+  // შემადგენლობა მუნიციპალიტეტების მიხედვით (100%-იანი სვეტები)
+  if (cfg?.stack) {
+    return result(
+      props.map((p) => ({
         name_ge: p.name_ge,
         ...Object.fromEntries(
-          Object.entries(fields).map(([label, field]) => [label, p[field]]),
+          cfg.stack.fields.flatMap((f) => [
+            [f.field, Number(p[f.field]) || 0],
+            [`${f.field}__color`, p[f.colorField]],
+          ]),
         ),
-        color: colorsOf(p, n),
       })),
-    });
+    );
   }
 
-if (group === "Merital") {
-  return result({
-    [name]: props.map((p) => ({
-      name_ge: p.name_ge,
-      old: meritalPart(p, "old"),
-      new: meritalPart(p, "new"),
-    })),
-  });
-}
-
-  if (group === "Population") {
-    if (name === "Birth rate" || name === "Death rate") {
-      return result({
-        [name]: props.map((p) => ({
-          name_ge: p.name_ge,
-          old: { rate: p.rate_one, color: colorsOf(p, 2) },
-          new: { rate: p.rate_two, color: colorsOf(p, 2) },
-        })),
-      });
-    }
-    if (name === "Population change") {
-  return result({
-    [name]: props.map((p) => ({
-      name_ge: p.name_ge,
-      rate: p.type_en,
-      color: p.color,
-      group: p.sub_header,
-      index: p.index,
-    })),
-  });
-}
-    return result({});
-  }
-
-  if (group === "Settlements") {
-    if (name === "Density") {
-      return result({
-        [name]: props.map((p) => ({
-          name_ge: p.name_ge,
-          rate: p.density,
-          color: p.color,
-        })),
-      });
-    }
-    if (name === "City population") {
-      return result({
-        [name]: props.map((p) => ({
-          name_ge: p.name_ge,
-          rate: { size_old: p.size_old, size_new: p.size_new },
-          color: [p.color_one, p.color_two],
-        })),
-      });
-    }
-    return result({});
-  }
-
-  if (group === "Migrants") {
+  // ქორწინებრივი მდგომარეობა
+  if (group === "Merital" || ["meritalmen", "meritalwomen"].includes(key)) {
     return result({
       [name]: props.map((p) => ({
         name_ge: p.name_ge,
-        old: { rate: p.conflict, color: colorsOf(p, 2) },
-        new: { rate: p.natural, color: colorsOf(p, 2) },
-        rate: { size_old: p.conflict, size_new: p.natural },
-        color: [p.color_one, p.color_two],
+        old: meritalPart(p, "old"),
+        new: meritalPart(p, "new"),
       })),
     });
   }
 
-  if (group === "Precipitation") {
-    const summarized = {};
-    props.forEach((p) => {
-      const k = p.description_en;
-      if (!summarized[k]) {
-        summarized[k] = {
-          name_ge: p.description_en || "",
-          description_en: p.name_ge ? p.name_ge : [],
-          area: p.area?.toFixed?.(2) || "",
-          totalArea: 0,
-          color: p.color,
-          index: p.index,
-        };
-      }
-      summarized[k].totalArea += Number(p.area) || 0;
+  // ორი წლის კლასები (შობადობა, მოკვდაობა)
+  if (cfg?.years) {
+    return result({
+      [name]: props.map((p) => ({
+        name_ge: p.name_ge,
+        old: { rate: p.rate_one, color: colorsOf(p, 2) },
+        new: { rate: p.rate_two, color: colorsOf(p, 2) },
+      })),
     });
-    return result(summarized);
   }
 
-  // დანარჩენი: ფართობები სახელის მიხედვით
-  const summarized = {};
-  props.forEach((p) => {
-    const k = p.name_ge || p.name_en;
-    const area = Number(p.area) || 0;
-    if (!summarized[k]) {
-      summarized[k] = {
-        name_ge: p.name_ge || "",
-        name_en: p.name_en || "",
-        description_en: p.description_en ? [p.description_en] : [],
-        description_ge: p.description_ge ? [p.description_ge] : [],
-        area: area ? area.toFixed(2) : "",
-        totalArea: 0,
+  // კლასების სია ჯგუფებით (მოსახლეობის ცვლილება)
+  if (cfg?.classList) {
+    return result({
+      [name]: props.map((p) => ({
+        name_ge: p.name_ge,
+        rate: p.type_en,
         color: p.color,
+        group: p.sub_header,
         index: p.index,
-      };
-    } else {
-      if (
-        p.description_en &&
-        !summarized[k].description_en.includes(p.description_en)
-      )
-        summarized[k].description_en.push(p.description_en);
-      if (
-        p.description_ge &&
-        !summarized[k].description_ge.includes(p.description_ge)
-      )
-        summarized[k].description_ge.push(p.description_ge);
-    }
-    summarized[k].totalArea += area;
-  });
-  return result(summarized);
+      })),
+    });
+  }
+
+  // დანარჩენი: თემატური ფენები — კლასების წილი ფართობში
+  return result(areaRows(props, cfg?.area));
 };
 
 const useChartData = () => {
@@ -249,14 +154,13 @@ const useChartData = () => {
   );
 
   // ფენების სია შეიცვალა → ბოლოს ჩართული ფენა
-const activeKey = activeLayers.map((l) => l.id).join("|");
-useEffect(() => {
-  setSelectedLayer(activeLayers.at(-1)?.id ?? "");
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-}, [activeKey]);
+  const activeKey = activeLayers.map((l) => l.id).join("|");
+  useEffect(() => {
+    setSelectedLayer(activeLayers.at(-1)?.id ?? "");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeKey]);
 
   const handleSelected = (layerId) => setSelectedLayer(layerId);
-
   const selectedChart = chartData.find((el) => el.id === selectedLayer);
 
   return {

@@ -1,17 +1,22 @@
 import L from "leaflet";
 import { pointOnFeature } from "@turf/turf";
 
-// წლების მიხედვით გადართვადი ფენები: popup + მუნიციპალიტეტის სახელი
+// წლების / წარწერების ფენები: popup + მუნიციპალიტეტის სახელი
+// (cfg.labelValue — სახელის ქვეშ მნიშვნელობა, მაგ. სიმჭიდროვე)
 export function addYearLayer({ cfg, feature, layer, enabled }) {
   const p = feature.properties || {};
   layer.unbindPopup?.();
   if (cfg.popup) layer.bindPopup(cfg.popup(p));
   if (!enabled || !p.name_ge) return;
 
+  const value = cfg.labelValue
+    ? `<div style="font-size:11px;font-weight:600;opacity:.9">${cfg.labelValue(p)}</div>`
+    : "";
+
   const [lng, lat] = pointOnFeature(feature).geometry.coordinates;
-  const html = `<div style="transform:translate(-50%,-50%);white-space:nowrap;
-    font-size:12px;font-weight:700;color:var(--background-color);
-    text-shadow:0 0 3px #fff,0 0 3px #fff,0 0 2px #fff;pointer-events:none">${p.name_ge}</div>`;
+  const html = `<div style="transform:translate(-50%,-50%);white-space:nowrap;text-align:center;
+    font-size:12px;font-weight:700;color:var(--background-color);line-height:1.25;
+    text-shadow:0 0 3px #fff,0 0 3px #fff,0 0 2px #fff;pointer-events:none">${p.name_ge}${value}</div>`;
 
   const place = () => {
     if (!layer._map) return;
