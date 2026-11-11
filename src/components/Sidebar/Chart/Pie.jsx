@@ -8,7 +8,7 @@ import ConfigBarChart from "./ChartsForLayer/ConfigBarChart";
 import { layerConfig } from "../../Map/data/layerConfig";
 import ConfigMatrixChart from "./ChartsForLayer/ConfigMatrixChart";
                                                               
-const ChartPie = ({ selectedLayer, data, dataKey, nameKey }) => {
+const ChartPie = ({ selectedLayer, data, dataKey, nameKey, compact = false }) => {
   const [activeIndex, setActiveIndex] = useState(null);
   const [tooltipIndex, setTooltipIndex] = useState(null);
   const getOpacity = (index) =>
@@ -17,8 +17,9 @@ const ChartPie = ({ selectedLayer, data, dataKey, nameKey }) => {
   const cfg = layerConfig[selectedLayer];
 if (cfg?.chart)
   return cfg.chart.type === "wheel"
-    ? <ConfigMatrixChart data={data} chart={cfg.chart} />
-    : <ConfigBarChart data={data} chart={cfg.chart} />;  if (
+    ? <ConfigMatrixChart data={data} chart={cfg.chart} compact={compact} />
+    : <ConfigBarChart data={data} chart={cfg.chart} compact={compact} />;
+     if (
     ["ownership", "status", "agroforms", "beneficiars","religy","ethnicity"].includes(selectedLayer)
   )
     return <FarmingChart data={data} layer={selectedLayer}/>;

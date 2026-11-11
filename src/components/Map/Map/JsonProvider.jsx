@@ -9,7 +9,7 @@ import { useEffect } from "react";
 export default function JsonProvider() {
   const { state, dispatch } = useMaps();
   const map = useMap();
-  const { activeLayers, dataChart,queryKey } = state;
+  const { activeLayers, dataChart,queryKey,printMode } = state;
   const layerIds = activeLayers.map((layer) => layer.id);
 const topLayerId = activeLayers?.[activeLayers.length - 1]?.id; 
   const queries = useQueries({
@@ -26,6 +26,9 @@ const topLayerId = activeLayers?.[activeLayers.length - 1]?.id;
   );
   const isLoading = queries.some((query) => query?.isLoading);
   const layersToDisplay = Object.entries(geoJsonData);
+  const visibleLayers = printMode
+  ? layersToDisplay.filter(([id]) => id === topLayerId)
+  : layersToDisplay;
   useEffect(() => {
     if (layersToDisplay.length === 0) return;
     const result = isEqual(dataChart, layersToDisplay);
@@ -37,7 +40,7 @@ const topLayerId = activeLayers?.[activeLayers.length - 1]?.id;
 
   return (
     <>
-      {layersToDisplay.map((el) => {
+      {visibleLayers.map((el) => {
           const isTop = el[0] === topLayerId;
       
         return el[1].shape === "polygon" ? (

@@ -7,18 +7,17 @@ import Spinner from "../UI/Loader/Spinner";
 
 const Home = () => {
   const { state } = useMaps();
-  const { isLoading } = state;
+  const { isLoading, printMode } = state;
 
   return isLoading ? (
     <Spinner />
   ) : (
     <div className={classes.main}>
-      <Navbar />
+      {!printMode && <Navbar />}
       <MapLayout />
-      <Footer />
+      {!printMode && <Footer />}
     </div>
   );
 };
-
 export default Home;
 

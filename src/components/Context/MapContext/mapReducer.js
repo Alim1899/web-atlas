@@ -4,6 +4,7 @@ const initialState = {
   baselayer: basemaps.light,
   dataChart: [],
   queryKey: "",
+  printMode: false,
 };
 const mapReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -23,7 +24,6 @@ const mapReducer = (state = initialState, action) => {
               label: action.label,
               info: action.info,
               group: action.group || "",
-             
             },
           ];
 
@@ -57,12 +57,14 @@ const mapReducer = (state = initialState, action) => {
             : layer,
         ),
       };
-   case "SET_MAP":
-  return { ...state, baselayer: action.payload };
+    case "SET_MAP":
+      return { ...state, baselayer: action.payload };
     case "SET_DATA_CHART":
       return { ...state, dataChart: action.payload };
-       case "SET_QUERY":
+    case "SET_QUERY":
       return { ...state, queryKey: action.payload };
+    case "SET_PRINT_MODE":
+      return { ...state, printMode: action.payload };
 
     default:
       return state;
